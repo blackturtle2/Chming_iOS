@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71E4D5E51F3046C800FD0F61 /* CH_main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E41F3046C800FD0F61 /* CH_main.storyboard */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		71E4D5E41F3046C800FD0F61 /* CH_main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_main.storyboard; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		71E4D5E31F30469C00FD0F61 /* CH */ = {
+			isa = PBXGroup;
+			children = (
+				71E4D5E41F3046C800FD0F61 /* CH_main.storyboard */,
+			);
+			name = CH;
+			sourceTree = "<group>";
+		};
 		FEE33F8D1F2F181F00BF61AB = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +69,7 @@
 				FEE33FA01F2F181F00BF61AB /* Assets.xcassets */,
 				FEE33FA21F2F181F00BF61AB /* LaunchScreen.storyboard */,
 				FEE33FAC1F30449700BF61AB /* MainStoryboard.storyboard */,
+				71E4D5E31F30469C00FD0F61 /* CH */,
 				FEE33FAB1F30439900BF61AB /* JS */,
 				FEE33F991F2F181F00BF61AB /* AppDelegate.swift */,
 				FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */,
@@ -136,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEE33FA41F2F181F00BF61AB /* LaunchScreen.storyboard in Resources */,
+				71E4D5E51F3046C800FD0F61 /* CH_main.storyboard in Resources */,
 				FEE33FA11F2F181F00BF61AB /* Assets.xcassets in Resources */,
 				FEE33FAD1F30449700BF61AB /* MainStoryboard.storyboard in Resources */,
 				FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */,
