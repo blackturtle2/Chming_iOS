@@ -53,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="-186" y="-23"/>
         </scene>
-        <!--GS_MapMain-->
+        <!--GSMapMain-->
         <scene sceneID="Ned-jc-6Xi">
             <objects>
-                <viewControllerPlaceholder storyboardName="GS_MapMain" id="J1n-OF-uVN" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="GSMapMain" id="J1n-OF-uVN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCs-Es-dfL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="518" y="-89"/>
