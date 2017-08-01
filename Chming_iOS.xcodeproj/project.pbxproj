@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CB146031F3046F100F8A32B /* GS_MapMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CB146011F3046F100F8A32B /* GS_MapMain.storyboard */; };
+		4CB146051F304B6400F8A32B /* GS_MapMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CB146041F304B6400F8A32B /* GS_MapMain.storyboard */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4CB146021F3046F100F8A32B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../Downloads/다음맵테스트/DaumMapPractice/DaumMapPractice/Base.lproj/GS_MapMain.storyboard"; sourceTree = "<group>"; };
+		4CB146041F304B6400F8A32B /* GS_MapMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GS_MapMain.storyboard; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		4CB146001F30468200F8A32B /* GS */ = {
 			isa = PBXGroup;
 			children = (
-				4CB146011F3046F100F8A32B /* GS_MapMain.storyboard */,
+				4CB146041F304B6400F8A32B /* GS_MapMain.storyboard */,
 			);
 			name = GS;
 			sourceTree = "<group>";
@@ -146,8 +146,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CB146031F3046F100F8A32B /* GS_MapMain.storyboard in Resources */,
 				FEE33FA41F2F181F00BF61AB /* LaunchScreen.storyboard in Resources */,
+				4CB146051F304B6400F8A32B /* GS_MapMain.storyboard in Resources */,
 				FEE33FA11F2F181F00BF61AB /* Assets.xcassets in Resources */,
 				FEE33FAD1F30449700BF61AB /* MainStoryboard.storyboard in Resources */,
 				FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */,
@@ -169,14 +169,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4CB146011F3046F100F8A32B /* GS_MapMain.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4CB146021F3046F100F8A32B /* Base */,
-			);
-			name = GS_MapMain.storyboard;
-			sourceTree = "<group>";
-		};
 		FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
