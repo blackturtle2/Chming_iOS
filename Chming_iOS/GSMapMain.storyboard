@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bWq-15-WfU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GSMapMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -40,46 +39,6 @@
                                 <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdE-wh-KzY">
-                                <rect key="frame" x="10" y="562" width="50" height="50"/>
-                                <state key="normal" image="mapLevelUp"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeF-5Q-DG5">
-                                <rect key="frame" x="10" y="612" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="CeF-5Q-DG5" secondAttribute="height" multiplier="1:1" id="34l-Wc-QXz"/>
-                                    <constraint firstAttribute="width" constant="50" id="drw-Mr-ANk"/>
-                                </constraints>
-                                <state key="normal" image="mapLevelDown"/>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htV-TQ-yEt" customClass="InfoCustomView" customModule="Chming_iOS" customModuleProvider="target">
-                                <rect key="frame" x="115" y="591" width="250" height="66"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifK-9v-g8o">
-                                        <rect key="frame" x="17" y="37" width="42" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEx-d8-tvT">
-                                        <rect key="frame" x="17" y="8" width="42" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="ddE-zw-tEp"/>
-                                    <constraint firstAttribute="width" constant="250" id="uWt-lZ-ojD"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="textLabel1" destination="TEx-d8-tvT" id="3kZ-5d-eSy"/>
-                                    <outlet property="textLabel2" destination="ifK-9v-g8o" id="dQq-pL-aoB"/>
-                                </connections>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -89,24 +48,14 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="g5T-LC-exG" secondAttribute="bottom" id="9vk-3o-yXM"/>
                             <constraint firstItem="V2S-9L-OtJ" firstAttribute="leading" secondItem="RlI-B3-0NU" secondAttribute="leading" id="Bhu-mL-a85"/>
                             <constraint firstAttribute="trailing" secondItem="g5T-LC-exG" secondAttribute="trailing" id="D9Z-Zh-KhG"/>
-                            <constraint firstItem="rdE-wh-KzY" firstAttribute="width" secondItem="CeF-5Q-DG5" secondAttribute="width" id="RfV-lo-W0b"/>
                             <constraint firstItem="RlI-B3-0NU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TmS-57-ute"/>
-                            <constraint firstItem="htV-TQ-yEt" firstAttribute="trailing" secondItem="g5T-LC-exG" secondAttribute="trailing" constant="-10" id="U10-xk-vsw"/>
-                            <constraint firstItem="rdE-wh-KzY" firstAttribute="trailing" secondItem="CeF-5Q-DG5" secondAttribute="trailing" id="W8N-TS-MX5"/>
-                            <constraint firstItem="CeF-5Q-DG5" firstAttribute="leading" secondItem="g5T-LC-exG" secondAttribute="leading" constant="10" id="YAJ-np-SP9"/>
-                            <constraint firstItem="CeF-5Q-DG5" firstAttribute="top" secondItem="rdE-wh-KzY" secondAttribute="bottom" id="dEv-Ph-4s8"/>
                             <constraint firstItem="V2S-9L-OtJ" firstAttribute="top" secondItem="RlI-B3-0NU" secondAttribute="bottom" id="k5E-r3-eww"/>
                             <constraint firstItem="RlI-B3-0NU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nGL-2l-0Qh"/>
-                            <constraint firstItem="htV-TQ-yEt" firstAttribute="bottom" secondItem="g5T-LC-exG" secondAttribute="bottom" constant="-10" id="nSp-Mi-1fn"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CeF-5Q-DG5" secondAttribute="bottom" constant="5" id="qxM-Vj-lKE"/>
-                            <constraint firstItem="rdE-wh-KzY" firstAttribute="leading" secondItem="CeF-5Q-DG5" secondAttribute="leading" id="sO3-E6-nrD"/>
                             <constraint firstAttribute="trailing" secondItem="RlI-B3-0NU" secondAttribute="trailing" id="scb-ke-Ngr"/>
-                            <constraint firstItem="rdE-wh-KzY" firstAttribute="height" secondItem="CeF-5Q-DG5" secondAttribute="height" id="uSx-wS-hbh"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="g5T-LC-exG" id="KNc-Cl-3hz"/>
-                        <outlet property="selectInfoView" destination="htV-TQ-yEt" id="hfc-VY-riV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -377,8 +326,4 @@
             <point key="canvasLocation" x="3862" y="957"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="mapLevelDown" width="100" height="100"/>
-        <image name="mapLevelUp" width="100" height="100"/>
-    </resources>
 </document>
