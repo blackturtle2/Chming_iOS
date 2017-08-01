@@ -8,8 +8,10 @@
 
 import UIKit
 
-class GSMapMainViewController: UIViewController {
+class GSMapMainViewController: UIViewController, MTMapViewDelegate {
 
+    @IBOutlet weak var mapView: MTMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
