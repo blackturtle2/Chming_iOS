@@ -12,7 +12,7 @@
         <!--모임-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="모임" id="BYZ-38-t0r" customClass="ViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="모임" id="BYZ-38-t0r" customClass="JSGroupMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

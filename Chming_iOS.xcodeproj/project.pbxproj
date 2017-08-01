@@ -11,6 +11,7 @@
 		4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB146061F30535600F8A32B /* GSMapMainViewController.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
+		FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -24,6 +25,7 @@
 		4CB146061F30535600F8A32B /* GSMapMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMapMainViewController.swift; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
+		FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
+				FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */,
 			);
 			name = JS;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
+				FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
