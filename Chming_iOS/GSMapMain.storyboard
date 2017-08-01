@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="662" y="430"/>
         </scene>
-        <!--View Test Controller-->
+        <!--View Controller-->
         <scene sceneID="rgE-lk-oE7">
             <objects>
-                <viewController id="bWq-15-WfU" customClass="ViewTestController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bWq-15-WfU" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="awv-oE-pBo"/>
                         <viewControllerLayoutGuide type="bottom" id="ToW-LC-Utw"/>
