@@ -1020,10 +1020,10 @@
 		FEE33FAB1F30439900BF61AB /* JS */ = {
 			isa = PBXGroup;
 			children = (
-				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
-				FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */,
-				FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */,
 				FE269E751F3072BA00A35803 /* DataCenter.swift */,
+				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
+				FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */,
+				FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */,
 				FE269E771F30798C00A35803 /* JSGroupDataCenter.swift */,
 			);
 			name = JS;

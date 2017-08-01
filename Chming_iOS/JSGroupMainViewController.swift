@@ -9,6 +9,8 @@
 import UIKit
 
 class JSGroupMainViewController: UIViewController {
+    
+    var number:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +23,14 @@ class JSGroupMainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func btnSignUpTest(_ sender:UIButton) {
+        let tempMember = LightMember(pkUser: number, email: "jaesung@gmail.com", password: "123456")
+        let signUpOkay = DataCenter.sharedInstance.signUpWith(member: tempMember)
+        
+        number = number + 1
+        print("/////number: ", number)
+        print(signUpOkay)
     }
-    */
 
 }
