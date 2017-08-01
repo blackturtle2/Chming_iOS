@@ -289,6 +289,7 @@
 		4CB1483B1F30611300F8A32B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483A1F30611300F8A32B /* CoreLocation.framework */; };
 		4CB1483D1F30611B00F8A32B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483C1F30611B00F8A32B /* SystemConfiguration.framework */; };
 		4CB1483F1F30612500F8A32B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483E1F30612500F8A32B /* OpenGLES.framework */; };
+		4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
 		FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */; };
@@ -585,6 +586,7 @@
 		4CB1483C1F30611B00F8A32B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4CB1483E1F30612500F8A32B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4CB1484B1F3064E900F8A32B /* Chming_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chming_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSFilterMenuView.swift; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
 		FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 			children = (
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
+				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
 			);
 			name = GS;
 			sourceTree = "<group>";
@@ -1375,6 +1378,7 @@
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FE269E761F3072BB00A35803 /* DataCenter.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
+				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 				FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */,
