@@ -291,10 +291,13 @@
 		4CB1483F1F30612500F8A32B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483E1F30612500F8A32B /* OpenGLES.framework */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
+		785489DA21390E17963D7836 /* Pods_Chming_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7DC4B603C1E38BE3D2835C7 /* Pods_Chming_iOS.framework */; };
 		FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */; };
 		FE269E761F3072BB00A35803 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E751F3072BA00A35803 /* DataCenter.swift */; };
 		FE269E781F30798C00A35803 /* JSGroupDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E771F30798C00A35803 /* JSGroupDataCenter.swift */; };
 		FE269E7A1F3080B700A35803 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */; };
+		FE269E7C1F31A61200A35803 /* JSLoginTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E7B1F31A61200A35803 /* JSLoginTestViewController.swift */; };
+		FE269E7E1F31B4F900A35803 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE269E7D1F31B4F900A35803 /* GoogleService-Info.plist */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -589,10 +592,15 @@
 		4CB1484B1F3064E900F8A32B /* Chming_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chming_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
+		B7DC4B603C1E38BE3D2835C7 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1F1065689E0A057FDBF8A86 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E2247028B246BA502CDF0BC4 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
 		FE269E751F3072BA00A35803 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FE269E771F30798C00A35803 /* JSGroupDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupDataCenter.swift; sourceTree = "<group>"; };
 		FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCreateGroupViewController.swift; sourceTree = "<group>"; };
+		FE269E7B1F31A61200A35803 /* JSLoginTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSLoginTestViewController.swift; sourceTree = "<group>"; };
+		FE269E7D1F31B4F900A35803 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -616,6 +624,7 @@
 				4CB148351F3060FB00F8A32B /* libxml2.tbd in Frameworks */,
 				4CB148331F3060F200F8A32B /* libsqlite3.tbd in Frameworks */,
 				4CB148131F30607500F8A32B /* DaumMap.framework in Frameworks */,
+				785489DA21390E17963D7836 /* Pods_Chming_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +978,7 @@
 				4CB148361F30610200F8A32B /* libstdc++.6.tbd */,
 				4CB148341F3060FB00F8A32B /* libxml2.tbd */,
 				4CB148321F3060F200F8A32B /* libsqlite3.tbd */,
+				B7DC4B603C1E38BE3D2835C7 /* Pods_Chming_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -982,12 +992,22 @@
 			name = CH;
 			sourceTree = "<group>";
 		};
+		C1BEF8FA7CAF4460B504857D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1065689E0A057FDBF8A86 /* Pods-Chming_iOS.debug.xcconfig */,
+				E2247028B246BA502CDF0BC4 /* Pods-Chming_iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FEE33F8D1F2F181F00BF61AB = {
 			isa = PBXGroup;
 			children = (
 				FEE33F981F2F181F00BF61AB /* Chming_iOS */,
 				FEE33F971F2F181F00BF61AB /* Products */,
 				4CB148311F3060F200F8A32B /* Frameworks */,
+				C1BEF8FA7CAF4460B504857D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1012,6 +1032,7 @@
 				FEE33F991F2F181F00BF61AB /* AppDelegate.swift */,
 				FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */,
 				FEE33FA51F2F181F00BF61AB /* Info.plist */,
+				FE269E7D1F31B4F900A35803 /* GoogleService-Info.plist */,
 				4CB146081F30607500F8A32B /* IOS_DaumMap_SDK_1.3.0 */,
 			);
 			path = Chming_iOS;
@@ -1021,6 +1042,7 @@
 			isa = PBXGroup;
 			children = (
 				FE269E751F3072BA00A35803 /* DataCenter.swift */,
+				FE269E7B1F31A61200A35803 /* JSLoginTestViewController.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */,
 				FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */,
@@ -1036,9 +1058,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEE33FA81F2F181F00BF61AB /* Build configuration list for PBXNativeTarget "Chming_iOS" */;
 			buildPhases = (
+				326406F00DB2FB679361A0E6 /* [CP] Check Pods Manifest.lock */,
 				FEE33F921F2F181F00BF61AB /* Sources */,
 				FEE33F931F2F181F00BF61AB /* Frameworks */,
 				FEE33F941F2F181F00BF61AB /* Resources */,
+				329AF4F0E30C854439A44FD1 /* [CP] Embed Pods Frameworks */,
+				CD91C92C21E1C4AA14929DA6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1167,6 +1192,7 @@
 				4CB147301F30607500F8A32B /* _m_t_map_reverse_geo_coder_8h_source.html in Resources */,
 				4CB147F51F30607500F8A32B /* variables_2.html in Resources */,
 				4CB148201F30607500F8A32B /* map_pin_shadow.png in Resources */,
+				FE269E7E1F31B4F900A35803 /* GoogleService-Info.plist in Resources */,
 				4CB147B11F30607500F8A32B /* functions_1.html in Resources */,
 				4CB147421F30607500F8A32B /* class_m_t_map_view-members.html in Resources */,
 				4CB147E31F30607500F8A32B /* properties_9.html in Resources */,
@@ -1372,6 +1398,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		326406F00DB2FB679361A0E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		329AF4F0E30C854439A44FD1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD91C92C21E1C4AA14929DA6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FEE33F921F2F181F00BF61AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1381,6 +1455,7 @@
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FE269E761F3072BB00A35803 /* DataCenter.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
+				FE269E7C1F31A61200A35803 /* JSLoginTestViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
 				FE269E7A1F3080B700A35803 /* JSCreateGroupViewController.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
@@ -1508,6 +1583,7 @@
 		};
 		FEE33FA91F2F181F00BF61AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F1065689E0A057FDBF8A86 /* Pods-Chming_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1530,6 +1606,7 @@
 		};
 		FEE33FAA1F2F181F00BF61AB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2247028B246BA502CDF0BC4 /* Pods-Chming_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

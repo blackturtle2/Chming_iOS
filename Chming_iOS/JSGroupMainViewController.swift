@@ -24,13 +24,4 @@ class JSGroupMainViewController: UIViewController {
     }
     
     
-    @IBAction func btnSignUpTest(_ sender:UIButton) {
-        let tempMember = LightMember(pkUser: number, email: "jaesung@gmail.com", password: "123456")
-        let signUpOkay = DataCenter.sharedInstance.signUpWith(member: tempMember)
-        
-        number = number + 1
-        print("/////number: ", number)
-        print(signUpOkay)
-    }
-
 }
