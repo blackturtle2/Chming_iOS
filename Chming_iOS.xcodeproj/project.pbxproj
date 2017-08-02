@@ -290,6 +290,8 @@
 		4CB1483D1F30611B00F8A32B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483C1F30611B00F8A32B /* SystemConfiguration.framework */; };
 		4CB1483F1F30612500F8A32B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483E1F30612500F8A32B /* OpenGLES.framework */; };
 		4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */; };
+		4CB148531F30B1BA00F8A32B /* marker1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148511F30B1BA00F8A32B /* marker1_1.png */; };
+		4CB148541F30B1BA00F8A32B /* marker1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148521F30B1BA00F8A32B /* marker1_2.png */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
 		FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */; };
@@ -586,6 +588,8 @@
 		4CB1483E1F30612500F8A32B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4CB1484B1F3064E900F8A32B /* Chming_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chming_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSFilterMenuView.swift; sourceTree = "<group>"; };
+		4CB148511F30B1BA00F8A32B /* marker1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker1_1.png; sourceTree = "<group>"; };
+		4CB148521F30B1BA00F8A32B /* marker1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker1_2.png; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
 		FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
 				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
+				4CB148501F30B19E00F8A32B /* mapIMG */,
 			);
 			name = GS;
 			sourceTree = "<group>";
@@ -970,6 +975,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4CB148501F30B19E00F8A32B /* mapIMG */ = {
+			isa = PBXGroup;
+			children = (
+				4CB148511F30B1BA00F8A32B /* marker1_1.png */,
+				4CB148521F30B1BA00F8A32B /* marker1_2.png */,
+			);
+			name = mapIMG;
+			sourceTree = "<group>";
+		};
 		71E4D5E61F304C0C00FD0F61 /* CH */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,7 +1069,7 @@
 				TargetAttributes = {
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 29Q45PKR77;
+						DevelopmentTeam = PV38XQ6LPC;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1271,6 +1285,7 @@
 				4CB147AA1F30607500F8A32B /* close.png in Resources */,
 				4CB148061F30607500F8A32B /* struct_m_t_map_point_geo.js in Resources */,
 				4CB1482D1F30607500F8A32B /* shadow_balloon.png in Resources */,
+				4CB148541F30B1BA00F8A32B /* marker1_2.png in Resources */,
 				4CB1474A1F30607500F8A32B /* doc.png in Resources */,
 				4CB147CF1F30607500F8A32B /* pages_0.html in Resources */,
 				71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */,
@@ -1331,6 +1346,7 @@
 				4CB147D11F30607500F8A32B /* properties_0.html in Resources */,
 				4CB147E91F30607500F8A32B /* search.css in Resources */,
 				4CB147541F30607500F8A32B /* functions_prop.html in Resources */,
+				4CB148531F30B1BA00F8A32B /* marker1_1.png in Resources */,
 				4CB147731F30607500F8A32B /* navtree.css in Resources */,
 				4CB147FB1F30607500F8A32B /* variables_5.html in Resources */,
 				4CB1478F1F30607500F8A32B /* all_3.js in Resources */,
@@ -1504,7 +1520,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Chming_iOS/IOS_DaumMap_SDK_1.3.0/lib/DaumMap.embeddedframework",
@@ -1526,7 +1543,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Chming_iOS/IOS_DaumMap_SDK_1.3.0/lib/DaumMap.embeddedframework",
