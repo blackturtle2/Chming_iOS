@@ -295,7 +295,12 @@
 		4CB148541F30B1BA00F8A32B /* marker1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148521F30B1BA00F8A32B /* marker1_2.png */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
-		FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */; };
+		FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */; };
+		FEDACE601F31C6B8004826B8 /* JSGroupDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5C1F31C6B8004826B8 /* JSGroupDataCenter.swift */; };
+		FEDACE621F31C6B8004826B8 /* JSLoginTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */; };
+		FEDACE641F31C6BF004826B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */; };
+		FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE651F31C6D0004826B8 /* DataCenter.swift */; };
+		FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -596,7 +601,12 @@
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
+		FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCreateGroupViewController.swift; sourceTree = "<group>"; };
+		FEDACE5C1F31C6B8004826B8 /* JSGroupDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupDataCenter.swift; sourceTree = "<group>"; };
+		FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSLoginTestViewController.swift; sourceTree = "<group>"; };
+		FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FEDACE651F31C6D0004826B8 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
+		FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -1039,6 +1049,7 @@
 				FEE33F991F2F181F00BF61AB /* AppDelegate.swift */,
 				FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */,
 				FEE33FA51F2F181F00BF61AB /* Info.plist */,
+				FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */,
 				4CB146081F30607500F8A32B /* IOS_DaumMap_SDK_1.3.0 */,
 			);
 			path = Chming_iOS;
@@ -1047,8 +1058,12 @@
 		FEE33FAB1F30439900BF61AB /* JS */ = {
 			isa = PBXGroup;
 			children = (
+				FEDACE651F31C6D0004826B8 /* DataCenter.swift */,
+				FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
-				FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */,
+				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
+				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
+				FEDACE5C1F31C6B8004826B8 /* JSGroupDataCenter.swift */,
 			);
 			name = JS;
 			sourceTree = "<group>";
@@ -1214,6 +1229,7 @@
 				4CB147AD1F30607500F8A32B /* files_0.html in Resources */,
 				4CB147F61F30607500F8A32B /* variables_2.js in Resources */,
 				4CB147351F30607500F8A32B /* annotated.js in Resources */,
+				FEDACE641F31C6BF004826B8 /* GoogleService-Info.plist in Resources */,
 				4CB147931F30607500F8A32B /* all_5.js in Resources */,
 				4CB147521F30607500F8A32B /* functions.html in Resources */,
 				4CB147EE1F30607500F8A32B /* searchdata.js in Resources */,
@@ -1456,11 +1472,15 @@
 			files = (
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
+				FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
+				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
+				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
+				FEDACE621F31C6B8004826B8 /* JSLoginTestViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
+				FEDACE601F31C6B8004826B8 /* JSGroupDataCenter.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
-				FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
