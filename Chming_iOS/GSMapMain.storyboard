@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bWq-15-WfU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -60,12 +60,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="430"/>
+            <point key="canvasLocation" x="529" y="49"/>
         </scene>
-        <!--View Controller-->
+        <!--Map Main View Controller-->
         <scene sceneID="rgE-lk-oE7">
             <objects>
-                <viewController id="bWq-15-WfU" sceneMemberID="viewController">
+                <viewController id="bWq-15-WfU" customClass="GSMapMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="awv-oE-pBo"/>
                         <viewControllerLayoutGuide type="bottom" id="ToW-LC-Utw"/>
@@ -87,9 +87,6 @@
                                         <rect key="frame" x="267" y="13" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="검색"/>
-                                        <connections>
-                                            <segue destination="EKu-ac-HNh" kind="show" id="Iwk-Rz-a0N"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="지금 보고있는 지역" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfF-6Z-Lod">
                                         <rect key="frame" x="8" y="0.0" width="127" height="21"/>
@@ -128,28 +125,36 @@
                                         <state key="normal" title="거리">
                                             <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="filterBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="tdD-PH-6JV"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="0.81240110759999995" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUk-Wa-WST">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUk-Wa-WST" customClass="MTMapView">
                                 <rect key="frame" x="0.0" y="118" width="375" height="549"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLF-jK-98l">
+                                <rect key="frame" x="300" y="148" width="63" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="내위치로"/>
+                                <connections>
+                                    <action selector="myLocationBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="Pze-XZ-ryi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="7Ui-cJ-vb6"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="xUk-Wa-WST" id="1r9-oW-4Ga"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Zj-Mk-7XN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911.2" y="1374.9625187406298"/>
+            <point key="canvasLocation" x="529" y="715"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4fw-KT-fmn">
@@ -228,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6e-wy-TIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3026" y="1763"/>
+            <point key="canvasLocation" x="1852" y="1334"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Euy-Ee-Pq5">

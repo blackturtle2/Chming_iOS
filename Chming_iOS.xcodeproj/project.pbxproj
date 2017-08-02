@@ -289,15 +289,12 @@
 		4CB1483B1F30611300F8A32B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483A1F30611300F8A32B /* CoreLocation.framework */; };
 		4CB1483D1F30611B00F8A32B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483C1F30611B00F8A32B /* SystemConfiguration.framework */; };
 		4CB1483F1F30612500F8A32B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1483E1F30612500F8A32B /* OpenGLES.framework */; };
+		4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */; };
+		4CB148531F30B1BA00F8A32B /* marker1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148511F30B1BA00F8A32B /* marker1_1.png */; };
+		4CB148541F30B1BA00F8A32B /* marker1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148521F30B1BA00F8A32B /* marker1_2.png */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
-		785489DA21390E17963D7836 /* Pods_Chming_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7DC4B603C1E38BE3D2835C7 /* Pods_Chming_iOS.framework */; };
 		FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */; };
-		FE269E761F3072BB00A35803 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E751F3072BA00A35803 /* DataCenter.swift */; };
-		FE269E781F30798C00A35803 /* JSGroupDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E771F30798C00A35803 /* JSGroupDataCenter.swift */; };
-		FE269E7A1F3080B700A35803 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */; };
-		FE269E7C1F31A61200A35803 /* JSLoginTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE269E7B1F31A61200A35803 /* JSLoginTestViewController.swift */; };
-		FE269E7E1F31B4F900A35803 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE269E7D1F31B4F900A35803 /* GoogleService-Info.plist */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -590,17 +587,12 @@
 		4CB1483C1F30611B00F8A32B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4CB1483E1F30612500F8A32B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4CB1484B1F3064E900F8A32B /* Chming_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chming_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSFilterMenuView.swift; sourceTree = "<group>"; };
+		4CB148511F30B1BA00F8A32B /* marker1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker1_1.png; sourceTree = "<group>"; };
+		4CB148521F30B1BA00F8A32B /* marker1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker1_2.png; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
-		B7DC4B603C1E38BE3D2835C7 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1F1065689E0A057FDBF8A86 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		E2247028B246BA502CDF0BC4 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
-		FE269E751F3072BA00A35803 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
-		FE269E771F30798C00A35803 /* JSGroupDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupDataCenter.swift; sourceTree = "<group>"; };
-		FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCreateGroupViewController.swift; sourceTree = "<group>"; };
-		FE269E7B1F31A61200A35803 /* JSLoginTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSLoginTestViewController.swift; sourceTree = "<group>"; };
-		FE269E7D1F31B4F900A35803 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -624,7 +616,6 @@
 				4CB148351F3060FB00F8A32B /* libxml2.tbd in Frameworks */,
 				4CB148331F3060F200F8A32B /* libsqlite3.tbd in Frameworks */,
 				4CB148131F30607500F8A32B /* DaumMap.framework in Frameworks */,
-				785489DA21390E17963D7836 /* Pods_Chming_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +627,8 @@
 			children = (
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
+				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
+				4CB148501F30B19E00F8A32B /* mapIMG */,
 			);
 			name = GS;
 			sourceTree = "<group>";
@@ -978,9 +971,17 @@
 				4CB148361F30610200F8A32B /* libstdc++.6.tbd */,
 				4CB148341F3060FB00F8A32B /* libxml2.tbd */,
 				4CB148321F3060F200F8A32B /* libsqlite3.tbd */,
-				B7DC4B603C1E38BE3D2835C7 /* Pods_Chming_iOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4CB148501F30B19E00F8A32B /* mapIMG */ = {
+			isa = PBXGroup;
+			children = (
+				4CB148511F30B1BA00F8A32B /* marker1_1.png */,
+				4CB148521F30B1BA00F8A32B /* marker1_2.png */,
+			);
+			name = mapIMG;
 			sourceTree = "<group>";
 		};
 		71E4D5E61F304C0C00FD0F61 /* CH */ = {
@@ -992,22 +993,12 @@
 			name = CH;
 			sourceTree = "<group>";
 		};
-		C1BEF8FA7CAF4460B504857D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E1F1065689E0A057FDBF8A86 /* Pods-Chming_iOS.debug.xcconfig */,
-				E2247028B246BA502CDF0BC4 /* Pods-Chming_iOS.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		FEE33F8D1F2F181F00BF61AB = {
 			isa = PBXGroup;
 			children = (
 				FEE33F981F2F181F00BF61AB /* Chming_iOS */,
 				FEE33F971F2F181F00BF61AB /* Products */,
 				4CB148311F3060F200F8A32B /* Frameworks */,
-				C1BEF8FA7CAF4460B504857D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1032,7 +1023,6 @@
 				FEE33F991F2F181F00BF61AB /* AppDelegate.swift */,
 				FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */,
 				FEE33FA51F2F181F00BF61AB /* Info.plist */,
-				FE269E7D1F31B4F900A35803 /* GoogleService-Info.plist */,
 				4CB146081F30607500F8A32B /* IOS_DaumMap_SDK_1.3.0 */,
 			);
 			path = Chming_iOS;
@@ -1041,12 +1031,8 @@
 		FEE33FAB1F30439900BF61AB /* JS */ = {
 			isa = PBXGroup;
 			children = (
-				FE269E751F3072BA00A35803 /* DataCenter.swift */,
-				FE269E7B1F31A61200A35803 /* JSLoginTestViewController.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FE269DFE1F30565C00A35803 /* JSGroupMainViewController.swift */,
-				FE269E791F3080B700A35803 /* JSCreateGroupViewController.swift */,
-				FE269E771F30798C00A35803 /* JSGroupDataCenter.swift */,
 			);
 			name = JS;
 			sourceTree = "<group>";
@@ -1058,12 +1044,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEE33FA81F2F181F00BF61AB /* Build configuration list for PBXNativeTarget "Chming_iOS" */;
 			buildPhases = (
-				326406F00DB2FB679361A0E6 /* [CP] Check Pods Manifest.lock */,
 				FEE33F921F2F181F00BF61AB /* Sources */,
 				FEE33F931F2F181F00BF61AB /* Frameworks */,
 				FEE33F941F2F181F00BF61AB /* Resources */,
-				329AF4F0E30C854439A44FD1 /* [CP] Embed Pods Frameworks */,
-				CD91C92C21E1C4AA14929DA6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1086,7 +1069,7 @@
 				TargetAttributes = {
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 29Q45PKR77;
+						DevelopmentTeam = PV38XQ6LPC;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1192,7 +1175,6 @@
 				4CB147301F30607500F8A32B /* _m_t_map_reverse_geo_coder_8h_source.html in Resources */,
 				4CB147F51F30607500F8A32B /* variables_2.html in Resources */,
 				4CB148201F30607500F8A32B /* map_pin_shadow.png in Resources */,
-				FE269E7E1F31B4F900A35803 /* GoogleService-Info.plist in Resources */,
 				4CB147B11F30607500F8A32B /* functions_1.html in Resources */,
 				4CB147421F30607500F8A32B /* class_m_t_map_view-members.html in Resources */,
 				4CB147E31F30607500F8A32B /* properties_9.html in Resources */,
@@ -1303,6 +1285,7 @@
 				4CB147AA1F30607500F8A32B /* close.png in Resources */,
 				4CB148061F30607500F8A32B /* struct_m_t_map_point_geo.js in Resources */,
 				4CB1482D1F30607500F8A32B /* shadow_balloon.png in Resources */,
+				4CB148541F30B1BA00F8A32B /* marker1_2.png in Resources */,
 				4CB1474A1F30607500F8A32B /* doc.png in Resources */,
 				4CB147CF1F30607500F8A32B /* pages_0.html in Resources */,
 				71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */,
@@ -1363,6 +1346,7 @@
 				4CB147D11F30607500F8A32B /* properties_0.html in Resources */,
 				4CB147E91F30607500F8A32B /* search.css in Resources */,
 				4CB147541F30607500F8A32B /* functions_prop.html in Resources */,
+				4CB148531F30B1BA00F8A32B /* marker1_1.png in Resources */,
 				4CB147731F30607500F8A32B /* navtree.css in Resources */,
 				4CB147FB1F30607500F8A32B /* variables_5.html in Resources */,
 				4CB1478F1F30607500F8A32B /* all_3.js in Resources */,
@@ -1398,54 +1382,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		326406F00DB2FB679361A0E6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		329AF4F0E30C854439A44FD1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CD91C92C21E1C4AA14929DA6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		FEE33F921F2F181F00BF61AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1453,14 +1389,11 @@
 			files = (
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
-				FE269E761F3072BB00A35803 /* DataCenter.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
-				FE269E7C1F31A61200A35803 /* JSLoginTestViewController.swift in Sources */,
+				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
-				FE269E7A1F3080B700A35803 /* JSCreateGroupViewController.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 				FE269DFF1F30565C00A35803 /* JSGroupMainViewController.swift in Sources */,
-				FE269E781F30798C00A35803 /* JSGroupDataCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1583,12 +1516,12 @@
 		};
 		FEE33FA91F2F181F00BF61AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1F1065689E0A057FDBF8A86 /* Pods-Chming_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Chming_iOS/IOS_DaumMap_SDK_1.3.0/lib/DaumMap.embeddedframework",
@@ -1606,12 +1539,12 @@
 		};
 		FEE33FAA1F2F181F00BF61AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2247028B246BA502CDF0BC4 /* Pods-Chming_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Chming_iOS/IOS_DaumMap_SDK_1.3.0/lib/DaumMap.embeddedframework",
