@@ -8,5 +8,5 @@
 
 // 다음 맵 SDK import
 #import "DaumMap/MTMapView.h"
-
+#import "DaumMap/MTMapReverseGeoCoder.h"
 

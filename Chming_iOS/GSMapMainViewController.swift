@@ -7,20 +7,23 @@
 //
 
 import UIKit
+import Firebase
 
-class GSMapMainViewController: UIViewController, MTMapViewDelegate {
+class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate {
 
     // MARK: - IBOulet
     @IBOutlet weak var mapView: MTMapView!
     var loadCurrentMapPoint: MTMapPoint?
+    var mapGetoCoder: MTMapReverseGeoCoder!
     
     // MARK: - Initialize
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         
+        mapGetoCoder = MTMapReverseGeoCoder()
         self.loadMarker()
-       
+        
         // Do any additional setup after loading the view.
     }
     
@@ -116,6 +119,15 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate {
         return poiItem
     }
     
+    func mapLoad(){
+        let reference = Database.database().reference()
+        reference.child("GroupListMap").observeSingleEvent(of: .value, with: { (dataSnapShot) in
+            let dataValue = dataSnapShot.value as! [String:Any]
+            print("파이어베이스 데이터:// ", dataValue)
+            
+            
+        })
+    }
     
     // MARK: - MTMapViewDelegate 메서드(Map View Event delegate methods)
     // 테스트중
@@ -142,7 +154,11 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate {
         print("[사용자 단말의 현재 위치 좌표 값: \(location), 현위치 좌표의 오차 반경(정확도) : \(accuracy)]")
         // 주기적으로 현 위치 좌표 값을 할당
         loadCurrentMapPoint = location
+        
     }
+    
+    
+    // MARK: - MTMapReverseGeoCoderDelegate 메서드
     
     
     // MARK: IBAction
@@ -150,17 +166,13 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate {
     @IBAction func myLocationBtnTouched(_ sender: UIButton){
         
         // 맵을 할당한 맵포인트 좌표로 이동
-        mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
+        //mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
+        self.mapLoad()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func filterBtnTouched(_ sender: UIButton){
+        let filtetView = GSFilterMenuView(frame: CGRect(x: 16.0, y: 20, width: self.view.frame.size.width - 32.0, height: 270.0), test: "tt")
+        filtetView.popUp(on: self.view)
     }
-    */
 
 }

@@ -293,6 +293,7 @@
 		4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */; };
 		4CB148531F30B1BA00F8A32B /* marker1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148511F30B1BA00F8A32B /* marker1_1.png */; };
 		4CB148541F30B1BA00F8A32B /* marker1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB148521F30B1BA00F8A32B /* marker1_2.png */; };
+		4CC0D9451F32C6A5003BF493 /* GSFilterMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
 		FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */; };
@@ -596,6 +597,7 @@
 		4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSFilterMenuView.swift; sourceTree = "<group>"; };
 		4CB148511F30B1BA00F8A32B /* marker1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker1_1.png; sourceTree = "<group>"; };
 		4CB148521F30B1BA00F8A32B /* marker1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker1_2.png; sourceTree = "<group>"; };
+		4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSFilterMenu.xib; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
 				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
+				4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */,
 				4CB148501F30B19E00F8A32B /* mapIMG */,
 			);
 			name = GS;
@@ -1200,6 +1203,7 @@
 				4CB148101F30607500F8A32B /* tabs.css in Resources */,
 				4CB1473F1F30607500F8A32B /* class_m_t_map_point-members.html in Resources */,
 				4CB1477A1F30607500F8A32B /* protocol_m_t_map_reverse_geo_coder_delegate-p.html in Resources */,
+				4CC0D9451F32C6A5003BF493 /* GSFilterMenu.xib in Resources */,
 				4CB147B61F30607500F8A32B /* functions_3.js in Resources */,
 				4CB148171F30607500F8A32B /* detail_button.png in Resources */,
 				4CB1475A1F30607500F8A32B /* globals_type.html in Resources */,
