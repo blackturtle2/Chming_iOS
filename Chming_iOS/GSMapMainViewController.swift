@@ -14,15 +14,17 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     // MARK: - IBOulet
     @IBOutlet weak var mapView: MTMapView!
     var loadCurrentMapPoint: MTMapPoint?
-    var mapGetoCoder: MTMapReverseGeoCoder!
+    
     
     // MARK: - Initialize
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         
-        mapGetoCoder = MTMapReverseGeoCoder()
+        
+        
         self.loadMarker()
+
         
         // Do any additional setup after loading the view.
     }
@@ -137,8 +139,15 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // 터치한 mapPoint 값을 MTMapPointGeo 타입으로 할당
         let geo = mapPoint.mapPointGeo()
         print("특정 지도를 터치했네요! 그곳의 위도: \(geo.latitude) , 경도: \(geo.longitude)")
-        
-        
+        // 해당 좌표의 주소값이 필요
+        let geoHandler: MTMapReverseGeoCoderCompletionHandler = {(success, addressFormapPoint, error: Error?) ->Void in
+            print("geoHandler success://",success)
+            print("geoHandler addressFormapPoint://",addressFormapPoint)
+            print("geoHandler error://",error)
+            
+        }
+        MTMapReverseGeoCoder.executeFindingAddress(for: mapPoint!, openAPIKey: "", completionHandler: geoHandler)
+        MTMapReverseGeoCoder.findAddress(for: <#T##MTMapPoint!#>, withOpenAPIKey: <#T##String!#>)
     }
     
     
@@ -160,6 +169,9 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     // MARK: - MTMapReverseGeoCoderDelegate 메서드
     
+    func mtMapReverseGeoCoder(_ rGeoCoder: MTMapReverseGeoCoder!, foundAddress addressString: String!) {
+        
+    }
     
     // MARK: IBAction
     // 현위치이동
