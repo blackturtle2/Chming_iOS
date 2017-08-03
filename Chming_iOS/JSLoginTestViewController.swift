@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class JSLoginTestViewController: UIViewController {
+    
+    @IBOutlet var labelTest:UILabel!
 
     var number:Int = 0
 
@@ -16,6 +19,18 @@ class JSLoginTestViewController: UIViewController {
     // MARK: viewDidLoad() //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Database.database().reference().child("GroupListMap").child("강남구").child("groupList").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let rootData = snapshot.value as! [String:Any]
+            
+            print("///// rootData: ",rootData)
+            let myData = rootData["축구"]
+
+            print("///// myData: ", myData ?? "(no data)")
+            self.labelTest.text = "\(myData ?? "(no data)")"
+            
+        })
 
     }
 
