@@ -9,6 +9,8 @@
 import UIKit
 
 class JSCreateGroupViewController: UIViewController {
+    
+    var userPK:Int? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()

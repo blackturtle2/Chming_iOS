@@ -10,17 +10,39 @@ import UIKit
 
 class JSGroupMainViewController: UIViewController {
     
-    var number:Int = 0
-
+    var groupPK:Int? = nil // 이전 뷰에서 넘어오는 groupPK 입니다.
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let vGroupPK = groupPK else {
+            print("///// groupPK is no data-")
+            
+            let alertViewController = UIAlertController(title: "알림", message: "인터넷 연결이 불안정합니다. 잠시 후, 다시 시도해주세요.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ok", style: .default, handler: { (action) in
+                self.dismiss(animated: true, completion: nil) // 작동 불가?
+            })
+            alertViewController.addAction(alertAction)
+            self.present(alertViewController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        print("///// groupPK: ", vGroupPK)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func buttonClose(_ sender:UIButton) {
+        self.dismiss(animated: true, completion: nil)
+
     }
     
     

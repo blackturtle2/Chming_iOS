@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login Test View Controller-->
+        <!--Temp Main View Controller-->
         <scene sceneID="i2a-UA-GPv">
             <objects>
-                <viewController id="Zcj-vT-5ST" customClass="JSLoginTestViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zcj-vT-5ST" customClass="JSTempMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rtg-mF-1En"/>
                         <viewControllerLayoutGuide type="bottom" id="SML-5S-9Lq"/>
@@ -21,44 +21,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kj4-a2-Oj2">
-                                <rect key="frame" x="16" y="114" width="343" height="545"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBi-FJ-a2Y">
-                                <rect key="frame" x="148" y="38" width="78" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="SignUpTest"/>
-                                <connections>
-                                    <action selector="btnSignUpTest:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="niO-WP-viO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzT-pT-9sU">
-                                <rect key="frame" x="152" y="76" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="SignInTest"/>
-                                <connections>
-                                    <action selector="btnSignInTest:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="wBE-sg-aiC"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="roE-IG-1EF">
+                                <rect key="frame" x="0.0" y="231.5" width="375" height="204.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userDefaultsPk = 999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5I-83-2Vc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bm-cZ-lMo">
+                                        <rect key="frame" x="0.0" y="36.5" width="375" height="30"/>
+                                        <state key="normal" title="Move-  &quot;JSCreateGroupViewController&quot;"/>
+                                        <connections>
+                                            <action selector="buttonMoveCreateGroupMainView:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="NIP-Kp-Sw3"/>
+                                            <segue destination="734-Yd-1BO" kind="presentation" id="QAk-Im-jdC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eET-ZE-h94">
+                                        <rect key="frame" x="0.0" y="82.5" width="375" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  is nil! )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainViewNil:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Oa3-6B-C8H"/>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" id="A31-TA-Oh6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1L-kl-mMt">
+                                        <rect key="frame" x="0.0" y="128.5" width="375" height="30"/>
+                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  = 0 )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainView0:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="RyA-fV-4qL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-gl-xqk">
+                                        <rect key="frame" x="0.0" y="174.5" width="375" height="30"/>
+                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  = 1 )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainView1:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="JLr-SJ-baT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="roE-IG-1EF" firstAttribute="centerX" secondItem="Bn4-cH-vNx" secondAttribute="centerX" id="UbM-4Y-YP8"/>
+                            <constraint firstItem="roE-IG-1EF" firstAttribute="centerY" secondItem="Bn4-cH-vNx" secondAttribute="centerY" id="hl7-3s-bnD"/>
+                            <constraint firstItem="roE-IG-1EF" firstAttribute="width" secondItem="Bn4-cH-vNx" secondAttribute="width" id="sd5-ng-UAw"/>
+                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="labelTest" destination="kj4-a2-Oj2" id="izO-8I-Rne"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DH7-47-VMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="691"/>
+            <point key="canvasLocation" x="14" y="347"/>
         </scene>
         <!--모임-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="모임" id="BYZ-38-t0r" customClass="JSGroupMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSGroupMainViewController" title="모임" id="BYZ-38-t0r" customClass="JSGroupMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -182,6 +203,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukk-Ql-pdY">
+                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="닫기"/>
+                                        <connections>
+                                            <action selector="buttonClose:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mHa-jb-Bl2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -286,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRQ-3W-NhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="431"/>
+            <point key="canvasLocation" x="1905" y="341"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jfL-7N-JKk">
@@ -424,7 +453,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDA-YC-ije" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2880.8000000000002" y="548.27586206896558"/>
+            <point key="canvasLocation" x="2884" y="714"/>
         </scene>
         <!--게시글 작성-->
         <scene sceneID="OZ5-k2-Pxc">
@@ -519,7 +548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvM-8s-TKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2882" y="-184"/>
+            <point key="canvasLocation" x="2884" y="-20"/>
         </scene>
         <!--갤러리-->
         <scene sceneID="rRT-4I-tQG">
@@ -602,12 +631,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7VG-Dn-Vld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="1129.385307346327"/>
+            <point key="canvasLocation" x="1905" y="1040"/>
         </scene>
         <!--게시글 작성-->
         <scene sceneID="qEl-S6-YVS">
             <objects>
-                <viewController title="게시글 작성" id="734-Yd-1BO" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSCreateGroupViewController" title="게시글 작성" id="734-Yd-1BO" customClass="JSCreateGroupViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GOD-va-v18"/>
                         <viewControllerLayoutGuide type="bottom" id="Pav-13-N0V"/>

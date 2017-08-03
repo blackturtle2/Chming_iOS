@@ -296,8 +296,8 @@
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
 		FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */; };
-		FEDACE601F31C6B8004826B8 /* JSGroupDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5C1F31C6B8004826B8 /* JSGroupDataCenter.swift */; };
-		FEDACE621F31C6B8004826B8 /* JSLoginTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */; };
+		FEDACE601F31C6B8004826B8 /* JSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5C1F31C6B8004826B8 /* JSDataCenter.swift */; };
+		FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */; };
 		FEDACE641F31C6BF004826B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */; };
 		FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE651F31C6D0004826B8 /* DataCenter.swift */; };
 		FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */; };
@@ -602,8 +602,8 @@
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCreateGroupViewController.swift; sourceTree = "<group>"; };
-		FEDACE5C1F31C6B8004826B8 /* JSGroupDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupDataCenter.swift; sourceTree = "<group>"; };
-		FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSLoginTestViewController.swift; sourceTree = "<group>"; };
+		FEDACE5C1F31C6B8004826B8 /* JSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDataCenter.swift; sourceTree = "<group>"; };
+		FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSTempMainViewController.swift; sourceTree = "<group>"; };
 		FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEDACE651F31C6D0004826B8 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
@@ -1059,11 +1059,11 @@
 		FEE33FAB1F30439900BF61AB /* JS */ = {
 			isa = PBXGroup;
 			children = (
-				FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */,
+				FEDACE5C1F31C6B8004826B8 /* JSDataCenter.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
+				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
 				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
-				FEDACE5C1F31C6B8004826B8 /* JSGroupDataCenter.swift */,
 			);
 			name = JS;
 			sourceTree = "<group>";
@@ -1477,9 +1477,9 @@
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
-				FEDACE621F31C6B8004826B8 /* JSLoginTestViewController.swift in Sources */,
+				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
-				FEDACE601F31C6B8004826B8 /* JSGroupDataCenter.swift in Sources */,
+				FEDACE601F31C6B8004826B8 /* JSDataCenter.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
