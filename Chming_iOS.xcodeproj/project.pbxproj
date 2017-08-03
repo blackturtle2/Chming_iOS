@@ -301,6 +301,9 @@
 		FEDACE641F31C6BF004826B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */; };
 		FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE651F31C6D0004826B8 /* DataCenter.swift */; };
 		FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */; };
+		FEDACE6C1F332E06004826B8 /* JSTabbarTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE6B1F332E06004826B8 /* JSTabbarTestViewController.swift */; };
+		FEDACE701F333843004826B8 /* JSItem1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE6F1F333843004826B8 /* JSItem1ViewController.swift */; };
+		FEDACE721F333BF4004826B8 /* JSCustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE711F333BF4004826B8 /* JSCustomTabBarController.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -607,6 +610,9 @@
 		FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEDACE651F31C6D0004826B8 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
+		FEDACE6B1F332E06004826B8 /* JSTabbarTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSTabbarTestViewController.swift; sourceTree = "<group>"; };
+		FEDACE6F1F333843004826B8 /* JSItem1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSItem1ViewController.swift; sourceTree = "<group>"; };
+		FEDACE711F333BF4004826B8 /* JSCustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCustomTabBarController.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -1062,6 +1068,9 @@
 				FEDACE5C1F31C6B8004826B8 /* JSDataCenter.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
+				FEDACE711F333BF4004826B8 /* JSCustomTabBarController.swift */,
+				FEDACE6B1F332E06004826B8 /* JSTabbarTestViewController.swift */,
+				FEDACE6F1F333843004826B8 /* JSItem1ViewController.swift */,
 				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
 			);
@@ -1479,7 +1488,10 @@
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
 				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
+				FEDACE701F333843004826B8 /* JSItem1ViewController.swift in Sources */,
 				FEDACE601F31C6B8004826B8 /* JSDataCenter.swift in Sources */,
+				FEDACE721F333BF4004826B8 /* JSCustomTabBarController.swift in Sources */,
+				FEDACE6C1F332E06004826B8 /* JSTabbarTestViewController.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

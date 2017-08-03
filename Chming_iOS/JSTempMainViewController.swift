@@ -45,7 +45,8 @@ class JSTempMainViewController: UIViewController {
         //"JSGroupMainViewController"로 이동할 때, userPK를 가지고 이동합니다.
         nextVC.userPK = 999
         
-        self.present(nextVC, animated: true, completion: nil)
+        let nextNavi = UINavigationController(rootViewController: nextVC)
+        self.present(nextNavi, animated: true, completion: nil)
     }
     
     // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
@@ -53,7 +54,8 @@ class JSTempMainViewController: UIViewController {
     @IBAction func buttonMoveGroupMainViewNil(_ sender:UIButton) {
         let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupMainViewController") as! JSGroupMainViewController
         
-        self.present(nextVC, animated: true, completion: nil)
+        let nextNavi = UINavigationController(rootViewController: nextVC)
+        self.present(nextNavi, animated: true, completion: nil)
     }
     
     // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
@@ -64,7 +66,8 @@ class JSTempMainViewController: UIViewController {
         //"JSGroupMainViewController"로 이동할 때, groupPK를 가지고 이동합니다.
         nextVC.groupPK = 0
         
-        self.present(nextVC, animated: true, completion: nil)
+        let nextNavi = UINavigationController(rootViewController: nextVC)
+        self.present(nextNavi, animated: true, completion: nil)
     }
     
     // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
@@ -73,7 +76,16 @@ class JSTempMainViewController: UIViewController {
         let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupMainViewController") as! JSGroupMainViewController
         nextVC.groupPK = 1
         
-        self.present(nextVC, animated: true, completion: nil)
+        let nextNavi = UINavigationController(rootViewController: nextVC)
+        self.present(nextNavi, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func buttonMoveTabbarController(_ sender:UIButton) {
+        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSCustomTabBarController") as! JSCustomTabBarController
+        let nextNavi = UINavigationController(rootViewController: nextVC)
+        
+        self.present(nextNavi, animated: true, completion: nil)
         
     }
     
