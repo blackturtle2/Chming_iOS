@@ -1043,6 +1043,7 @@
 				FEE33FA21F2F181F00BF61AB /* LaunchScreen.storyboard */,
 				FEE33FAC1F30449700BF61AB /* MainStoryboard.storyboard */,
 				4CB1484B1F3064E900F8A32B /* Chming_iOS-Bridging-Header.h */,
+				FEDACE651F31C6D0004826B8 /* DataCenter.swift */,
 				71E4D5E61F304C0C00FD0F61 /* CH */,
 				4CB146001F30468200F8A32B /* GS */,
 				FEE33FAB1F30439900BF61AB /* JS */,
@@ -1058,7 +1059,6 @@
 		FEE33FAB1F30439900BF61AB /* JS */ = {
 			isa = PBXGroup;
 			children = (
-				FEDACE651F31C6D0004826B8 /* DataCenter.swift */,
 				FEDACE5E1F31C6B8004826B8 /* JSLoginTestViewController.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
