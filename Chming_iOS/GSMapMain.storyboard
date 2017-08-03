@@ -125,6 +125,9 @@
                                         <state key="normal" title="거리">
                                             <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="filterBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="jSO-3H-dJQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="0.81240110759999995" colorSpace="calibratedRGB"/>
