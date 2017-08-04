@@ -88,7 +88,8 @@ class JSTempMainViewController: UIViewController {
         nextVC.groupPK = 1
         
         let nextNavi = UINavigationController(rootViewController: nextVC)
-        nextNavi.navigationBar.barTintColor = .red
+        nextNavi.navigationBar.barTintColor = .black
+        nextNavi.navigationBar.tintColor = .white
         
         self.present(nextNavi, animated: true, completion: nil)
         

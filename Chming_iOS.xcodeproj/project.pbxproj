@@ -308,6 +308,7 @@
 		FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */; };
 		FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */; };
 		FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */; };
+		FEDACEA21F349154004826B8 /* JSGroupMainImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -621,6 +622,7 @@
 		FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardViewController.swift; sourceTree = "<group>"; };
 		FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupGalleryViewController.swift; sourceTree = "<group>"; };
 		FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardDetailViewController.swift; sourceTree = "<group>"; };
+		FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainImageTableViewCell.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -1036,6 +1038,32 @@
 			name = CH;
 			sourceTree = "<group>";
 		};
+		FEDACE9E1F349064004826B8 /* JSGroupMain */ = {
+			isa = PBXGroup;
+			children = (
+				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
+				FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */,
+			);
+			name = JSGroupMain;
+			sourceTree = "<group>";
+		};
+		FEDACE9F1F34907B004826B8 /* JSGroupBoard */ = {
+			isa = PBXGroup;
+			children = (
+				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
+				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
+			);
+			name = JSGroupBoard;
+			sourceTree = "<group>";
+		};
+		FEDACEA01F34908B004826B8 /* JSGroupGallery */ = {
+			isa = PBXGroup;
+			children = (
+				FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */,
+			);
+			name = JSGroupGallery;
+			sourceTree = "<group>";
+		};
 		FEE33F8D1F2F181F00BF61AB = {
 			isa = PBXGroup;
 			children = (
@@ -1080,10 +1108,9 @@
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
 				FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */,
-				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
-				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
-				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
-				FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */,
+				FEDACE9E1F349064004826B8 /* JSGroupMain */,
+				FEDACE9F1F34907B004826B8 /* JSGroupBoard */,
+				FEDACEA01F34908B004826B8 /* JSGroupGallery */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
 			);
 			name = JS;
@@ -1500,6 +1527,7 @@
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
 				4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */,
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
+				FEDACEA21F349154004826B8 /* JSGroupMainImageTableViewCell.swift in Sources */,
 				FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */,
 				FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
