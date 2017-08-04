@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login Test View Controller-->
+        <!--Temp Main View Controller-->
         <scene sceneID="i2a-UA-GPv">
             <objects>
-                <viewController id="Zcj-vT-5ST" customClass="JSLoginTestViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zcj-vT-5ST" customClass="JSTempMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rtg-mF-1En"/>
                         <viewControllerLayoutGuide type="bottom" id="SML-5S-9Lq"/>
@@ -21,44 +22,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kj4-a2-Oj2">
-                                <rect key="frame" x="16" y="114" width="343" height="545"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBi-FJ-a2Y">
-                                <rect key="frame" x="148" y="38" width="78" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="SignUpTest"/>
-                                <connections>
-                                    <action selector="btnSignUpTest:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="niO-WP-viO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzT-pT-9sU">
-                                <rect key="frame" x="152" y="76" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="SignInTest"/>
-                                <connections>
-                                    <action selector="btnSignInTest:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="wBE-sg-aiC"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="roE-IG-1EF">
+                                <rect key="frame" x="0.0" y="208.5" width="375" height="250.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userDefaultsPk = 999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5I-83-2Vc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bm-cZ-lMo">
+                                        <rect key="frame" x="0.0" y="36.5" width="375" height="30"/>
+                                        <state key="normal" title="Move-  &quot;JSCreateGroupViewController&quot;"/>
+                                        <connections>
+                                            <action selector="buttonMoveCreateGroupMainView:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="NIP-Kp-Sw3"/>
+                                            <segue destination="SVF-a4-32Y" kind="presentation" id="QAk-Im-jdC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eET-ZE-h94">
+                                        <rect key="frame" x="0.0" y="82.5" width="375" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  is nil! )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainViewNil:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Oa3-6B-C8H"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1L-kl-mMt">
+                                        <rect key="frame" x="0.0" y="128.5" width="375" height="30"/>
+                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  = 0 )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainView0:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="RyA-fV-4qL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-gl-xqk">
+                                        <rect key="frame" x="0.0" y="174.5" width="375" height="30"/>
+                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  = 1 )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainView1:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="JLr-SJ-baT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjV-Eg-jSR">
+                                        <rect key="frame" x="0.0" y="220.5" width="375" height="30"/>
+                                        <state key="normal" title="MoveTabbar"/>
+                                        <connections>
+                                            <action selector="buttonMoveTabbarController:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Zlb-Wf-5gt"/>
+                                            <segue destination="mX9-ea-Ji8" kind="presentation" id="qJF-58-Y6f"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="roE-IG-1EF" firstAttribute="centerX" secondItem="Bn4-cH-vNx" secondAttribute="centerX" id="UbM-4Y-YP8"/>
+                            <constraint firstItem="roE-IG-1EF" firstAttribute="centerY" secondItem="Bn4-cH-vNx" secondAttribute="centerY" id="hl7-3s-bnD"/>
+                            <constraint firstItem="roE-IG-1EF" firstAttribute="width" secondItem="Bn4-cH-vNx" secondAttribute="width" id="sd5-ng-UAw"/>
+                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="labelTest" destination="kj4-a2-Oj2" id="izO-8I-Rne"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DH7-47-VMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="691"/>
+            <point key="canvasLocation" x="14" y="347"/>
         </scene>
         <!--모임-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="모임" id="BYZ-38-t0r" customClass="JSGroupMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSGroupMainViewController" title="모임" id="BYZ-38-t0r" customClass="JSGroupMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -67,10 +96,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbm-rh-Hg3">
-                                <rect key="frame" x="16" y="108" width="343" height="192"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="모임 소개" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDb-H9-rwm">
                                 <rect key="frame" x="16" y="308" width="343" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,19 +139,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="모임 가입"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fh-lM-LMH">
-                                <rect key="frame" x="168" y="72" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="게시판"/>
-                                <connections>
-                                    <segue destination="Tps-hn-ShI" kind="presentation" id="zGr-OG-xhe"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suu-G7-LgM">
-                                <rect key="frame" x="29" y="72" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="정보"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-Xw-ACr">
                                 <rect key="frame" x="227" y="552" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -163,41 +175,86 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vP-ZA-LHi">
-                                <rect key="frame" x="312" y="72" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="갤러리"/>
-                                <connections>
-                                    <segue destination="Hk1-3B-TDC" kind="presentation" id="BnP-x7-7B8"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD2-Rz-HM4">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OO 모임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h46-c7-fxd">
-                                        <rect key="frame" x="157" y="12" width="60" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pbm-rh-Hg3">
+                                <rect key="frame" x="0.0" y="20" width="375" height="211"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pbm-rh-Hg3" secondAttribute="height" multiplier="16:9" id="C5h-CF-bSn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pbm-rh-Hg3" secondAttribute="trailing" id="9E3-TF-2Ro"/>
+                            <constraint firstItem="pbm-rh-Hg3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dP6-Rx-AL1"/>
+                            <constraint firstItem="pbm-rh-Hg3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ijl-da-ih3"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="OO 모임" id="roC-eO-x9y"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="691.304347826087"/>
+            <point key="canvasLocation" x="2951" y="97"/>
         </scene>
-        <!--게시판-->
+        <!--Group Pager Tab View Controller-->
+        <scene sceneID="frM-Sg-oGE">
+            <objects>
+                <viewController storyboardIdentifier="JSGroupPagerTabViewController" id="BvJ-cP-8CE" customClass="JSGroupPagerTabViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gf7-4j-j8A"/>
+                        <viewControllerLayoutGuide type="bottom" id="jZ6-tE-NLo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PZQ-d5-Rco">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLn-Qz-9fs">
+                                <rect key="frame" x="0.0" y="128" width="375" height="539"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2vS-Sm-Xbb" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="64" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="lFQ-9U-cee"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LmZ-sn-Wux">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jZ6-tE-NLo" firstAttribute="top" secondItem="JLn-Qz-9fs" secondAttribute="bottom" id="2I5-mS-M5w"/>
+                            <constraint firstItem="JLn-Qz-9fs" firstAttribute="leading" secondItem="PZQ-d5-Rco" secondAttribute="leading" id="DYS-H9-S03"/>
+                            <constraint firstItem="2vS-Sm-Xbb" firstAttribute="leading" secondItem="PZQ-d5-Rco" secondAttribute="leading" id="UYW-Yv-DIQ"/>
+                            <constraint firstAttribute="trailing" secondItem="JLn-Qz-9fs" secondAttribute="trailing" id="bbd-zQ-kyJ"/>
+                            <constraint firstItem="JLn-Qz-9fs" firstAttribute="top" secondItem="2vS-Sm-Xbb" secondAttribute="bottom" id="h8V-fF-oUP"/>
+                            <constraint firstAttribute="trailing" secondItem="2vS-Sm-Xbb" secondAttribute="trailing" id="lDZ-zp-3pJ"/>
+                            <constraint firstItem="2vS-Sm-Xbb" firstAttribute="top" secondItem="Gf7-4j-j8A" secondAttribute="bottom" id="tUq-1s-sf8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Eqo-4T-4V5">
+                        <barButtonItem key="leftBarButtonItem" title="X" id="z8X-Zl-E1M">
+                            <connections>
+                                <action selector="buttonClose:" destination="BvJ-cP-8CE" id="0cS-tI-Ciy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonBarView" destination="2vS-Sm-Xbb" id="kVT-5e-5d0"/>
+                        <outlet property="containerView" destination="JLn-Qz-9fs" id="ewm-f6-eLy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lff-bo-BdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1918" y="765"/>
+        </scene>
+        <!--Title-->
         <scene sceneID="y22-z0-2YL">
             <objects>
-                <viewController id="Tps-hn-ShI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSGroupBoardViewController" id="Tps-hn-ShI" customClass="JSGroupBoardViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6vF-1t-Rlr"/>
                         <viewControllerLayoutGuide type="bottom" id="fqc-2e-gG2"/>
@@ -206,21 +263,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NN0-ea-jUh">
-                                <rect key="frame" x="165" y="72" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="게시판"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgV-IP-apq">
-                                <rect key="frame" x="26" y="72" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="정보"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOt-Bg-N51">
-                                <rect key="frame" x="309" y="72" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="갤러리"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4cU-ej-aCT">
                                 <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -255,38 +297,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhp-4O-YSF">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjR-Mj-0mc">
+                                <rect key="frame" x="164" y="72" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OO 모임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpl-aP-3yJ">
-                                        <rect key="frame" x="157" y="12" width="60" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvD-Ho-TQR">
-                                        <rect key="frame" x="323" y="8" width="43" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="글 작성"/>
-                                        <connections>
-                                            <segue destination="A5k-sj-GSu" kind="presentation" id="eSw-9r-kvD"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="btnTest:" destination="Tps-hn-ShI" eventType="touchUpInside" id="u8W-LI-wz9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="게시판" id="BcH-mB-9D3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="6Z6-X9-Gbw"/>
+                    <navigationItem key="navigationItem" title="Title" id="vbv-iq-NTj">
+                        <barButtonItem key="rightBarButtonItem" title="hello" id="uMM-zl-XcJ"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRQ-3W-NhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="431"/>
+            <point key="canvasLocation" x="2951" y="773"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jfL-7N-JKk">
@@ -424,7 +452,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDA-YC-ije" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2880.8000000000002" y="548.27586206896558"/>
+            <point key="canvasLocation" x="4058" y="1163"/>
+        </scene>
+        <!--Group Board Detail View Controller-->
+        <scene sceneID="TYJ-Wi-nry">
+            <objects>
+                <viewController storyboardIdentifier="JSGroupBoardDetailViewController" id="d6q-9t-HDo" customClass="JSGroupBoardDetailViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5gg-wb-Ynm"/>
+                        <viewControllerLayoutGuide type="bottom" id="TdX-5Q-kqj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ozb-ZE-7xE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="게시판 디테일 뷰 컨트롤러" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkr-e4-Xba">
+                                <rect key="frame" x="100" y="222" width="175" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6gT-Hl-rjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4740" y="1162.6686656671666"/>
         </scene>
         <!--게시글 작성-->
         <scene sceneID="OZ5-k2-Pxc">
@@ -519,12 +574,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvM-8s-TKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2882" y="-184"/>
+            <point key="canvasLocation" x="4058" y="385"/>
         </scene>
         <!--갤러리-->
         <scene sceneID="rRT-4I-tQG">
             <objects>
-                <viewController title="갤러리" id="Hk1-3B-TDC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSGroupGalleryViewController" title="갤러리" id="Hk1-3B-TDC" customClass="JSGroupGalleryViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UnR-CV-DJ9"/>
                         <viewControllerLayoutGuide type="bottom" id="vBJ-7I-vuh"/>
@@ -533,21 +588,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABM-U8-aFU">
-                                <rect key="frame" x="165" y="72" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="게시판"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kad-aD-cdS">
-                                <rect key="frame" x="26" y="72" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="정보"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E61-Ua-fYP">
-                                <rect key="frame" x="309" y="72" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="갤러리"/>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wUT-Xk-U4e">
                                 <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -602,12 +642,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7VG-Dn-Vld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="1129.385307346327"/>
+            <point key="canvasLocation" x="2951" y="1432"/>
         </scene>
-        <!--게시글 작성-->
+        <!--모임 생성-->
         <scene sceneID="qEl-S6-YVS">
             <objects>
-                <viewController title="게시글 작성" id="734-Yd-1BO" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSCreateGroupViewController" id="734-Yd-1BO" customClass="JSCreateGroupViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GOD-va-v18"/>
                         <viewControllerLayoutGuide type="bottom" id="Pav-13-N0V"/>
@@ -623,30 +663,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="392-xh-soe">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1D-MG-kMC">
-                                        <rect key="frame" x="329" y="8" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="완료"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGX-01-5Zk">
-                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="취소"/>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="모임 생성" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5z2-vo-nhf">
-                                        <rect key="frame" x="155" y="12" width="64" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uts-mz-X5K">
                                 <rect key="frame" x="0.0" y="72" width="375" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -700,10 +716,55 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="모임 생성" id="sAa-HA-kH8">
+                        <barButtonItem key="leftBarButtonItem" title="취소" id="cip-9E-amk">
+                            <connections>
+                                <action selector="buttonClose:" destination="734-Yd-1BO" id="gD0-yY-F4T"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="09k-6b-5H9"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uF3-mm-TxG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="31.934032983508249"/>
+            <point key="canvasLocation" x="1919" y="27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dig-3q-BfY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SVF-a4-32Y" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xne-A0-wOf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="734-Yd-1BO" kind="relationship" relationship="rootViewController" id="MS1-nw-EUm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1i-l0-rBr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="r8M-hX-51j">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mX9-ea-Ji8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="d0x-3o-ghg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BvJ-cP-8CE" kind="relationship" relationship="rootViewController" id="Cul-UT-gfB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8iF-gK-M7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="765"/>
         </scene>
     </scenes>
 </document>
