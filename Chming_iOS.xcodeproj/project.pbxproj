@@ -1127,7 +1127,7 @@
 				TargetAttributes = {
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 29Q45PKR77;
+						DevelopmentTeam = PV38XQ6LPC;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1511,7 +1511,7 @@
 				FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
 				FEDACE601F31C6B8004826B8 /* JSDataCenter.swift in Sources */,
-				FEDACE601F31C6B8004826B8 /* JSGroupDataCenter.swift in Sources */,
+				FEDACE601F31C6B8004826B8 /* JSDataCenter.swift in Sources */,
 				4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 			);
@@ -1641,7 +1641,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1665,7 +1665,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
