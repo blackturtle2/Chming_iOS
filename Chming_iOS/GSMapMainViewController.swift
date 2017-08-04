@@ -121,9 +121,9 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         return poiItem
     }
     
-    func mapLoad(){
+    func mapLoad(location: String){
         let reference = Database.database().reference()
-        reference.child("GroupListMap").observeSingleEvent(of: .value, with: { (dataSnapShot) in
+        reference.child("GroupListMap").child(location).observeSingleEvent(of: .value, with: { (dataSnapShot) in
             let dataValue = dataSnapShot.value as! [String:Any]
             print("파이어베이스 데이터:// ", dataValue)
             
@@ -140,14 +140,34 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         let geo = mapPoint.mapPointGeo()
         print("특정 지도를 터치했네요! 그곳의 위도: \(geo.latitude) , 경도: \(geo.longitude)")
         // 해당 좌표의 주소값이 필요
+        
+        // 좌표값을 이용하여 주소형태로 변환 방법 
+        // #1. 클로저 타입인 MTMapReverseGeoCoderCompletionHandler 타입의 값을 hanlder 형태로 함수 구현한것을 프로퍼티저장
+        //  MTMapReverseGeoCoder.executeFindingAddress 메서드를 통해 파리미터에 클로저 hanlder를 전달하여 메서드 수행
         let geoHandler: MTMapReverseGeoCoderCompletionHandler = {(success, addressFormapPoint, error: Error?) ->Void in
+            print("//########## Geo Handler Start #######//")
             print("geoHandler success://",success)
             print("geoHandler addressFormapPoint://",addressFormapPoint)
             print("geoHandler error://",error)
+            print("//########## Geo Handler End #######//")
+
             
         }
-        MTMapReverseGeoCoder.executeFindingAddress(for: mapPoint!, openAPIKey: "", completionHandler: geoHandler)
-        MTMapReverseGeoCoder.findAddress(for: <#T##MTMapPoint!#>, withOpenAPIKey: <#T##String!#>)
+        MTMapReverseGeoCoder.executeFindingAddress(for: mapPoint!, openAPIKey: "719b03dd28e6291a3486d538192dca4b", completionHandler: geoHandler)
+        
+        // #2. String? 을 리턴하는 MTMapReverseGeoCoder.findAddress 메서드를 통해 주소 형태 문자열을 반환 받아 사용
+        let result = MTMapReverseGeoCoder.findAddress(for: mapPoint, withOpenAPIKey: "719b03dd28e6291a3486d538192dca4b") ?? ""
+        
+        print("//@@@@@@@@@@ FindAddress Start @@@@@@@@@@ //")
+        print("FindAddress: // ", result)
+        print("//@@@@@@@@@@ FindAddress End @@@@@@@@@@ //")
+        
+        // 서울 서초구 서초동 1328-10 => '서초구' 로 잘라야됨
+        // components() 메서드사용하여 공백 기준으로 분리 => ["서울", "관악구", "신림동", "441-48"]
+        // 우리가 필요한 값은 index 1번 값이 필요
+        let addressSplitArr: [String] = result.components(separatedBy: " ")
+        print(addressSplitArr)
+        self.mapLoad(location: addressSplitArr[1])
     }
     
     
@@ -159,6 +179,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
      location : 사용자 단말의 현재 위치 좌표
      accuracy : 현위치 좌표의 오차 반경(정확도) (meter)
      */
+    // 좌표값을 주소변환 테스트 위해 잠시 주석처리합니다 -GS(20170803)
     func mapView(_ mapView: MTMapView!, updateCurrentLocation location: MTMapPoint!, withAccuracy accuracy: MTMapLocationAccuracy) {
         print("[사용자 단말의 현재 위치 좌표 값: \(location), 현위치 좌표의 오차 반경(정확도) : \(accuracy)]")
         // 주기적으로 현 위치 좌표 값을 할당
@@ -178,13 +199,89 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     @IBAction func myLocationBtnTouched(_ sender: UIButton){
         
         // 맵을 할당한 맵포인트 좌표로 이동
-        //mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
-        self.mapLoad()
+        mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
+//        self.mapLoad()
     }
     
     @IBAction func filterBtnTouched(_ sender: UIButton){
         let filtetView = GSFilterMenuView(frame: CGRect(x: 16.0, y: 20, width: self.view.frame.size.width - 32.0, height: 270.0), test: "tt")
         filtetView.popUp(on: self.view)
     }
+    
+    @IBAction func localFilterBtnTouched(_ sender: UIButton){
+        let localFilterMenuView = GSLocalFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 300.0), localHandler: { [unowned self] (localFiterView, mapPoint) in
+            print("localHandler")
+            self.mapView.setMapCenter(mapPoint["localMapPoint"], zoomLevel: 3, animated: true)
+            
+            var items = [MTMapPOIItem]()
+            // 특정 마커에 대한 커스텀 적용시
+            let interestPoitItem = MTMapPOIItem()
+            interestPoitItem.itemName = "축구"
+            interestPoitItem.mapPoint = mapPoint["interestMapPoint"]
+            interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+            interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+            interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+            //interestPoitItem.draggable = true
+            // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+            interestPoitItem.tag = 22
+            
+            items.append(interestPoitItem)
+            self.mapView.addPOIItems(items)
+            //화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
+//            self.mapView.fitAreaToShowAllPOIItems()
+            
+        }) { (localFilterview) in
+            print("cancelHandler")
+            
+        }
+        localFilterMenuView.popUp(on: self.view)
+    }
 
 }
+
+
+
+//
+/*
+extension String
+{
+    func substring(start: Int, end: Int) -> String
+    {
+        if (start < 0 || start > self.characters.count)
+        {
+            print("start index \(start) out of bounds")
+            return ""
+        }
+        else if end < 0 || end > self.characters.count
+        {
+            print("end index \(end) out of bounds")
+            return ""
+        }
+        let startIndex = self.characters.index(self.startIndex, offsetBy: start)
+        let endIndex = self.characters.index(self.startIndex, offsetBy: end)
+        let range = startIndex..<endIndex
+        
+        return self.substring(with: range)
+    }
+    
+    func substring(start: Int, location: Int) -> String
+    {
+        if (start < 0 || start > self.characters.count)
+        {
+            print("start index \(start) out of bounds")
+            return ""
+        }
+        else if location < 0 || start + location > self.characters.count
+        {
+            print("end index \(start + location) out of bounds")
+            return ""
+        }
+        let startIndex = self.characters.index(self.startIndex, offsetBy: start)
+        let endIndex = self.characters.index(self.startIndex, offsetBy: start + location)
+        let range = startIndex..<endIndex
+        
+        return self.substring(with: range)
+    }
+}
+
+*/
