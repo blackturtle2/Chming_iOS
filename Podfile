@@ -10,5 +10,6 @@ target 'Chming_iOS' do
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
+pod 'XLPagerTabStrip', '~> 7.0'
 
 end

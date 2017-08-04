@@ -81,9 +81,14 @@ class JSTempMainViewController: UIViewController {
         
     }
     
+    // JSGroupPagerTabViewController로 이동하는 버튼 메소드 샘플 코드.
+    // groupPK = 1
     @IBAction func buttonMoveTabbarController(_ sender:UIButton) {
-        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSCustomTabBarController") as! JSCustomTabBarController
+        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupPagerTabViewController") as! JSGroupPagerTabViewController
+        nextVC.groupPK = 1
+        
         let nextNavi = UINavigationController(rootViewController: nextVC)
+        nextNavi.navigationBar.barTintColor = .red
         
         self.present(nextNavi, animated: true, completion: nil)
         

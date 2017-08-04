@@ -1,21 +1,19 @@
 //
-//  JSItem1ViewController.swift
+//  JSBoardDetailViewController.swift
 //  Chming_iOS
 //
-//  Created by leejaesung on 2017. 8. 3..
+//  Created by leejaesung on 2017. 8. 4..
 //  Copyright © 2017년 leejaesung. All rights reserved.
 //
 
 import UIKit
 
-class JSItem1ViewController: UIViewController {
+class JSGroupBoardDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.green
-        self.title = "item1"
-        print("///// item1 loaded-")
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

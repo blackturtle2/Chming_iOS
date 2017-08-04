@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
-class JSGroupMainViewController: UIViewController {
+class JSGroupMainViewController: UIViewController, IndicatorInfoProvider {
     
     var groupPK:Int? = nil // 이전 뷰에서 넘어오는 groupPK 입니다.
     
@@ -39,10 +40,8 @@ class JSGroupMainViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
-    @IBAction func buttonClose(_ sender:UIButton) {
-        self.dismiss(animated: true, completion: nil)
-
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "모임 정보")
     }
     
     

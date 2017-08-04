@@ -302,9 +302,10 @@
 		FEDACE641F31C6BF004826B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */; };
 		FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE651F31C6D0004826B8 /* DataCenter.swift */; };
 		FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */; };
-		FEDACE6C1F332E06004826B8 /* JSTabbarTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE6B1F332E06004826B8 /* JSTabbarTestViewController.swift */; };
-		FEDACE701F333843004826B8 /* JSItem1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE6F1F333843004826B8 /* JSItem1ViewController.swift */; };
-		FEDACE721F333BF4004826B8 /* JSCustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE711F333BF4004826B8 /* JSCustomTabBarController.swift */; };
+		FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */; };
+		FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */; };
+		FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */; };
+		FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -612,9 +613,10 @@
 		FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEDACE651F31C6D0004826B8 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
-		FEDACE6B1F332E06004826B8 /* JSTabbarTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSTabbarTestViewController.swift; sourceTree = "<group>"; };
-		FEDACE6F1F333843004826B8 /* JSItem1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSItem1ViewController.swift; sourceTree = "<group>"; };
-		FEDACE711F333BF4004826B8 /* JSCustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCustomTabBarController.swift; sourceTree = "<group>"; };
+		FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupPagerTabViewController.swift; sourceTree = "<group>"; };
+		FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardViewController.swift; sourceTree = "<group>"; };
+		FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupGalleryViewController.swift; sourceTree = "<group>"; };
+		FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardDetailViewController.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -1071,10 +1073,11 @@
 				FEDACE5C1F31C6B8004826B8 /* JSDataCenter.swift */,
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
-				FEDACE711F333BF4004826B8 /* JSCustomTabBarController.swift */,
-				FEDACE6B1F332E06004826B8 /* JSTabbarTestViewController.swift */,
-				FEDACE6F1F333843004826B8 /* JSItem1ViewController.swift */,
+				FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */,
 				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
+				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
+				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
+				FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
 			);
 			name = JS;
@@ -1486,16 +1489,17 @@
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */,
+				FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
+				FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */,
+				FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
 				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
+				FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
-				FEDACE701F333843004826B8 /* JSItem1ViewController.swift in Sources */,
 				FEDACE601F31C6B8004826B8 /* JSDataCenter.swift in Sources */,
-				FEDACE721F333BF4004826B8 /* JSCustomTabBarController.swift in Sources */,
-				FEDACE6C1F332E06004826B8 /* JSTabbarTestViewController.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
