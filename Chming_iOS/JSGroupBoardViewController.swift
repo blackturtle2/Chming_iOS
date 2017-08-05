@@ -9,9 +9,16 @@
 import UIKit
 import XLPagerTabStrip
 
+protocol JSGroupBoardMenuDelegate {
+    func showNavigationBarPostingButton()
+    func disMissNavigationBarPostingButton()
+}
+
 class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var mainTableView:UITableView!
+    
+    var delegate:JSGroupBoardMenuDelegate?
 
     
     /*******************************************/
@@ -22,12 +29,19 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
         super.viewDidLoad()
         
         // 모임 게시판 뷰에 오면, 내비게이션 바 버튼을 바꾸려고 하는데.. 작동이 안되는 중입니다. OTL
-        self.parent?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "hello", style: .plain, target: nil, action: nil)
-//        self.parent?.navigationItem.setRightBarButton(UIBarButtonItem(title: "hello", style: .plain, target: nil, action: nil), animated: true)
+        // Delegate로 해결..
         
         mainTableView.delegate = self
         mainTableView.dataSource = self
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        delegate?.showNavigationBarPostingButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.disMissNavigationBarPostingButton()
     }
     
     override func didReceiveMemoryWarning() {

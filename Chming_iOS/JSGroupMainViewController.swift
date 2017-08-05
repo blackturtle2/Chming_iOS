@@ -61,8 +61,9 @@ class JSGroupMainViewController: UIViewController, IndicatorInfoProvider, UITabl
     /*********************************************/
     
     // Section Number
+    // 모임 메인 화면의 섹션은 총 5개로 고정합니다.
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     // Row Number
@@ -70,32 +71,32 @@ class JSGroupMainViewController: UIViewController, IndicatorInfoProvider, UITabl
         return 1
     }
     
-    // Secion Title
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 3:
-            return "공지사항"
-        case 4:
-            return "회원목록"
-        default:
-            return nil
-        }
+    // Cell's custom height
+    // 각 Cell의 AutoLayout을 Bottom까지 잘 설정한 후, UITableViewAutomaticDimension를 먹이면, 알아서 Cell 크기가 유동적으로(estimated) 설정됩니다.
+    // heightForRowAt은 최소 단위, estimatedHeightForRowAt은 유동적인 단위를 주는 메소드입니다.
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
+        return UITableViewAutomaticDimension
+    }
+    
+    // Secion Title
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
         case 0:
-            return (self.view.frame.width/16*9)
+            return nil // 모임 대표 이미지
         case 1:
-            return 100
+            return "모임 소개"
         case 2:
-            return 100
+            return nil // 모임 가입-좋아요 버튼
         case 3:
-            return 100
+            return "공지 사항"
         case 4:
-            return 100
+            return "회원 목록"
         default:
-            return 43.5
+            return nil
         }
     }
     
@@ -112,11 +113,27 @@ class JSGroupMainViewController: UIViewController, IndicatorInfoProvider, UITabl
             return tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath)
         case 4:
             return tableView.dequeueReusableCell(withIdentifier: "5thMemberListCell", for: indexPath)
+        case 5:
+            // MARK: [리팩토링 필요!]TableView의 최하단에 여백을 넣기 위한 cell 삽입.
+            let basicCell = UITableViewCell()
+            let babyView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 32))
+            basicCell.contentView.addSubview(babyView)
+            return basicCell
         default:
             let basicCell = UITableViewCell()
             return basicCell
         }
     }
     
+    // DidSelectRowAt
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 3: // 공지 사항 section
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            return
+        }
+    }
     
 }
