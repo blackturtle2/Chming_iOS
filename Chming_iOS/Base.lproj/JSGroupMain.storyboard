@@ -370,15 +370,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJT-BL-eLG" userLabel="CommentView">
                                 <rect key="frame" x="0.0" y="603" width="375" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvr-bC-FZf">
-                                        <rect key="frame" x="337" y="17" width="30" height="30"/>
-                                        <state key="normal" title="확인"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvr-bC-FZf">
+                                        <rect key="frame" x="343" y="20" width="24" height="24"/>
+                                        <state key="normal" image="ic_check"/>
                                         <connections>
                                             <action selector="commentButtonConfirm:" destination="d6q-9t-HDo" eventType="touchUpInside" id="h7X-FY-TxP"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGy-nG-ZnH">
-                                        <rect key="frame" x="66" y="7" width="263" height="50"/>
+                                        <rect key="frame" x="66" y="7" width="269" height="50"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -417,7 +417,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pZb-wR-jQM">
-                        <barButtonItem key="rightBarButtonItem" title="삭제" id="F2b-am-330"/>
+                        <barButtonItem key="rightBarButtonItem" image="ic_delete_white" id="F2b-am-330"/>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonPostLike" destination="Nq1-xZ-RFT" id="tcN-Js-Zi6"/>
@@ -950,6 +950,8 @@
     </scenes>
     <resources>
         <image name="IU_Sample" width="720" height="432"/>
+        <image name="ic_check" width="24" height="24"/>
         <image name="ic_clear_white" width="24" height="24"/>
+        <image name="ic_delete_white" width="24" height="24"/>
     </resources>
 </document>
