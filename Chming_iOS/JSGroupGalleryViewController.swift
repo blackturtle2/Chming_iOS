@@ -9,12 +9,21 @@
 import UIKit
 import XLPagerTabStrip
 
-class JSGroupGalleryViewController: UIViewController, IndicatorInfoProvider {
+class JSGroupGalleryViewController: UIViewController, IndicatorInfoProvider, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    @IBOutlet var mainCollectionView:UICollectionView!
 
+    
+    
+    /*******************************************/
+    // MARK: -  Life Cycle                     //
+    /*******************************************/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        mainCollectionView.delegate = self
+        mainCollectionView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,5 +34,23 @@ class JSGroupGalleryViewController: UIViewController, IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "갤러리")
     }
-
+    
+    
+    
+    /**************************************************/
+    // MARK: -  UICollectionView Delegate & DataSource//
+    /**************************************************/
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mainCollectionViewCell", for: indexPath) as! JSGroupGalleryCollectionViewCell
+        
+        return myCell
+        
+    }
+  
 }
