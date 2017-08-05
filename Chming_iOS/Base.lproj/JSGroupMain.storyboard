@@ -128,7 +128,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Eqo-4T-4V5">
-                        <barButtonItem key="leftBarButtonItem" title="닫기" id="z8X-Zl-E1M">
+                        <barButtonItem key="leftBarButtonItem" image="ic_clear_white" id="z8X-Zl-E1M">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="buttonClose:" destination="BvJ-cP-8CE" id="0cS-tI-Ciy"/>
@@ -640,7 +640,7 @@
         <!--게시글 작성-->
         <scene sceneID="OZ5-k2-Pxc">
             <objects>
-                <viewController title="게시글 작성" id="A5k-sj-GSu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSGroupBoardPostingViewController" title="게시글 작성" id="A5k-sj-GSu" customClass="JSGroupBoardPostingViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zgE-6g-3LY"/>
                         <viewControllerLayoutGuide type="bottom" id="ds6-tz-0Cx"/>
@@ -704,7 +704,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="게시글 작성" id="lXa-rh-iGQ">
-                        <barButtonItem key="leftBarButtonItem" title="취소" id="n4a-qH-juh"/>
+                        <barButtonItem key="leftBarButtonItem" title="취소" id="n4a-qH-juh">
+                            <connections>
+                                <action selector="buttonClose:" destination="A5k-sj-GSu" id="NRj-FS-ObL"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="완료" id="mI8-Eo-fnp"/>
                     </navigationItem>
                 </viewController>
@@ -946,5 +950,6 @@
     </scenes>
     <resources>
         <image name="IU_Sample" width="720" height="432"/>
+        <image name="ic_clear_white" width="24" height="24"/>
     </resources>
 </document>

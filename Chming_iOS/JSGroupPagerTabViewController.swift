@@ -69,7 +69,14 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
     
     func showNavigationBarPostingButton() {
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "글 작성", style: .plain, target: nil, action: nil)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: <#T##UIImage?#>, style: <#T##UIBarButtonItemStyle#>, target: <#T##Any?#>, action: <#T##Selector?#>)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_create_white"), style: .plain, target: self, action: #selector(moveJSGRoupBoardPostingView))
+    }
+    
+    func moveJSGRoupBoardPostingView() {
+        let rootVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardPostingViewController") as! JSGroupBoardPostingViewController
+        let nextVC = UINavigationController(rootViewController: rootVC)
+        
+        self.present(nextVC, animated: true, completion: nil)
     }
     
     func disMissNavigationBarPostingButton() {

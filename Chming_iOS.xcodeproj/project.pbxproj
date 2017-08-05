@@ -311,6 +311,7 @@
 		FEDACEA21F349154004826B8 /* JSGroupMainImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */; };
 		FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA31F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift */; };
 		FEDACEA71F356B03004826B8 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FEDACEA61F356B03004826B8 /* Location.gpx */; };
+		FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
@@ -627,6 +628,7 @@
 		FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainImageTableViewCell.swift; sourceTree = "<group>"; };
 		FEDACEA31F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FEDACEA61F356B03004826B8 /* Location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
+		FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardPostingViewController.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -1056,6 +1058,7 @@
 			children = (
 				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
 				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
+				FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */,
 			);
 			name = JSGroupBoard;
 			sourceTree = "<group>";
@@ -1538,6 +1541,7 @@
 				FEDACEA21F349154004826B8 /* JSGroupMainImageTableViewCell.swift in Sources */,
 				FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */,
 				FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */,
+				FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
 				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
