@@ -49,38 +49,6 @@ class JSTempMainViewController: UIViewController {
         self.present(nextNavi, animated: true, completion: nil)
     }
     
-    // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
-    // groupPK를 넘겨주지 않는 경우.
-    @IBAction func buttonMoveGroupMainViewNil(_ sender:UIButton) {
-        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupMainViewController") as! JSGroupMainViewController
-        
-        let nextNavi = UINavigationController(rootViewController: nextVC)
-        self.present(nextNavi, animated: true, completion: nil)
-    }
-    
-    // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
-    // groupPK = 0
-    @IBAction func buttonMoveGroupMainView0(_ sender:UIButton) {
-        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupMainViewController") as! JSGroupMainViewController
-        
-        //"JSGroupMainViewController"로 이동할 때, groupPK를 가지고 이동합니다.
-        nextVC.groupPK = 0
-        
-        let nextNavi = UINavigationController(rootViewController: nextVC)
-        self.present(nextNavi, animated: true, completion: nil)
-    }
-    
-    // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
-    // groupPK = 0
-    @IBAction func buttonMoveGroupMainView1(_ sender:UIButton) {
-        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupMainViewController") as! JSGroupMainViewController
-        nextVC.groupPK = 1
-        
-        let nextNavi = UINavigationController(rootViewController: nextVC)
-        self.present(nextNavi, animated: true, completion: nil)
-        
-    }
-    
     // JSGroupPagerTabViewController로 이동하는 버튼 메소드 샘플 코드.
     // groupPK = 1
     @IBAction func buttonMoveTabbarController(_ sender:UIButton) {
@@ -95,7 +63,20 @@ class JSTempMainViewController: UIViewController {
         
     }
     
+    // JSGroupMainView로 이동하는 버튼 메소드 샘플 코드.
+    // groupPK를 넘겨주지 않는 경우.
+    @IBAction func buttonMoveGroupMainViewNil(_ sender:UIButton) {
+        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupPagerTabViewController") as! JSGroupPagerTabViewController
+        
+        let nextNavi = UINavigationController(rootViewController: nextVC)
+        nextNavi.navigationBar.barTintColor = .black
+        nextNavi.navigationBar.tintColor = .white
+        
+        self.present(nextNavi, animated: true, completion: nil)
+    }
     
+    
+    // 임시로 작동하는 close 버튼 액션.
     @IBAction func buttonClose(_ sender:UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

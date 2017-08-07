@@ -25,11 +25,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="roE-IG-1EF">
-                                <rect key="frame" x="0.0" y="208.5" width="375" height="250.5"/>
+                                <rect key="frame" x="0.0" y="218" width="375" height="231.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userDefaultsPk = 999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5I-83-2Vc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⬇️ 모임 생성 버튼 ⬇️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8D-gC-RHU">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -41,34 +41,32 @@
                                             <segue destination="SVF-a4-32Y" kind="presentation" id="QAk-Im-jdC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eET-ZE-h94">
-                                        <rect key="frame" x="0.0" y="82.5" width="375" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  is nil! )"/>
-                                        <connections>
-                                            <action selector="buttonMoveGroupMainViewNil:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Oa3-6B-C8H"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1L-kl-mMt">
-                                        <rect key="frame" x="0.0" y="128.5" width="375" height="30"/>
-                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  = 0 )"/>
-                                        <connections>
-                                            <action selector="buttonMoveGroupMainView0:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="RyA-fV-4qL"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-gl-xqk">
-                                        <rect key="frame" x="0.0" y="174.5" width="375" height="30"/>
-                                        <state key="normal" title="Move-  &quot;JSGroupMainViewController&quot; ( groupPK  = 1 )"/>
-                                        <connections>
-                                            <action selector="buttonMoveGroupMainView1:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="JLr-SJ-baT"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIk-nr-not">
+                                        <rect key="frame" x="0.0" y="82.5" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⬇️ 모임 메인 뷰 이동 버튼 ⬇️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R51-B8-9iM">
+                                        <rect key="frame" x="0.0" y="119" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjV-Eg-jSR">
-                                        <rect key="frame" x="0.0" y="220.5" width="375" height="30"/>
-                                        <state key="normal" title="MoveTabbar"/>
+                                        <rect key="frame" x="0.0" y="155.5" width="375" height="30"/>
+                                        <state key="normal" title="Move- &quot;GroupPagerTabView&quot;"/>
                                         <connections>
                                             <action selector="buttonMoveTabbarController:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Zlb-Wf-5gt"/>
                                             <segue destination="mX9-ea-Ji8" kind="presentation" id="qJF-58-Y6f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eET-ZE-h94">
+                                        <rect key="frame" x="0.0" y="201.5" width="375" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Move- &quot;GroupPagerTabView&quot; ( groupPK  is nil! )"/>
+                                        <connections>
+                                            <action selector="buttonMoveGroupMainViewNil:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Oa3-6B-C8H"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -83,10 +81,18 @@
                                     <action selector="buttonClose:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="ezA-cN-tfa"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userDefaultsPk = 999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5I-83-2Vc">
+                                <rect key="frame" x="16" y="74" width="132" height="14.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="n5I-83-2Vc" firstAttribute="leading" secondItem="L1H-cG-Y1K" secondAttribute="leading" id="EuZ-Zp-yr0"/>
                             <constraint firstItem="roE-IG-1EF" firstAttribute="centerX" secondItem="Bn4-cH-vNx" secondAttribute="centerX" id="UbM-4Y-YP8"/>
+                            <constraint firstItem="n5I-83-2Vc" firstAttribute="top" secondItem="L1H-cG-Y1K" secondAttribute="bottom" constant="8" id="WVJ-iD-oX2"/>
                             <constraint firstItem="L1H-cG-Y1K" firstAttribute="leading" secondItem="Bn4-cH-vNx" secondAttribute="leading" constant="16" id="a0t-0X-ynF"/>
                             <constraint firstItem="roE-IG-1EF" firstAttribute="centerY" secondItem="Bn4-cH-vNx" secondAttribute="centerY" id="hl7-3s-bnD"/>
                             <constraint firstItem="L1H-cG-Y1K" firstAttribute="top" secondItem="Rtg-mF-1En" secondAttribute="bottom" constant="16" id="jmh-9Z-2rO"/>

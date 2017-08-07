@@ -1116,11 +1116,11 @@
 			children = (
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
+				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
 				FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */,
 				FEDACE9E1F349064004826B8 /* JSGroupMain */,
 				FEDACE9F1F34907B004826B8 /* JSGroupBoard */,
 				FEDACEA01F34908B004826B8 /* JSGroupGallery */,
-				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
 			);
 			name = JS;
 			sourceTree = "<group>";
