@@ -15,13 +15,56 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     @IBOutlet weak var mapView: MTMapView!
     var loadCurrentMapPoint: MTMapPoint?
     
+    @IBOutlet weak var infoScrollView: UIScrollView!
+    
+    
+    
+    @IBOutlet var scrollAreaWidthConstraints: NSLayoutConstraint!
     
     // MARK: - Initialize
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         
+        // ----------- 스크롤뷰 테스트 start---------------
+        // 스크롤뷰의 페이지느낌 속성값 - default false
+        infoScrollView.isPagingEnabled = true
+        // 튕기듯하 바운스 속성값 - default true
+        //contentScrollView.bounces = false
         
+        
+        // 스크롤뷰에 커스텀
+//        let detailView = DetailInfoView(frame: CGRect(x: self.view.bounds.width*0, y: 0, width: infoScrollView.bounds.width, height: infoScrollView.bounds.height))
+//        detailView.backgroundColor = .yellow
+//        infoScrollView.addSubview(detailView)
+        
+        
+        //## 코드로 구현 시작 - 강사님 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
+        // 개인적으로 닙파일로 빼야될거 같음
+        var scrollAreaView = ScrollAreaView(frame: CGRect(x: 0, y: 0, width: infoScrollView.frame.size.width, height: infoScrollView.frame.size.height))
+        
+        
+        
+        
+        //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
+        let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
+        for index in cg {
+//            let areaView: ScrollAreaView = ScrollAreaView(frame: infoScrollView.frame)
+//            areaView.backgroundColor = .black
+//            print(index.description)
+//            self.infoScrollView.addSubview(areaView)
+            let detailView = DetailInfoView()
+            detailView.backgroundColor = index
+            detailView.text = "testtest"
+            
+        }
+        scrollAreaWidthConstraints.constant = self.infoScrollView.frame.size.width*5
+        self.infoScrollView.layoutIfNeeded()
+        
+        
+        
+        
+        // ---------- 스크롤뷰 테스트  end---------------
         
         self.loadMarker()
 
@@ -202,6 +245,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
 //        self.mapLoad()
     }
+    
+    // 뒤로가기 버튼 - 임시버튼
     
     @IBAction func filterBtnTouched(_ sender: UIButton){
         let filtetView = GSFilterMenuView(frame: CGRect(x: 16.0, y: 20, width: self.view.frame.size.width - 32.0, height: 270.0), test: "tt")
