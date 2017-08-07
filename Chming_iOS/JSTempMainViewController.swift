@@ -95,4 +95,9 @@ class JSTempMainViewController: UIViewController {
         
     }
     
+    
+    @IBAction func buttonClose(_ sender:UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

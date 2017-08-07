@@ -73,11 +73,23 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L1H-cG-Y1K">
+                                <rect key="frame" x="16" y="36" width="41" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonClose:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="ezA-cN-tfa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="roE-IG-1EF" firstAttribute="centerX" secondItem="Bn4-cH-vNx" secondAttribute="centerX" id="UbM-4Y-YP8"/>
+                            <constraint firstItem="L1H-cG-Y1K" firstAttribute="leading" secondItem="Bn4-cH-vNx" secondAttribute="leading" constant="16" id="a0t-0X-ynF"/>
                             <constraint firstItem="roE-IG-1EF" firstAttribute="centerY" secondItem="Bn4-cH-vNx" secondAttribute="centerY" id="hl7-3s-bnD"/>
+                            <constraint firstItem="L1H-cG-Y1K" firstAttribute="top" secondItem="Rtg-mF-1En" secondAttribute="bottom" constant="16" id="jmh-9Z-2rO"/>
                             <constraint firstItem="roE-IG-1EF" firstAttribute="width" secondItem="Bn4-cH-vNx" secondAttribute="width" id="sd5-ng-UAw"/>
                         </constraints>
                     </view>
