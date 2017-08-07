@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="roE-IG-1EF">
-                                <rect key="frame" x="0.0" y="218" width="375" height="231.5"/>
+                                <rect key="frame" x="0.0" y="217.5" width="375" height="232.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⬇️ 모임 생성 버튼 ⬇️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8D-gC-RHU">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -54,15 +54,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjV-Eg-jSR">
-                                        <rect key="frame" x="0.0" y="155.5" width="375" height="30"/>
-                                        <state key="normal" title="Move- &quot;GroupPagerTabView&quot;"/>
+                                        <rect key="frame" x="0.0" y="155.5" width="375" height="31"/>
+                                        <state key="normal" title="Move- &quot;GroupPagerTabView&quot;" backgroundImage="ic_button_sample"/>
                                         <connections>
                                             <action selector="buttonMoveTabbarController:" destination="Zcj-vT-5ST" eventType="touchUpInside" id="Zlb-Wf-5gt"/>
                                             <segue destination="mX9-ea-Ji8" kind="presentation" id="qJF-58-Y6f"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eET-ZE-h94">
-                                        <rect key="frame" x="0.0" y="201.5" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="202.5" width="375" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Move- &quot;GroupPagerTabView&quot; ( groupPK  is nil! )"/>
                                         <connections>
@@ -537,7 +537,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="37" id="jGs-Bd-Ta2"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="모임 가입"/>
+                                                                    <state key="normal" title="모임 가입" backgroundImage="ic_button_sample"/>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -556,7 +556,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="37" id="JUH-9g-cj4"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="모임 좋아요"/>
+                                                                    <state key="normal" title="모임 좋아요" backgroundImage="ic_button_sample"/>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -968,6 +968,7 @@
     </scenes>
     <resources>
         <image name="IU_Sample" width="720" height="432"/>
+        <image name="ic_button_sample" width="180" height="31"/>
         <image name="ic_check" width="24" height="24"/>
         <image name="ic_clear_white" width="24" height="24"/>
         <image name="ic_delete_white" width="24" height="24"/>

@@ -29,12 +29,14 @@ class JSGroupMainViewController: UIViewController, IndicatorInfoProvider, UITabl
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        // groupPK 값이 오지 않았을 케이스 예외처리
         guard let vGroupPK = groupPK else {
             print("///// groupPK is no data-")
             
             let alertViewController = UIAlertController(title: "알림", message: "인터넷 연결이 불안정합니다. 잠시 후, 다시 시도해주세요.", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "ok", style: .default, handler: { (action) in
-                self.dismiss(animated: true, completion: nil) // 작동 불가?
+                self.dismiss(animated: true, completion: nil)
             })
             alertViewController.addAction(alertAction)
             self.present(alertViewController, animated: true, completion: nil)
@@ -100,10 +102,18 @@ class JSGroupMainViewController: UIViewController, IndicatorInfoProvider, UITabl
         }
     }
     
+    
+    
+    enum sectionID:Int {
+        case mainImageCell = 0
+        case mainTextCell = 1
+        case JoinLikeGroupCell = 2
+    }
+
     // Custom Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case sectionID.mainImageCell.rawValue:
             return tableView.dequeueReusableCell(withIdentifier: "1stMainImageCell", for: indexPath)
         case 1:
             return tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath)
