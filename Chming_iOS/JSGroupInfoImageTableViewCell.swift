@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JSGroupMainImageTableViewCell: UITableViewCell {
+class JSGroupInfoImageTableViewCell: UITableViewCell {
     
     @IBOutlet var mainImage:UIImageView!
 

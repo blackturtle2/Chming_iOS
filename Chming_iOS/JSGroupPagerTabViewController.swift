@@ -46,7 +46,7 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
     /***************************************************/
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = UIStoryboard(name: JSStoryboardName, bundle: nil).instantiateViewController(withIdentifier: "JSGroupMainViewController") as! JSGroupMainViewController
+        let child_1 = UIStoryboard(name: JSStoryboardName, bundle: nil).instantiateViewController(withIdentifier: "JSGroupInfoViewController") as! JSGroupInfoViewController
         child_1.groupPK = self.groupPK
         
         let child_2 = UIStoryboard(name: JSStoryboardName, bundle: nil).instantiateViewController(withIdentifier: "JSGroupBoardViewController") as! JSGroupBoardViewController

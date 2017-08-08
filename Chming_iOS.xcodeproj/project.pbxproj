@@ -303,12 +303,12 @@
 		FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */; };
 		FEDACE641F31C6BF004826B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */; };
 		FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE651F31C6D0004826B8 /* DataCenter.swift */; };
-		FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */; };
+		FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE671F31C74C004826B8 /* JSGroupInfoViewController.swift */; };
 		FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */; };
 		FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */; };
 		FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */; };
 		FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */; };
-		FEDACEA21F349154004826B8 /* JSGroupMainImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */; };
+		FEDACEA21F349154004826B8 /* JSGroupInfoImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA11F349154004826B8 /* JSGroupInfoImageTableViewCell.swift */; };
 		FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA31F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift */; };
 		FEDACEA71F356B03004826B8 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FEDACEA61F356B03004826B8 /* Location.gpx */; };
 		FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */; };
@@ -620,12 +620,12 @@
 		FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSTempMainViewController.swift; sourceTree = "<group>"; };
 		FEDACE631F31C6BF004826B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEDACE651F31C6D0004826B8 /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
-		FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainViewController.swift; sourceTree = "<group>"; };
+		FEDACE671F31C74C004826B8 /* JSGroupInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoViewController.swift; sourceTree = "<group>"; };
 		FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupPagerTabViewController.swift; sourceTree = "<group>"; };
 		FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardViewController.swift; sourceTree = "<group>"; };
 		FEDACE9A1F344F37004826B8 /* JSGroupGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupGalleryViewController.swift; sourceTree = "<group>"; };
 		FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardDetailViewController.swift; sourceTree = "<group>"; };
-		FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupMainImageTableViewCell.swift; sourceTree = "<group>"; };
+		FEDACEA11F349154004826B8 /* JSGroupInfoImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoImageTableViewCell.swift; sourceTree = "<group>"; };
 		FEDACEA31F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FEDACEA61F356B03004826B8 /* Location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardPostingViewController.swift; sourceTree = "<group>"; };
@@ -1044,13 +1044,13 @@
 			name = CH;
 			sourceTree = "<group>";
 		};
-		FEDACE9E1F349064004826B8 /* JSGroupMain */ = {
+		FEDACE9E1F349064004826B8 /* JSGroupInfo */ = {
 			isa = PBXGroup;
 			children = (
-				FEDACE671F31C74C004826B8 /* JSGroupMainViewController.swift */,
-				FEDACEA11F349154004826B8 /* JSGroupMainImageTableViewCell.swift */,
+				FEDACE671F31C74C004826B8 /* JSGroupInfoViewController.swift */,
+				FEDACEA11F349154004826B8 /* JSGroupInfoImageTableViewCell.swift */,
 			);
-			name = JSGroupMain;
+			name = JSGroupInfo;
 			sourceTree = "<group>";
 		};
 		FEDACE9F1F34907B004826B8 /* JSGroupBoard */ = {
@@ -1118,7 +1118,7 @@
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
 				FEDACE961F3446D4004826B8 /* JSGroupPagerTabViewController.swift */,
-				FEDACE9E1F349064004826B8 /* JSGroupMain */,
+				FEDACE9E1F349064004826B8 /* JSGroupInfo */,
 				FEDACE9F1F34907B004826B8 /* JSGroupBoard */,
 				FEDACEA01F34908B004826B8 /* JSGroupGallery */,
 			);
@@ -1533,12 +1533,12 @@
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
-				FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */,
+				FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */,
 				FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
 				4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */,
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
-				FEDACEA21F349154004826B8 /* JSGroupMainImageTableViewCell.swift in Sources */,
+				FEDACEA21F349154004826B8 /* JSGroupInfoImageTableViewCell.swift in Sources */,
 				FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */,
 				FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */,
 				FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */,

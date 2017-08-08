@@ -1,5 +1,5 @@
 //
-//  JSGroupMainViewController.swift
+//  JSGroupInfoViewController.swift
 //  Chming_iOS
 //
 //  Created by leejaesung on 2017. 8. 1..
@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class JSGroupMainViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
+class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
     var groupPK:Int? = nil // 이전 뷰에서 넘어오는 groupPK 입니다.
     
