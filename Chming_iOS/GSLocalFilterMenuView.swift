@@ -14,11 +14,11 @@ class GSLocalFilterMenuView: UIView {
     
     // 배경 뷰
     private var bacgroundView: UIView = UIView()
-    private var localHandler: (GSLocalFilterMenuView, [String : MTMapPoint])->Void = {(self) in}
+    private var localHandler: (GSLocalFilterMenuView, [String : Any])->Void = {(self) in}
     private var cancleHandler: ((GSLocalFilterMenuView)->Void)?
     
     // 생성시 frame 값과, 지역버튼 클릭시에 일어날 행동에 대한 클로저 함수를 파라미터로 할당
-    init(frame: CGRect, localHandler: @escaping (GSLocalFilterMenuView, [String : MTMapPoint])->Void , cancleHandler: ComposeActionHandler?) {
+    init(frame: CGRect, localHandler: @escaping (GSLocalFilterMenuView, [String: Any])->Void , cancleHandler: ComposeActionHandler?) {
         super.init(frame: frame)
         self.loadNib()
         self.bacgroundView.backgroundColor = .black
