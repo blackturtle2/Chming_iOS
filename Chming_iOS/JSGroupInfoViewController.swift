@@ -202,6 +202,10 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     
     // DidSelectRowAt
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // 터치한 표시를 제거하는 액션
+        tableView.deselectRow(at: indexPath, animated: true)
+
         switch indexPath.section {
         case sectionID.noticeListCell.rawValue: // 공지 사항 section
             let nowCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
