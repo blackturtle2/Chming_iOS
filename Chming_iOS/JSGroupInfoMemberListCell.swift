@@ -1,22 +1,18 @@
 //
-//  JSGroupMainImageTableViewCell.swift
+//  JSGroupInfoMemberListCell.swift
 //  Chming_iOS
 //
-//  Created by leejaesung on 2017. 8. 4..
+//  Created by leejaesung on 2017. 8. 8..
 //  Copyright © 2017년 leejaesung. All rights reserved.
 //
 
 import UIKit
 
-class JSGroupInfoImageTableViewCell: UITableViewCell {
-    
-    @IBOutlet var mainImage:UIImageView!
+class JSGroupInfoMemberListCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        mainImage.image = #imageLiteral(resourceName: "IU_Sample")
-        
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

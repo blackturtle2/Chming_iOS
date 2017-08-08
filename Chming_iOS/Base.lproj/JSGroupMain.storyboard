@@ -471,7 +471,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="1stMainImageCell" rowHeight="211" id="3bF-g3-xpT" customClass="JSGroupInfoImageTableViewCell" customModule="Chming_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="1stMainImageCell" rowHeight="211" id="3bF-g3-xpT" customClass="JSGroupInfoMainImageCell" customModule="Chming_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="211"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3bF-g3-xpT" id="qxR-9Y-sYa">
@@ -496,7 +496,7 @@
                                             <outlet property="mainImage" destination="Hpz-qM-TQM" id="6By-Vi-siX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="2ndMainTextCell" rowHeight="100" id="tQq-VF-kdO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="2ndMainTextCell" rowHeight="100" id="tQq-VF-kdO" customClass="JSGroupInfoMainTextCell" customModule="Chming_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="239" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tQq-VF-kdO" id="QHE-hm-SyP">
@@ -518,8 +518,11 @@
                                                 <constraint firstItem="nCa-5s-a8q" firstAttribute="leading" secondItem="QHE-hm-SyP" secondAttribute="leadingMargin" constant="8" id="f2E-Jx-chj"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mainLabel" destination="nCa-5s-a8q" id="Wrl-VK-u68"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="3rdJoinLikeGroupCell" rowHeight="53" id="vzC-Td-gif">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="3rdJoinLikeGroupCell" rowHeight="53" id="vzC-Td-gif" customClass="JSGroupInfoJoinLikeGroupCell" customModule="Chming_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="339" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vzC-Td-gif" id="zMJ-LS-e4s">
@@ -586,7 +589,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="4thNoticeListCell" rowHeight="76" id="aWn-hx-Kcf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="4thNoticeListCell" rowHeight="76" id="aWn-hx-Kcf" customClass="JSGroupInfoNoticeListCell" customModule="Chming_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="392" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aWn-hx-Kcf" id="Eel-Yn-sBh">
@@ -616,7 +619,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="5thMemberListCell" textLabel="gb6-7B-erx" detailTextLabel="azO-Aj-kET" rowHeight="45" style="IBUITableViewCellStyleValue1" id="Vkv-iR-NTy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="5thMemberListCell" textLabel="gb6-7B-erx" detailTextLabel="azO-Aj-kET" rowHeight="45" style="IBUITableViewCellStyleValue1" id="Vkv-iR-NTy" customClass="JSGroupInfoMemberListCell" customModule="Chming_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="468" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vkv-iR-NTy" id="aC7-Qz-rbN">

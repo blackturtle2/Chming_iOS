@@ -11,7 +11,9 @@ import XLPagerTabStrip
 
 class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
-    var groupPK:Int? = nil // 이전 뷰에서 넘어오는 groupPK 입니다.
+    var groupPK:Int?
+    var groupInfo:JSGroupInfo?
+    
     
     @IBOutlet var mainTableView:UITableView!
     
@@ -25,26 +27,25 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         
         mainTableView.delegate = self
         mainTableView.dataSource = self
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        // groupPK 값이 오지 않았을 케이스 예외처리
-        guard let vGroupPK = groupPK else {
-            print("///// groupPK is no data-")
-            
-            let alertViewController = UIAlertController(title: "알림", message: "인터넷 연결이 불안정합니다. 잠시 후, 다시 시도해주세요.", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "ok", style: .default, handler: { (action) in
-                self.dismiss(animated: true, completion: nil)
-            })
-            alertViewController.addAction(alertAction)
-            self.present(alertViewController, animated: true, completion: nil)
-            
+        // Singleton에 있는 GroupPK 데려오기.
+        if self.groupInfo != nil { return } // 다른 탭에 있는 게시판이나 갤러리 뷰에 갔다 와도 viewWillAppear()가 불리므로 통신을 추가로 하지 않기 위한 예외처리입니다.
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else {
+            print("//// guardlet- vSelectedGroupPK")
             return
         }
         
-        print("///// groupPK: ", vGroupPK)
+        self.groupPK = vSelectedGroupPK
+        self.groupInfo = JSDataCenter.shared.findGroupInfo(ofGroupPK: vSelectedGroupPK)
+        
+        print("///// groupPK: ", groupPK!)
+        print("///// groupInfo: ", groupInfo!)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,8 +63,17 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     // MARK: -  UITableView Delegate & DataSource//
     /*********************************************/
     
+    enum sectionID:Int {
+        case mainImageCell = 0
+        case mainTextCell = 1
+        case joinLikeGroupCell = 2
+        case noticeListCell = 3
+        case memberListCell = 4
+    }
+    
     // Section Number
-    // 모임 메인 화면의 섹션은 총 5개로 고정합니다.
+    // 모임 메인 화면의 섹션은 총 6개로 고정합니다.
+    // 마지막 cell은 여백 cell.
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
     }
@@ -84,13 +94,6 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         return UITableViewAutomaticDimension
     }
     
-    enum sectionID:Int {
-        case mainImageCell = 0
-        case mainTextCell = 1
-        case joinLikeGroupCell = 2
-        case noticeListCell = 3
-        case memberListCell = 4
-    }
     
     // Secion Title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -115,15 +118,26 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case sectionID.mainImageCell.rawValue:
-            return tableView.dequeueReusableCell(withIdentifier: "1stMainImageCell", for: indexPath)
+            let mainImageCell = tableView.dequeueReusableCell(withIdentifier: "1stMainImageCell", for: indexPath) as! JSGroupInfoMainImageCell
+            return mainImageCell
+            
         case sectionID.mainTextCell.rawValue:
-            return tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath)
+            let mainTextCell = tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath) as! JSGroupInfoMainTextCell
+            mainTextCell.mainLabel.text = groupInfo?.mainText
+            return mainTextCell
+            
         case sectionID.joinLikeGroupCell.rawValue:
-            return tableView.dequeueReusableCell(withIdentifier: "3rdJoinLikeGroupCell", for: indexPath)
+            let joinLikeCell = tableView.dequeueReusableCell(withIdentifier: "3rdJoinLikeGroupCell", for: indexPath) as! JSGroupInfoJoinLikeGroupCell
+            return joinLikeCell
+            
         case sectionID.noticeListCell.rawValue:
-            return tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath)
+            let noticeCell = tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath) as! JSGroupInfoNoticeListCell
+            return noticeCell
+            
         case sectionID.memberListCell.rawValue:
-            return tableView.dequeueReusableCell(withIdentifier: "5thMemberListCell", for: indexPath)
+            let memberListCell = tableView.dequeueReusableCell(withIdentifier: "5thMemberListCell", for: indexPath) as! JSGroupInfoMemberListCell
+            return memberListCell
+            
         case 5:
             // MARK: [리팩토링 필요!]TableView의 최하단에 여백을 넣기 위한 cell 삽입.
             let basicCell = UITableViewCell()
