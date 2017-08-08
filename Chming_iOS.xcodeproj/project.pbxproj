@@ -297,8 +297,9 @@
 		4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */; };
 		4CC0D9491F341B80003BF493 /* GSLocalFilterMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */; };
 		4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */; };
-		4CC0D94F1F380C07003BF493 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D94E1F380C07003BF493 /* DetailInfoView.swift */; };
-		4CC0D9531F381716003BF493 /* ScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9521F381716003BF493 /* ScrollAreaView.swift */; };
+		4CC0D9771F395856003BF493 /* GSSimpleGroupInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */; };
+		4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */; };
+		4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
 		FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */; };
@@ -609,8 +610,10 @@
 		4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSDataCenter.swift; sourceTree = "<group>"; };
 		4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSLocalFilterMenu.xib; sourceTree = "<group>"; };
 		4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSLocalFilterMenuView.swift; sourceTree = "<group>"; };
-		4CC0D94E1F380C07003BF493 /* DetailInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
-		4CC0D9521F381716003BF493 /* ScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollAreaView.swift; sourceTree = "<group>"; };
+		4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSimpleGroupInfo.xib; sourceTree = "<group>"; };
+		4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSimpleGroupInfoView.swift; sourceTree = "<group>"; };
+		4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SeoulLocation.gpx; sourceTree = "<group>"; };
+		4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSScrollAreaView.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
@@ -670,11 +673,13 @@
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
-				4CC0D9521F381716003BF493 /* ScrollAreaView.swift */,
-				4CC0D94E1F380C07003BF493 /* DetailInfoView.swift */,
+				4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */,
 				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
+				4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */,
 				4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */,
 				4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */,
+				4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */,
+				4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */,
 				4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */,
 				4CB148501F30B19E00F8A32B /* mapIMG */,
 			);
@@ -1423,6 +1428,7 @@
 				4CB147CA1F30607500F8A32B /* functions_d.js in Resources */,
 				4CB147AE1F30607500F8A32B /* files_0.js in Resources */,
 				4CB147A91F30607500F8A32B /* classes_0.js in Resources */,
+				4CC0D9771F395856003BF493 /* GSSimpleGroupInfo.xib in Resources */,
 				4CB147A31F30607500F8A32B /* all_d.js in Resources */,
 				4CB147311F30607500F8A32B /* _m_t_map_view_8h.html in Resources */,
 				4CB1481F1F30607500F8A32B /* map_pin_red@3x.png in Resources */,
@@ -1504,18 +1510,18 @@
 				FEDACE681F31C74C004826B8 /* JSGroupMainViewController.swift in Sources */,
 				FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
-				4CC0D9531F381716003BF493 /* ScrollAreaView.swift in Sources */,
-				4CC0D94F1F380C07003BF493 /* DetailInfoView.swift in Sources */,
 				4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */,
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
 				FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */,
 				FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */,
+				4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
 				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
 				FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
 				4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */,
+				4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -141,27 +141,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHn-jR-d2q">
                                 <rect key="frame" x="0.0" y="575" width="375" height="82"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-kx-Csa" userLabel="Scroll Area View" customClass="ScrollAreaView" customModule="Chming_iOS" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-kx-Csa" userLabel="Scroll Area View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T18-lM-vql" customClass="DetailInfoView" customModule="Chming_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="39" y="0.0" width="272" height="82"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iya-ID-SDj">
-                                                        <rect key="frame" x="115" y="30" width="42" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" red="1" green="0.9070747176508096" blue="0.849746785089324" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <outlet property="groupNameLabel" destination="Iya-ID-SDj" id="0dS-5g-rBS"/>
-                                                </connections>
-                                            </view>
-                                        </subviews>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -206,6 +187,7 @@
                     <connections>
                         <outlet property="infoScrollView" destination="CHn-jR-d2q" id="7dl-os-95O"/>
                         <outlet property="mapView" destination="xUk-Wa-WST" id="1r9-oW-4Ga"/>
+                        <outlet property="scrollAreaView" destination="SXd-kx-Csa" id="98z-WR-k6I"/>
                         <outlet property="scrollAreaWidthConstraints" destination="V87-oJ-UuE" id="HmX-fr-1k8"/>
                     </connections>
                 </viewController>

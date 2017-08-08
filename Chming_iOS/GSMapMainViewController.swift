@@ -10,63 +10,26 @@ import UIKit
 import Firebase
 
 class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate {
-
+    
+    // ############################ IBOulet #######################################//
     // MARK: - IBOulet
     @IBOutlet weak var mapView: MTMapView!
     var loadCurrentMapPoint: MTMapPoint?
     
     @IBOutlet weak var infoScrollView: UIScrollView!
-    
+    @IBOutlet weak var scrollAreaView: UIView!
     
     
     @IBOutlet var scrollAreaWidthConstraints: NSLayoutConstraint!
     
+    // ############################ Initialize #######################################//
     // MARK: - Initialize
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         
-        // ----------- 스크롤뷰 테스트 start---------------
-        // 스크롤뷰의 페이지느낌 속성값 - default false
-        infoScrollView.isPagingEnabled = true
-        // 튕기듯하 바운스 속성값 - default true
-        //contentScrollView.bounces = false
-        
-        
-        // 스크롤뷰에 커스텀
-//        let detailView = DetailInfoView(frame: CGRect(x: self.view.bounds.width*0, y: 0, width: infoScrollView.bounds.width, height: infoScrollView.bounds.height))
-//        detailView.backgroundColor = .yellow
-//        infoScrollView.addSubview(detailView)
-        
-        
-        //## 코드로 구현 시작 - 강사님 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
-        // 개인적으로 닙파일로 빼야될거 같음
-        var scrollAreaView = ScrollAreaView(frame: CGRect(x: 0, y: 0, width: infoScrollView.frame.size.width, height: infoScrollView.frame.size.height))
-        
-        
-        
-        
-        //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
-        let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
-        for index in cg {
-//            let areaView: ScrollAreaView = ScrollAreaView(frame: infoScrollView.frame)
-//            areaView.backgroundColor = .black
-//            print(index.description)
-//            self.infoScrollView.addSubview(areaView)
-            let detailView = DetailInfoView()
-            detailView.backgroundColor = index
-            detailView.text = "testtest"
-            
-        }
-        scrollAreaWidthConstraints.constant = self.infoScrollView.frame.size.width*5
-        self.infoScrollView.layoutIfNeeded()
-        
-        
-        
-        
-        // ---------- 스크롤뷰 테스트  end---------------
-        
         self.loadMarker()
+        self.simpleGroupViewLoad()
 
         
         // Do any additional setup after loading the view.
@@ -95,6 +58,10 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         mapView.didReceiveMemoryWarning()
         
     }
+    
+    // ############################ 클래스 메서드 #######################################//
+    // MARK: - Class Method
+    
     // load시 마커 리스트 셋팅 메서드
     func loadMarker() {
         var items = [MTMapPOIItem]()
@@ -174,6 +141,58 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         })
     }
     
+    
+    func simpleGroupViewLoad(){
+        
+        // -------------------------------- 스크롤뷰 테스트 start --------------------------
+        // 메서드로 변경 예정
+        // 스크롤뷰의 페이지느낌 속성값 - default false
+        infoScrollView.isPagingEnabled = true
+        // 튕기듯하 바운스 속성값 - default true
+        //contentScrollView.bounces = false
+        
+        
+        //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
+        // 개인적으로 닙파일로 빼야될거 같음
+
+        
+        var count: CGFloat = 0
+        var testTextNum = 0
+        //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
+        let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
+        for index in cg {
+            let simpleGroupInfoView: GSSimpleGroupInfoView = {
+                let view = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42, y: 0, width: self.view.bounds.size.width*0.8, height: self.infoScrollView.bounds.size.height),
+                                                 groupImg: "marker1_\(testTextNum)",
+                    groupName: "그룹명 \(testTextNum)",
+                    groupSimpleInfo: "간단소개\(testTextNum)")
+                
+                view.layer.borderColor = index.cgColor
+                view.layer.borderWidth = 2
+                
+                testTextNum += 1
+                return view
+            }()
+            
+            count += 1
+            scrollAreaView.addSubview(simpleGroupInfoView)
+            
+        }
+        
+        // ## 제약 사항 변경
+        scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
+        // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
+        self.infoScrollView.layoutIfNeeded()
+        
+        
+        
+        
+        // ---------------------------- 스크롤뷰 테스트  end --------------------------
+    }
+    
+    
+    
+    // ############################ MTMapViewDelegate Method #######################################//
     // MARK: - MTMapViewDelegate 메서드(Map View Event delegate methods)
     // 테스트중
     
@@ -237,8 +256,10 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
     }
     
+    // ############################ IBAction #######################################//
     // MARK: IBAction
-    // 현위치이동
+    
+    // 내 위치로 이동
     @IBAction func myLocationBtnTouched(_ sender: UIButton){
         
         // 맵을 할당한 맵포인트 좌표로 이동
@@ -246,34 +267,63 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
 //        self.mapLoad()
     }
     
-    // 뒤로가기 버튼 - 임시버튼
     
+    
+    
+    // 뒤로가기 버튼 - 임시버튼
     @IBAction func filterBtnTouched(_ sender: UIButton){
         let filtetView = GSFilterMenuView(frame: CGRect(x: 16.0, y: 20, width: self.view.frame.size.width - 32.0, height: 270.0), test: "tt")
         filtetView.popUp(on: self.view)
     }
     
+    
+    // 지역선택 버튼
     @IBAction func localFilterBtnTouched(_ sender: UIButton){
         let localFilterMenuView = GSLocalFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 300.0), localHandler: { [unowned self] (localFiterView, mapPoint) in
             print("localHandler")
-            self.mapView.setMapCenter(mapPoint["localMapPoint"], zoomLevel: 3, animated: true)
+            self.mapView.setMapCenter(mapPoint["localMapPoint"] as! MTMapPoint, zoomLevel: 3, animated: true)
+            print("지역선택시 넘어온 데이터정보:// ",mapPoint )
             
+            
+            // 작업 진행중--- 현재 2017.08.08 오후 6시 17분
             var items = [MTMapPOIItem]()
             // 특정 마커에 대한 커스텀 적용시
-            let interestPoitItem = MTMapPOIItem()
-            interestPoitItem.itemName = "축구"
-            interestPoitItem.mapPoint = mapPoint["interestMapPoint"]
-            interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
-            interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-            interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
-            //interestPoitItem.draggable = true
-            // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
-            interestPoitItem.tag = 22
             
-            items.append(interestPoitItem)
+            let groupInfo: [[String:Any]] = mapPoint["interestMapPoint"] as! [[String:Any]]
+            
+        
+//            groupInfo.map({ (groupOne) in
+//                print(groupOne)
+//                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+//                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+//                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+//                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+//                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.springFromGround
+//                //interestPoitItem.draggable = true
+//                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+//                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
+//                items.append(interestPoitItem)
+//                print("딕셔너리 맵 ")
+//                
+//            })
+            for groupOne in groupInfo {
+                let interestPoitItem = MTMapPOIItem()
+                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+                print("그룸정보://", groupOne)
+                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+                //interestPoitItem.draggable = true
+                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
+                items.append(interestPoitItem)
+                print("아이템스:// ",items)
+            }
+            
             self.mapView.addPOIItems(items)
             //화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
-//            self.mapView.fitAreaToShowAllPOIItems()
+            //self.mapView.fitAreaToShowAllPOIItems()
             
         }) { (localFilterview) in
             print("cancelHandler")
@@ -283,50 +333,3 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     }
 
 }
-
-
-
-//
-/*
-extension String
-{
-    func substring(start: Int, end: Int) -> String
-    {
-        if (start < 0 || start > self.characters.count)
-        {
-            print("start index \(start) out of bounds")
-            return ""
-        }
-        else if end < 0 || end > self.characters.count
-        {
-            print("end index \(end) out of bounds")
-            return ""
-        }
-        let startIndex = self.characters.index(self.startIndex, offsetBy: start)
-        let endIndex = self.characters.index(self.startIndex, offsetBy: end)
-        let range = startIndex..<endIndex
-        
-        return self.substring(with: range)
-    }
-    
-    func substring(start: Int, location: Int) -> String
-    {
-        if (start < 0 || start > self.characters.count)
-        {
-            print("start index \(start) out of bounds")
-            return ""
-        }
-        else if location < 0 || start + location > self.characters.count
-        {
-            print("end index \(start + location) out of bounds")
-            return ""
-        }
-        let startIndex = self.characters.index(self.startIndex, offsetBy: start)
-        let endIndex = self.characters.index(self.startIndex, offsetBy: start + location)
-        let range = startIndex..<endIndex
-        
-        return self.substring(with: range)
-    }
-}
-
-*/

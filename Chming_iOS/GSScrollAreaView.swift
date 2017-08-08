@@ -1,14 +1,14 @@
 //
-//  ScrollAreaView.swift
+//  GSScrollAreaView.swift
 //  Chming_iOS
 //
-//  Created by HwangGisu on 2017. 8. 7..
+//  Created by HwangGisu on 2017. 8. 8..
 //  Copyright © 2017년 leejaesung. All rights reserved.
 //
 
 import UIKit
 
-class ScrollAreaView: UIView {
+class GSScrollAreaView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -17,11 +17,5 @@ class ScrollAreaView: UIView {
         // Drawing code
     }
     */
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 
 }
