@@ -503,9 +503,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCa-5s-a8q">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모임 소개" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCa-5s-a8q">
                                                     <rect key="frame" x="16" y="8" width="343" height="84"/>
-                                                    <string key="text">생활코딩의 세계에 오신 것을 환영합니다. 생활코딩은 일반인들에게 프로그래밍을 알려주는 무료 온라인, 오프라인 수업입니다. 어떻게 공부할 것인가를 생각해보기 전에 왜 프로그래밍을 공부하는 이유에 대한 이유를 함께 생각해보면 좋을 것 같습니다.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -596,14 +595,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[공지] 구글과 함께 하는 &quot;코딩야학&quot; 캠페인 진행 소식" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZV-qP-Bu4">
-                                                    <rect key="frame" x="16" y="8" width="352" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 공지 ]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znA-ab-gLc">
+                                                    <rect key="frame" x="16" y="8" width="51" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="51" id="GfB-zs-waQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지사항 타이틀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZV-qP-Bu4">
+                                                    <rect key="frame" x="75" y="8" width="292" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="혼자서 공부하는 막막함을 덜어드리기 위해서 구글과 코딩야학이라는 캠페인을 진행하고 있습니다. 7월 17일부터 8월 15일까지 적당한 진도로 생활코딩 웹에플리케이션 만들기 수업을 함께 공부해보시면 어떨까요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuJ-MH-xD4">
-                                                    <rect key="frame" x="16" y="36.5" width="343" height="23.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="공지사항 콘텐트" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuJ-MH-xD4">
+                                                    <rect key="frame" x="16" y="42" width="343" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -611,13 +619,20 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="QuJ-MH-xD4" firstAttribute="top" secondItem="qZV-qP-Bu4" secondAttribute="bottom" constant="8" id="5Z3-sQ-4jE"/>
+                                                <constraint firstItem="znA-ab-gLc" firstAttribute="top" secondItem="Eel-Yn-sBh" secondAttribute="top" constant="8" id="6M6-bt-F4V"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="QuJ-MH-xD4" secondAttribute="bottom" constant="8" id="FFF-L0-7so"/>
                                                 <constraint firstItem="QuJ-MH-xD4" firstAttribute="leading" secondItem="Eel-Yn-sBh" secondAttribute="leadingMargin" constant="8" id="TZo-Qa-IYe"/>
-                                                <constraint firstItem="qZV-qP-Bu4" firstAttribute="leading" secondItem="Eel-Yn-sBh" secondAttribute="leadingMargin" constant="8" id="YU1-Ps-ma7"/>
                                                 <constraint firstItem="qZV-qP-Bu4" firstAttribute="top" secondItem="Eel-Yn-sBh" secondAttribute="top" constant="8" id="iBb-gf-SHN"/>
+                                                <constraint firstItem="qZV-qP-Bu4" firstAttribute="leading" secondItem="znA-ab-gLc" secondAttribute="trailing" constant="8" id="pVi-8b-hfF"/>
+                                                <constraint firstItem="znA-ab-gLc" firstAttribute="leading" secondItem="Eel-Yn-sBh" secondAttribute="leading" constant="16" id="ukC-hf-PwC"/>
+                                                <constraint firstAttribute="trailing" secondItem="qZV-qP-Bu4" secondAttribute="trailing" constant="8" id="vgk-49-3zZ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="QuJ-MH-xD4" secondAttribute="trailing" constant="8" id="wLx-wT-tDY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="labelContent" destination="QuJ-MH-xD4" id="bO4-0q-9QD"/>
+                                            <outlet property="labelTitle" destination="qZV-qP-Bu4" id="IFj-Fx-dTt"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="5thMemberListCell" textLabel="gb6-7B-erx" detailTextLabel="azO-Aj-kET" rowHeight="45" style="IBUITableViewCellStyleValue1" id="Vkv-iR-NTy" customClass="JSGroupInfoMemberListCell" customModule="Chming_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="468" width="375" height="45"/>
@@ -626,15 +641,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="홍길동" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gb6-7B-erx">
-                                                    <rect key="frame" x="15" y="13" width="44.5" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="회원 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gb6-7B-erx">
+                                                    <rect key="frame" x="15" y="13" width="63.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="모임장" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="azO-Aj-kET">
-                                                    <rect key="frame" x="323.5" y="16" width="36.5" height="17"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="azO-Aj-kET">
+                                                    <rect key="frame" x="322.5" y="16" width="37.5" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -660,7 +675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gmu-WV-X1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2806" y="-300"/>
+            <point key="canvasLocation" x="2805.5999999999999" y="-300"/>
         </scene>
         <!--게시글 작성-->
         <scene sceneID="OZ5-k2-Pxc">

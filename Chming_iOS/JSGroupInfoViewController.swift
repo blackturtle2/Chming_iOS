@@ -12,10 +12,11 @@ import XLPagerTabStrip
 class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
     var groupPK:Int?
-    var groupInfo:JSGroupInfo?
-    
+    var groupInfo: JSGroupInfo? // 모임 정보 뷰에서 사용되는 데이터 묶음입니다. (공지사항 데이터 제외)
+    var noticeList: [JSGroupBoard]? // 모임 정보 뷰에서 보이는 공지사항을 보여주기 위한 객체입니다.
     
     @IBOutlet var mainTableView:UITableView!
+    
     
     
     /*******************************************/
@@ -25,6 +26,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 모임 정보 뷰는 테이블뷰로 이루어져 있습니다.
         mainTableView.delegate = self
         mainTableView.dataSource = self
 
@@ -32,19 +34,24 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         
+        // 다른 탭에 있는 게시판이나 갤러리 뷰에 갔다 와도 viewWillAppear()가 불리므로 네트워크-통신을 추가로 하지 않기 위한 예외처리입니다.
+        // 모임 정보 데이터가 있다면, 아래 함수들을 읽지 말라는 명령.
+        if self.groupInfo != nil { return }
+        
         // Singleton에 있는 GroupPK 데려오기.
-        if self.groupInfo != nil { return } // 다른 탭에 있는 게시판이나 갤러리 뷰에 갔다 와도 viewWillAppear()가 불리므로 통신을 추가로 하지 않기 위한 예외처리입니다.
         guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else {
             print("//// guardlet- vSelectedGroupPK")
             return
         }
         
+        // Singleton에 저장된 모임 PK로 모임 정보와 공지사항 리스트를 가져옵니다.
         self.groupPK = vSelectedGroupPK
         self.groupInfo = JSDataCenter.shared.findGroupInfo(ofGroupPK: vSelectedGroupPK)
+        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
         
         print("///// groupPK: ", groupPK!)
         print("///// groupInfo: ", groupInfo!)
-        
+        print("///// noticeList: ", noticeList!)
         
     }
     
@@ -63,6 +70,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     // MARK: -  UITableView Delegate & DataSource//
     /*********************************************/
     
+    // 테이블 뷰의 섹션 구분을 위한 enum 입니다.
     enum sectionID:Int {
         case mainImageCell = 0
         case mainTextCell = 1
@@ -80,7 +88,23 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     
     // Row Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+            
+        // 공지사항 개수를 파악해 row를 그립니다.
+        case sectionID.noticeListCell.rawValue:
+            return self.noticeList?.count ?? 1
+            
+        // 회원목록 개수를 파악해 row를 그립니다.
+        case sectionID.memberListCell.rawValue:
+            guard let vMemberList = self.groupInfo?.memberList else { return 1 } // 회원목록 데이터가 비었을 경우의 예외처리
+            if vMemberList.count == 0 {
+                return 1 // 만약 회원목록이 0개더라도 "모임장"은 표시해주기 위해 row를 1로 리턴합니다.
+            }else {
+                return vMemberList.count + 1 // 회원목록 최상단에 "모임장"을 표시했으므로 count + 1만큼 리턴합니다.
+            }
+        default:
+            return 1
+        }
     }
     
     // Cell's custom height
@@ -117,27 +141,53 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     // Custom Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+            
+        // 메인 이미지 셀
         case sectionID.mainImageCell.rawValue:
             let mainImageCell = tableView.dequeueReusableCell(withIdentifier: "1stMainImageCell", for: indexPath) as! JSGroupInfoMainImageCell
+            mainImageCell.mainImage.image = #imageLiteral(resourceName: "IU_Sample")
+            
             return mainImageCell
             
+        // 모임 소개 셀
         case sectionID.mainTextCell.rawValue:
             let mainTextCell = tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath) as! JSGroupInfoMainTextCell
             mainTextCell.mainLabel.text = groupInfo?.mainText
+            
             return mainTextCell
             
+        // 모임 가입, 좋아요 버튼 셀
         case sectionID.joinLikeGroupCell.rawValue:
             let joinLikeCell = tableView.dequeueReusableCell(withIdentifier: "3rdJoinLikeGroupCell", for: indexPath) as! JSGroupInfoJoinLikeGroupCell
+            
             return joinLikeCell
             
+        // 모임 공지사항 리스트 셀
         case sectionID.noticeListCell.rawValue:
             let noticeCell = tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath) as! JSGroupInfoNoticeListCell
+            noticeCell.noticePK = self.noticeList![indexPath.row].boardPK
+            noticeCell.labelTitle.text = self.noticeList![indexPath.row].title
+            noticeCell.labelContent.text = self.noticeList![indexPath.row].content
+            
             return noticeCell
             
+        // 모임 회원 목록 셀
         case sectionID.memberListCell.rawValue:
             let memberListCell = tableView.dequeueReusableCell(withIdentifier: "5thMemberListCell", for: indexPath) as! JSGroupInfoMemberListCell
+            
+            // 회원목록의 최상단에는 "모임장"을 표시합니다.
+            if indexPath.row == 0 {
+                memberListCell.textLabel?.text = self.groupInfo?.leaderName
+                memberListCell.detailTextLabel?.text = "모임장"
+            } else {
+                memberListCell.textLabel?.text = self.groupInfo?.memberList?[indexPath.row-1] ?? "no data"
+                memberListCell.detailTextLabel?.text = String(indexPath.row)
+            }
+            // 메모: 회원 프사도 보여주면 좋겠다.
+            
             return memberListCell
             
+        // 테이블 뷰 여백 셀
         case 5:
             // MARK: [리팩토링 필요!]TableView의 최하단에 여백을 넣기 위한 cell 삽입.
             let basicCell = UITableViewCell()
@@ -154,6 +204,9 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case sectionID.noticeListCell.rawValue: // 공지 사항 section
+            let nowCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
+            print("///// noticePK: ", nowCell.noticePK ?? "no data")
+            
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:

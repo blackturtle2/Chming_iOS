@@ -9,10 +9,14 @@
 import UIKit
 
 class JSGroupInfoNoticeListCell: UITableViewCell {
+    
+    var noticePK:Int?
+    
+    @IBOutlet var labelTitle:UILabel!
+    @IBOutlet var labelContent:UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
