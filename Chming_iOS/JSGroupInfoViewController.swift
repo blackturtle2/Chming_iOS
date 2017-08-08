@@ -84,44 +84,45 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         return UITableViewAutomaticDimension
     }
     
+    enum sectionID:Int {
+        case mainImageCell = 0
+        case mainTextCell = 1
+        case joinLikeGroupCell = 2
+        case noticeListCell = 3
+        case memberListCell = 4
+    }
+    
     // Secion Title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
+        case sectionID.mainImageCell.rawValue:
             return nil // 모임 대표 이미지
-        case 1:
+        case sectionID.mainTextCell.rawValue:
             return "모임 소개"
-        case 2:
+        case sectionID.joinLikeGroupCell.rawValue:
             return nil // 모임 가입-좋아요 버튼
-        case 3:
+        case sectionID.noticeListCell.rawValue:
             return "공지 사항"
-        case 4:
+        case sectionID.memberListCell.rawValue:
             return "회원 목록"
         default:
             return nil
         }
     }
-    
-    
-    
-    enum sectionID:Int {
-        case mainImageCell = 0
-        case mainTextCell = 1
-        case JoinLikeGroupCell = 2
-    }
 
+    
     // Custom Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case sectionID.mainImageCell.rawValue:
             return tableView.dequeueReusableCell(withIdentifier: "1stMainImageCell", for: indexPath)
-        case 1:
+        case sectionID.mainTextCell.rawValue:
             return tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath)
-        case 2:
+        case sectionID.joinLikeGroupCell.rawValue:
             return tableView.dequeueReusableCell(withIdentifier: "3rdJoinLikeGroupCell", for: indexPath)
-        case 3:
+        case sectionID.noticeListCell.rawValue:
             return tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath)
-        case 4:
+        case sectionID.memberListCell.rawValue:
             return tableView.dequeueReusableCell(withIdentifier: "5thMemberListCell", for: indexPath)
         case 5:
             // MARK: [리팩토링 필요!]TableView의 최하단에 여백을 넣기 위한 cell 삽입.
@@ -138,7 +139,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     // DidSelectRowAt
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 3: // 공지 사항 section
+        case sectionID.noticeListCell.rawValue: // 공지 사항 section
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
