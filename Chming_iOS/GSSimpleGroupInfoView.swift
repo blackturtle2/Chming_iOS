@@ -21,6 +21,7 @@ class GSSimpleGroupInfoView: UIView {
     @IBOutlet var groupNameLable: UILabel!
     @IBOutlet var groupSimpleInfo: UILabel!
     
+    var groupPK: String = ""
     
     
     init(frame: CGRect, groupImg: String, groupName: String, groupSimpleInfo:String) {
@@ -43,6 +44,12 @@ class GSSimpleGroupInfoView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    @IBAction func simpleVieTapGesture(_ sender: UITapGestureRecognizer) {
+        print("탭  제스쳐", self.groupPK)
+        
+        
     }
 }
 

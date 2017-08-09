@@ -14,6 +14,7 @@ class GSLocalFilterMenuView: UIView {
     
     // 배경 뷰
     private var bacgroundView: UIView = UIView()
+    // 버튼 실행시 이루어질 핸들러 선언
     private var localHandler: (GSLocalFilterMenuView, [String : Any])->Void = {(self) in}
     private var cancleHandler: ((GSLocalFilterMenuView)->Void)?
     

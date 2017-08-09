@@ -9,23 +9,26 @@
 import UIKit
 
 class GSFilterMenuView: UIView {
-
+    //배경뷰
     private var bacgroundView: UIView = UIView()
-    private var distanceSort: (GSFilterMenuView)->Void = {(self) in}
-
-    override func awakeFromNib() {
-        
-    }
+    // 정렬핸들러 - ibaction 미연결 상태
+    private var sortHandler: (GSFilterMenuView)->Void = {(self) in}
+    private var cancleHandler: ((GSFilterMenuView)->Void)?
     
-    init(frame: CGRect, test: String) {
+    override func awakeFromNib() { }
+    
+    init(frame: CGRect, sortHandler: @escaping (GSFilterMenuView)->Void, cancleHandler: ((GSFilterMenuView)->Void)?) {
         super.init(frame: frame)
         self.bacgroundView.backgroundColor = .black
         self.bacgroundView.alpha = 0.5
         
         let filterViewFromNib: UIView = Bundle.main.loadNibNamed("GSFilterMenu", owner: self, options: nil)!.first as! UIView
         filterViewFromNib.frame = self.bounds
-        filterViewFromNib.frame.origin.y = 300
+//        filterViewFromNib.frame.origin.y = 300
         self.addSubview(filterViewFromNib)
+        
+        self.sortHandler = sortHandler
+        self.cancleHandler = cancleHandler
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,6 +58,12 @@ class GSFilterMenuView: UIView {
         //            self.alpha = 1.0 //애니메이션 후 상황
         //        }
         
+    }
+    
+    @IBAction func cancleBtnTouched(_ sender: UIButton){
+        print("필터메뉴에서 내리기 버튼 클릭햇음")
+        self.bacgroundView.removeFromSuperview()
+        self.removeFromSuperview()
     }
 
 }

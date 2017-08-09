@@ -28,7 +28,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         super.viewDidLoad()
         mapView.delegate = self
         
-        self.loadMarker()
+        // 샘플코드로 마커 찍엇던 메서드를 주석처리 - 다른 마커들을 구현중이라 주석처리 합니다.
+        // self.loadMarker()
         self.simpleGroupViewLoad()
 
         
@@ -142,6 +143,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     }
     
     
+    // 하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
     func simpleGroupViewLoad(){
         
         // -------------------------------- 스크롤뷰 테스트 start --------------------------
@@ -155,7 +157,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
         // 개인적으로 닙파일로 빼야될거 같음
 
-        
+        // 고유 정보가 필요하다
         var count: CGFloat = 0
         var testTextNum = 0
         //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
@@ -166,10 +168,11 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
                                                  groupImg: "marker1_\(testTextNum)",
                     groupName: "그룹명 \(testTextNum)",
                     groupSimpleInfo: "간단소개\(testTextNum)")
-                
+                    // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+                    view.groupPK = "\(testTextNum)"
                 view.layer.borderColor = index.cgColor
                 view.layer.borderWidth = 2
-                
+                print(view.frame)
                 testTextNum += 1
                 return view
             }()
@@ -231,8 +234,22 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print(addressSplitArr)
         self.mapLoad(location: addressSplitArr[1])
     }
-    
-    
+    // 사용자가 POI Item을 선택한 경우 호출
+    // 리턴 값은 마커 선택시 말풍선을 보여줄지 여부를 할당하는 리턴값
+    func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
+        //print(scrollAreaView.subviews)
+        print(poiItem.tag)
+        let selectView = scrollAreaView.subviews[poiItem.tag]
+        print(selectView.frame)
+        
+        //  scrollAreaView에 addsubview 하는 view 생성순서에 맞게 마커에 tag을 할당하여 선택한 태그의 값으로 subviews의 인덱스 값을 찾아
+        // 그 뷰의 CGRect값을 이용하면서 뷰 생성시 공간을 더해줬던 42값을 다시 빼주어 가운데 위치로 갈수있도록 프로퍼티 선언 및 할당
+        let moveOffsetCGRect = CGRect(x: selectView.frame.origin.x-42, y: selectView.frame.origin.y, width: selectView.frame.size.width, height: selectView.frame.size.width)
+        infoScrollView.contentOffset = moveOffsetCGRect.origin
+        
+        // 말풍선을 보여주지 않기 위해 false를 리턴
+        return false
+    }
     
     // MARK: - MTMapViewDelegate 메서드(User Location Tracking delegate methods)
     /*
@@ -269,10 +286,18 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     
     
+    @IBAction func backBtnTouched(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
-    // 뒤로가기 버튼 - 임시버튼
+    // 정렬버튼
     @IBAction func filterBtnTouched(_ sender: UIButton){
-        let filtetView = GSFilterMenuView(frame: CGRect(x: 16.0, y: 20, width: self.view.frame.size.width - 32.0, height: 270.0), test: "tt")
+        let filtetView = GSFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width - 32.0, height: 270.0), sortHandler: { (filterMenu) in
+            print("정렬 핸들러 ")
+        }) { (filterMenu) in
+            print("취소 핸들러-내리기 버튼 클릭")
+        }
+        
         filtetView.popUp(on: self.view)
     }
     
@@ -284,14 +309,76 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             self.mapView.setMapCenter(mapPoint["localMapPoint"] as! MTMapPoint, zoomLevel: 3, animated: true)
             print("지역선택시 넘어온 데이터정보:// ",mapPoint )
             
-            
+            print(type(of: mapPoint["interestMapPoint"]))
+            let interestGroupsAll:[String:Any] = mapPoint["interestMapPoint"] as! [String:Any]
+            print(interestGroupsAll)
             // 작업 진행중--- 현재 2017.08.08 오후 6시 17분
             var items = [MTMapPOIItem]()
             // 특정 마커에 대한 커스텀 적용시
             
-            let groupInfo: [[String:Any]] = mapPoint["interestMapPoint"] as! [[String:Any]]
+
+            var tagValue = 0
+            for key in interestGroupsAll.keys {
+                print(key)// key = "축구", "농구"
+                // 각각의 키가 가지고 있는 값이 필요
+                // for-in 문을 돌면서 먼저 키값을 기준으로 그룹정보가 들어있는 배열 형태로 생성
+                // interestGroup = [["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+                //                  ["groupPK": "23", "groupMapPoint": <MTMapPoint: 0x608000011340>]]
+                let interestGroup = interestGroupsAll[key] as! [[String:Any]]
+                for groupOne in interestGroup { //["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+                    let interestPoitItem = MTMapPOIItem() // 마커 생성
+                    // 마커에 필요한 값을 groupOne에서 가져와서 할당
+                    interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+                    interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+                    print("그룸정보://", groupOne)
+                    // 모임의 관심사에 따라 마커의 타입을 분기처리
+                    switch key {
+                    case "축구":
+                        interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                    case "농구":
+                        interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
+                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                    default:
+                        interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
+                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
+                    }
+                    interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+                    interestPoitItem.tag = tagValue
+                    items.append(interestPoitItem)
+                    tagValue += 1
+                    print(items)
+                }
+                
+            }
+            print(items.count)
+            self.mapView.addPOIItems(items)
             
-        
+
+            
+            
+              // #단일 관심사 모임에 대한 마커를 표시했던 이전 코드
+//            let groupInfo: [[String:Any]] = mapPoint["interestMapPoint"] as! [[String:Any]]
+//            for groupOne in groupInfo {
+//                let interestPoitItem = MTMapPOIItem()
+//                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+//                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+//                print("그룸정보://", groupOne)
+//                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+//                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+//                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+//                //interestPoitItem.draggable = true
+//                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+//                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
+//                items.append(interestPoitItem)
+//                print("아이템스:// ",items)
+//            }
+//            self.mapView.addPOIItems(items)
+//            화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
+//            self.mapView.fitAreaToShowAllPOIItems()
+            
+            
+            // Dictionary 자체의 map메서드 - 파라미터를 클로저 함수를 가지고 있다. 뷰를 그리는 시점차이로 파악중이며 아래 for-in문으로 구현한것을 사용
 //            groupInfo.map({ (groupOne) in
 //                print(groupOne)
 //                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
@@ -304,26 +391,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
 //                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
 //                items.append(interestPoitItem)
 //                print("딕셔너리 맵 ")
-//                
+//
 //            })
-            for groupOne in groupInfo {
-                let interestPoitItem = MTMapPOIItem()
-                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
-                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
-                print("그룸정보://", groupOne)
-                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
-                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
-                //interestPoitItem.draggable = true
-                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
-                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
-                items.append(interestPoitItem)
-                print("아이템스:// ",items)
-            }
-            
-            self.mapView.addPOIItems(items)
-            //화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
-            //self.mapView.fitAreaToShowAllPOIItems()
             
         }) { (localFilterview) in
             print("cancelHandler")
