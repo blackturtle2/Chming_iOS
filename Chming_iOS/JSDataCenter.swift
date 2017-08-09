@@ -57,6 +57,10 @@ struct JSGroupBoardComment {
 }
 
 
+/*******************************************/
+// MARK: -  JSDataCenter                   //
+/*******************************************/
+
 class JSDataCenter {
     
     static let shared = JSDataCenter()
@@ -72,8 +76,22 @@ class JSDataCenter {
     // 일단, 임시 데이터이고, 추후 여기에서 통신이 이루어질 예정입니다.
     // GroupInfoViewController에서 이 값들을 받아서 UI에 뿌릴 예정입니다.
     func findGroupInfo(ofGroupPK: Int) -> JSGroupInfo {
-        var resultGroupInfo = JSGroupInfo(name: "테스트 모임", mainImageUrl: "http://google.com", mainText: "테스트 모임 세계에 오신 것을 환영합니다.\n우리는 iOS 개발자 모임이며, 세계 최강 iOS Developer를 꿈꾸고 있습니다.", leaderPK: 1, leaderName: "이재성", memberList: nil, location: .강남구, interestCategory: .스포츠, interest: .축구, address: "인천시 계양구 작전동", longitude: 100, latitude: 100)
-        resultGroupInfo.memberList = ["김세화", "김강훈", "이준호"]
+        var resultGroupInfo = JSGroupInfo(
+            name: "테스트 모임",
+            mainImageUrl: "http://cfile27.uf.tistory.com/image/265AAB42544A1F1C136ED6",
+            mainText: "테스트 모임 세계에 오신 것을 환영합니다.\n우리는 iOS 개발자 모임이며, 세계 최강 iOS Developer를 꿈꾸고 있습니다.",
+            leaderPK: 1,
+            leaderName: "이재성",
+            memberList: nil,
+            location: .강남구, 
+            interestCategory: .스포츠, 
+            interest: .축구, 
+            address: "인천시 계양구 작전동", 
+            longitude: 100, 
+            latitude: 100
+        )
+        
+        resultGroupInfo.memberList = ["김세화", "이창호", "황기수", "서현종", "김은영", "윤새결"]
         
         return resultGroupInfo
     }
