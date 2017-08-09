@@ -40,7 +40,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         
         // Singleton에 있는 GroupPK 데려오기.
         guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else {
-            print("//// guardlet- vSelectedGroupPK")
+            print("///// guardlet- vSelectedGroupPK")
             return
         }
         
@@ -147,7 +147,9 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         case sectionID.mainImageCell.rawValue:
             let mainImageCell = tableView.dequeueReusableCell(withIdentifier: "1stMainImageCell", for: indexPath) as! JSGroupInfoMainImageCell
             
-            if let imageURL = URL(string: (groupInfo?.mainImageUrl)!) {
+            guard let vMainImageUrl = self.groupInfo?.mainImageUrl else { return mainImageCell }
+            
+            if let imageURL = URL(string: vMainImageUrl) {
                 let task = URLSession.shared.dataTask(with: imageURL, completionHandler: { (data, response, error) in
                     print("///// mainImageCell /////")
                     print("///// data: ", data ?? "no data")
@@ -182,9 +184,11 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // MARK: Custom Cell- 모임 공지사항 리스트 셀
         case sectionID.noticeListCell.rawValue:
             let noticeCell = tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath) as! JSGroupInfoNoticeListCell
-            noticeCell.noticePK = self.noticeList![indexPath.row].boardPK
-            noticeCell.labelTitle.text = self.noticeList![indexPath.row].title
-            noticeCell.labelContent.text = self.noticeList![indexPath.row].content
+            guard let vNoticeList = self.noticeList else { return noticeCell }
+            
+            noticeCell.noticePK = vNoticeList[indexPath.row].boardPK
+            noticeCell.labelTitle.text = vNoticeList[indexPath.row].title
+            noticeCell.labelContent.text = vNoticeList[indexPath.row].content
             
             return noticeCell
             
