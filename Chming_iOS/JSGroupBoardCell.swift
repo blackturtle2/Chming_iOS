@@ -17,8 +17,9 @@ class JSGroupBoardCell: UITableViewCell {
     @IBOutlet var labelTextContent:UILabel!
     @IBOutlet var imageViewImageContent:UIImageView!
     @IBOutlet var labelLike:UILabel!
-    @IBOutlet var labelComment:UILabel!
 
+    @IBOutlet var constraintImageViewHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
