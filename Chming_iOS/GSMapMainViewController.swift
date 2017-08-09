@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate {
+class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol {
     
     // ############################ IBOulet #######################################//
     // MARK: - IBOulet
@@ -168,6 +168,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
                                                  groupImg: "marker1_\(testTextNum)",
                     groupName: "그룹명 \(testTextNum)",
                     groupSimpleInfo: "간단소개\(testTextNum)")
+                    view.delegate = self
                     // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
                     view.groupPK = "\(testTextNum)"
                 view.layer.borderColor = index.cgColor
@@ -399,6 +400,17 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             
         }
         localFilterMenuView.popUp(on: self.view)
+    }
+    
+    // 커스텀뷰에서 탭 액션시 모임 정보뷰로 이동하기위해 viewcontroller가 해주어야 하는 부분이있어서 delegate 패턴으로 구현
+    func nextViewPresent(nextView: JSGroupPagerTabViewController) {
+        let nextNavi = UINavigationController(rootViewController: nextView)
+        
+        nextNavi.navigationBar.barTintColor = .black
+        nextNavi.navigationBar.tintColor = .white
+        
+        self.present(nextNavi, animated: true, completion: nil)
+
     }
 
 }

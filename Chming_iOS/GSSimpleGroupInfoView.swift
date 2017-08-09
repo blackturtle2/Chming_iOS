@@ -22,7 +22,7 @@ class GSSimpleGroupInfoView: UIView {
     @IBOutlet var groupSimpleInfo: UILabel!
     
     var groupPK: String = ""
-    
+    var delegate: GSSimpleGroupInfoProtocol?
     
     init(frame: CGRect, groupImg: String, groupName: String, groupSimpleInfo:String) {
         super.init(frame: frame)
@@ -48,7 +48,14 @@ class GSSimpleGroupInfoView: UIView {
     
     @IBAction func simpleVieTapGesture(_ sender: UITapGestureRecognizer) {
         print("탭  제스쳐", self.groupPK)
+        let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSGroupPagerTabViewController") as! JSGroupPagerTabViewController
         
+        //"JSGroupMainViewController"로 이동할 때, userPK를 가지고 이동합니다.
+        nextVC.groupPK = Int(self.groupPK)
+        
+                
+        self.delegate?.nextViewPresent(nextView: nextVC)
         
     }
 }
@@ -61,3 +68,7 @@ extension UIColor {
     }
 }
 
+
+protocol GSSimpleGroupInfoProtocol {
+    func nextViewPresent(nextView: JSGroupPagerTabViewController)
+}
