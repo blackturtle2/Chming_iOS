@@ -302,6 +302,7 @@
 		4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */; };
+		FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */; };
 		FE53B0D31F39A25C0010D663 /* JSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */; };
 		FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */; };
 		FE53B0D71F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D61F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift */; };
@@ -628,6 +629,7 @@
 		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCell.swift; sourceTree = "<group>"; };
 		FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDataCenter.swift; sourceTree = "<group>"; };
 		FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoMainTextCell.swift; sourceTree = "<group>"; };
 		FE53B0D61F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoJoinLikeGroupCell.swift; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 			isa = PBXGroup;
 			children = (
 				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
+				FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */,
 				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
 				FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */,
 			);
@@ -1583,6 +1586,7 @@
 				4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 				FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */,
+				FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

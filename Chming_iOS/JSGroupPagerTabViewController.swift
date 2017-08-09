@@ -93,11 +93,11 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
     
     // 게시판 뷰가 로드될 때, 내비게이션 바에 글 작성 버튼 보이게 하는 function.
     func showNavigationBarPostingButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_create_white"), style: .plain, target: self, action: #selector(moveJSGRoupBoardPostingView))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_create_white"), style: .plain, target: self, action: #selector(moveJSGroupBoardPostingView))
     }
     
     // 글 작성 버튼을 눌렀을 때, 글 작성 뷰로 이동.
-    func moveJSGRoupBoardPostingView() {
+    func moveJSGroupBoardPostingView() {
         let rootVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardPostingViewController") as! JSGroupBoardPostingViewController
         let nextVC = UINavigationController(rootViewController: rootVC)
         

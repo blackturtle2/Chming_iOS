@@ -83,11 +83,11 @@ class JSDataCenter {
             leaderPK: 1,
             leaderName: "이재성",
             memberList: nil,
-            location: .강남구, 
-            interestCategory: .스포츠, 
-            interest: .축구, 
-            address: "인천시 계양구 작전동", 
-            longitude: 100, 
+            location: .강남구,
+            interestCategory: .스포츠,
+            interest: .축구,
+            address: "인천시 계양구 작전동",
+            longitude: 100,
             latitude: 100
         )
         
@@ -105,6 +105,19 @@ class JSDataCenter {
         let myGroupNoticeList1 = JSGroupBoard(boardPK: 0, createdDate: Date(), isNotice: true, title: "첫번째 공지사항입니다.", content: "공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: "http://google.com", writerPK: 1, writer: "이재성")
         let myGroupNoticeList2 = JSGroupBoard(boardPK: 1, createdDate: Date(), isNotice: true, title: "두번째 공지사항입니다.", content: "두번째 공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: "http://google.com", writerPK: 1, writer: "이재성")
         let resultArray = [myGroupNoticeList1, myGroupNoticeList2]
+        
+        return resultArray
+    }
+    
+    // MARK: 모임 게시판 데이터 메소드
+    func findGroupBoardList(ofGroupPK: Int) -> [JSGroupBoard] {
+        let myGroupNoticeList1 = JSGroupBoard(boardPK: 0, createdDate: Date(), isNotice: true, title: "첫번째 공지사항입니다.", content: "공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: "http://google.com", writerPK: 1, writer: "이재성")
+        let myGroupNoticeList2 = JSGroupBoard(boardPK: 1, createdDate: Date(), isNotice: true, title: "두번째 공지사항입니다.", content: "두번째 공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: "http://google.com", writerPK: 1, writer: "이재성")
+        
+        let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: Date(), isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writer: "황기수")
+        let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: Date(), isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: nil, writerPK: 3, writer: "이창호")
+        
+        let resultArray = [myGroupNoticeList1, myGroupNoticeList2, myGroupList1, myGroupList2]
         
         return resultArray
     }

@@ -210,7 +210,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             let basicCell = UITableViewCell()
             let babyView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 32))
             basicCell.contentView.addSubview(babyView)
-            basicCell.setSelected(false, animated: false)
+            basicCell.selectionStyle = .none
             return basicCell
         default:
             let basicCell = UITableViewCell()
@@ -228,8 +228,8 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             
         // MARK: DidSelect- notice cell
         case sectionID.noticeListCell.rawValue: // 공지 사항 section
-            let nowCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
-            print("///// noticePK: ", nowCell.noticePK ?? "no data")
+            let currentCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
+            print("///// noticePK: ", currentCell.noticePK ?? "no data")
             
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
