@@ -48,6 +48,7 @@
                 </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="f4j-mB-Ge0" firstAttribute="leading" secondItem="BFL-W9-qRs" secondAttribute="trailing" constant="19.5" id="0uS-Wb-oj8"/>
                 <constraint firstAttribute="trailing" secondItem="f4j-mB-Ge0" secondAttribute="trailing" constant="30" id="2N4-Em-zWh"/>
@@ -58,7 +59,15 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="OPn-d6-mJr" appends="YES" id="gf7-ep-8jr"/>
+            </connections>
             <point key="canvasLocation" x="-2.5" y="351"/>
         </view>
+        <tapGestureRecognizer id="OPn-d6-mJr">
+            <connections>
+                <action selector="simpleVieTapGesture:" destination="-1" id="NbC-zZ-czB"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
