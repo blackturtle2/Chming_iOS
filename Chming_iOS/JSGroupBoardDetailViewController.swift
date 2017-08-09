@@ -8,28 +8,63 @@
 
 import UIKit
 
-class JSGroupBoardDetailViewController: UIViewController {
+class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet var imageViewUserProfile: UIImageView!
+    @IBOutlet var labelUserName: UILabel!
+    @IBOutlet var labelPostedTime: UILabel!
+    
+    @IBOutlet var labelPostTitle: UILabel!
+    @IBOutlet var labelPostContent: UILabel!
+    @IBOutlet var imageViewContent: UIImageView!
+    @IBOutlet var buttonPostLike: UIButton!
+    @IBAction func buttonPostLikeAction(_ sender:UIButton) {
+        
+    }
+    
+    @IBOutlet var tableViewCommentList: UITableView!
+    
+    @IBOutlet var commentMotherView: UIView!
+    @IBOutlet var commentImageViewMyProfile: UIImageView!
+    @IBOutlet var commentTextField: UITextField!
+    @IBAction func commentButtonConfirm(_ sender:UIButton) {
+        
+    }
+    
 
+    
+    /*******************************************/
+    // MARK: -  Life Cycle                     //
+    /*******************************************/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableViewCommentList.delegate = self
+        tableViewCommentList.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    /*********************************************/
+    // MARK: -  UITableView Delegate & DataSource//
+    /*********************************************/
+    
+    // row number
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
     }
-    */
-
+    
+    // custom cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+        
+        return myCell
+    }
+    
 }

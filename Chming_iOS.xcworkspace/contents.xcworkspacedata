@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Chming_iOS/Location.gpx">
+   </FileRef>
+   <FileRef
       location = "group:Chming_iOS.xcodeproj">
    </FileRef>
    <FileRef
