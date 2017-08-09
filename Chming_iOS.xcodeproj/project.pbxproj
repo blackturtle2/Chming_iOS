@@ -297,6 +297,15 @@
 		4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */; };
 		4CC0D9491F341B80003BF493 /* GSLocalFilterMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */; };
 		4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */; };
+		715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */; };
+		715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */; };
+		715C4DEA1F3AE7A700194C9E /* CHUserFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */; };
+		715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */; };
+		715C4DEE1F3AEDF200194C9E /* CHUserInfoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */; };
+		715C4DF01F3AF09B00194C9E /* CHFindResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */; };
+		71BC18911F380D4800A742F2 /* CHSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */; };
+		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
+		71E4D5EA1F304F5400FD0F61 /* CHSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4D5E91F304F5400FD0F61 /* CHSignInViewController.swift */; };
 		4CC0D9771F395856003BF493 /* GSSimpleGroupInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */; };
 		4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */; };
 		4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */; };
@@ -625,8 +634,15 @@
 		4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SeoulLocation.gpx; sourceTree = "<group>"; };
 		4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSScrollAreaView.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindInfoViewController.swift; sourceTree = "<group>"; };
+		715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserLocationViewController.swift; sourceTree = "<group>"; };
+		715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserFavoriteViewController.swift; sourceTree = "<group>"; };
+		715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserInfoViewController.swift; sourceTree = "<group>"; };
+		715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserInfoEditViewController.swift; sourceTree = "<group>"; };
+		715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindResultViewController.swift; sourceTree = "<group>"; };
+		71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSignUpViewController.swift; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
-		71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHMainViewController.swift; sourceTree = "<group>"; };
+		71E4D5E91F304F5400FD0F61 /* CHSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSignInViewController.swift; sourceTree = "<group>"; };
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCell.swift; sourceTree = "<group>"; };
@@ -1062,7 +1078,14 @@
 			isa = PBXGroup;
 			children = (
 				71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */,
-				71E4D5E91F304F5400FD0F61 /* CHMainViewController.swift */,
+				715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */,
+				715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */,
+				71E4D5E91F304F5400FD0F61 /* CHSignInViewController.swift */,
+				71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */,
+				715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */,
+				715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */,
+				715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */,
+				715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */,
 			);
 			name = CH;
 			sourceTree = "<group>";
@@ -1573,25 +1596,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
+				715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
 				FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */,
 				FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */,
 				FE53B0D71F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
+				715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */,
 				4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */,
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
+				715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */,
 				FEDACEA21F349154004826B8 /* JSGroupInfoMainImageCell.swift in Sources */,
 				FE53B0D31F39A25C0010D663 /* JSDataCenter.swift in Sources */,
 				FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */,
+				71BC18911F380D4800A742F2 /* CHSignUpViewController.swift in Sources */,
 				FEDACE971F3446D4004826B8 /* JSGroupPagerTabViewController.swift in Sources */,
 				FE53B0D91F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift in Sources */,
 				FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */,
 				4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
+				715C4DEA1F3AE7A700194C9E /* CHUserFavoriteViewController.swift in Sources */,
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
+				715C4DEE1F3AEDF200194C9E /* CHUserInfoEditViewController.swift in Sources */,
+				715C4DF01F3AF09B00194C9E /* CHFindResultViewController.swift in Sources */,
 				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
 				FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */,
+				71E4D5EA1F304F5400FD0F61 /* CHSignInViewController.swift in Sources */,
 				71E4D5EA1F304F5400FD0F61 /* CHMainViewController.swift in Sources */,
 				FE53B0DB1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift in Sources */,
 				4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */,

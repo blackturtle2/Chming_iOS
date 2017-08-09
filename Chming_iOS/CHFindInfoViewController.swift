@@ -1,14 +1,15 @@
 //
-//  CHMainViewController.swift
+//  CHPwFindViewController.swift
 //  Chming_iOS
 //
-//  Created by CLEE on 01/08/2017.
+//  Created by CLEE on 09/08/2017.
 //  Copyright © 2017 leejaesung. All rights reserved.
 //
 
 import UIKit
+import Firebase
 
-class CHMainViewController: UIViewController {
+class CHFindPwViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
