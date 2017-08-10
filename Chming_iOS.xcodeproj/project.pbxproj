@@ -1210,6 +1210,7 @@
 				TargetAttributes = {
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 29Q45PKR77;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1753,7 +1754,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 29Q45PKR77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1777,7 +1778,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 29Q45PKR77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

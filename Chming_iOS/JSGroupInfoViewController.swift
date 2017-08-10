@@ -186,7 +186,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             let noticeCell = tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath) as! JSGroupInfoNoticeListCell
             guard let vNoticeList = self.noticeList else { return noticeCell }
             
-            noticeCell.noticePK = vNoticeList[indexPath.row].boardPK
+            noticeCell.boardPK = vNoticeList[indexPath.row].boardPK
             noticeCell.labelTitle.text = vNoticeList[indexPath.row].title
             noticeCell.labelContent.text = vNoticeList[indexPath.row].content
             
@@ -233,7 +233,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // MARK: DidSelect- notice cell
         case sectionID.noticeListCell.rawValue: // 공지 사항 section
             let currentCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
-            print("///// noticePK: ", currentCell.noticePK ?? "no data")
+            print("///// noticePK: ", currentCell.boardPK ?? "no data")
             
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
