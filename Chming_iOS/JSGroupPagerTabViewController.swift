@@ -13,6 +13,7 @@ let JSStoryboardName = "JSGroupMain"
 
 
 class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGroupBoardMenuDelegate {
+    
     var groupPK:Int? = nil // 이전 뷰에서 넘어오는 groupPK. ( 넘어오지 않았을 케이스 예외처리는 아래 viewDidLoad()에서 구현 )
     
     
@@ -51,6 +52,7 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
         print("///// groupPK: ", vGroupPK)
         JSDataCenter.shared.selectedGroupPK = vGroupPK // Singleton에 선택한 모임 PK 저장.
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         JSDataCenter.shared.selectedGroupPK = nil // 뷰가 닫힐 때, Singleton에 있던 선택한 모임 PK 데이터 삭제.

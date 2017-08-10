@@ -31,6 +31,7 @@ class JSGroupGalleryViewController: UIViewController, IndicatorInfoProvider, UIC
         // Dispose of any resources that can be recreated.
     }
     
+    // XLPagerTabStrip 에서 Tab 버튼에 Indicator 정보를 등록하는 Delegate 함수입니다.
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "갤러리")
     }
