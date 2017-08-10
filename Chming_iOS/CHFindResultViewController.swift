@@ -10,15 +10,15 @@ import UIKit
 
 class CHFindResultViewController: UIViewController {
     
+    // ID or PW를 찾고 SignInView로 넘기기 위한 버튼.
     @IBAction func endFindingAction(sender: UIButton) {
         
         if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-        
         {
             UIApplication.shared.keyWindow?.rootViewController = viewController
             self.dismiss(animated: true, completion: nil)
         }
-
+        
     }
 
     override func viewDidLoad() {

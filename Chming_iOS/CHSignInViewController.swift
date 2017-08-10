@@ -17,6 +17,7 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
+    // 회원가입 버튼
     @IBAction func signInAction(sender: UIButton) {
         // Validate the input
         guard let emailAddress = emailTextField.text, emailAddress != "",
@@ -56,10 +57,19 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // unwind Segue!
-    @IBAction func unwindToSignInView(segue: UIStoryboardSegue) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func findIdAction() {
+        
     }
+    
+    @IBAction func findPwAction() {
+        
+    }
+    
+    
+    // SignInView로 넘어오는 UnwindSegue
+//    @IBAction func unwindToSignInView(segue: UIStoryboardSegue) {
+//        dismiss(animated: true, completion: nil)
+//    }
     
     
     
@@ -115,7 +125,7 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: 화면 터치시 키보드 내림
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
         
     }

@@ -85,6 +85,14 @@ class CHSignUpViewController: UIViewController {
 //
         })
     }
+    
+    // 취소버튼. Token값을 받아서 SignInView로 보내거나 UserInfoView로 보내거나.
+    @IBAction func cancelAction(sender: UIBarButtonItem) {
+        
+        // 분기처리는 추후에.
+        self.dismiss(animated: true, completion: nil)
+        
+    }
 
 
 

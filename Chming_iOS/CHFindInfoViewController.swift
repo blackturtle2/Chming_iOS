@@ -9,7 +9,16 @@
 import UIKit
 import Firebase
 
-class CHFindPwViewController: UIViewController {
+class CHFindInfoViewController: UIViewController {
+    
+    //변수 만들어서 ValueKey:Int?
+    
+    // UIBarButton 취소 액션 -> SignInView
+    @IBAction func cancelAction(sender: UIBarButtonItem) {
+    
+        self.dismiss(animated: true, completion: nil)
+    
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
