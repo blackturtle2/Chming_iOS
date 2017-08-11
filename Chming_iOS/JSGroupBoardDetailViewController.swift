@@ -12,6 +12,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     
     var boardPK: Int?
     var boardData: JSGroupBoard?
+    var commentListData: [JSGroupBoardComment]?
     
     @IBOutlet var imageViewUserProfile: UIImageView!
     @IBOutlet var labelUserName: UILabel!
@@ -50,6 +51,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         
         guard let vBoardPK = self.boardPK else { return }
         self.boardData = JSDataCenter.shared.findBoardData(ofBoardPK: vBoardPK)
+        self.commentListData = JSDataCenter.shared.findCommentList(ofBoardPK: vBoardPK)
         
         self.labelUserName.text = self.boardData?.writerName
         self.labelPostedTime.text = String(describing: (self.boardData?.createdDate)!)
@@ -131,12 +133,31 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     
     // row number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return commentListData?.count ?? 0
+    }
+    
+    // MARK: Cell's custom height
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     // custom cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let resultCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+        let resultCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! JSGroupBoardCommentCell
+        
+        guard let vCommentListData = self.commentListData else { return resultCell }
+        
+        resultCell.labelWriterName.text = vCommentListData[indexPath.row].writerName
+        resultCell.labelText.text = vCommentListData[indexPath.row].content
+        resultCell.labelCreatedDate.text = String(describing: vCommentListData[indexPath.row].createdDate)
+        
+        resultCell.writerPK = vCommentListData[indexPath.row].writerPK
+        resultCell.commentPK = vCommentListData[indexPath.row].commentPK
+        resultCell.buttonDeleteComment.tag = vCommentListData[indexPath.row].commentPK
         
         return resultCell
     }

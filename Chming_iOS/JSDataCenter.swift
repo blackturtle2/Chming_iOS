@@ -48,13 +48,13 @@ struct JSGroupBoard {
 // MARK: 모임 게시판의 댓글 구조체
 // 배열로 감싸고 리턴 필요.
 struct JSGroupBoardComment {
-    let commnetPK: Int
+    let commentPK: Int
     let createdDate: Date
     
     let content: String
     
     let writerPK: Int
-    let writer: String
+    let writerName: String
 }
 
 
@@ -149,6 +149,14 @@ class JSDataCenter {
         let resultString = "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431"
         
         return URL(string: resultString)
+    }
+    
+    // MARK: 댓글 리스트 가져오는 메소드
+    func findCommentList(ofBoardPK: Int) -> [JSGroupBoardComment] {
+        let resultCommentList1 = JSGroupBoardComment(commentPK: 0, createdDate: Date(), content: "댓글 테스트입니다.", writerPK: 0, writerName: "이재성")
+        let resultCommentList2 = JSGroupBoardComment(commentPK: 0, createdDate: Date(), content: "댓글 테스트입니다.", writerPK: 0, writerName: "이재성")
+        
+        return [resultCommentList1, resultCommentList2]
     }
     
 }
