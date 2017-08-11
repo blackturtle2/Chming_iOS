@@ -142,7 +142,13 @@ class JSDataCenter {
             
             return tempGroupList
         }
-        
-        
     }
+    
+    // MARK: 사용자 프로필 이미지 URL 가져오는 메소드
+    func findUserProfileImageURL(ofUserPK: Int) -> URL? {
+        let resultString = "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431"
+        
+        return URL(string: resultString)
+    }
+    
 }

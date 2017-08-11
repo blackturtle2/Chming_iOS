@@ -75,6 +75,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
                 task.resume()
             }
         }
+        
         // 본문 이미지 출력.
         DispatchQueue.global().async {
             guard let vImageURL = self.boardData?.imageURL else {
@@ -97,9 +98,23 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             }
         }
         
+        // 댓글 작성 뷰에 사용자 본인의 프로필 이미지 출력.
+        DispatchQueue.global().async {
+            guard let vUserProfileImageURL = JSDataCenter.shared.findUserProfileImageURL(ofUserPK: UserDefaults.standard.integer(forKey: userDefaultsPk)) else { return }
+            
+            let task = URLSession.shared.dataTask(with: vUserProfileImageURL, completionHandler: { (data, res, err) in
+                print("///// data 832: ", data ?? "no data")
+                print("///// res 832: ", res ?? "no data")
+                print("///// err 832: ", err ?? "no data")
+                
+                guard let realData = data else { return }
+                DispatchQueue.main.async {
+                    self.commentImageViewMyProfile.image = UIImage(data: realData)
+                }
+            })
+            task.resume()
+        }
         
-        
-        // self.imageViewContent
         self.buttonPostLike.setTitle("좋아요 백만개", for: .normal)
     }
 
