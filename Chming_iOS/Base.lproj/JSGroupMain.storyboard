@@ -646,75 +646,8 @@
                                             <outlet property="mainLabel" destination="nCa-5s-a8q" id="Wrl-VK-u68"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="3rdJoinLikeGroupCell" rowHeight="53" id="vzC-Td-gif" customClass="JSGroupInfoJoinLikeGroupCell" customModule="Chming_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="339" width="375" height="53"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vzC-Td-gif" id="zMJ-LS-e4s">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aDD-vp-1Xo">
-                                                    <rect key="frame" x="16" y="8" width="343" height="37"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9B-Me-WfL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="167.5" height="37"/>
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAk-gE-f9z">
-                                                                    <rect key="frame" x="0.5" y="0.0" width="167.5" height="37"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="37" id="jGs-Bd-Ta2"/>
-                                                                    </constraints>
-                                                                    <state key="normal" title="모임 가입" backgroundImage="ic_button_sample">
-                                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    </state>
-                                                                </button>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstItem="AAk-gE-f9z" firstAttribute="centerY" secondItem="f9B-Me-WfL" secondAttribute="centerY" id="4Ci-KI-Wdc"/>
-                                                                <constraint firstItem="AAk-gE-f9z" firstAttribute="width" secondItem="f9B-Me-WfL" secondAttribute="width" id="OOz-6K-DHd"/>
-                                                                <constraint firstItem="AAk-gE-f9z" firstAttribute="centerX" secondItem="f9B-Me-WfL" secondAttribute="centerX" id="RF7-QK-H01"/>
-                                                                <constraint firstAttribute="height" secondItem="AAk-gE-f9z" secondAttribute="height" id="Ur8-fO-qwj"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaE-eh-c6C">
-                                                            <rect key="frame" x="175.5" y="0.0" width="167.5" height="37"/>
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mal-xK-wfQ">
-                                                                    <rect key="frame" x="0.5" y="0.0" width="167.5" height="37"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="37" id="JUH-9g-cj4"/>
-                                                                    </constraints>
-                                                                    <state key="normal" title="모임 좋아요" backgroundImage="ic_button_sample">
-                                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    </state>
-                                                                </button>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstItem="mal-xK-wfQ" firstAttribute="centerX" secondItem="IaE-eh-c6C" secondAttribute="centerX" id="3Ad-Uw-du3"/>
-                                                                <constraint firstAttribute="height" secondItem="mal-xK-wfQ" secondAttribute="height" id="A2q-Gz-HMP"/>
-                                                                <constraint firstItem="mal-xK-wfQ" firstAttribute="centerY" secondItem="IaE-eh-c6C" secondAttribute="centerY" id="H3s-G4-hQs"/>
-                                                                <constraint firstItem="mal-xK-wfQ" firstAttribute="width" secondItem="IaE-eh-c6C" secondAttribute="width" id="Hgo-YQ-DcA"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="f9B-Me-WfL" firstAttribute="width" secondItem="aDD-vp-1Xo" secondAttribute="width" multiplier="1/2" constant="-4" id="5sj-Pd-4EK"/>
-                                                        <constraint firstItem="IaE-eh-c6C" firstAttribute="width" secondItem="aDD-vp-1Xo" secondAttribute="width" multiplier="1/2" constant="-4" id="hql-Ks-lev"/>
-                                                    </constraints>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="aDD-vp-1Xo" secondAttribute="trailing" constant="8" id="A2Y-7f-wOs"/>
-                                                <constraint firstItem="aDD-vp-1Xo" firstAttribute="leading" secondItem="zMJ-LS-e4s" secondAttribute="leadingMargin" constant="8" id="IPD-H8-oXL"/>
-                                                <constraint firstAttribute="bottom" secondItem="aDD-vp-1Xo" secondAttribute="bottom" constant="8" id="Kj8-ot-7LO"/>
-                                                <constraint firstItem="aDD-vp-1Xo" firstAttribute="top" secondItem="zMJ-LS-e4s" secondAttribute="top" constant="8" id="aF1-YO-Y2m"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="4thNoticeListCell" rowHeight="76" id="aWn-hx-Kcf" customClass="JSGroupInfoNoticeListCell" customModule="Chming_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="392" width="375" height="76"/>
+                                        <rect key="frame" x="0.0" y="339" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aWn-hx-Kcf" id="Eel-Yn-sBh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
@@ -760,7 +693,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="5thMemberListCell" textLabel="gb6-7B-erx" detailTextLabel="azO-Aj-kET" rowHeight="45" style="IBUITableViewCellStyleValue1" id="Vkv-iR-NTy" customClass="JSGroupInfoMemberListCell" customModule="Chming_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="468" width="375" height="45"/>
+                                        <rect key="frame" x="0.0" y="415" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vkv-iR-NTy" id="aC7-Qz-rbN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -1179,7 +1112,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_button_sample" width="180" height="31"/>
         <image name="ic_check" width="24" height="24"/>
         <image name="ic_clear_white" width="24" height="24"/>
         <image name="ic_delete_white" width="24" height="24"/>
