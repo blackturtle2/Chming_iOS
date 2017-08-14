@@ -14,20 +14,8 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     var boardData: JSGroupBoard?
     var commentListData: [JSGroupBoardComment]?
     
-    @IBOutlet var imageViewUserProfile: UIImageView!
-    @IBOutlet var labelUserName: UILabel!
-    @IBOutlet var labelPostedTime: UILabel!
     
-    @IBOutlet var labelPostTitle: UILabel!
-    @IBOutlet var labelPostContent: UILabel!
-    @IBOutlet var imageViewContent: UIImageView!
-    @IBOutlet var constraintContentImageView: NSLayoutConstraint! // 이미지가 없으면, 0으로 만들기.
-    @IBOutlet var buttonPostLike: UIButton!
-    @IBAction func buttonPostLikeAction(_ sender:UIButton) {
-        
-    }
-    
-    @IBOutlet var tableViewCommentList: UITableView!
+    @IBOutlet var mainTableView: UITableView!
     
     // 댓글 작성 뷰 IBOutlet
     @IBOutlet var commentMotherView: UIView!
@@ -37,7 +25,6 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         
     }
     
-
     
     /*******************************************/
     // MARK: -  Life Cycle                     //
@@ -46,59 +33,14 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewCommentList.delegate = self
-        tableViewCommentList.dataSource = self
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        
         
         guard let vBoardPK = self.boardPK else { return }
         self.boardData = JSDataCenter.shared.findBoardData(ofBoardPK: vBoardPK)
         self.commentListData = JSDataCenter.shared.findCommentList(ofBoardPK: vBoardPK)
         
-        self.labelUserName.text = self.boardData?.writerName
-        self.labelPostedTime.text = String(describing: (self.boardData?.createdDate)!)
-        
-        self.labelPostTitle.text = self.boardData?.title
-        self.labelPostContent.text = self.boardData?.content
-        
-        // 프로필 이미지 출력.
-        DispatchQueue.global().async {
-            guard let vWriterProfileImageURL = self.boardData?.writerProfileImageURL else { return }
-            if let realProfileImageURL = URL(string: vWriterProfileImageURL) {
-                let task = URLSession.shared.dataTask(with: realProfileImageURL, completionHandler: { (data, res, err) in
-                    print("///// data 231: ", data ?? "no data")
-                    print("///// res 231: ", res ?? "no data")
-                    print("///// err 231: ", err ?? "no data")
-                    
-                    guard let realData = data else { return }
-                    DispatchQueue.main.async {
-                        self.imageViewUserProfile.image = UIImage(data: realData)
-                    }
-                    
-                })
-                task.resume()
-            }
-        }
-        
-        // 본문 이미지 출력.
-        DispatchQueue.global().async {
-            guard let vImageURL = self.boardData?.imageURL else {
-                self.constraintContentImageView.constant = 0
-                return
-            }
-            if let realImageURL = URL(string: vImageURL) {
-                let task = URLSession.shared.dataTask(with: realImageURL, completionHandler: { (data, res, err) in
-                    print("///// data 298: ", data ?? "no data")
-                    print("///// res 298: ", res ?? "no data")
-                    print("///// err 298: ", err ?? "no data")
-                    
-                    guard let realData = data else { return }
-                    DispatchQueue.main.async {
-                        self.imageViewContent.image = UIImage(data: realData)
-                    }
-                    
-                })
-                task.resume()
-            }
-        }
         
         // 댓글 작성 뷰에 사용자 본인의 프로필 이미지 출력.
         DispatchQueue.global().async {
@@ -116,8 +58,10 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             })
             task.resume()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        self.buttonPostLike.setTitle("좋아요 백만개", for: .normal)
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,9 +75,21 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     // MARK: -  CommentList : UITableView Delegate & DataSource//
     /***********************************************************/
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     // row number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentListData?.count ?? 0
+        switch section {
+        case 0: // 게시글 섹션
+            return 1
+        case 1: // 댓글 섹션
+            return commentListData?.count ?? 0
+        default:
+            return 0
+        }
+        
     }
     
     // MARK: Cell's custom height
@@ -147,19 +103,85 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     
     // custom cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let resultCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! JSGroupBoardCommentCell
         
-        guard let vCommentListData = self.commentListData else { return resultCell }
+        switch indexPath.section {
+        case 0:
+            let resultCell = tableView.dequeueReusableCell(withIdentifier: "contentsCell", for: indexPath) as! JSGroupBoardContentsCell
+            
+            
+            resultCell.labelUserName.text = self.boardData?.writerName
+            resultCell.labelPostedTime.text = String(describing: (self.boardData?.createdDate)!)
+            
+            resultCell.labelPostTitle.text = self.boardData?.title
+            resultCell.labelPostContent.text = self.boardData?.content
+            
+            resultCell.buttonPostLike.setTitle("좋아요 백만개", for: .normal)
+            
+            // 프로필 이미지 출력.
+            DispatchQueue.global().async {
+                guard let vWriterProfileImageURL = self.boardData?.writerProfileImageURL else { return }
+                if let realProfileImageURL = URL(string: vWriterProfileImageURL) {
+                    let task = URLSession.shared.dataTask(with: realProfileImageURL, completionHandler: { (data, res, err) in
+                        print("///// data 231: ", data ?? "no data")
+                        print("///// res 231: ", res ?? "no data")
+                        print("///// err 231: ", err ?? "no data")
+                        
+                        guard let realData = data else { return }
+                        DispatchQueue.main.async {
+                            resultCell.imageViewUserProfile.image = UIImage(data: realData)
+                        }
+                        
+                    })
+                    task.resume()
+                }
+            }
+            
+            // 본문 이미지 출력.
+            DispatchQueue.global().async {
+                guard let vImageURL = self.boardData?.imageURL else {
+                    resultCell.constraintImageViewHeight.constant = 0
+                    
+                    return
+                    
+                }
+                if let realImageURL = URL(string: vImageURL) {
+                    let task = URLSession.shared.dataTask(with: realImageURL, completionHandler: { (data, res, err) in
+                        print("///// data 298: ", data ?? "no data")
+                        print("///// res 298: ", res ?? "no data")
+                        print("///// err 298: ", err ?? "no data")
+                        
+                        guard let realData = data else { return }
+                        DispatchQueue.main.async {
+                            resultCell.imageViewContent.image = UIImage(data: realData)
+                        }
+                        
+                    })
+                    task.resume()
+                }
+                resultCell.constraintImageViewHeight.constant = self.view.frame.width * 9 / 16
+            }
+            
+            return resultCell
+            
+        case 1:
+            let resultCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! JSGroupBoardCommentCell
+            
+            guard let vCommentListData = self.commentListData else { return resultCell }
+            
+            resultCell.labelWriterName.text = vCommentListData[indexPath.row].writerName
+            resultCell.labelText.text = vCommentListData[indexPath.row].content
+            resultCell.labelCreatedDate.text = String(describing: vCommentListData[indexPath.row].createdDate)
+            
+            resultCell.writerPK = vCommentListData[indexPath.row].writerPK
+            resultCell.commentPK = vCommentListData[indexPath.row].commentPK
+            resultCell.buttonDeleteComment.tag = vCommentListData[indexPath.row].commentPK
+            
+            return resultCell
+        default:
+            return UITableViewCell()
+        }
         
-        resultCell.labelWriterName.text = vCommentListData[indexPath.row].writerName
-        resultCell.labelText.text = vCommentListData[indexPath.row].content
-        resultCell.labelCreatedDate.text = String(describing: vCommentListData[indexPath.row].createdDate)
         
-        resultCell.writerPK = vCommentListData[indexPath.row].writerPK
-        resultCell.commentPK = vCommentListData[indexPath.row].commentPK
-        resultCell.buttonDeleteComment.tag = vCommentListData[indexPath.row].commentPK
-        
-        return resultCell
     }
     
 }

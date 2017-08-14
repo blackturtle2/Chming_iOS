@@ -310,6 +310,7 @@
 		71BC18911F380D4800A742F2 /* CHSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		FE026B611F3D807E00EF3140 /* JSGroupBoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */; };
+		FE0D7CC81F419D6400D27EAE /* JSGroupBoardContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */; };
 		FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */; };
 		FE53B0D31F39A25C0010D663 /* JSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */; };
 		FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */; };
@@ -644,6 +645,7 @@
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCommentCell.swift; sourceTree = "<group>"; };
+		FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardContentsCell.swift; sourceTree = "<group>"; };
 		FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCell.swift; sourceTree = "<group>"; };
 		FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDataCenter.swift; sourceTree = "<group>"; };
 		FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoMainTextCell.swift; sourceTree = "<group>"; };
@@ -1107,6 +1109,7 @@
 				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
 				FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */,
 				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
+				FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */,
 				FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */,
 				FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */,
 			);
@@ -1593,6 +1596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
+				FE0D7CC81F419D6400D27EAE /* JSGroupBoardContentsCell.swift in Sources */,
 				715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
