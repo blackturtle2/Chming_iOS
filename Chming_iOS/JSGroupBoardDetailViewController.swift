@@ -8,11 +8,14 @@
 
 import UIKit
 
-class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var boardPK: Int?
     var boardData: JSGroupBoard?
     var commentListData: [JSGroupBoardComment]?
+    
+    @IBOutlet var constraintCommentMotherViewBottom: NSLayoutConstraint! // 댓글 작성 박스의 Constraint ( 키보드 Show/hide 용도 )
+    @IBOutlet var buttonKeyboardHide: UIButton!
     
     
     @IBOutlet var mainTableView: UITableView!
@@ -26,15 +29,16 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     }
     
     
-    /*******************************************/
-    // MARK: -  Life Cycle                     //
-    /*******************************************/
+    /************************/
+    // MARK: -  Life Cycle  //
+    /************************/
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         mainTableView.delegate = self
         mainTableView.dataSource = self
+        commentTextField.delegate = self
         
         
         guard let vBoardPK = self.boardPK else { return }
@@ -58,10 +62,26 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             })
             task.resume()
         }
+        
+        // 댓글 터치시, 키보드 올리기 위한 키보드 노티 옵저버 등록.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(JSGroupBoardDetailViewController.keyboardWillShowOrHide(notification:)),
+            name: .UIKeyboardWillShow,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(JSGroupBoardDetailViewController.keyboardWillShowOrHide(notification:)),
+            name: .UIKeyboardWillHide,
+            object: nil)
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        // 키보드 옵저버 해제.
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,9 +91,9 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
 
     
     
-    /***********************************************************/
-    // MARK: -  CommentList : UITableView Delegate & DataSource//
-    /***********************************************************/
+    /*************************************************************/
+    // MARK: -  CommentList : UITableView Delegate & DataSource  //
+    /*************************************************************/
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -180,8 +200,62 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         default:
             return UITableViewCell()
         }
+
+    }
+    
+    
+    /**********************************/
+    // MARK: -  Keyboard Show or Hide //
+    /**********************************/
+    
+    // 키보드 Hide 버튼 액션 정의.
+    @IBAction func buttonHideKeyboard(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    // 텍스트필드를 터치해서 Editing을 시작할 때의 액션 정의.
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.buttonKeyboardHide.isHidden = false
+    }
+    
+    // 키보드의 Return 버튼 액션 정의.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("///// textFieldShouldReturn")
+        NotificationCenter.default.post(name: .UIKeyboardWillHide, object: nil)
         
+        return true
+    }
+    
+    // 키보드 올리기 or 내리기
+    func keyboardWillShowOrHide(notification: Notification) {
+        print("///// keyboardWillShowOrHide")
         
+        // guard-let으로 nil 값이면, 키보드를 내립니다.
+        guard let userInfo = notification.userInfo else {
+            self.commentTextField.resignFirstResponder() // 키보드 내리기.
+            self.buttonKeyboardHide.isHidden = true // 키보드 hide 버튼 감추기.
+            self.constraintCommentMotherViewBottom.constant = 0 // 댓글 작성칸 내리기.
+            self.view.layoutIfNeeded() // UIView layout 새로고침.
+            return
+        }
+        
+        // notification.userInfo를 이용해 키보드와 UIView를 함께 올립니다.
+        print("///// userInfo: ", userInfo)
+        
+        let animationDuration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let animationCurve = UIViewAnimationOptions(rawValue: (userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).uintValue << 16)
+        let frameEnd = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        UIView.animate(
+            withDuration: animationDuration,
+            delay: 0.0,
+            options: [.beginFromCurrentState, animationCurve],
+            animations: {
+                self.constraintCommentMotherViewBottom.constant = (self.view.bounds.maxY - self.view.window!.convert(frameEnd, to: self.view).minY)
+                self.view.layoutIfNeeded()
+        },
+            completion: nil
+        )
     }
     
 }
