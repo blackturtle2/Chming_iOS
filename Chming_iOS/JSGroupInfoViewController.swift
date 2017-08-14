@@ -65,6 +65,18 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     }
     
     
+    /************************************/
+    // MARK: -  buttonGroupJoin Action  //
+    /************************************/
+    
+    @IBAction func buttonGroupJoin(_ sender: UIButton) {
+        print("///// buttonGroupJoin")
+    }
+    
+    @IBAction func buttonGroupFavorite(_ sender: UIButton) {
+        print("///// buttonGroupFavorite")
+    }
+    
     
     /*********************************************/
     // MARK: -  UITableView Delegate & DataSource//

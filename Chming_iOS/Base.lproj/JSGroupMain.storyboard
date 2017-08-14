@@ -725,6 +725,9 @@
                                     <constraint firstAttribute="height" constant="50" id="dL1-XO-IIg"/>
                                 </constraints>
                                 <state key="normal" title="관심 등록"/>
+                                <connections>
+                                    <action selector="buttonGroupFavorite:" destination="M9E-xj-8ld" eventType="touchUpInside" id="1kZ-Zt-7OH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIJ-rQ-j4Z">
                                 <rect key="frame" x="0.0" y="617" width="187.5" height="50"/>
@@ -733,6 +736,9 @@
                                     <constraint firstAttribute="height" constant="50" id="2zm-MY-7bz"/>
                                 </constraints>
                                 <state key="normal" title="모임 가입"/>
+                                <connections>
+                                    <action selector="buttonGroupJoin:" destination="M9E-xj-8ld" eventType="touchUpInside" id="ejW-to-gyM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
