@@ -10,10 +10,10 @@ import UIKit
 
 class CHFindResultViewController: UIViewController {
     
-    @IBAction func endFindingAction(sender: UIButton) {
+    // User Pw or Id를 찾고 SignInView로 보내는 버튼.
+    @IBAction func findFinishButtonAction(sender: UIButton) {
         
         if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-        
         {
             UIApplication.shared.keyWindow?.rootViewController = viewController
             self.dismiss(animated: true, completion: nil)

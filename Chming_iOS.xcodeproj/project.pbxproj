@@ -301,6 +301,7 @@
 		4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */; };
 		4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */; };
 		4CC0D9801F3B04AF003BF493 /* CHSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97F1F3B04AF003BF493 /* CHSignInViewController.swift */; };
+		714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B308E1F4188A400013E56 /* CHDataCenter.swift */; };
 		715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */; };
 		715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */; };
 		715C4DEA1F3AE7A700194C9E /* CHUserFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */; };
@@ -635,6 +636,7 @@
 		4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSScrollAreaView.swift; sourceTree = "<group>"; };
 		4CC0D97F1F3B04AF003BF493 /* CHSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSignInViewController.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		714B308E1F4188A400013E56 /* CHDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHDataCenter.swift; sourceTree = "<group>"; };
 		715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindInfoViewController.swift; sourceTree = "<group>"; };
 		715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserLocationViewController.swift; sourceTree = "<group>"; };
 		715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserFavoriteViewController.swift; sourceTree = "<group>"; };
@@ -1088,6 +1090,7 @@
 				715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */,
 				715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */,
 				715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */,
+				714B308E1F4188A400013E56 /* CHDataCenter.swift */,
 			);
 			name = CH;
 			sourceTree = "<group>";
@@ -1641,6 +1644,7 @@
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 				FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */,
 				FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */,
+				714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
