@@ -21,7 +21,7 @@ struct GSGroupOne {
 struct GSGroupList {
     let interestCategory: eInterestCategory
     let interest: eInterest
-    let groupOne: GSGroupOne
+    let groupOne: [GSGroupOne]
     
 }
 
@@ -32,7 +32,9 @@ class GSDataCenter{
                                             "축구":[
                                                 "22":[
                                                     "latitude":"37.514537",
-                                                    "longtitude":"127.046695"
+                                                    "longtitude":"127.046695",
+                                                    "groupName":"FC강남 싸카"
+                                                    
                                                 ],
                                                 "23":[
                                                     "latitude":"37.512128",
@@ -86,7 +88,26 @@ class GSDataCenter{
                                             "latitude":"37.4819815",
                                             "longtitude":"127.0272152"
                                          ]
-                                   ]
+                                   ],
+                                  "중구":[
+                                    "group":[
+                                        "축구":[
+                                            "40":[
+                                                "latitude":"37.557802",
+                                                "longtitude":"126.972420"
+                                            ],
+                                            "41":[
+                                                "latitude":"37.559295",
+                                                "longtitude":"126.972500"
+                                            ]
+                                        ]
+                                    ],
+                                    "location":[
+                                        "latitude":"37.4819815",
+                                        "longtitude":"127.0272152"
+                                    ]
+        ]
+
         
                                 ]
     private init(){}
@@ -235,4 +256,102 @@ class GSDataCenter{
         
     }
     
+    
+    // 지역선택시 선택지역 정보리턴 - 파베임...클로저 사용해야될듯합니다. 혼술 연습햇던거 봐보자..추가 적으로 파베구조장 Group디비에 지역이 필요하여 리턴시 추가
+    func selectLocalMapPointFirebaseTest(local: String, completion:@escaping ([String:Any])->Void) {
+        print("선택 지역://", local)
+        var localInfoDic: [String:Any] = [:]
+        // 관심사 모임의 위치정보
+        var interestMapPoint: MTMapPoint = MTMapPoint()
+        // 선택 지역 위치정보
+        var localMapPoint: MTMapPoint = MTMapPoint()
+        
+//---- 파베 데이터를 가져와보자
+        Database.database().reference().child("GroupListMap").child(local).observeSingleEvent(of: .value, with: { (dataSnapShot) in
+                let groupListDict = dataSnapShot.value as! [String:Any]
+                print(groupListDict)
+                print("FIREBase-groupListDict://", groupListDict)
+                // 선택지역 location 정보
+                
+                let localMap = groupListDict["location"] as! [String:Any]
+                // # FireBase database에 오타잇음 ==> 수정필요합니다.=> 고쳣습니다.
+                let latitude = localMap["latitude"] as! Double
+                let longtitude = localMap["longtitude"] as! Double
+                
+                print(latitude)
+                print(longtitude)
+                
+                // 선택지역 위도,경도 정보
+                localMapPoint =  MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longtitude))
+                print(localMapPoint)
+                
+                // 관심사 모임 정보
+                let localInterest = groupListDict["groupList"] as! [String:Any]
+                print("count://", localInterest.count)
+                print("data://",localInterest)
+                // 선택지역의 모든 관심사 모임 정보를 담을 프로퍼티
+                var interestAllGroups: [String:Any] = [:]
+                
+                for interestKey in localInterest{
+                    print("Firebase== 제발://",interestKey.key)
+                    print(localInterest["축구"])
+                    var interestMaps = localInterest[interestKey.key] as! [String:Any]
+                    // 모임명 키값의 정보들
+                    //예시) "축구"라는 키값의 모든 값들 => ["22": ["latitude": "37.517404", "longtitude": "127.047446"], "23": ["latitude": "37.512128", "longtitude": "127.0376503"]]
+                    print("FIREBase-모임리스트 정보://", interestMaps)
+                    //[ "22": ["latitude": "37.517404", "longtitude": "127.047446"],
+                    //  "23": ["latitude": "37.512128", "longtitude": "127.0376503"]]
+                    print("FIREBase-key값://", interestKey) // 축구
+                    
+                    var interestGroups: [[String: Any]] = []
+                    for groupKey in interestMaps.keys {
+                        var groupValue = interestMaps[groupKey] as! [String:Any]
+                        print(groupValue)
+                        var interestGroupOneInfo: [String:Any] = [:]
+                        
+                        // MTMapPoint 타입으로 형변환을 위해 변수선언
+                        var groupLatitude = groupValue["latitude"] as! Double ?? 0.0
+                        let groupLongtitude = groupValue["longtitude"] as! Double ?? 0.0
+                        print("FIREBase-그룸 tt위도://", groupLatitude)
+                        print("FIREBase-그룸 tt경도://", groupLongtitude)
+                        
+                        let interestLocationMapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: groupLatitude, longitude: groupLongtitude))!
+                        interestGroupOneInfo.updateValue(groupKey, forKey: "groupPK")
+                        interestGroupOneInfo.updateValue(interestLocationMapPoint, forKey: "groupMapPoint")
+                        
+                        interestGroups.append(interestGroupOneInfo)
+                        
+                    }
+                    interestAllGroups.updateValue(interestGroups, forKey: interestKey.key)
+                }
+                print("여러 관심모임정보 토랄://", interestAllGroups)
+                localInfoDic.updateValue(localMapPoint, forKey: "localMapPoint")
+                localInfoDic.updateValue(interestAllGroups, forKey: "interestMapPoint")
+                localInfoDic.updateValue(local, forKey: "local")
+                print("리턴 여러 관심모임정보 토랄://", localInfoDic)
+                completion(localInfoDic)
+            }
+        )
+    }
+    
+    func groupInfoLoad(local:String, interestKey: String, groupPK: String, complition: @escaping ([String:Any]) ->Void){
+        // 먼저 좌표값을 가지고 파베 기준으로 주소형태로 변환
+        print("로컬://", local)
+        print("카테고리 키 ://", interestKey)
+        
+        
+        Database.database().reference().child("Group").child(local).child(interestKey).child(groupPK).observeSingleEvent(of: .value, with: { (dataSnapShot) in
+            print("데이터스냅샷://",dataSnapShot.value)
+            let groupListDict = dataSnapShot.value as! [String:Any]
+//            print("선택 관심사의 모임 정보 데이터:// ", groupListDict)
+            
+            
+            complition(groupListDict)
+        })
+
+        
+        
+        
+    }
+
 }

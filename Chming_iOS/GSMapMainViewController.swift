@@ -9,7 +9,12 @@
 import UIKit
 import Firebase
 
-class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol {
+class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol, GSCategoryProtocol ,UIScrollViewDelegate {
+    
+    var locationFullAddress: String = ""
+    
+    // 데이터센터에서 파베에서 조회한 데이터를 담을 프로퍼티
+    var groupsData: [String:Any] = [:]
     
     // ############################ IBOulet #######################################//
     // MARK: - IBOulet
@@ -22,18 +27,33 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     @IBOutlet var scrollAreaWidthConstraints: NSLayoutConstraint!
     
+    
+    
     // ############################ Initialize #######################################//
     // MARK: - Initialize
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        infoScrollView.delegate = self
+        infoScrollView.isPagingEnabled = true
         
         // 샘플코드로 마커 찍엇던 메서드를 주석처리 - 다른 마커들을 구현중이라 주석처리 합니다.
         // self.loadMarker()
-        self.simpleGroupViewLoad()
-
+        
+        
+        // #테스트 진행위한 주석처리 - 0811
+        //self.simpleGroupViewLoad()
+     
         
         // Do any additional setup after loading the view.
+        
+        // 현위치 트랙킹 모드 On, 단말의 위치에 따라 지도 중심이 이동한다.
+        mapView.currentLocationTrackingMode = .onWithoutHeading
+        
+        // 현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
+        // currentLocationTrackingMode property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
+        mapView.showCurrentLocationMarker = true
+        //        loadCurrentMapPoint = mapView.mapCenterPoint
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,14 +62,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         //self.loadMarker()
         
         // 최초 앱 실행시 현재위치의 위도,경도 값을 서버에 전달
-        
-        // 현위치 트랙킹 모드 On, 단말의 위치에 따라 지도 중심이 이동한다.
-        mapView.currentLocationTrackingMode = .onWithoutHeading
-        
-        // 현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
-        // currentLocationTrackingMode property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
-        mapView.showCurrentLocationMarker = true
-//        loadCurrentMapPoint = mapView.mapCenterPoint
+        print("$$$$$$ View WillAppear")
       
     }
     
@@ -132,6 +145,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         return poiItem
     }
     
+    // 파이어베이스 작업 메서드
     func mapLoad(location: String){
         let reference = Database.database().reference()
         reference.child("GroupListMap").child(location).observeSingleEvent(of: .value, with: { (dataSnapShot) in
@@ -235,6 +249,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print(addressSplitArr)
         self.mapLoad(location: addressSplitArr[1])
     }
+    
     // 사용자가 POI Item을 선택한 경우 호출
     // 리턴 값은 마커 선택시 말풍선을 보여줄지 여부를 할당하는 리턴값
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
@@ -252,6 +267,57 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         return false
     }
     
+    // MARK: - 현재 작업 메서드 0811
+    // 지도화면의 이동이 끝난뒤 호출
+    // 플로우 확인해보니 최초에 맵이 뜨면서도 호출이 된다.
+    func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
+        print("이동한 중심 좌표://", mapCenterPoint.mapPointGeo())
+        
+// 이경우에는 맵이뜨지않고 잠시 먹통 상태로 유지.... 뭐가문제일가내부적이 쓰레드문제? - Main쓰레드에서 돌고있는거 같다..
+//        let result = MTMapReverseGeoCoder.findAddress(for: mapCenterPoint, withOpenAPIKey: "719b03dd28e6291a3486d538192dca4b") ?? ""
+//        print("//@@@@@@@@@@ FindAddress Start @@@@@@@@@@ //")
+//        print("FindAddress: // ", result)
+//        print("//@@@@@@@@@@ FindAddress End @@@@@@@@@@ //")
+//        
+        // 2번째 방안인 클로저형태로 선언 하였다. 문제 없이 수행된다. 흠
+        
+        let geoHandler: MTMapReverseGeoCoderCompletionHandler = {(success, addressFormapPoint, error: Error?) ->Void in
+            print("//########## 지도화면의 이동이 끝난뒤 호출Geo Handler Start #######//")
+            print("geoHandler success://",success)
+            print("geoHandler addressFormapPoint://",addressFormapPoint)
+            print("geoHandler error://",error)
+            print("//########## 지도화면의 이동이 끝난뒤 호출Geo Handler End #######//")
+            
+            
+            guard let addressStr: String = addressFormapPoint! else { return }
+            let addresSplitArr: [String] = addressStr.components(separatedBy: " ")
+            print("지도화면 이동에서의 '주소전체'://", addressStr)
+            print("지도화면 이동에서의 '주소배열'://", addresSplitArr)
+            print("지도화면 이동에서의 '구'://", addresSplitArr[1])
+            let addressValue = addresSplitArr[1]
+            //self.mapLoad(location: addresSplitArr[1])
+            
+            // param으로 '구'형태의 값을 주고 return 값으로 중심점 좌표의 '구'값에 해당하는 관심 모임 정보들을 리턴받는다
+            //let groupList = GSDataCenter.shared.selectLocalMapPoint(local: addressValue)
+            //print(groupList.count)
+
+            // 서버랑 연결해보자
+            GSDataCenter.shared.selectLocalMapPointFirebaseTest(local: addressValue, completion: { (grousInfo) in
+                self.groupsData = grousInfo
+                print("Datacenter의 Firebase Data를 뷰컨에서 가져옴://", self.groupsData)
+                self.simpleGroupViewLoadTest(locationGroupData: grousInfo)
+            })
+            
+            
+            
+            // 시뮬레이터 상에서는 내위치에서도 호출되는데 여러번 반복되는 문제가있다. 기기테스트도 해봐야겟지만 예외처리해야될거같음
+            //self.simpleGroupViewLoadTest(locationGroupData: groupList)
+            
+        }
+        MTMapReverseGeoCoder.executeFindingAddress(for: mapCenterPoint!, openAPIKey: "719b03dd28e6291a3486d538192dca4b", completionHandler: geoHandler)
+        
+    }
+   
     // MARK: - MTMapViewDelegate 메서드(User Location Tracking delegate methods)
     /*
      단말의 위치에 해당하는 지도 좌표와 위치 정확도가 주기적으로 delegate 객체에 통보된다.
@@ -271,6 +337,29 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     // MARK: - MTMapReverseGeoCoderDelegate 메서드
     
     func mtMapReverseGeoCoder(_ rGeoCoder: MTMapReverseGeoCoder!, foundAddress addressString: String!) {
+        
+    }
+    
+    // ############################ UIScrollViewDelegate Method #######################################//
+    // MARK: - UIScrollViewDelegate 메서드
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+       
+        
+    }
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let scrollViewIndex = Int(targetContentOffset.pointee.x/self.view.frame.size.width)
+        
+    
+        print(targetContentOffset.pointee)
+        print(scrollViewIndex)
+        //infoScrollView.contentOffset = targetContentOffset.pointee
+        
+        let scrollMapPoIItem = mapView.findPOIItem(byTag: scrollViewIndex)
+        print(scrollMapPoIItem?.itemName)
+        mapView.setMapCenter(scrollMapPoIItem?.mapPoint, animated: true)
+        
+        
         
     }
     
@@ -402,6 +491,17 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         localFilterMenuView.popUp(on: self.view)
     }
     
+    // 관심사버튼 클릭
+    @IBAction func categoryBtnTouched(_ sender: UIButton){
+        let nextViewContorller = self.storyboard?.instantiateViewController(withIdentifier: "GSInterestCategoryView") as! GSInterestCategoryViewController
+        nextViewContorller.categoryDelegate = self
+        self.present(nextViewContorller, animated: true, completion: nil)
+       
+    }
+    
+    
+    
+    // MARK: - GSSimpleGroupInfoProtocol Delegate Method
     // 커스텀뷰에서 탭 액션시 모임 정보뷰로 이동하기위해 viewcontroller가 해주어야 하는 부분이있어서 delegate 패턴으로 구현
     func nextViewPresent(nextView: JSGroupPagerTabViewController) {
         let nextNavi = UINavigationController(rootViewController: nextView)
@@ -412,5 +512,236 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         self.present(nextNavi, animated: true, completion: nil)
 
     }
+    // MARK: - GSCategoryProtocal delegate Method
+    func selectCategory(categoryList: [String]) {
+        print(categoryList)
+    }
+    
+    func test(location: String){
+        let localFilterMenuView = GSLocalFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 300.0), localHandler: { [unowned self] (localFiterView, mapPoint) in
+            print("localHandler")
+            self.mapView.setMapCenter(mapPoint["localMapPoint"] as! MTMapPoint, zoomLevel: 3, animated: true)
+            print("지역선택시 넘어온 데이터정보:// ",mapPoint )
+            
+            print(type(of: mapPoint["interestMapPoint"]))
+            let interestGroupsAll:[String:Any] = mapPoint["interestMapPoint"] as! [String:Any]
+            print(interestGroupsAll)
+            // 작업 진행중--- 현재 2017.08.08 오후 6시 17분
+            var items = [MTMapPOIItem]()
+            // 특정 마커에 대한 커스텀 적용시
+            
+            
+            var tagValue = 0
+            for key in interestGroupsAll.keys {
+                print(key)// key = "축구", "농구"
+                // 각각의 키가 가지고 있는 값이 필요
+                // for-in 문을 돌면서 먼저 키값을 기준으로 그룹정보가 들어있는 배열 형태로 생성
+                // interestGroup = [["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+                //                  ["groupPK": "23", "groupMapPoint": <MTMapPoint: 0x608000011340>]]
+                let interestGroup = interestGroupsAll[key] as! [[String:Any]]
+                for groupOne in interestGroup { //["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+                    let interestPoitItem = MTMapPOIItem() // 마커 생성
+                    // 마커에 필요한 값을 groupOne에서 가져와서 할당
+                    interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+                    interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+                    print("그룸정보://", groupOne)
+                    // 모임의 관심사에 따라 마커의 타입을 분기처리
+                    switch key {
+                    case "축구":
+                        interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                    case "농구":
+                        interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
+                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                    default:
+                        interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
+                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
+                    }
+                    interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+                    interestPoitItem.tag = tagValue
+                    items.append(interestPoitItem)
+                    tagValue += 1
+                    print(items)
+                }
+                
+            }
+            print(items.count)
+            self.mapView.addPOIItems(items)
+            
+        })
+        { (localFilterview) in
+            print("cancelHandler")
+            
+        }
+        localFilterMenuView.popUp(on: self.view)
+    }
+    
+    // MARK: - 0816 API통신 붙어서 비로그인상태시 호출되도록 구현예정입니다.
+    // 하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
+    func simpleGroupViewLoadTest(locationGroupData: [String:Any]){
+        // 영역인컨텐츠뷰의 타입은 현재 UIViewd이다
+        print("SCROLL AREAVIEW SUBVIEWS://", scrollAreaView.subviews,"/ COUNT:// ",scrollAreaView.subviews.count)
+        if scrollAreaView.subviews.count > 0 {
+            scrollAreaView.removeSubviews()
+            
+        }
+        mapView.removeAllPOIItems()
+        // -------------------------------- 스크롤뷰 테스트 start --------------------------
+        // 메서드로 변경 예정
+        // 스크롤뷰의 페이지느낌 속성값 - default false
+        infoScrollView.isPagingEnabled = true
+        // 튕기듯하 바운스 속성값 - default true
+        //contentScrollView.bounces = false
+        print("simpleGroupViewLoadTest 넘어온 파라미터 데이터 ://",locationGroupData)
+ 
+        //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
+        // 개인적으로 닙파일로 빼야될거 같음
+        
+        // 고유 정보가 필요하다
+//        var count: CGFloat = 0
+        var testTextNum = 0
+        //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
+        let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
+        
+        //__##################### 데이터 테스트 start ############################
+        let interestGroupsAll: [String:Any] = locationGroupData["interestMapPoint"] as! [String:Any]
+        let currentLocal = locationGroupData["local"] as! String
+        print(interestGroupsAll)
+        
+        var items = [MTMapPOIItem]()
+        // 특정 마커에 대한 커스텀 적용시
+        
+        var count: CGFloat = 0
+        var tagValue = 0 // 간단정보뷰의 인덱스와
+        for key in interestGroupsAll.keys {
+            print(key)// key = "축구", "농구"
+            // 각각의 키가 가지고 있는 값이 필요
+            // for-in 문을 돌면서 먼저 키값을 기준으로 그룹정보가 들어있는 배열 형태로 생성
+            // interestGroup = [["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+            //                  ["groupPK": "23", "groupMapPoint": <MTMapPoint: 0x608000011340>]]
+            let interestGroup = interestGroupsAll[key] as! [[String:Any]]
+            
+            // paging
+            print("PAGING://\(interestGroup.count)")
+            
+            
+            for groupOne in interestGroup { //["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+                let interestPoitItem = MTMapPOIItem() // 마커 생성
+                // 마커에 필요한 값을 groupOne에서 가져와서 할당
+                print("Group PK://", groupOne["groupPK"])
+                let groupPK = groupOne["groupPK"] as! String
+                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+                print("그룸정보://", groupOne)
+                // 모임의 관심사에 따라 마커의 타입을 분기처리
+                switch key {
+                case "축구":
+                    interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                case "농구":
+                    interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
+                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                default:
+                    interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
+                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
+                }
+                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.springFromGround
+                interestPoitItem.tag = tagValue
+                items.append(interestPoitItem)
+                tagValue += 1
+                print(items)
+                // 그룹피케이 사용해야됨
+                //간단정보뷰 생성 - 그룹의 피케이가 필요하다....잠시 주석 처리 하고 파베랑 연결해보자! 0810
+                // 간단정보에 뿌릴 정보는 관심 모임 맵 정보에 있는 PK 값을 활용해야함
+                
+//                let simpleGroupInfoView: GSSimpleGroupInfoView = {
+//                    let view = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42, y: 0, width: self.view.bounds.size.width*0.8, height: self.infoScrollView.bounds.size.height),
+//                        groupImg: "marker1_\(tagValue)",
+//                        groupName: "그룹명 \(tagValue)",
+//                        groupSimpleInfo: "간단소개\(tagValue)")
+//                    view.delegate = self
+//                    
+//                    // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+//                    view.groupPK = "\(testTextNum)"
+//                    view.layer.borderWidth = 2
+//                    print(view.frame)
+//                    testTextNum += 1
+//                    return view
+//                }()
+//                print("count://", count)
+//                count += 1
+//                scrollAreaView.addSubview(simpleGroupInfoView)
+                
+                
+                // ------- 그룹의 정보를 받아올 부분 - 선택지역의 그룹 PK값을가지고 파베의 그룹 정보를 가져와야한다.작업중-0815
+                
+                GSDataCenter.shared.groupInfoLoad(local: currentLocal, interestKey: key, groupPK: groupPK, complition: { (groupInfoDic) in
+                    
+                    let simpleGroupInfoView: GSSimpleGroupInfoView = {
+                        let view = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42,
+                                                                       y: 0, width: self.view.bounds.size.width*0.8,
+                                                                       height: self.infoScrollView.bounds.size.height),
+                                                         // 이미지 가져오자 => gk 를 가지고 그룹정보를 가지고와서 이미지정보를 가져오자
+                                                         groupImg: "marker1_\(tagValue)",
+                                                         groupName: groupInfoDic["groupName"] as! String,
+                                                         groupSimpleInfo: groupInfoDic["mainText"] as! String)
+                        view.delegate = self
+                        
+                        // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+                        view.groupPK = "\(key)"
+                        view.layer.borderWidth = 2
+                        print(view.frame)
+                        testTextNum += 1
+                        return view
+                    }()
+                    print("count://", count)
+                    count += 1
+                    self.scrollAreaView.addSubview(simpleGroupInfoView)
+                    // ## 제약 사항 변경
+                    self.scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
+                    // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
+                    self.infoScrollView.layoutIfNeeded()
+                })
 
+                
+            }
+           
+
+        }
+        print(items.count)
+        self.mapView.addPOIItems(items)
+        
+        
+        
+   
+    }
+
+
+}
+
+
+// ScrollAreaView의 하위 뷰들의 정보를 초기화 하기위한 extension
+// 참고: https://stackoverflow.com/questions/30831444/swift-remove-subviews-from-superview
+extension UIView {
+    
+    // Recursive remove subviews and constraints
+    func removeSubviews() {
+        self.subviews.forEach({
+            if !($0 is UILayoutSupport) {
+                $0.removeSubviews()
+                $0.removeFromSuperview()
+            }
+        })
+        
+    }
+    
+    // Recursive remove subviews and constraints
+    func removeSubviewsAndConstraints() {
+        self.subviews.forEach({
+            $0.removeSubviewsAndConstraints()
+            $0.removeConstraints($0.constraints)
+            $0.removeFromSuperview()
+        })
+    }
+    
 }

@@ -26,13 +26,20 @@ class GSSimpleGroupInfoView: UIView {
     
     init(frame: CGRect, groupImg: String, groupName: String, groupSimpleInfo:String) {
         super.init(frame: frame)
+        let url = URL(string: "https://www.gstatic.com/webp/gallery3/1.png")
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            DispatchQueue.main.async {
+                guard let imgData = data else {return}
+                // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
+                if groupImg == "marker1_1" || groupImg == "marker1_2"{
+                    self.groupImgView.image = UIImage(named: groupImg)
+                }else{
+                    self.groupImgView.image = UIImage(data: imgData)
+                }
+            }
+        }.resume()
         let simpleInfoViewFromNib: UIView = Bundle.main.loadNibNamed("GSSimpleGroupInfo", owner: self, options: nil)!.first as! UIView
-        // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
-        if groupImg == "marker1_1" || groupImg == "marker1_2"{
-            self.groupImgView.image = UIImage(named: groupImg)
-        }else{
-            self.groupImgView.image = UIImage(named: "map_pin_red.png")
-        }
+        
         self.groupImgView.contentMode = .scaleAspectFit
         self.groupNameLable.text = groupName
         self.groupSimpleInfo.text = groupSimpleInfo
