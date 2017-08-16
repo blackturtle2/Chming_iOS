@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Alamofire
 
 class JSRegisterViewController: UIViewController {
     
     @IBOutlet var textFieldEmail: UITextField!
     @IBAction func buttonEmailInvalidAction(_ sender: UIButton) {
-        
+        Alamofire.request("http://chming.jeongmyeonghyeon.com/api/member/").responseJSON { (res) in
+            print("///// res: ", res )
+        }
     }
     
     @IBOutlet var textFieldPassword: UITextField!
