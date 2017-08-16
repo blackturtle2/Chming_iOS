@@ -312,6 +312,8 @@
 		FE026B611F3D807E00EF3140 /* JSGroupBoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */; };
 		FE0D7CC81F419D6400D27EAE /* JSGroupBoardContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */; };
 		FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */; };
+		FE3C3F641F44174800416DEA /* JSLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C3F631F44174800416DEA /* JSLoginViewController.swift */; };
+		FE3C3F661F44175400416DEA /* JSRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C3F651F44175400416DEA /* JSRegisterViewController.swift */; };
 		FE53B0D31F39A25C0010D663 /* JSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */; };
 		FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */; };
 		FE53B0D91F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D81F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift */; };
@@ -646,6 +648,8 @@
 		FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCommentCell.swift; sourceTree = "<group>"; };
 		FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardContentsCell.swift; sourceTree = "<group>"; };
 		FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCell.swift; sourceTree = "<group>"; };
+		FE3C3F631F44174800416DEA /* JSLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSLoginViewController.swift; sourceTree = "<group>"; };
+		FE3C3F651F44175400416DEA /* JSRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSRegisterViewController.swift; sourceTree = "<group>"; };
 		FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDataCenter.swift; sourceTree = "<group>"; };
 		FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoMainTextCell.swift; sourceTree = "<group>"; };
 		FE53B0D81F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoNoticeListCell.swift; sourceTree = "<group>"; };
@@ -1164,6 +1168,8 @@
 			isa = PBXGroup;
 			children = (
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
+				FE3C3F631F44174800416DEA /* JSLoginViewController.swift */,
+				FE3C3F651F44175400416DEA /* JSRegisterViewController.swift */,
 				FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */,
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
@@ -1550,6 +1556,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
@@ -1557,6 +1564,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
@@ -1594,7 +1602,9 @@
 			files = (
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
 				FE0D7CC81F419D6400D27EAE /* JSGroupBoardContentsCell.swift in Sources */,
+				FE3C3F661F44175400416DEA /* JSRegisterViewController.swift in Sources */,
 				715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */,
+				FE3C3F641F44174800416DEA /* JSLoginViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
 				FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */,
