@@ -9,7 +9,14 @@
 import UIKit
 import Firebase
 
-class CHFindPwViewController: UIViewController {
+class CHFindInfoViewController: UIViewController {
+
+    //변수만들어서 valueKey를 통해 전환되는 화면 설정하는 기능 추가해야함.
+    
+    @IBAction func cancelButtonAction(sender: UIBarButtonItem) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
