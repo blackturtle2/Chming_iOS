@@ -65,6 +65,18 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     }
     
     
+    /************************************/
+    // MARK: -  buttonGroupJoin Action  //
+    /************************************/
+    
+    @IBAction func buttonGroupJoin(_ sender: UIButton) {
+        print("///// buttonGroupJoin")
+    }
+    
+    @IBAction func buttonGroupFavorite(_ sender: UIButton) {
+        print("///// buttonGroupFavorite")
+    }
+    
     
     /*********************************************/
     // MARK: -  UITableView Delegate & DataSource//
@@ -75,16 +87,16 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     enum sectionID:Int {
         case mainImageCell = 0
         case mainTextCell = 1
-        case joinLikeGroupCell = 2
-        case noticeListCell = 3
-        case memberListCell = 4
+//        case joinLikeGroupCell = 2
+        case noticeListCell = 2
+        case memberListCell = 3
     }
     
     // MARK: Section Number
-    // 모임 메인 화면의 섹션은 총 6개로 고정합니다.
+    // 모임 메인 화면의 섹션은 총 5개로 고정합니다.
     // 마지막 cell은 여백 cell.
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 5
     }
     
     // MARK: Row Number
@@ -127,8 +139,6 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             return nil // 모임 대표 이미지
         case sectionID.mainTextCell.rawValue:
             return "모임 소개"
-        case sectionID.joinLikeGroupCell.rawValue:
-            return nil // 모임 가입-좋아요 버튼
         case sectionID.noticeListCell.rawValue:
             return "공지 사항"
         case sectionID.memberListCell.rawValue:
@@ -174,19 +184,13 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             mainTextCell.mainLabel.text = groupInfo?.mainText
             
             return mainTextCell
-            
-        // MARK: Custom Cell- 모임 가입, 좋아요 버튼 셀
-        case sectionID.joinLikeGroupCell.rawValue:
-            let joinLikeCell = tableView.dequeueReusableCell(withIdentifier: "3rdJoinLikeGroupCell", for: indexPath) as! JSGroupInfoJoinLikeGroupCell
-            
-            return joinLikeCell
-            
+        
         // MARK: Custom Cell- 모임 공지사항 리스트 셀
         case sectionID.noticeListCell.rawValue:
             let noticeCell = tableView.dequeueReusableCell(withIdentifier: "4thNoticeListCell", for: indexPath) as! JSGroupInfoNoticeListCell
             guard let vNoticeList = self.noticeList else { return noticeCell }
             
-            noticeCell.noticePK = vNoticeList[indexPath.row].boardPK
+            noticeCell.boardPK = vNoticeList[indexPath.row].boardPK
             noticeCell.labelTitle.text = vNoticeList[indexPath.row].title
             noticeCell.labelContent.text = vNoticeList[indexPath.row].content
             
@@ -233,7 +237,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // MARK: DidSelect- notice cell
         case sectionID.noticeListCell.rawValue: // 공지 사항 section
             let currentCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
-            print("///// noticePK: ", currentCell.noticePK ?? "no data")
+            print("///// noticePK: ", currentCell.boardPK ?? "no data")
             
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
             self.navigationController?.pushViewController(nextVC, animated: true)

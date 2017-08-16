@@ -12,4 +12,9 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'XLPagerTabStrip', '~> 7.0'
 
+pod 'Alamofire', '~> 4.4'
+pod 'SwiftyJSON'
+
+pod 'Toaster'
+
 end
