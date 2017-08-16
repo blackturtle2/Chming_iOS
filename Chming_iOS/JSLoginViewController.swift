@@ -1,25 +1,14 @@
 //
-//  CHResultFindViewController.swift
+//  JSLoginViewController.swift
 //  Chming_iOS
 //
-//  Created by CLEE on 09/08/2017.
-//  Copyright © 2017 leejaesung. All rights reserved.
+//  Created by leejaesung on 2017. 8. 16..
+//  Copyright © 2017년 leejaesung. All rights reserved.
 //
 
 import UIKit
 
-class CHFindResultViewController: UIViewController {
-    
-    // User Pw or Id를 찾고 SignInView로 보내는 버튼.
-    @IBAction func findFinishButtonAction(sender: UIButton) {
-        
-        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-        {
-            UIApplication.shared.keyWindow?.rootViewController = viewController
-            self.dismiss(animated: true, completion: nil)
-        }
-
-    }
+class JSLoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

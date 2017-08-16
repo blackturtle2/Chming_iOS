@@ -304,6 +304,7 @@
 		4CC95B031F3DA4E50095A2FF /* GSInterestCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */; };
 		4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */; };
 		4CC95B091F4303A40095A2FF /* GSCategoryHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */; };
+		714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B308E1F4188A400013E56 /* CHDataCenter.swift */; };
 		715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */; };
 		715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */; };
 		715C4DEA1F3AE7A700194C9E /* CHUserFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */; };
@@ -312,10 +313,13 @@
 		715C4DF01F3AF09B00194C9E /* CHFindResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */; };
 		71BC18911F380D4800A742F2 /* CHSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
+		FE026B611F3D807E00EF3140 /* JSGroupBoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */; };
+		FE0D7CC81F419D6400D27EAE /* JSGroupBoardContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */; };
 		FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */; };
+		FE3C3F641F44174800416DEA /* JSLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C3F631F44174800416DEA /* JSLoginViewController.swift */; };
+		FE3C3F661F44175400416DEA /* JSRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C3F651F44175400416DEA /* JSRegisterViewController.swift */; };
 		FE53B0D31F39A25C0010D663 /* JSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */; };
 		FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */; };
-		FE53B0D71F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D61F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift */; };
 		FE53B0D91F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0D81F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift */; };
 		FE53B0DB1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE53B0DA1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift */; };
 		FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */; };
@@ -329,7 +333,6 @@
 		FEDACE9D1F346620004826B8 /* JSGroupBoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */; };
 		FEDACEA21F349154004826B8 /* JSGroupInfoMainImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA11F349154004826B8 /* JSGroupInfoMainImageCell.swift */; };
 		FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA31F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift */; };
-		FEDACEA71F356B03004826B8 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FEDACEA61F356B03004826B8 /* Location.gpx */; };
 		FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */; };
 		FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F991F2F181F00BF61AB /* AppDelegate.swift */; };
 		FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE33F9B1F2F181F00BF61AB /* MainViewController.swift */; };
@@ -639,6 +642,7 @@
 		4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSInterestCell.swift; sourceTree = "<group>"; };
 		4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCategoryHeaderReusableView.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		714B308E1F4188A400013E56 /* CHDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHDataCenter.swift; sourceTree = "<group>"; };
 		715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindInfoViewController.swift; sourceTree = "<group>"; };
 		715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserLocationViewController.swift; sourceTree = "<group>"; };
 		715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserFavoriteViewController.swift; sourceTree = "<group>"; };
@@ -649,10 +653,13 @@
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCommentCell.swift; sourceTree = "<group>"; };
+		FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardContentsCell.swift; sourceTree = "<group>"; };
 		FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardCell.swift; sourceTree = "<group>"; };
+		FE3C3F631F44174800416DEA /* JSLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSLoginViewController.swift; sourceTree = "<group>"; };
+		FE3C3F651F44175400416DEA /* JSRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSRegisterViewController.swift; sourceTree = "<group>"; };
 		FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDataCenter.swift; sourceTree = "<group>"; };
 		FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoMainTextCell.swift; sourceTree = "<group>"; };
-		FE53B0D61F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoJoinLikeGroupCell.swift; sourceTree = "<group>"; };
 		FE53B0D81F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoNoticeListCell.swift; sourceTree = "<group>"; };
 		FE53B0DA1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoMemberListCell.swift; sourceTree = "<group>"; };
 		FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCreateGroupViewController.swift; sourceTree = "<group>"; };
@@ -666,7 +673,6 @@
 		FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardDetailViewController.swift; sourceTree = "<group>"; };
 		FEDACEA11F349154004826B8 /* JSGroupInfoMainImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupInfoMainImageCell.swift; sourceTree = "<group>"; };
 		FEDACEA31F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
-		FEDACEA61F356B03004826B8 /* Location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSGroupBoardPostingViewController.swift; sourceTree = "<group>"; };
 		FEE33F961F2F181F00BF61AB /* Chming_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chming_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE33F991F2F181F00BF61AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1093,6 +1099,7 @@
 				715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */,
 				715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */,
 				715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */,
+				714B308E1F4188A400013E56 /* CHDataCenter.swift */,
 			);
 			name = CH;
 			sourceTree = "<group>";
@@ -1103,7 +1110,6 @@
 				FEDACE671F31C74C004826B8 /* JSGroupInfoViewController.swift */,
 				FEDACEA11F349154004826B8 /* JSGroupInfoMainImageCell.swift */,
 				FE53B0D41F39B0250010D663 /* JSGroupInfoMainTextCell.swift */,
-				FE53B0D61F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift */,
 				FE53B0D81F39B05C0010D663 /* JSGroupInfoNoticeListCell.swift */,
 				FE53B0DA1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift */,
 			);
@@ -1116,6 +1122,8 @@
 				FEDACE981F344F08004826B8 /* JSGroupBoardViewController.swift */,
 				FE206CA01F3AD4AD0019FA13 /* JSGroupBoardCell.swift */,
 				FEDACE9C1F346620004826B8 /* JSGroupBoardDetailViewController.swift */,
+				FE0D7CC71F419D6400D27EAE /* JSGroupBoardContentsCell.swift */,
+				FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */,
 				FEDACEA81F35D39A004826B8 /* JSGroupBoardPostingViewController.swift */,
 			);
 			name = JSGroupBoard;
@@ -1151,7 +1159,6 @@
 		FEE33F981F2F181F00BF61AB /* Chming_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				FEDACEA61F356B03004826B8 /* Location.gpx */,
 				FEE33FA01F2F181F00BF61AB /* Assets.xcassets */,
 				FEE33FA21F2F181F00BF61AB /* LaunchScreen.storyboard */,
 				FEE33FAC1F30449700BF61AB /* MainStoryboard.storyboard */,
@@ -1173,6 +1180,8 @@
 			isa = PBXGroup;
 			children = (
 				FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */,
+				FE3C3F631F44174800416DEA /* JSLoginViewController.swift */,
+				FE3C3F651F44175400416DEA /* JSRegisterViewController.swift */,
 				FE53B0D21F39A25C0010D663 /* JSDataCenter.swift */,
 				FEDACE5E1F31C6B8004826B8 /* JSTempMainViewController.swift */,
 				FEDACE5B1F31C6B8004826B8 /* JSCreateGroupViewController.swift */,
@@ -1220,6 +1229,7 @@
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PV38XQ6LPC;
+						DevelopmentTeam = 29Q45PKR77;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1503,7 +1513,6 @@
 				4CB147731F30607500F8A32B /* navtree.css in Resources */,
 				4CB147FB1F30607500F8A32B /* variables_5.html in Resources */,
 				4CB1478F1F30607500F8A32B /* all_3.js in Resources */,
-				FEDACEA71F356B03004826B8 /* Location.gpx in Resources */,
 				4CB1472C1F30607500F8A32B /* _m_t_map_p_o_i_item_8h_source.html in Resources */,
 				4CB147281F30607500F8A32B /* _m_t_map_location_marker_item_8h.html in Resources */,
 				4CB1478C1F30607500F8A32B /* all_2.html in Resources */,
@@ -1560,15 +1569,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -1603,14 +1618,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */,
+				FE0D7CC81F419D6400D27EAE /* JSGroupBoardContentsCell.swift in Sources */,
+				FE3C3F661F44175400416DEA /* JSRegisterViewController.swift in Sources */,
 				715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */,
+				FE3C3F641F44174800416DEA /* JSLoginViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */,
 				4CC95B031F3DA4E50095A2FF /* GSInterestCategoryViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
 				FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */,
 				FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */,
-				FE53B0D71F39B04F0010D663 /* JSGroupInfoJoinLikeGroupCell.swift in Sources */,
 				FEE33F9A1F2F181F00BF61AB /* AppDelegate.swift in Sources */,
 				715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */,
 				4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */,
@@ -1631,6 +1648,7 @@
 				715C4DEE1F3AEDF200194C9E /* CHUserInfoEditViewController.swift in Sources */,
 				715C4DF01F3AF09B00194C9E /* CHFindResultViewController.swift in Sources */,
 				FEDACE621F31C6B8004826B8 /* JSTempMainViewController.swift in Sources */,
+				FE026B611F3D807E00EF3140 /* JSGroupBoardCommentCell.swift in Sources */,
 				FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */,
 				FE53B0DB1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift in Sources */,
 				4CC95B091F4303A40095A2FF /* GSCategoryHeaderReusableView.swift in Sources */,
@@ -1639,6 +1657,7 @@
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 				FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */,
 				FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */,
+				714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1767,6 +1786,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				DEVELOPMENT_TEAM = 29Q45PKR77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1791,6 +1811,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				DEVELOPMENT_TEAM = 29Q45PKR77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

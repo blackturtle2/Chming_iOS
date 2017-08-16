@@ -10,7 +10,7 @@ import UIKit
 
 class JSGroupInfoNoticeListCell: UITableViewCell {
     
-    var noticePK:Int?
+    var boardPK:Int?
     
     @IBOutlet var labelTitle:UILabel!
     @IBOutlet var labelContent:UILabel!
