@@ -9,6 +9,7 @@
 import Foundation
 
 let userDefaultsPk:String = "userPK"
+let userDefaultsToken:String = "userToken"
 
 enum Gender:String {
     case man
