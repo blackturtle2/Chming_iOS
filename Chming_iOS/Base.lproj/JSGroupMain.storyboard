@@ -852,7 +852,7 @@
         <!--Login View Controller-->
         <scene sceneID="VKb-1b-TkZ">
             <objects>
-                <viewController id="obM-zG-v4g" customClass="JSLoginViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSLoginViewController" id="obM-zG-v4g" customClass="JSLoginViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Liq-ML-JvA"/>
                         <viewControllerLayoutGuide type="bottom" id="P9P-0v-CZh"/>
@@ -879,6 +879,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRS-Np-hJB">
                                         <rect key="frame" x="0.0" y="80" width="375" height="30"/>
                                         <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="buttonLoginAction:" destination="obM-zG-v4g" eventType="touchUpInside" id="bDU-JL-hWc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0C-Uu-L7j">
                                         <rect key="frame" x="0.0" y="120" width="375" height="30"/>
@@ -903,7 +906,17 @@
                             <constraint firstItem="pa6-l5-sQj" firstAttribute="centerY" secondItem="CbM-3T-HVc" secondAttribute="centerY" id="rTH-jl-8Fo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="QLZ-UM-X1l"/>
+                    <navigationItem key="navigationItem" id="QLZ-UM-X1l">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="lLs-rZ-vqx">
+                            <connections>
+                                <action selector="buttonCloseAction:" destination="obM-zG-v4g" id="0gF-gX-Apz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textFieldEmail" destination="2Um-o1-wqX" id="wxL-FP-DGh"/>
+                        <outlet property="textFieldPassword" destination="GcP-A9-zTd" id="VQG-2x-D9z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUP-H9-l3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -912,7 +925,7 @@
         <!--Register View Controller-->
         <scene sceneID="cNU-Kr-7zv">
             <objects>
-                <viewController id="C2I-d8-iAz" customClass="JSRegisterViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSRegisterViewController" id="C2I-d8-iAz" customClass="JSRegisterViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xaP-YK-Xc4"/>
                         <viewControllerLayoutGuide type="bottom" id="zEY-PP-WQy"/>
@@ -1001,9 +1014,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKk-GV-wgc">
                                 <rect key="frame" x="313" y="90" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="invalid"/>
+                                <state key="normal" title="isvalid"/>
                                 <connections>
-                                    <action selector="buttonEmailInvalidAction:" destination="C2I-d8-iAz" eventType="touchUpInside" id="W55-jJ-ebC"/>
+                                    <action selector="buttonEmailIsvalidAction:" destination="C2I-d8-iAz" eventType="touchUpInside" id="Up8-Dp-opS"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2R-OL-nUU">
