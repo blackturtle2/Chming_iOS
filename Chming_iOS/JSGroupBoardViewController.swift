@@ -107,6 +107,7 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "noticeListCell", for: indexPath) as! JSGroupInfoNoticeListCell
             
             guard let vNoticeList = self.noticeList else { return resultCell }
+            resultCell.boardPK = vNoticeList[indexPath.row].boardPK
             resultCell.labelTitle.text = vNoticeList[indexPath.row].title
             resultCell.labelContent.text = vNoticeList[indexPath.row].content
             
@@ -116,43 +117,49 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "groupBoardCell", for: indexPath) as! JSGroupBoardCell
             
             guard let vCommonList = self.commonList else { return resultCell }
+            resultCell.boardPK = vCommonList[indexPath.row].boardPK
             resultCell.labelWriterName.text = vCommonList[indexPath.row].writerName
             resultCell.labelPostingDate.text = String(describing: vCommonList[indexPath.row].createdDate)
             resultCell.labelTitle.text = vCommonList[indexPath.row].title
             resultCell.labelTextContent.text = vCommonList[indexPath.row].content
             
             // 프로필 사진 출력
-            guard let vWriterProfileImageURL = vCommonList[indexPath.row].writerProfileImageURL else { return resultCell }
-            if let realProfileImageURL = URL(string:vWriterProfileImageURL) {
-                let task = URLSession.shared.dataTask(with: realProfileImageURL, completionHandler: { (data, res, error) in
-                    
-                    guard let realData = data else { return }
-                    DispatchQueue.main.async {
-                        resultCell.imageViewWriterProfile.image = UIImage(data: realData)
-                    }
-                    
-                })
-                task.resume()
+            DispatchQueue.global().async {
+                guard let vWriterProfileImageURL = vCommonList[indexPath.row].writerProfileImageURL else { return }
+                if let realProfileImageURL = URL(string:vWriterProfileImageURL) {
+                    let task = URLSession.shared.dataTask(with: realProfileImageURL, completionHandler: { (data, res, error) in
+                        
+                        guard let realData = data else { return }
+                        DispatchQueue.main.async {
+                            resultCell.imageViewWriterProfile.image = UIImage(data: realData)
+                        }
+                        
+                    })
+                    task.resume()
+                }
             }
             
-            guard let vImageURL = vCommonList[indexPath.row].imageURL else {
-                // 이미지가 없으면, constant를 0으로 줘서 cell의 height을 조절합니다.
-                resultCell.constraintImageViewHeight.constant = 0
-                return resultCell
+            // 본문 이미지 출력
+            DispatchQueue.global().async {
+                guard let vImageURL = vCommonList[indexPath.row].imageURL else {
+                    // 이미지가 없으면, constant를 0으로 줘서 cell의 height을 조절합니다.
+                    resultCell.constraintImageViewHeight.constant = 0
+                    return
+                }
+                if let realImageURL = URL(string: vImageURL) {
+                    let task = URLSession.shared.dataTask(with: realImageURL, completionHandler: { (data, res, error) in
+                        print("///// data 456: ", data ?? "no data")
+                        print("///// res 456: ", res ?? "no data")
+                        print("///// error 456: ", error ?? "no data")
+                        guard let realData = data else { return }
+                        DispatchQueue.main.async {
+                            resultCell.imageViewImageContent.image = UIImage(data: realData)
+                        }
+                    })
+                    task.resume()
+                }
+                resultCell.constraintImageViewHeight.constant = self.view.frame.width * 9 / 16
             }
-            if let realImageURL = URL(string: vImageURL) {
-                let task = URLSession.shared.dataTask(with: realImageURL, completionHandler: { (data, res, error) in
-                    print("///// data 456: ", data ?? "no data")
-                    print("///// res 456: ", res ?? "no data")
-                    print("///// error 456: ", error ?? "no data")
-                    guard let realData = data else { return }
-                    DispatchQueue.main.async {
-                        resultCell.imageViewImageContent.image = UIImage(data: realData)
-                    }
-                })
-                task.resume()
-            }
-            resultCell.constraintImageViewHeight.constant = self.view.frame.width * 9 / 16
             
             return resultCell
             
@@ -168,9 +175,22 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
 
         // 터치한 표시를 제거하는 액션
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
         
+        switch indexPath.section {
+        case 0: // notice cell
+            let selectedCell = tableView.cellForRow(at: indexPath) as! JSGroupInfoNoticeListCell
+            nextVC.boardPK = selectedCell.boardPK
+            
+        case 1: // common cell
+            let selectedCell = tableView.cellForRow(at: indexPath) as! JSGroupBoardCell
+            nextVC.boardPK = selectedCell.boardPK
+            
+        default: break
+            
+        }
         self.navigationController?.pushViewController(nextVC, animated: true)
+        
     }
 }

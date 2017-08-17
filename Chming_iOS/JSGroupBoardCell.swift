@@ -10,6 +10,8 @@ import UIKit
 
 class JSGroupBoardCell: UITableViewCell {
     
+    var boardPK:Int?
+    
     @IBOutlet var imageViewWriterProfile:UIImageView!
     @IBOutlet var labelWriterName:UILabel!
     @IBOutlet var labelPostingDate:UILabel!

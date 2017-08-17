@@ -48,13 +48,13 @@ struct JSGroupBoard {
 // MARK: 모임 게시판의 댓글 구조체
 // 배열로 감싸고 리턴 필요.
 struct JSGroupBoardComment {
-    let commnetPK: Int
+    let commentPK: Int
     let createdDate: Date
     
     let content: String
     
     let writerPK: Int
-    let writer: String
+    let writerName: String
 }
 
 
@@ -110,7 +110,7 @@ class JSDataCenter {
         return resultArray
     }
     
-    // MARK: 모임 게시판 데이터 메소드
+    // MARK: 모임 게시판 리스트 데이터 메소드
     func findGroupBoardList(ofGroupPK: Int) -> [JSGroupBoard] {
         let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: Date(), isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
         let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: Date(), isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: "http://pm1.narvii.com/6388/1d2f5d9672a126ca93bbda8c87dba1835e9a013a_hq.jpg", writerPK: 3, writerName: "이창호", writerProfileImageURL: "http://cfile27.uf.tistory.com/image/266F773758FF10A81B5B49")
@@ -119,4 +119,44 @@ class JSDataCenter {
         
         return resultArray
     }
+    
+    // MARK: 모임 게시판 디테일 데이터 메소드
+    func findBoardData(ofBoardPK: Int) -> JSGroupBoard {
+        
+        switch ofBoardPK {
+        case 0:
+            let myGroupNoticeList1 = JSGroupBoard(boardPK: 0, createdDate: Date(), isNotice: true, title: "첫번째 공지사항입니다.", content: "공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: nil, writerPK: 1, writerName: "이재성", writerProfileImageURL: nil)
+            return myGroupNoticeList1
+        case 1:
+            let myGroupNoticeList2 = JSGroupBoard(boardPK: 1, createdDate: Date(), isNotice: true, title: "두번째 공지사항입니다.", content: "두번째 공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: nil, writerPK: 1, writerName: "이재성", writerProfileImageURL: nil)
+            return myGroupNoticeList2
+        case 2:
+            let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: Date(), isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
+            return myGroupList1
+        case 3:
+            let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: Date(), isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D\n안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: "http://pm1.narvii.com/6388/1d2f5d9672a126ca93bbda8c87dba1835e9a013a_hq.jpg", writerPK: 3, writerName: "이창호", writerProfileImageURL: "http://cfile27.uf.tistory.com/image/266F773758FF10A81B5B49")
+            return myGroupList2
+            
+        default:
+            let tempGroupList = JSGroupBoard(boardPK: 2, createdDate: Date(), isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
+            
+            return tempGroupList
+        }
+    }
+    
+    // MARK: 사용자 프로필 이미지 URL 가져오는 메소드
+    func findUserProfileImageURL(ofUserPK: Int) -> URL? {
+        let resultString = "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431"
+        
+        return URL(string: resultString)
+    }
+    
+    // MARK: 댓글 리스트 가져오는 메소드
+    func findCommentList(ofBoardPK: Int) -> [JSGroupBoardComment] {
+        let resultCommentList1 = JSGroupBoardComment(commentPK: 0, createdDate: Date(), content: "댓글 테스트입니다.", writerPK: 0, writerName: "이재성")
+        let resultCommentList2 = JSGroupBoardComment(commentPK: 0, createdDate: Date(), content: "댓글 테스트입니다.", writerPK: 0, writerName: "이재성")
+        
+        return [resultCommentList1, resultCommentList2]
+    }
+    
 }
