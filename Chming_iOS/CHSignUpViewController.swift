@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import Firebase
 
 class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -17,6 +18,7 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     @IBOutlet var backGroundImg: UIImageView!
 
+    @IBOutlet var emailCheckBtn: UIButton!
     @IBOutlet var photoBtn: UIButton!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var nameTextField: UITextField!
@@ -24,26 +26,71 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     @IBOutlet var passwordCheckTextField: UITextField!
     
     @IBOutlet var genderSegment: UISegmentedControl!
-    @IBOutlet var birthDayPicker: UIDatePicker!
+    @IBOutlet var registerBirthDayBtn: UIButton!
+    @IBOutlet var registerLocationBtn: UIButton!
+    @IBOutlet var registerFavoriteBtn: UIButton!
+    
+    @IBOutlet var signUpOutlet: UIButton!
+    
     
     // 성별 선택하기 Segment.
+    // 디자인파트는 성능 테스트 후 삭제를 할 수 있음.
     @IBAction func genderSegmentAction(_ sender: UISegmentedControl) {
+        
+        let segAttributes: NSDictionary = [
+            NSForegroundColorAttributeName: UIColor.white
+        ]
+
+        let btnBundles = [registerBirthDayBtn, registerFavoriteBtn, registerLocationBtn]
         
         switch genderSegment.selectedSegmentIndex {
         case 0:
+            
+            genderSegment.tintColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5)
+            genderSegment.layer.borderColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5).cgColor
+            genderSegment.setTitleTextAttributes(segAttributes as [NSObject : AnyObject], for: UIControlState.selected)
+            
+            photoBtn.setTitleColor(#colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5), for: .normal)
+            photoBtn.layer.borderColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5).cgColor
+            
+            for btn in btnBundles {
+                btn?.tintColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5)
+                btn?.layer.borderColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5).cgColor
+                btn?.setTitleColor(#colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 1), for: .normal)
+            }
+            
             print("남자")
+            
         case 1:
+            genderSegment.tintColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5)
+            genderSegment.layer.borderColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5).cgColor
+            genderSegment.setTitleTextAttributes(segAttributes as [NSObject : AnyObject], for: UIControlState.selected)
+            
+            photoBtn.setTitleColor(#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5), for: .normal)
+            photoBtn.layer.borderColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5).cgColor
+            
+            for btn in btnBundles {
+                btn?.tintColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5)
+                btn?.layer.borderColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5).cgColor
+                btn?.setTitleColor(#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 1), for: .normal)
+            }
+            
             print("여자")
+            
         default:
             break
             
         }
+
+
     }
     
     // 생년월일 선택하기 DayPicker.
-    @IBAction func birthDayPickerAction(_ sender: UIDatePicker) {
+    @IBAction func birthDayPickerAction(_ sender: UIButton) {
         
     }
+    
+    
     
     // 회원가입 진행 버튼.
     @IBAction func registerAccount(sender:UIButton) {
@@ -52,7 +99,6 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     // 프로필 이미지 등록
     @IBAction func photoActionButton(sender:UIButton) {
-        
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
@@ -77,16 +123,25 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
 //MARK: App Cycle////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.title = ""
+//        nameTextField.becomeFirstResponder()
         
-        self.title = "Sign Up"
-        //        nameTextField.becomeFirstResponder()
         
         nameTextField.shapesForSignUp()
-        emailTextField.shapesForSignUp()
+        emailTextField.roundedButton(corners: [.topLeft, .bottomLeft], radius: emailTextField.frame.height / 2)
+        emailCheckBtn.roundedButton(corners: [.topRight, .bottomRight], radius: emailCheckBtn.frame.height / 2)
         passwordTextField.shapesForSignUp()
         passwordCheckTextField.shapesForSignUp()
-        genderSegment.shapesForSignUp()
+        genderSegment.shapesCustomizing()
         photoBtn.shapesForSignUpProfileImg()
+        
+        registerBirthDayBtn.shapesForRegisterBtnAtSignUp()
+        registerLocationBtn.shapesForRegisterBtnAtSignUp()
+        registerFavoriteBtn.shapesForRegisterBtnAtSignUp()
+        
+        signUpOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        signUpOutlet.cornerRadius()
         
         print(genderSegment.selectedSegmentIndex)
         
@@ -97,6 +152,15 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 //MARK: Methods//////////////////
     // 추후에 DataCenter에 넣어야 할 회원가입 메소드.
@@ -149,6 +213,7 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         //스토리지 데이터베이스 시작!
     }
     
+    
     // 이미지 피커!
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("info: ",info) // UIImagePickerControllerOriginalImage를 사용하는 것으로 파악.
@@ -162,6 +227,7 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         self.dismiss(animated: true, completion: nil)
     }
 
+    
     // 뷰 올리기
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.scrollView.setContentOffset(CGPoint(x: 0.0, y: 100.0), animated:true)
@@ -199,6 +265,10 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         return true
         
     }
+    
+    
+    
+
 
     
 }
