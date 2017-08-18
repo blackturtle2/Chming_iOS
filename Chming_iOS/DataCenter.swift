@@ -10,6 +10,7 @@ import Foundation
 
 let userDefaultsPk:String = "userPK"
 let userDefaultsToken:String = "userToken"
+let rootDomain:String = "http://chming.jeongmyeonghyeon.com"
 
 enum Gender:String {
     case man

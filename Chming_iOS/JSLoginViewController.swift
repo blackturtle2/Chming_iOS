@@ -62,7 +62,7 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
         let param: [String:String] = ["email" : email, "password" : password]
 //        let param: [String:String] = ["email" : "t_jaesung1@gmail.com", "password" : "123456"]
         
-        Alamofire.request("http://chming.jeongmyeonghyeon.com/api/user/login/", method: .post, parameters: param, headers: nil).responseJSON { (response) in
+        Alamofire.request(rootDomain + "/api/user/login/", method: .post, parameters: param, headers: nil).responseJSON { (response) in
             
             switch response.result {
             case .success(let value):
