@@ -301,6 +301,9 @@
 		4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */; };
 		4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */; };
 		4CC0D9801F3B04AF003BF493 /* CHSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97F1F3B04AF003BF493 /* CHSignInViewController.swift */; };
+		4CC95B031F3DA4E50095A2FF /* GSInterestCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */; };
+		4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */; };
+		4CC95B091F4303A40095A2FF /* GSCategoryHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */; };
 		714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B308E1F4188A400013E56 /* CHDataCenter.swift */; };
 		714B30921F45B2E000013E56 /* PolarBear.mov in Resources */ = {isa = PBXBuildFile; fileRef = 714B30911F45B2E000013E56 /* PolarBear.mov */; };
 		714B30941F45B51400013E56 /* CHPlaygroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */; };
@@ -637,6 +640,9 @@
 		4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SeoulLocation.gpx; sourceTree = "<group>"; };
 		4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSScrollAreaView.swift; sourceTree = "<group>"; };
 		4CC0D97F1F3B04AF003BF493 /* CHSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSignInViewController.swift; sourceTree = "<group>"; };
+		4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSInterestCategoryViewController.swift; sourceTree = "<group>"; };
+		4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSInterestCell.swift; sourceTree = "<group>"; };
+		4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCategoryHeaderReusableView.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		714B308E1F4188A400013E56 /* CHDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHDataCenter.swift; sourceTree = "<group>"; };
 		714B30911F45B2E000013E56 /* PolarBear.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PolarBear.mov; sourceTree = "<group>"; };
@@ -717,7 +723,10 @@
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
+				4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */,
 				4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */,
+				4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */,
+				4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */,
 				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
 				4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */,
 				4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */,
@@ -1233,7 +1242,7 @@
 				TargetAttributes = {
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 29Q45PKR77;
+						DevelopmentTeam = PV38XQ6LPC;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1580,6 +1589,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1590,6 +1600,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1628,6 +1639,8 @@
 				715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */,
 				FE3C3F641F44174800416DEA /* JSLoginViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
+				4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */,
+				4CC95B031F3DA4E50095A2FF /* GSInterestCategoryViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
 				FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */,
 				FEDACE991F344F08004826B8 /* JSGroupBoardViewController.swift in Sources */,
@@ -1655,6 +1668,7 @@
 				FE026B611F3D807E00EF3140 /* JSGroupBoardCommentCell.swift in Sources */,
 				FEDACE9B1F344F37004826B8 /* JSGroupGalleryViewController.swift in Sources */,
 				FE53B0DB1F39B06A0010D663 /* JSGroupInfoMemberListCell.swift in Sources */,
+				4CC95B091F4303A40095A2FF /* GSCategoryHeaderReusableView.swift in Sources */,
 				4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */,
 				4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */,
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
@@ -1788,7 +1802,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1812,7 +1826,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
