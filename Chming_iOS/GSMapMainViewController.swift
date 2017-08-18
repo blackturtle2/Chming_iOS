@@ -403,10 +403,26 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     }
     
     
-    
-    @IBAction func backBtnTouched(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func groupCreateBtnTouched(_ sender: UIButton) {
+
+        let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSCreateGroupViewController") as! JSCreateGroupViewController
+        let navigation = UINavigationController(rootViewController: nextVC)
+        self.present(navigation, animated: true, completion: nil)
+        
+        
     }
+    
+    @IBAction func loginStateBtnTouched(_ sender: UIButton) {
+        if UserDefaults.standard.value(forKey: userDefaultsToken) == nil {
+            let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSLoginViewController") as! JSLoginViewController
+            self.present(nextVC, animated: true, completion: nil)
+        }
+        // else 일때 로그아웃 수행 - 작성예정 -0818
+    }
+    
+    
     
     // 정렬버튼
     @IBAction func filterBtnTouched(_ sender: UIButton){
