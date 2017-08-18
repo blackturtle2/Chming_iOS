@@ -21,7 +21,10 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var uiViewTouchHideKeyboard: UIView!
     
-    
+    @IBOutlet var datePickerBirth: UIDatePicker!
+    @IBOutlet var uiViewOfBirthDatePicker: UIView!
+
+    // 화면의 남는 공간을 아무 곳이나 터치하면, 키보드 숨기기.
     @IBAction func tabToHideKeyboard(_ sender: UITapGestureRecognizer) {
         textFieldEmail.resignFirstResponder()
         textFieldUserName.resignFirstResponder()
@@ -30,8 +33,14 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
         textFieldUserName.resignFirstResponder()
     }
     
+    // 이메일 중복체크 눌렀는지 여부 확인.
     var checkEmailValidate: Bool = false
     
+    // 생년월일 기록용.
+    var datePickerData: Date?
+    var birthYear: String?
+    var birthMonth: String?
+    var birthDay: String?
     
     /*******************************************/
     // MARK: -  Life Cycle                     //
@@ -93,25 +102,84 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    /******************************/
+    // MARK: -  프로필 이미지 Logic   //
+    /******************************/
+    
     @IBAction func buttonProfileImage(_ sender: UIButton) {
         
     }
     
     
+    /***************************/
+    // MARK: -  생년월일 Logic    //
+    /***************************/
+    
+    // 생년월일 버튼 액션 정의.
     @IBAction func buttonBirthAction(_ sender: UIButton) {
+//        self.datePickerBirth.backgroundColor = .white
+        self.uiViewOfBirthDatePicker.isHidden = false // DatePicker와 취소-확인 버튼까지 있는 UIView.
+    }
+    
+    // datePicker 값 변화 트랙킹.
+    @IBAction func datePickerBirthValueChanged(_ sender: UIDatePicker) {
+        
+        self.datePickerData = sender.date
         
     }
     
+    // DatePicker 확인 버튼 액션 정의.
+    @IBAction func buttonBirthDatePickerConfirm(_ sender: UIButton) {
+        
+        let dateFormatter = DateFormatter()
+        //        dateFormatter.dateStyle = DateFormatter.Style.medium
+        //        dateFormatter.timeStyle = DateFormatter.Style.none
+        //        // result --> 2017. 8. 19.
+        
+        guard let birthDate = self.datePickerData else { return }
+        dateFormatter.dateFormat = "yyyy"
+        print("yyyy", dateFormatter.string(from: birthDate))
+        self.birthYear = dateFormatter.string(from: birthDate)
+        
+        dateFormatter.dateFormat = "MM"
+        print("MM", dateFormatter.string(from: birthDate))
+        self.birthMonth = dateFormatter.string(from: birthDate)
+        
+        dateFormatter.dateFormat = "dd"
+        print("dd", dateFormatter.string(from: birthDate))
+        self.birthDay = dateFormatter.string(from: birthDate)
+        
+        self.uiViewOfBirthDatePicker.isHidden = true
+    }
+    
+    // DatePicker 취소 버튼 액션 정의.
+    @IBAction func buttonBirthDatePickerCancel(_ sender: UIButton) {
+        self.uiViewOfBirthDatePicker.isHidden = true
+    }
+    
+    
+    
+    /***************************/
+    // MARK: -  위치등록 Logic    //
+    /***************************/
     
     @IBAction func buttonLocationAction(_ sender: UIButton) {
         
     }
     
     
+    /**************************/
+    // MARK: -  관심사 Logic    //
+    /**************************/
+    
     @IBAction func buttonHobbyAction(_ sender: UIButton) {
         
     }
     
+    
+    /***************************/
+    // MARK: -  완료 버튼 Logic   //
+    /***************************/
     
     @IBAction func buttonCompleteAction(_ sender: UIButton) {
         if textFieldEmail.text == "" {
@@ -131,23 +199,10 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let paramTest: [String:Any] = ["email" : "t_jaesung2@gmail.com",
-                                      "password" : "123456",
-                                      "confirm_password" : "123456",
-                                      "username" : "테스트재성",
-                                      "profile_img" : "",
-                                      "gender" : "m",
-                                      "birth_year" : 1988,
-                                      "birth_month" : 10,
-                                      "birth_day" : 19,
-                                      "hobby" : "축구",
-                                      "address" : "대한민국 서울특별시 영등포구 여의도동",
-                                      "lat" : 37.5285730,
-                                      "lng" : 126.9289740 ]
-        
         guard let userEmail = textFieldEmail.text else { return }
         guard let userPassword = textFieldPassword.text else { return }
         guard let userName = textFieldUserName.text else { return }
+        
         let userGender: String!
         switch segmentGender.selectedSegmentIndex {
         case 0:
@@ -158,15 +213,19 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
             userGender = "m"
         }
         
+        guard let birthYear = self.birthYear else { return }
+        guard let birthMonth = self.birthMonth else { return }
+        guard let birthDay = self.birthDay else { return }
+        
         let param: [String:Any] = ["email" : userEmail,
                                    "password" : userPassword,
                                    "confirm_password" : userPassword,
                                    "username" : userName,
                                    "profile_img" : "",
                                    "gender" : userGender,
-                                   "birth_year" : 1988,
-                                   "birth_month" : 10,
-                                   "birth_day" : 19,
+                                   "birth_year" : birthYear,
+                                   "birth_month" : birthMonth,
+                                   "birth_day" : birthDay,
                                    "hobby" : "축구",
                                    "address" : "대한민국 서울특별시 영등포구 여의도동",
                                    "lat" : 37.5285730,
@@ -183,15 +242,15 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
                 let json = JSON(value)
                 
                 let usernameIssue = json["username"][0].stringValue
-                print("///// usernameIssue: ", usernameIssue)
                 if usernameIssue == "user with this username already exists." {
+                    print("///// usernameIssue: ", usernameIssue)
                     Toast(text: "중복되는 회원 이름입니다.\n이름을 다시 입력해주세요.").show()
                     return
                 }
                 
-                let result = json["pk"].stringValue
-                
-                print("///// result: ", result)
+                let resultPK = json["pk"].stringValue
+                Toast(text: "회원가입 되었습니다. :D").show()
+                print("///// resultPK: ", resultPK)
                 
             case .failure(let err):
                 print("///// error: ", err)
