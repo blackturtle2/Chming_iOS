@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 class CHSignInViewController: UIViewController, UITextFieldDelegate {
 
@@ -42,7 +43,12 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
         emailTextField.shapesForSignIn()
         passwordTextField.shapesForSignIn()
         
-        signInOutlet.shapesForSignIn()
+        signInOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        signInOutlet.cornerRadius()
+        
+        // background AV
+        self.setupVideoBackground()
+        videoURL = Bundle.main.url(forResource: "PolarBear", withExtension: "mov")! as NSURL
         
     }
     
@@ -146,6 +152,54 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
             
         }
         
+    }
+    
+    // 하늘이형 제공.
+    public var videoURL: NSURL? {
+        didSet {
+            setupVideoBackground()
+        }
+    }
+    
+    // 로그인 페이지 백그라운드 설정
+    func setupVideoBackground() {
+        
+        var theURL = NSURL()
+        if let url = videoURL {
+            
+            let shade = UIView(frame: self.view.frame)
+            shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+            view.addSubview(shade)
+            view.sendSubview(toBack: shade)
+            
+            theURL = url
+            
+            var avPlayer = AVPlayer()
+            avPlayer = AVPlayer(url: theURL as URL)
+            let avPlayerLayer = AVPlayerLayer(player: avPlayer)
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            avPlayer.volume = 0
+            avPlayer.actionAtItemEnd = AVPlayerActionAtItemEnd.none
+            
+            avPlayerLayer.frame = view.layer.bounds
+            
+            let layer = UIView(frame: self.view.frame)
+            view.backgroundColor = UIColor.clear
+            view.layer.insertSublayer(avPlayerLayer, at: 0)
+            view.addSubview(layer)
+            view.sendSubview(toBack: layer)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
+            
+            avPlayer.play()
+        }
+    }
+    
+    func playerItemDidReachEnd(notification: NSNotification) {
+        
+        if let p = notification.object as? AVPlayerItem {
+            p.seek(to: kCMTimeZero)
+        }
     }
     
 }
