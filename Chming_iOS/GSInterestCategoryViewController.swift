@@ -127,16 +127,19 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
     }
+
     
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! GSInterestCell
-        cell.backgroundColor = .gray
-        if selectIndexPathArr.contains(indexPath){
-            let indexInt = selectIndexPathArr.index(of: indexPath)
-            print(indexInt)
-            selectIndexPathArr.remove(at: indexInt!)
-        }
-    }
+    // didHighlightItemAt - 지정한 인덱스 경로의 항목이 강조 표시되었음을 델리게이트에 알립니다
+//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+//        print("지정한 인덱스 경로의 항목이 강조 표시되었음을 델리게이트에 알립니다.\(indexPath)")
+//        let cell = collectionView.cellForItem(at: indexPath) as! GSInterestCell
+//        cell.backgroundColor = .gray
+//        if selectIndexPathArr.contains(indexPath){
+//            let indexInt = selectIndexPathArr.index(of: indexPath)
+//            print(indexInt)
+//            selectIndexPathArr.remove(at: indexInt!)
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
@@ -144,12 +147,17 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
         print("didUnhighlightItemAt \(indexPath)")
     }
   
-    
+    // didDeselectItemAt - 지정한 패스의 항목의 선택이 해제 된 것을 위양에 통지합니다
     // 4-b. -collectionView:didDeselectItemAtIndexPath: 다른 item을 Select하면서 원래 선택된 item이 Deselect 됩니다.
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("didDeselectItemAt \(indexPath)")
-        
+        print("지정한 패스의 항목의 선택이 해제 된 것을 위양에 통지합니다.\(indexPath)")
         collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray
+        if selectIndexPathArr.contains(indexPath){
+            let indexInt = selectIndexPathArr.index(of: indexPath)
+            print(indexInt)
+            selectIndexPathArr.remove(at: indexInt!)
+        }
     }
    
     @IBAction func searchBtnTouched(_ sender: UIButton){
@@ -162,7 +170,7 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
         print("관심사 총 데이터://", categoryListArry)
         
         self.dismiss(animated: true) { 
-            self.categoryDelegate?.selectCategory(categoryList: ["축구"])
+            self.categoryDelegate?.selectCategory(categoryList: categoryListArry)
         }
         
     }
