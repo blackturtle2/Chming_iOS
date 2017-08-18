@@ -73,7 +73,7 @@
                                         <rect key="frame" x="0.0" y="247.5" width="375" height="30"/>
                                         <state key="normal" title="JSLogin_test"/>
                                         <connections>
-                                            <segue destination="AsL-cI-ktP" kind="presentation" id="bt1-8E-pGB"/>
+                                            <segue destination="obM-zG-v4g" kind="presentation" id="aMm-8n-UNt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -898,6 +898,14 @@
                                     <constraint firstItem="GcP-A9-zTd" firstAttribute="width" secondItem="pa6-l5-sQj" secondAttribute="width" id="edG-8w-C3s"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnx-p6-seH">
+                                <rect key="frame" x="20" y="28" width="39" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="buttonCloseAction:" destination="obM-zG-v4g" eventType="touchUpInside" id="cNf-60-SOn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -907,11 +915,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QLZ-UM-X1l">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="lLs-rZ-vqx">
-                            <connections>
-                                <action selector="buttonCloseAction:" destination="obM-zG-v4g" id="0gF-gX-Apz"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="lLs-rZ-vqx"/>
                     </navigationItem>
                     <connections>
                         <outlet property="textFieldEmail" destination="2Um-o1-wqX" id="wxL-FP-DGh"/>
@@ -1384,24 +1388,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40b-f9-0Ob" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4488.8000000000002" y="841.52923538230891"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="THr-Ay-6f7">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AsL-cI-ktP" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Jp-ny-OOf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="obM-zG-v4g" kind="relationship" relationship="rootViewController" id="7Q1-hT-tx1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yJk-bQ-Jyo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="872.79999999999995" y="1088.9055472263869"/>
         </scene>
     </scenes>
     <resources>
