@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSimpleGroupInfoView" customModule="Chming_iOS" customModuleProvider="target">
             <connections>
                 <outlet property="groupImgView" destination="BFL-W9-qRs" id="AUy-8D-iT2"/>
+                <outlet property="groupIndex" destination="Z2g-CC-yf2" id="P6Q-7E-EjI"/>
                 <outlet property="groupNameLable" destination="tyL-Fa-Ydb" id="vPH-Ri-htZ"/>
                 <outlet property="groupSimpleInfo" destination="Sww-Ll-fcf" id="HQH-gH-E3I"/>
             </connections>
@@ -30,14 +31,28 @@
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="f4j-mB-Ge0">
-                    <rect key="frame" x="137" y="0.0" width="208" height="55"/>
+                    <rect key="frame" x="137" y="5" width="208" height="55"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모임명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyL-Fa-Ydb">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="kcp-et-Zhv">
                             <rect key="frame" x="0.0" y="0.0" width="208" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2g-CC-yf2">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="xgz-x3-Bm5"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모임명" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyL-Fa-Ydb">
+                                    <rect key="frame" x="23" y="0.0" width="185" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="간단 모임 소개" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sww-Ll-fcf">
                             <rect key="frame" x="0.0" y="34.5" width="208" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -53,7 +68,7 @@
                 <constraint firstItem="f4j-mB-Ge0" firstAttribute="leading" secondItem="BFL-W9-qRs" secondAttribute="trailing" constant="19.5" id="0uS-Wb-oj8"/>
                 <constraint firstAttribute="trailing" secondItem="f4j-mB-Ge0" secondAttribute="trailing" constant="30" id="2N4-Em-zWh"/>
                 <constraint firstItem="BFL-W9-qRs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="5dM-9L-Ghv"/>
-                <constraint firstItem="f4j-mB-Ge0" firstAttribute="top" secondItem="BFL-W9-qRs" secondAttribute="top" id="opm-O2-E2z"/>
+                <constraint firstItem="f4j-mB-Ge0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="V6G-iG-roB"/>
                 <constraint firstItem="BFL-W9-qRs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qnM-aD-oXy"/>
                 <constraint firstItem="BFL-W9-qRs" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.3" id="ynU-uJ-Ngt"/>
             </constraints>
