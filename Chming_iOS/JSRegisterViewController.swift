@@ -11,8 +11,9 @@ import Alamofire
 import Toaster
 import SwiftyJSON
 
-class JSRegisterViewController: UIViewController, UITextFieldDelegate {
+class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet var buttonProfileImage: UIButton!
     @IBOutlet var textFieldEmail: UITextField!
     @IBOutlet var textFieldPassword: UITextField!
     @IBOutlet var textFieldPasswordConfirm: UITextField!
@@ -68,6 +69,25 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
     // MARK: -  Logic                          //
     /*******************************************/
     
+    // MARK: -  프로필 이미지 Logic.
+    @IBAction func buttonProfileImage(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    // imagePickerController Delegate.
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("///// info: ", info)
+        guard let image = info["UIImagePickerControllerEditedImage"] as? UIImage else { return }
+        self.buttonProfileImage.setBackgroundImage(image, for: .normal)
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    
     // MARK: 이메일 중복체크 버튼 액션 정의.
     @IBAction func buttonEmailIsvalidAction(_ sender: UIButton) {
         
@@ -99,15 +119,6 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
                 print("///// error: ", err)
             }
         }
-    }
-    
-    
-    /******************************/
-    // MARK: -  프로필 이미지 Logic   //
-    /******************************/
-    
-    @IBAction func buttonProfileImage(_ sender: UIButton) {
-        
     }
     
     
@@ -196,6 +207,9 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate {
             return
         } else if textFieldUserName.text == "" {
             Toast(text: "이름을 입력해주세요.").show()
+            return
+        } else if self.birthYear == nil {
+            Toast(text: "생년월일을 입력해주세요.").show()
             return
         }
         

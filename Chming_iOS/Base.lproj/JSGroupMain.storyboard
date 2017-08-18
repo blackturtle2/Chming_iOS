@@ -1091,6 +1091,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonProfileImage" destination="Gjm-qi-qh7" id="yIs-lR-MnR"/>
                         <outlet property="datePickerBirth" destination="61f-C8-BIP" id="TfB-mt-HSc"/>
                         <outlet property="segmentGender" destination="Mla-30-ksM" id="e3k-oR-v7P"/>
                         <outlet property="textFieldEmail" destination="L8X-lg-lvI" id="4Iy-ZP-GzC"/>
