@@ -8,10 +8,12 @@
 
 import Foundation
 
-let userDefaultsPk:String = "userPK"
-let userDefaultsToken:String = "userToken"
+let userDefaultsPk: String = "userPK"
+let userDefaultsToken: String = "userToken"
+let userDefaultsHobby: String = "userHobby"
+let rootDomain: String = "http://chming.jeongmyeonghyeon.com"
 
-enum Gender:String {
+enum Gender: String {
     case man
     case woman
 }
