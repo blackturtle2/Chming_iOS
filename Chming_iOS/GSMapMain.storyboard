@@ -148,15 +148,15 @@
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHn-jR-d2q">
-                                <rect key="frame" x="0.0" y="575" width="375" height="82"/>
+                                <rect key="frame" x="0.0" y="550" width="375" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-kx-Csa" userLabel="Scroll Area View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="SXd-kx-Csa" firstAttribute="leading" secondItem="CHn-jR-d2q" secondAttribute="leading" id="EgP-rS-uPS"/>
-                                    <constraint firstAttribute="height" constant="82" id="Fhl-b1-k6m"/>
+                                    <constraint firstAttribute="height" constant="100" id="Fhl-b1-k6m"/>
                                     <constraint firstItem="SXd-kx-Csa" firstAttribute="height" secondItem="CHn-jR-d2q" secondAttribute="height" id="Sdo-Q8-uT0"/>
                                     <constraint firstItem="SXd-kx-Csa" firstAttribute="width" secondItem="CHn-jR-d2q" secondAttribute="width" id="V87-oJ-UuE"/>
                                     <constraint firstAttribute="bottom" secondItem="SXd-kx-Csa" secondAttribute="bottom" id="aYF-uQ-rlN"/>
@@ -186,7 +186,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="CHn-jR-d2q" secondAttribute="trailing" id="9Of-CU-rKW"/>
-                            <constraint firstItem="CHn-jR-d2q" firstAttribute="top" secondItem="awv-oE-pBo" secondAttribute="bottom" constant="555" id="AZo-lK-VIC"/>
+                            <constraint firstItem="CHn-jR-d2q" firstAttribute="top" secondItem="awv-oE-pBo" secondAttribute="bottom" constant="530" id="AZo-lK-VIC"/>
                             <constraint firstItem="CHn-jR-d2q" firstAttribute="leading" secondItem="IRN-sW-Rie" secondAttribute="leading" id="RlC-nr-XNK"/>
                         </constraints>
                     </view>
@@ -373,7 +373,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GKs-ta-Ovc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gam-BZ-fXg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gam-BZ-fXg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

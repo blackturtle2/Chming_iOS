@@ -304,7 +304,7 @@
 		4CC95B031F3DA4E50095A2FF /* GSInterestCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */; };
 		4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */; };
 		4CC95B091F4303A40095A2FF /* GSCategoryHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */; };
-		714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B308E1F4188A400013E56 /* CHDataCenter.swift */; };
+		714B308F1F4188A500013E56 /* CHDesginCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B308E1F4188A400013E56 /* CHDesginCenter.swift */; };
 		714B30921F45B2E000013E56 /* PolarBear.mov in Resources */ = {isa = PBXBuildFile; fileRef = 714B30911F45B2E000013E56 /* PolarBear.mov */; };
 		714B30941F45B51400013E56 /* CHPlaygroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */; };
 		715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */; };
@@ -644,7 +644,7 @@
 		4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSInterestCell.swift; sourceTree = "<group>"; };
 		4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCategoryHeaderReusableView.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		714B308E1F4188A400013E56 /* CHDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHDataCenter.swift; sourceTree = "<group>"; };
+		714B308E1F4188A400013E56 /* CHDesginCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHDesginCenter.swift; sourceTree = "<group>"; };
 		714B30911F45B2E000013E56 /* PolarBear.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PolarBear.mov; sourceTree = "<group>"; };
 		714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHPlaygroundViewController.swift; sourceTree = "<group>"; };
 		715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindInfoViewController.swift; sourceTree = "<group>"; };
@@ -1112,7 +1112,7 @@
 				715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */,
 				715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */,
 				715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */,
-				714B308E1F4188A400013E56 /* CHDataCenter.swift */,
+				714B308E1F4188A400013E56 /* CHDesginCenter.swift */,
 				714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */,
 			);
 			name = CH;
@@ -1589,7 +1589,6 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1600,7 +1599,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1674,7 +1672,7 @@
 				4CB148301F30607500F8A32B /* OpenSourceNotice.md in Sources */,
 				FE53B0D51F39B0250010D663 /* JSGroupInfoMainTextCell.swift in Sources */,
 				FE206CA11F3AD4AD0019FA13 /* JSGroupBoardCell.swift in Sources */,
-				714B308F1F4188A500013E56 /* CHDataCenter.swift in Sources */,
+				714B308F1F4188A500013E56 /* CHDesginCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

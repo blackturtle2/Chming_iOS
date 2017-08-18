@@ -59,12 +59,18 @@ class GSSimpleGroupInfoView: UIView {
 //        }.resume(
         let simpleInfoViewFromNib: UIView = Bundle.main.loadNibNamed("GSSimpleGroupInfo", owner: self, options: nil)!.first as! UIView
         
-        self.groupImgView.contentMode = .scaleAspectFit
+        // commentByCH: 안될경우 aspectFill로 변경해서 코드로 재생.
+//        self.groupImgView.contentMode = .scaleAspectFit 
+        
         self.groupNameLable.text = groupName
         self.groupSimpleInfo.text = groupSimpleInfo
         self.groupIndex.text = groupIndex
-        simpleInfoViewFromNib.frame = self.bounds
         
+        self.layer.cornerRadius = 12
+        self.clipsToBounds = true
+        
+        
+        simpleInfoViewFromNib.frame = self.bounds
         
         self.addSubview(simpleInfoViewFromNib)
     }

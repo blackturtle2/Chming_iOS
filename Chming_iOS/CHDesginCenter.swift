@@ -8,6 +8,62 @@
 
 import UIKit
 
+extension UIViewController
+{
+    // Any Int value you want the views to be identified
+    enum blurViewEnum: Int { case ID = -999 }
+    
+    func BlurExtraLight(imgView: UIImageView)
+    {
+        Blur(imgView: imgView, effectType: UIBlurEffectStyle.extraLight)
+    }
+    
+    func BlurLight(imgView: UIImageView)
+    {
+        Blur(imgView: imgView, effectType: UIBlurEffectStyle.light)
+    }
+    
+    func BlurDark(imgView: UIImageView)
+    {
+        Blur(imgView: imgView, effectType: UIBlurEffectStyle.dark)
+    }
+    
+    func BlurReset()
+    {
+        for v in view.subviews
+        {
+            if (v.tag == blurViewEnum.ID.rawValue)
+            {
+                v.removeFromSuperview()
+            }
+        }
+    }
+    
+    func Blur(imgView: UIImageView, effectType: UIBlurEffectStyle)
+    {
+        if !UIAccessibilityIsReduceTransparencyEnabled()
+        {
+            let effect = UIBlurEffect(style: effectType)
+            let effectView = UIVisualEffectView(effect: effect)
+            
+            // Identify these created views with a tag for future reset
+            effectView.tag = blurViewEnum.ID.rawValue
+            
+            // if you want the whole view to be blurred,
+            // use view.bounds instead
+            effectView.frame = imgView.bounds
+            
+            view.addSubview(effectView)
+        }
+        else
+        {
+            self.view.backgroundColor = UIColor.black
+        }
+    }
+}
+
+
+
 extension UITextField {
     
     func shapesForSignIn(){
@@ -122,6 +178,13 @@ extension UIButton {
     }
 
 
+}
+
+extension UIImageView {
+    func customShaping() {
+        self.layer.cornerRadius = self.frame.height / 2
+        self.clipsToBounds = true
+    }
 }
 
 extension UISegmentedControl {
