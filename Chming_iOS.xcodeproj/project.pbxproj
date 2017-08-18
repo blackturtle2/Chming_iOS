@@ -313,6 +313,7 @@
 		715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */; };
 		715C4DEE1F3AEDF200194C9E /* CHUserInfoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */; };
 		715C4DF01F3AF09B00194C9E /* CHFindResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */; };
+		71A72CE21F46E3BE008C9C4C /* CHLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A72CE11F46E3BE008C9C4C /* CHLaunchViewController.swift */; };
 		71BC18911F380D4800A742F2 /* CHSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
 		FE026B611F3D807E00EF3140 /* JSGroupBoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE026B601F3D807E00EF3140 /* JSGroupBoardCommentCell.swift */; };
@@ -653,6 +654,7 @@
 		715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserInfoViewController.swift; sourceTree = "<group>"; };
 		715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserInfoEditViewController.swift; sourceTree = "<group>"; };
 		715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindResultViewController.swift; sourceTree = "<group>"; };
+		71A72CE11F46E3BE008C9C4C /* CHLaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHLaunchViewController.swift; sourceTree = "<group>"; };
 		71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSignUpViewController.swift; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
 		BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chming_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1114,6 +1116,7 @@
 				715C4DE91F3AE7A700194C9E /* CHUserFavoriteViewController.swift */,
 				714B308E1F4188A400013E56 /* CHDesginCenter.swift */,
 				714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */,
+				71A72CE11F46E3BE008C9C4C /* CHLaunchViewController.swift */,
 			);
 			name = CH;
 			sourceTree = "<group>";
@@ -1646,6 +1649,7 @@
 				715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */,
 				4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */,
 				FEDACE5F1F31C6B8004826B8 /* JSCreateGroupViewController.swift in Sources */,
+				71A72CE21F46E3BE008C9C4C /* CHLaunchViewController.swift in Sources */,
 				715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */,
 				FEDACEA21F349154004826B8 /* JSGroupInfoMainImageCell.swift in Sources */,
 				4CC0D9801F3B04AF003BF493 /* CHSignInViewController.swift in Sources */,
