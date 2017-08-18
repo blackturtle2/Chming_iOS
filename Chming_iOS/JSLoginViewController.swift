@@ -73,14 +73,19 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
                 
                 let userToken = json["token"].stringValue
                 let userPK = json["login_user_info"]["pk"].stringValue
+                let userHobby = json["login_user_info"]["hobby"].arrayValue.map({ (json) -> String in
+                    return json.stringValue
+                })
                 
                 if userToken != "" {
                     UserDefaults.standard.set(userToken, forKey: userDefaultsToken) // Token을 UserDefaults에 저장.
                     UserDefaults.standard.set(userPK, forKey: userDefaultsPk) // UserPK를 UserDefaults에 저장.
+                    UserDefaults.standard.set(userHobby, forKey: userDefaultsHobby) // UserHobby를 UserDefaults에 저장.
                     
                     // UserDefaults 정상 저장 확인 위한 print
                     print("///// UserDefaults Token: ", UserDefaults.standard.string(forKey: userDefaultsToken) ?? "no data")
                     print("///// UserDefaults PK: ", UserDefaults.standard.string(forKey: userDefaultsPk) ?? "no data")
+                    print("///// UserDefaults Hobby: ", UserDefaults.standard.array(forKey: userDefaultsHobby) ?? "no data")
                     
                     Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
                     
