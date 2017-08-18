@@ -341,7 +341,6 @@
 		FEE33F9F1F2F181F00BF61AB /* JSGroupMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33F9D1F2F181F00BF61AB /* JSGroupMain.storyboard */; };
 		FEE33FA11F2F181F00BF61AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE33FA01F2F181F00BF61AB /* Assets.xcassets */; };
 		FEE33FA41F2F181F00BF61AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33FA21F2F181F00BF61AB /* LaunchScreen.storyboard */; };
-		FEE33FAD1F30449700BF61AB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE33FAC1F30449700BF61AB /* MainStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -685,7 +684,6 @@
 		FEE33FA01F2F181F00BF61AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEE33FA31F2F181F00BF61AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEE33FA51F2F181F00BF61AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FEE33FAC1F30449700BF61AB /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1175,7 +1173,6 @@
 			children = (
 				FEE33FA01F2F181F00BF61AB /* Assets.xcassets */,
 				FEE33FA21F2F181F00BF61AB /* LaunchScreen.storyboard */,
-				FEE33FAC1F30449700BF61AB /* MainStoryboard.storyboard */,
 				4CB1484B1F3064E900F8A32B /* Chming_iOS-Bridging-Header.h */,
 				FEDACE651F31C6D0004826B8 /* DataCenter.swift */,
 				71E4D5E61F304C0C00FD0F61 /* CH */,
@@ -1530,7 +1527,6 @@
 				4CB1472C1F30607500F8A32B /* _m_t_map_p_o_i_item_8h_source.html in Resources */,
 				4CB147281F30607500F8A32B /* _m_t_map_location_marker_item_8h.html in Resources */,
 				4CB1478C1F30607500F8A32B /* all_2.html in Resources */,
-				FEE33FAD1F30449700BF61AB /* MainStoryboard.storyboard in Resources */,
 				4CB147211F30607500F8A32B /* _m_t_map_camera_update_8h.html in Resources */,
 				4CB147851F30607500F8A32B /* all_10.js in Resources */,
 				4CB147CA1F30607500F8A32B /* functions_d.js in Resources */,

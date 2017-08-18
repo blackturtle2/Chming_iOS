@@ -10,59 +10,6 @@
     </dependencies>
     <scenes>
         <!--Map Main View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="GSMapMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RlI-B3-0NU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
-                                <color key="backgroundColor" red="1" green="0.573755758" blue="0.14108950949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="FUq-YD-M8q"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2S-9L-OtJ">
-                                <rect key="frame" x="0.0" y="62" width="375" height="49"/>
-                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="0.81240110759493667" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="bax-Ak-OzV"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5T-LC-exG" customClass="MTMapView">
-                                <rect key="frame" x="0.0" y="111" width="375" height="556"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="g5T-LC-exG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4d1-C1-G8D"/>
-                            <constraint firstItem="g5T-LC-exG" firstAttribute="top" secondItem="V2S-9L-OtJ" secondAttribute="bottom" id="6Mb-yt-MZl"/>
-                            <constraint firstItem="V2S-9L-OtJ" firstAttribute="trailing" secondItem="RlI-B3-0NU" secondAttribute="trailing" id="9Fr-p5-nvx"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="g5T-LC-exG" secondAttribute="bottom" id="9vk-3o-yXM"/>
-                            <constraint firstItem="V2S-9L-OtJ" firstAttribute="leading" secondItem="RlI-B3-0NU" secondAttribute="leading" id="Bhu-mL-a85"/>
-                            <constraint firstAttribute="trailing" secondItem="g5T-LC-exG" secondAttribute="trailing" id="D9Z-Zh-KhG"/>
-                            <constraint firstItem="RlI-B3-0NU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TmS-57-ute"/>
-                            <constraint firstItem="V2S-9L-OtJ" firstAttribute="top" secondItem="RlI-B3-0NU" secondAttribute="bottom" id="k5E-r3-eww"/>
-                            <constraint firstItem="RlI-B3-0NU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nGL-2l-0Qh"/>
-                            <constraint firstAttribute="trailing" secondItem="RlI-B3-0NU" secondAttribute="trailing" id="scb-ke-Ngr"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="mapView" destination="g5T-LC-exG" id="KNc-Cl-3hz"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="529" y="-153"/>
-        </scene>
-        <!--Map Main View Controller-->
         <scene sceneID="rgE-lk-oE7">
             <objects>
                 <viewController id="bWq-15-WfU" customClass="GSMapMainViewController" customModule="Chming_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,20 +26,23 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0A-QT-LHs">
-                                        <rect key="frame" x="324" y="13" width="39" height="30"/>
+                                        <rect key="frame" x="325" y="13" width="39" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="햄버거">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axv-Tj-OYm">
-                                        <rect key="frame" x="267" y="13" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="검색">
+                                        <state key="normal" title="로그인">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="GKs-ta-Ovc" kind="presentation" id="62g-GX-jz9"/>
+                                            <action selector="loginStateBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="Hvw-9N-Pfu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axv-Tj-OYm">
+                                        <rect key="frame" x="254" y="13" width="56" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="모임 생성">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="groupCreateBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="ZEO-f4-3CX"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="지금 보고있는 지역" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfF-6Z-Lod">
@@ -170,16 +120,6 @@
                                 <state key="normal" title="내위치로"/>
                                 <connections>
                                     <action selector="myLocationBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="Pze-XZ-ryi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ph-xj-aVj">
-                                <rect key="frame" x="10" y="120" width="63" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="뒤로가기">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="backBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="MuC-Jo-bek"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -373,7 +313,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GKs-ta-Ovc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gam-BZ-fXg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gam-BZ-fXg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
