@@ -632,7 +632,7 @@ class GSDataCenter{
                     categoryData.append(GSCateogrySortingList(category: category, hobbyListArr: hobbyListJSON.arrayValue))
                 }
                 print("CATEGORY Data://", categoryData)
-                print(categoryData[1])
+                
 
                 
                 completion(categoryData)
