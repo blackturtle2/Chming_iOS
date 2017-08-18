@@ -8,20 +8,130 @@
 
 import Foundation
 import Firebase
+import Alamofire
+import SwiftyJSON
 
-struct GSGroupOne {
-    let groupPK:Int
-    let latitude:Double
-    let longitude:Double
-    // latitude: 위도, longitude: 경도
+struct GSGroupUser{
+    let userPK: Int
+    let profileImg: String?
+    let userName: String
     
+    init(authorJson: [String : JSON]) {
+        print("STRUCT authorJson://", authorJson)
+        self.userPK = authorJson["pk"]?.intValue ?? 0
+        self.profileImg = authorJson["profile_img"]?.string
+        self.userName = authorJson["username"]?.stringValue ?? ""
+    }
+}
+struct GSGroupOne {
+    let groupPK: Int
+    let groupHobby: String
+    let latitude: Double
+    let longitude: Double
+    // latitude: 위도, longitude: 경도
+
+    init(stringJSON: (String,JSON)) {
+        self.groupPK = stringJSON.1["pk"].intValue
+        self.groupHobby = stringJSON.1["hobby"].stringValue
+        self.latitude = stringJSON.1["lat"].doubleValue
+        self.longitude = stringJSON.1["lng"].doubleValue
+    }
+    
+}
+struct GSGroupDetail {
+    let groupPK: Int
+    let hobby: [JSON]
+    let groupName: String
+    let image: String?
+    let description: String
+    let address: String
+    let lat: Double
+    let lng: Double
+    let author: GSGroupUser
+    let memberCount: Int
+    
+    init(jsonData: JSON) {
+        
+        self.groupPK = jsonData["pk"].intValue
+        self.hobby = jsonData["hobby"].arrayValue
+        self.groupName = jsonData["name"].stringValue
+        self.image = jsonData["image"].string
+        self.description = jsonData["description"].stringValue
+        self.address = jsonData["address"].stringValue
+        self.lat = jsonData["lat"].doubleValue
+        self.lng = jsonData["lng"].doubleValue
+        self.author = GSGroupUser(authorJson: jsonData["author"].dictionaryValue)
+        self.memberCount = jsonData["member_count"].intValue
+        
+    }
+}
+struct GSGroupList {
+//    let interestCategory: eInterestCategory
+//    let interest: eInterest
+    let groupOne: [GSGroupOne]
+    
+    init(groups: JSON) {
+//        self.groupOne = [GSGroupOne(groupJson: groups)]
+        var groupList: [GSGroupOne] = []
+        for group in groups{
+            let groupOne = GSGroupOne(stringJSON: group)
+            groupList.append(groupOne)
+            
+        }
+        self.groupOne = groupList
+    }
+}
+
+struct GSHobby {
+    let hobbyPK: Int
+    let category: String
+    let categoryDetail: String
+    
+    init(hobbyListJSON: JSON) {
+        self.hobbyPK = hobbyListJSON["pk"].intValue
+        self.category = hobbyListJSON["category"].stringValue
+        self.categoryDetail = hobbyListJSON["category_detail"].stringValue
+    }
+}
+
+struct GSSortHobbyList {
+    let hobbySport: [GSHobby]
+    let hobbyLanguage: [GSHobby]
+    let hobbyMusic: [GSHobby]
+    
+    init(hobbyListJSON: JSON) {
+        var allHobbyArry: [GSHobby] = []
+        for hobby in hobbyListJSON.arrayValue{
+            allHobbyArry.append(GSHobby(hobbyListJSON: hobby))
+        }
+        self.hobbySport = allHobbyArry.filter({ (hobby) -> Bool in
+            hobby.category == "운동/스포츠"
+        })
+        self.hobbyLanguage = allHobbyArry.filter({ (hobby) -> Bool in
+            hobby.category == "외국/언어"
+        })
+        self.hobbyMusic = allHobbyArry.filter({ (hobby) -> Bool in
+            hobby.category == "음악/악기"
+        })
+    }
     
     
 }
-struct GSGroupList {
-    let interestCategory: eInterestCategory
-    let interest: eInterest
-    let groupOne: [GSGroupOne]
+
+struct GSCateogrySortingList{
+    let category: String
+    let sortingData: [GSHobby]
+    
+    init(category: String, hobbyListArr: [JSON]) {
+        var hobbyData: [GSHobby] = []
+        for hobby in hobbyListArr{
+            if hobby["category"].stringValue == category{
+                hobbyData.append(GSHobby(hobbyListJSON: hobby))
+            }
+        }
+        self.category = category
+        self.sortingData = hobbyData
+    }
     
 }
 
@@ -110,6 +220,12 @@ class GSDataCenter{
 
         
                                 ]
+    
+    
+    // 불필요 삭제예정-0817
+    var groupListJSON: JSON = JSON.init(rawValue: [])!
+    var groupDetailJSON: JSON = JSON.init(rawValue: [])!
+    var hobbyListArr: [JSON] = []
     private init(){}
     
     // 좌표값을 파라미터, 관심사 를 받아서 주변 모임리스트를 리턴
@@ -130,13 +246,13 @@ class GSDataCenter{
             
         })
         //
-        var group = GSGroupOne(groupPK: 1, latitude: 1, longitude: 1)
-        complition(group)
+        //var group = GSGroupOne(groupPK: 1, latitude: 1, longitude: 1)
+        //complition(group)
         
         
     }
     
-    // 지역선택시 선택지역 정보리턴
+    // 임시데이터 - 지역선택시 선택지역 정보리턴
     func selectLocalMapPoint(local: String) -> [String:Any] {
         print("선택 지역://", local)
         var localInfoDic: [String:Any] = [:]
@@ -334,6 +450,8 @@ class GSDataCenter{
         )
     }
     
+    
+    // MARK: - Firebase 기반 조회 메서드 부분
     func groupInfoLoad(local:String, interestKey: String, groupPK: String, complition: @escaping ([String:Any]) ->Void){
         // 먼저 좌표값을 가지고 파베 기준으로 주소형태로 변환
         print("로컬://", local)
@@ -348,10 +466,178 @@ class GSDataCenter{
             
             complition(groupListDict)
         })
+    }
+    
+    // MARK: - API통신xAlamfire
+    func getLoadGroupMapList(token: String, latitude: Double?, longtitude: Double?, hobby: [String]?, completion: @escaping (GSGroupList)->Void){
+        let headerInfo: HTTPHeaders = [
+            "Authorization":token
+        ]
+        
+        var parameter: Parameters = Parameters()
+//        if hobby?.count == 0{
+//             parameter = [
+//                "lat":latitude,
+//                "lng":longtitude
+//            ]
+//        }else{
+//            let hobbyes: String = ""
+//            for hobbyStr in hobby!{
+//                
+//                hobbyes.appending(hobbyStr)
+//                
+//            }
+//            parameter = [
+//                "lat":latitude,
+//                "lng":longtitude
+//            ]
+//        }
+        
+        guard let hobbyList = hobby, let lat = latitude, let lng = longtitude else { return}
+        switch hobbyList.count {
+        case 0:
+            print("")
+            parameter = [
+                "lat":lat,
+                "lng":lng
+            ]
+        case 1:
+            print("")
+            parameter = [
+                "lat":lat,
+                "lng":lng,
+                "hobby":hobbyList.first!
+            ]
+        default:
+            print("")
+            var hobbyStr = ""
+            for hobbyIndex in 0...hobbyList.count-1{
+                if hobbyIndex != hobbyList.count-1{
+                    hobbyStr.append("\(hobbyList[hobbyIndex]),")
+                }else{
+                    hobbyStr.append("\(hobbyList[hobbyIndex])")
+                }
+            }
+            parameter = [
+                "lat":lat,
+                "lng":lng,
+                "hobby":hobbyStr
+            ]
+        }
+        
+        print("데이터센터-현재 위도 경도://",latitude,"/",longtitude)
+        Alamofire.request(
+            URL(string: "http://chming.jeongmyeonghyeon.com/api/group/")!,
+            method: .get,
+            parameters: parameter, headers: headerInfo)
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Error while fetching remote rooms: \(response.result.error)")
+                    return
+                }
+                let json = JSON(response.value)
+                self.groupListJSON = json
+                print("데이터센터-현재  groupListJSON://",self.groupListJSON)
+                var groups: [GSGroupOne] = []
+//                for data in self.groupListJSON {
+//                    print("",data)
+//                    print("Data:// ",data.1["pk"].stringValue)
+//                    let groupOne = GSGroupOne(groupPK: data.1["pk"].intValue, groupHobby: data.1["hobby"].stringValue, latitude: data.1["lat"].doubleValue, longitude: data.1["lng"].doubleValue)
+//                    print(groupOne)
+//                    groups.append(groupOne)
+//                    
+//                    
+//                }
+                let groupList = GSGroupList(groups: self.groupListJSON)
+                print("데이터센터-현재  Struct GROUPLIST://",groupList)
+                completion(groupList)
+        }
+    }
+    
+    func getGroupDetail(groupPK: Int, completion:@escaping (GSGroupDetail)->Void){
+       
+        
+        Alamofire.request(
+            URL(string: "http://chming.jeongmyeonghyeon.com/api/group/\(groupPK)")!,
+            method: .get)
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Error while fetching remote rooms: \(response.result.error)")
+                    return
+                }
+                let json = JSON(response.value)
+                self.groupDetailJSON = json
+                print("GROUPDETAIL INFO:// ",self.groupDetailJSON)
+                print(self.groupDetailJSON["name"])
+                
+                let groupDetail = GSGroupDetail(jsonData: self.groupDetailJSON)
+                print("GSGROUPDETAIL://",groupDetail)
+//                for data in self.dataJSON {
+//                    print("Data:// ",data.1["pk"].stringValue)
+//                    let groupOne = GSGroupOne(groupPK: data.1["pk"].intValue, groupHobby: data.1["hobby"].stringValue, latitude: data.1["lat"].doubleValue, longitude: data.1["lng"].doubleValue)
+//                    print(groupOne)
+//                    groups.append(groupOne)
+//                }
+//                let groupList = GSGroupList(groupOne: groups)
+                completion(groupDetail)
+        }
+    }
+    
+    func getCategoryHobbyList(completion:@escaping ([GSCateogrySortingList])->Void){
+        Alamofire.request(
+            URL(string: "http://chming.jeongmyeonghyeon.com/api/group/hobby/")!,
+            method: .get)
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Error while fetching remote rooms: \(response.result.error)")
+                    return
+                }
+                let json = JSON(response.value)
+                let hobbyListJSON = json
+                print("getHobbyList INFO:// ", hobbyListJSON)
+//________________________TEST___________________
+//                let hobbySortingList = GSSortHobbyList(hobbyListJSON: hobbyListJSON)
+//                
+//                
+//                let hobbyListArr = hobbyListJSON.arrayValue
+//                
+//
+//                print("HOBBY ARR://",hobbyListArr)
+//                
+//                
+//                print("HOBBY sortHobbyDic://", hobbySortingList)
+//________________________TEST___________________
+                
+                // array map을 쓰면 줄일수 잇을것 같다 -  Set으로 구현하였으나 순서가 없어서 보류중
+//                var categorySet: Set<String> = []
+//                let categoryArray = hobbyListJSON.arrayValue.map({ (hobbyJson) -> String in
+//                    return hobbyJson["category"].stringValue
+//                })
+//                categorySet = Set(categoryArray)
+//               
+//                print("categorySet://",categorySet)
+//                print("categorySet://",categorySet)
+//                print("categorySet://",categorySet)
+                
+                var categoryArr: [String] = []
+                for hobby in hobbyListJSON.arrayValue{
+                    let cateogry = hobby["category"].stringValue
+                    if categoryArr.contains(cateogry) == false{
+                        categoryArr.append(cateogry)
+                    }
+                }
+                
+                var categoryData: [GSCateogrySortingList] = []
+                for category in categoryArr {
+                    categoryData.append(GSCateogrySortingList(category: category, hobbyListArr: hobbyListJSON.arrayValue))
+                }
+                print("CATEGORY Data://", categoryData)
+                print(categoryData[1])
 
-        
-        
-        
+                
+                completion(categoryData)
+        }
+
     }
 
 }

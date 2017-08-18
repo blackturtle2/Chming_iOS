@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class GSInterestCategoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -21,13 +22,26 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
                                         ["pk":7,"category":"외국어/언어", "categoryDetail":"영어"],
                                         ["pk":8,"category":"외국어/언어", "categoryDetail":"불어"]
                                    ]
-    var categoryDelegate: GSCategoryProtocol?
     
+    var categorySortListArray:[GSCateogrySortingList] = []
+    var categoryDelegate: GSCategoryProtocol?
+    var selectCategory: [[String]] = []
+    var deatail: [String] = []
+    
+    
+    var selectIndexPathArr: [IndexPath] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         interestCollectionView.delegate = self
         interestCollectionView.dataSource = self
-
+        interestCollectionView.allowsMultipleSelection = true
+        
+    
+        
+        GSDataCenter.shared.getCategoryHobbyList { (categorySortListArr) in
+            self.categorySortListArray = categorySortListArr
+            self.interestCollectionView.reloadData()
+        }
         // Do any additional setup after loading the view.
         
         // 서버에서 하비리스트를 가져온다 - Alomfire로 변경
@@ -53,26 +67,26 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return categorySortListArray.count
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "categoryHeader", for: indexPath) as! GSCategoryHeaderReusableView
         
         print("뷰 포 서플리멘트리.\(indexPath)")
-        header.categoryNameLabel.text = "YOUR_HEADER_TEXT"
+        header.categoryNameLabel.text = categorySortListArray[indexPath.section].category
+        
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("섹션:\(section)")
-        return testData.count
+        
+        return categorySortListArray[section].sortingData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InterestCell", for: indexPath) as! GSInterestCell
-        cell.interestNameLabel.text = testData[indexPath.item]["categoryDetail"] as! String
-        
-//        cell.backgroundColor = .red
+        cell.interestNameLabel.text = categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail
+        //        cell.backgroundColor = .red
         print("cell  호출")
         
         return cell
@@ -80,23 +94,48 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 선택한 값들을 가지고 맵에 관심모임정보 조회해야한다.
-        print(testData[indexPath.item]["categoryDetail"])
-        print("didSelectItemAt \(indexPath)")
+        deatail = [ ]
         
+        print("didSelectItemAt \(indexPath)")
+        let selectItemCategory = categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail
+        print("selectItemCategory://",selectItemCategory)
+        
+        let selectCell = collectionView.cellForItem(at: indexPath) as! GSInterestCell
+        let selectCategoryName = selectCell.interestNameLabel.text!
+        
+        print("selectCategoryName://",selectCategoryName)
+        print("##://", collectionView.cellForItem(at: indexPath)?.backgroundColor)
         if collectionView.cellForItem(at: indexPath)?.backgroundColor == UIColor.blue {
             collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.clear
+            print("######",selectIndexPathArr)
+            if selectIndexPathArr.contains(indexPath){
+                let indexInt = selectIndexPathArr.index(of: indexPath)
+                print(indexInt)
+                selectIndexPathArr.remove(at: indexInt!)
+            }
         }else {
             collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.blue
+//      selectCategory.append(categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail)
+            
+            if !selectIndexPathArr.contains(indexPath) {
+                 selectIndexPathArr.append(indexPath)
+            }
+
         }
-        
+        print("상세 선택셀 데이터://",selectIndexPathArr)
     }
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = .gray
+        let cell = collectionView.cellForItem(at: indexPath) as! GSInterestCell
+        cell.backgroundColor = .gray
+        if selectIndexPathArr.contains(indexPath){
+            let indexInt = selectIndexPathArr.index(of: indexPath)
+            print(indexInt)
+            selectIndexPathArr.remove(at: indexInt!)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
@@ -116,6 +155,12 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
     @IBAction func searchBtnTouched(_ sender: UIButton){
         // 현재 선택된 관심정보 리스트를 리턴해준다.
         // GSMapMainViewController viewAppear 부분에 관심사에 해당하는 값을 전달해줘야한다.
+        
+        let categoryListArry = selectIndexPathArr.map { (indexpath) -> String in
+            self.categorySortListArray[indexpath.section].sortingData[indexpath.item].categoryDetail
+        }
+        print("관심사 총 데이터://", categoryListArry)
+        
         self.dismiss(animated: true) { 
             self.categoryDelegate?.selectCategory(categoryList: ["축구"])
         }

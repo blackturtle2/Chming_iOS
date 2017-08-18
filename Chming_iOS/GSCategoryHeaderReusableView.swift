@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class GSCategoryHeaderReusableView: UICollectionReusableView {
     @IBOutlet var categoryNameLabel: UILabel!
         
