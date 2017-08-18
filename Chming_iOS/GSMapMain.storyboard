@@ -135,6 +135,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="infoScrollView" destination="CHn-jR-d2q" id="7dl-os-95O"/>
+                        <outlet property="logtinStateBtnOutlet" destination="k0A-QT-LHs" id="r0C-tG-QIk"/>
                         <outlet property="mapView" destination="xUk-Wa-WST" id="1r9-oW-4Ga"/>
                         <outlet property="scrollAreaView" destination="SXd-kx-Csa" id="98z-WR-k6I"/>
                         <outlet property="scrollAreaWidthConstraints" destination="V87-oJ-UuE" id="HmX-fr-1k8"/>

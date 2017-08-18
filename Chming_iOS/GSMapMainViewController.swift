@@ -24,18 +24,19 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     var userToken: String?
     var loginUserHobbyList: [String]?
+    var loadCurrentMapPoint: MTMapPoint?
     
     // ############################ IBOulet #######################################//
     // MARK: - IBOulet
     @IBOutlet weak var mapView: MTMapView!
-    var loadCurrentMapPoint: MTMapPoint?
     
     @IBOutlet weak var infoScrollView: UIScrollView!
     @IBOutlet weak var scrollAreaView: UIView!
     
     
-    @IBOutlet var scrollAreaWidthConstraints: NSLayoutConstraint!
+    @IBOutlet weak var scrollAreaWidthConstraints: NSLayoutConstraint!
     
+    @IBOutlet weak var logtinStateBtnOutlet: UIButton!
     
     
     // ############################ Initialize #######################################//
@@ -294,8 +295,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
 //            
 //        }
         self.loadGroupListInfo(loadMapPoint: mapCenterPoint, hobbyList: [])
-        // 최초 로그인상태여부 확인 - viewdidload에서 확인할것(UsderDefault에서 pk , 토큰여부로 ㅁ판단
-        // 비로그인이면 현위치 주변의 그룹정보 
+        
         
      
 // 이경우에는 맵이뜨지않고 잠시 먹통 상태로 유지.... 뭐가문제일가내부적이 쓰레드문제? - Main쓰레드에서 돌고있는거 같다..
@@ -420,6 +420,12 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             self.present(nextVC, animated: true, completion: nil)
         }
         // else 일때 로그아웃 수행 - 작성예정 -0818
+        else{
+            UserDefaults.standard.removeObject(forKey: userDefaultsToken)
+            UserDefaults.standard.removeObject(forKey: userDefaultsPk)
+            UserDefaults.standard.removeObject(forKey: "userHobby")
+            self.viewDidLoad()
+        }
     }
     
     
@@ -689,18 +695,24 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         }
     }
     
-    // 로그인 체크
+    // 최초 로그인 체크
     func loginCheck(){
-        
-        if let token = UserDefaults.standard.value(forKey: "") as? String, let userHobbyList = UserDefaults.standard.value(forKey: "") as? [String] {
+        // 토큰값과, 관심사 항목 옵셔널바이딩체크
+        // 옵셔널이 아니면
+        if let token = UserDefaults.standard.value(forKey: userDefaultsToken) as? String, let userHobbyList = UserDefaults.standard.value(forKey: "userHobby") as? [String] {
             self.userToken = token
             self.loginUserHobbyList = userHobbyList
+            self.logtinStateBtnOutlet.titleLabel?.text = "로그인"
             self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList)
+            
         }else{
+            self.logtinStateBtnOutlet.titleLabel?.text = "로그아웃"
             self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: [])
         }
         
     }
+    
+    
     
     // MARK: - 테스트-0816 API통신 붙어서 비로그인상태시 호출되도록 구현예정입니다.
     // 하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
