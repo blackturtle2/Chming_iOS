@@ -13,26 +13,24 @@ import SwiftyJSON
 
 class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet var scrollViewMain: UIScrollView!
+    
     @IBOutlet var buttonProfileImage: UIButton!
     @IBOutlet var textFieldEmail: UITextField!
+    @IBOutlet var buttonValidateEmail: UIButton!
     @IBOutlet var textFieldPassword: UITextField!
     @IBOutlet var textFieldPasswordConfirm: UITextField!
     @IBOutlet var textFieldUserName: UITextField!
     @IBOutlet var segmentGender: UISegmentedControl!
     
-    @IBOutlet var uiViewTouchHideKeyboard: UIView!
-    
     @IBOutlet var datePickerBirth: UIDatePicker!
     @IBOutlet var uiViewOfBirthDatePicker: UIView!
 
-    // 화면의 남는 공간을 아무 곳이나 터치하면, 키보드 숨기기.
-    @IBAction func tabToHideKeyboard(_ sender: UITapGestureRecognizer) {
-        textFieldEmail.resignFirstResponder()
-        textFieldUserName.resignFirstResponder()
-        textFieldPassword.resignFirstResponder()
-        textFieldPasswordConfirm.resignFirstResponder()
-        textFieldUserName.resignFirstResponder()
-    }
+    @IBOutlet var buttonBirth: UIButton!
+    @IBOutlet var buttonLocation: UIButton!
+    @IBOutlet var buttonHobby: UIButton!
+    
+    @IBOutlet var buttonComplete: UIButton! // 회원가입 완료 버튼
     
     // 이메일 중복체크 눌렀는지 여부 확인.
     var checkEmailValidate: Bool = false
@@ -55,7 +53,24 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         textFieldPassword.delegate = self
         textFieldPasswordConfirm.delegate = self
         textFieldUserName.delegate = self
-
+        
+        textFieldUserName.shapesForSignUp()
+        textFieldEmail.roundedButton(corners: [.topLeft, .bottomLeft], radius: textFieldEmail.frame.height / 2)
+        buttonValidateEmail.roundedButton(corners: [.topRight, .bottomRight], radius: buttonValidateEmail.frame.height / 2)
+        textFieldPassword.shapesForSignUp()
+        textFieldPasswordConfirm.shapesForSignUp()
+        segmentGender.shapesCustomizing()
+        buttonProfileImage.shapesForSignUpProfileImg()
+        
+        buttonBirth.shapesForRegisterBtnAtSignUp()
+        buttonLocation.shapesForRegisterBtnAtSignUp()
+        buttonHobby.shapesForRegisterBtnAtSignUp()
+        
+        buttonComplete.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        buttonComplete.cornerRadius()
+        
+        print(segmentGender.selectedSegmentIndex)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,7 +78,47 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         // Dispose of any resources that can be recreated.
     }
     
+    // Cancel 버튼 액션 정의.
+    @IBAction func buttonCancelAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
+    // 화면의 남는 공간을 아무 곳이나 터치하면, 키보드 숨기기.
+    @IBAction func tabToHideKeyboard(_ sender: UITapGestureRecognizer) {
+        textFieldEmail.resignFirstResponder()
+        textFieldUserName.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
+        textFieldPasswordConfirm.resignFirstResponder()
+        textFieldUserName.resignFirstResponder()
+    }
+    
+    
+    // 뷰 올리기
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 100.0), animated:true)
+    }
+    
+    // 뷰 내리기
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+    }
+    
+    // 리턴키 설정
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == textFieldUserName {
+            textFieldEmail.becomeFirstResponder()
+        } else if textField == textFieldEmail {
+            textFieldPassword.becomeFirstResponder()
+        } else if textField == textFieldPassword {
+            textFieldPasswordConfirm.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+        
+    }
     
     /*******************************************/
     // MARK: -  Logic                          //
@@ -121,6 +176,48 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         }
     }
     
+    @IBAction func segmentedControlGender(_ sender: UISegmentedControl) {
+        let segAttributes: NSDictionary = [
+            NSForegroundColorAttributeName: UIColor.white
+        ]
+        
+        let btnBundles = [buttonBirth, buttonHobby, buttonLocation]
+        
+        switch segmentGender.selectedSegmentIndex {
+        case 0:
+            
+            segmentGender.tintColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5)
+            segmentGender.layer.borderColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5).cgColor
+            segmentGender.setTitleTextAttributes(segAttributes as [NSObject : AnyObject], for: UIControlState.selected)
+            
+            buttonProfileImage.setTitleColor(#colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5), for: .normal)
+            buttonProfileImage.layer.borderColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5).cgColor
+            
+            for btn in btnBundles {
+                btn?.tintColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5)
+                btn?.layer.borderColor = #colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 0.5).cgColor
+                btn?.setTitleColor(#colorLiteral(red: 0.470497191, green: 0.675825417, blue: 1, alpha: 1), for: .normal)
+            }
+            
+        case 1:
+            segmentGender.tintColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5)
+            segmentGender.layer.borderColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5).cgColor
+            segmentGender.setTitleTextAttributes(segAttributes as [NSObject : AnyObject], for: UIControlState.selected)
+            
+            buttonProfileImage.setTitleColor(#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5), for: .normal)
+            buttonProfileImage.layer.borderColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5).cgColor
+            
+            for btn in btnBundles {
+                btn?.tintColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5)
+                btn?.layer.borderColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5).cgColor
+                btn?.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
+            }
+            
+        default:
+            break
+            
+        }
+    }
     
     /***************************/
     // MARK: -  생년월일 Logic    //
@@ -128,7 +225,7 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     // 생년월일 버튼 액션 정의.
     @IBAction func buttonBirthAction(_ sender: UIButton) {
-//        self.datePickerBirth.backgroundColor = .white
+        print("///// buttonBirthAction ")
         self.uiViewOfBirthDatePicker.isHidden = false // DatePicker와 취소-확인 버튼까지 있는 UIView.
     }
     
@@ -167,7 +264,6 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBAction func buttonBirthDatePickerCancel(_ sender: UIButton) {
         self.uiViewOfBirthDatePicker.isHidden = true
     }
-    
     
     
     /***************************/

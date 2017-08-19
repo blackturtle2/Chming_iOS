@@ -32,7 +32,7 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
         textFieldEmail.shapesForSignIn()
         textFieldPassword.shapesForSignIn()
         
-        buttonLogin.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        buttonLogin.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
         buttonLogin.cornerRadius()
         
         // background AV
