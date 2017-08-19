@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // JS 파이어베이스 초기화 코드 추가
         FirebaseApp.configure()
         
-        self.window!.tintColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 1)
+        self.window!.tintColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
         
         // Override point for customization after application launch.
         return true
