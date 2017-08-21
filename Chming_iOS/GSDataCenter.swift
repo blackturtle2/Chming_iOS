@@ -42,7 +42,7 @@ struct GSGroupDetail {
     let groupPK: Int
     let hobby: [JSON]
     let groupName: String
-    let image: String?
+    let image: String
     let description: String
     let address: String
     let lat: Double
@@ -55,7 +55,7 @@ struct GSGroupDetail {
         self.groupPK = jsonData["pk"].intValue
         self.hobby = jsonData["hobby"].arrayValue
         self.groupName = jsonData["name"].stringValue
-        self.image = jsonData["image"].string
+        self.image = jsonData["image"].stringValue
         self.description = jsonData["description"].stringValue
         self.address = jsonData["address"].stringValue
         self.lat = jsonData["lat"].doubleValue

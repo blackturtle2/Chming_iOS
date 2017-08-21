@@ -185,6 +185,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     
     // 테스트-하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
+    /**
     func simpleGroupViewLoad(){
         
         // -------------------------------- 스크롤뷰 테스트 start --------------------------
@@ -235,8 +236,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
         // ---------------------------- 스크롤뷰 테스트  end --------------------------
     }
-    
-    
+    */    
     
     // ############################ MTMapViewDelegate Method #######################################//
     // MARK: - MTMapViewDelegate 메서드(Map View Event delegate methods)
@@ -279,7 +279,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
 //       - 파이어베이스 사용안함으로써 주석처리함 - 0816
 //        self.mapLoad(location: addressSplitArr[1])
     }
-    
+ 
     // 사용자가 POI Item을 선택한 경우 호출
     // 리턴 값은 마커 선택시 말풍선을 보여줄지 여부를 할당하는 리턴값
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
@@ -726,33 +726,38 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
                     // 예외처리를 해줘야한다. 현재 임시 예외처리 -0816
                     // 그룹명이 없으면 간단정보뷰를 그리지 않게처리함
                     if groupDetail.groupName != "" {
-                        let simpleGroupInfoView: GSSimpleGroupInfoView = {
-                            let view = GSSimpleGroupInfoView(
-                                frame: CGRect(x: (self.view.bounds.size.width * count)+42,
-                                              y: 0, width: self.view.bounds.size.width*0.8,
-                                              height: self.infoScrollView.bounds.size.height),
-                                groupImg: groupDetail.image,
-                                groupName: groupDetail.groupName,
-                                groupSimpleInfo: groupDetail.description,
-                                groupIndex: "\(groupTagValue)."
-                            )
-                            view.delegate = self
+                        DispatchQueue.main.async {
                             
+                            
+                            let simpleGroupInfoView: GSSimpleGroupInfoView = {
+                                let view = GSSimpleGroupInfoView(
+                                    frame: CGRect(x: (self.view.bounds.size.width * count)+42,
+                                                  y: 0, width: self.view.bounds.size.width*0.8,
+                                                  height: self.infoScrollView.bounds.size.height))
+                                view.delegate = self
+                                //                            groupImg: groupDetail.image,
+                                //                            groupName: groupDetail.groupName,
+                                //                            groupSimpleInfo: groupDetail.description,
+                                //                            groupIndex: "\(groupTagValue)."
+                                
+                                view.groupPK = String(groupDetail.groupPK)
+                                view.layer.borderWidth = 2
+                                print(view.frame)
+                                
+                                return view
+                            }()
+                            print("SIMPLINFOVIEW://",groupDetail)
+                            simpleGroupInfoView.viewSetUp(groupImg: groupDetail.image, groupName: groupDetail.groupName, groupSimpleInfo: groupDetail.description, groupIndex: "\(groupTagValue).")
                             // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
-                            view.groupPK = String(groupDetail.groupPK)
-                            view.layer.borderWidth = 2
-                            print(view.frame)
-                            
-                            return view
-                        }()
-                        print("count://", count)
-                        count += 1
-                        groupTagValue += 1
-                        self.scrollAreaView.addSubview(simpleGroupInfoView)
-                        // ## 제약 사항 변경
-                        self.scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
-                        // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
-                        self.infoScrollView.layoutIfNeeded()
+                            print("count://", count)
+                            count += 1
+                            groupTagValue += 1
+                            self.scrollAreaView.addSubview(simpleGroupInfoView)
+                            // ## 제약 사항 변경
+                            self.scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
+                            // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
+                            self.infoScrollView.layoutIfNeeded()
+                        }
                     }
                 })
             }
@@ -802,6 +807,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     // MARK: - 테스트-0816 API통신 붙어서 비로그인상태시 호출되도록 구현예정입니다.
     // 하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
+    /**
     func simpleGroupViewLoadTest(locationGroupData: [String:Any]){
         // 영역인컨텐츠뷰의 타입은 현재 UIViewd이다
         print("SCROLL AREAVIEW SUBVIEWS://", scrollAreaView.subviews,"/ COUNT:// ",scrollAreaView.subviews.count)
@@ -874,31 +880,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
                 items.append(interestPoitItem)
                 tagValue += 1
                 print(items)
-                // 그룹피케이 사용해야됨
-                //간단정보뷰 생성 - 그룹의 피케이가 필요하다....잠시 주석 처리 하고 파베랑 연결해보자! 0810
-                // 간단정보에 뿌릴 정보는 관심 모임 맵 정보에 있는 PK 값을 활용해야함
-                
-//                let simpleGroupInfoView: GSSimpleGroupInfoView = {
-//                    let view = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42, y: 0, width: self.view.bounds.size.width*0.8, height: self.infoScrollView.bounds.size.height),
-//                        groupImg: "marker1_\(tagValue)",
-//                        groupName: "그룹명 \(tagValue)",
-//                        groupSimpleInfo: "간단소개\(tagValue)")
-//                    view.delegate = self
-//                    
-//                    // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
-//                    view.groupPK = "\(testTextNum)"
-//                    view.layer.borderWidth = 2
-//                    print(view.frame)
-//                    testTextNum += 1
-//                    return view
-//                }()
-//                print("count://", count)
-//                count += 1
-//                scrollAreaView.addSubview(simpleGroupInfoView)
-                
-                
-                // ------- 그룹의 정보를 받아올 부분 - 선택지역의 그룹 PK값을가지고 파베의 그룹 정보를 가져와야한다.작업중-0815
-                
+
                 GSDataCenter.shared.groupInfoLoad(local: currentLocal, interestKey: key, groupPK: groupPK, complition: { (groupInfoDic) in
                     
                     let simpleGroupInfoView: GSSimpleGroupInfoView = {
@@ -931,17 +913,14 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
 
                 
             }
-           
+
 
         }
         print(items.count)
         self.mapView.addPOIItems(items)
-        
-        
-        
-   
+     
     }
-
+     */
 
 }
 

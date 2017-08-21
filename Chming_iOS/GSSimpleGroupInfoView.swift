@@ -25,54 +25,57 @@ class GSSimpleGroupInfoView: UIView {
     var groupPK: String = ""
     var delegate: GSSimpleGroupInfoProtocol?
 
-    init(frame: CGRect, groupImg: String?, groupName: String, groupSimpleInfo:String, groupIndex: String) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        if let img = groupImg  {
-            let url = URL(string: img)
-            
-            // 별도의 쓰레드 관리를 방지하기 위해 Alamofire 사용하여 통신
-            Alamofire.request(url!, method: .get).responseData(completionHandler: { (data) in
-                DispatchQueue.main.async {
-                    // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
-                    if let imgData = data.value {
-    
-                        self.groupImgView.image = UIImage(data: imgData)
-                    }else{
-                        self.groupImgView.image = UIImage(named: "marker1_1.png")
-                    }
-                    
-                }
-            })
-        }else{ // 0817 - 그룹이미지 부분에 대해 URL이 없는 경우 어떤식으로 대체할지 아직 서버쪽에 이야기를 듣지못해 임시로 디폴트 이미지처리함
-            self.groupImgView.image = UIImage(named: "marker1_1.png")
-            
-        }
-//        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//            DispatchQueue.main.async {
-//                guard let imgData = data else {return}
-//                // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
-//                self.groupImgView.image = UIImage(data: imgData)
-//                
-//            }
-//        }.resume(
-        let simpleInfoViewFromNib: UIView = Bundle.main.loadNibNamed("GSSimpleGroupInfo", owner: self, options: nil)!.first as! UIView
-        
-        // commentByCH: 안될경우 aspectFill로 변경해서 코드로 재생.
-//        self.groupImgView.contentMode = .scaleAspectFit 
-        
-        self.groupNameLable.text = groupName
-        self.groupSimpleInfo.text = groupSimpleInfo
-        self.groupIndex.text = groupIndex
-        
-        self.layer.cornerRadius = 12
-        self.clipsToBounds = true
-        
-        
-        simpleInfoViewFromNib.frame = self.bounds
-        
-        self.addSubview(simpleInfoViewFromNib)
     }
+//    init(frame: CGRect, groupImg: String?, groupName: String, groupSimpleInfo:String, groupIndex: String) {
+//        super.init(frame: frame)
+//        
+//        if let img = groupImg  {
+//            let url = URL(string: img)
+//            
+//            // 별도의 쓰레드 관리를 방지하기 위해 Alamofire 사용하여 통신
+//            Alamofire.request(url!, method: .get).responseData(completionHandler: { (data) in
+//                DispatchQueue.main.async {
+//                    // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
+//                    if let imgData = data.value {
+//    
+//                        self.groupImgView.image = UIImage(data: imgData)
+//                    }else{
+//                        self.groupImgView.image = UIImage(named: "marker1_1.png")
+//                    }
+//                    
+//                }
+//            })
+//        }else{ // 0817 - 그룹이미지 부분에 대해 URL이 없는 경우 어떤식으로 대체할지 아직 서버쪽에 이야기를 듣지못해 임시로 디폴트 이미지처리함
+//            self.groupImgView.image = UIImage(named: "marker1_1.png")
+//            
+//        }
+////        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+////            DispatchQueue.main.async {
+////                guard let imgData = data else {return}
+////                // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
+////                self.groupImgView.image = UIImage(data: imgData)
+////                
+////            }
+////        }.resume(
+//        let simpleInfoViewFromNib: UIView = Bundle.main.loadNibNamed("GSSimpleGroupInfo", owner: self, options: nil)!.first as! UIView
+//        
+//        // commentByCH: 안될경우 aspectFill로 변경해서 코드로 재생.
+////        self.groupImgView.contentMode = .scaleAspectFit 
+//        
+//        self.groupNameLable.text = groupName
+//        self.groupSimpleInfo.text = groupSimpleInfo
+//        self.groupIndex.text = groupIndex
+//        
+//        self.layer.cornerRadius = 12
+//        self.clipsToBounds = true
+//        
+//        
+//        simpleInfoViewFromNib.frame = self.bounds
+//        
+//        self.addSubview(simpleInfoViewFromNib)
+//    }
     
 //    init(frame: CGRect, groupImg: String, groupName: String, groupSimpleInfo:String) {
 //        super.init(frame: frame)
@@ -103,6 +106,59 @@ class GSSimpleGroupInfoView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func viewSetUp(groupImg: String, groupName: String, groupSimpleInfo:String, groupIndex: String){
+//        if let img = groupImg  {
+//            let url = URL(string: img)
+//            
+//            // 별도의 쓰레드 관리를 방지하기 위해 Alamofire 사용하여 통신
+//            Alamofire.request(url!, method: .get).responseData(completionHandler: { (data) in
+//                DispatchQueue.main.async {
+//                    // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
+//                    if let imgData = data.value {
+//                        
+//                        self.groupImgView.image = UIImage(data: imgData)
+//                    }else{
+//                        self.groupImgView.image = UIImage(named: "marker1_1.png")
+//                    }
+//                    
+//                }
+//            })
+//        }else{ // 0817 - 그룹이미지 부분에 대해 URL이 없는 경우 어떤식으로 대체할지 아직 서버쪽에 이야기를 듣지못해 임시로 디폴트 이미지처리함
+//            self.groupImgView.image = UIImage(named: "marker1_1.png")
+//            
+//        }
+       
+        let simpleInfoViewFromNib: UIView = Bundle.main.loadNibNamed("GSSimpleGroupInfo", owner: self, options: nil)!.first as! UIView
+        
+        // commentByCH: 안될경우 aspectFill로 변경해서 코드로 재생.
+        //        self.groupImgView.contentMode = .scaleAspectFit
+        
+        self.groupNameLable.text = groupName
+        self.groupSimpleInfo.text = groupSimpleInfo
+        self.groupIndex.text = groupIndex
+        let url = URL(string: groupImg)
+        Alamofire.request(url!, method: .get).responseData(completionHandler: { (data) in
+            DispatchQueue.main.async {
+                // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
+                if let imgData = data.value {
+                    
+                    self.groupImgView.image = UIImage(data: imgData)
+                }else{
+                    self.groupImgView.image = UIImage(named: "marker1_1.png")
+                }
+                
+            }
+        })
+        
+        self.layer.cornerRadius = 12
+        self.clipsToBounds = true
+        
+        
+        simpleInfoViewFromNib.frame = self.bounds
+        
+        self.addSubview(simpleInfoViewFromNib)
     }
     
     @IBAction func simpleVieTapGesture(_ sender: UITapGestureRecognizer) {
