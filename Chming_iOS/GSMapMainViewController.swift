@@ -11,7 +11,7 @@ import Firebase
 import Alamofire
 import SwiftyJSON
 
-class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol, GSCategoryProtocol ,UIScrollViewDelegate {
+class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol, GSCategoryProtocol ,UIScrollViewDelegate, loginCompleteDelegate {
     
     var locationFullAddress: String = ""
     
@@ -43,6 +43,11 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     @IBOutlet weak var logtinStateBtnOutlet: UIButton!
     @IBOutlet weak var groupCreateBtnOutlet: UIButton!
+    
+    func completeLogin() {
+        //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: [])
+        self.logtinStateBtnOutlet.setTitle("로그아웃", for: .normal)
+    }
     
     // ############################ Initialize #######################################//
     // MARK: - Initialize
@@ -443,6 +448,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         if UserDefaults.standard.value(forKey: userDefaultsToken) == nil {
             let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSLoginViewController") as! JSLoginViewController
+            nextVC.loginDelegate = self
             self.present(nextVC, animated: true, completion: nil)
         }
         // else 일때 로그아웃 수행 - 작성예정 -0818
@@ -764,14 +770,14 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         if let token = UserDefaults.standard.value(forKey: userDefaultsToken) as? String, let userHobbyList = UserDefaults.standard.value(forKey: "userHobby") as? [String] {
             self.userToken = token
             self.userHobbyList = userHobbyList
-            self.logtinStateBtnOutlet.titleLabel?.text = "로그아웃"
+            self.logtinStateBtnOutlet.setTitle("로그아웃", for: .normal)
             self.groupCreateBtnOutlet.isHidden = false
             self.userLogtinState = true
             //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList)
             
         }else{
             print("LOGINCHECK NO LOGIN")
-            self.logtinStateBtnOutlet.titleLabel?.text = "로그인"
+            self.logtinStateBtnOutlet.setTitle("로그인", for: .normal)
             self.groupCreateBtnOutlet.isHidden = true
             self.userLogtinState = false
             self.userHobbyList = []
