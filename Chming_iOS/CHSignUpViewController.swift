@@ -62,17 +62,17 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
             print("남자")
             
         case 1:
-            genderSegment.tintColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5)
-            genderSegment.layer.borderColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5).cgColor
+            genderSegment.tintColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5)
+            genderSegment.layer.borderColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5).cgColor
             genderSegment.setTitleTextAttributes(segAttributes as [NSObject : AnyObject], for: UIControlState.selected)
             
-            photoBtn.setTitleColor(#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5), for: .normal)
-            photoBtn.layer.borderColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5).cgColor
+            photoBtn.setTitleColor(#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5), for: .normal)
+            photoBtn.layer.borderColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5).cgColor
             
             for btn in btnBundles {
-                btn?.tintColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5)
-                btn?.layer.borderColor = #colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.5).cgColor
-                btn?.setTitleColor(#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 1), for: .normal)
+                btn?.tintColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5)
+                btn?.layer.borderColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.5).cgColor
+                btn?.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
             }
             
             print("여자")
@@ -140,7 +140,7 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         registerLocationBtn.shapesForRegisterBtnAtSignUp()
         registerFavoriteBtn.shapesForRegisterBtnAtSignUp()
         
-        signUpOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.1568113565, blue: 0.2567096651, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        signUpOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
         signUpOutlet.cornerRadius()
         
         print(genderSegment.selectedSegmentIndex)
