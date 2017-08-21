@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class GSSimpleGroupInfoView: UIView {
 
@@ -29,24 +30,21 @@ class GSSimpleGroupInfoView: UIView {
         
         if let img = groupImg  {
             let url = URL(string: img)
-                URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                    DispatchQueue.main.async {
-                        guard let imgData = data else {return}
-                        // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
-                        self.groupImgView.image = UIImage(data: imgData)
-                        
-                    }
-                }.resume()
-        }else{ // 0817 - 그룹이미지 부분에 대해 URL이 없는 경우 어떤식으로 대체할지 아직 서버쪽에 이야기를 듣지못해 임시로 디폴트 이미지처리함
-            let defaultURL = URL(string: "https://www.gstatic.com/webp/gallery3/1.png")
-            URLSession.shared.dataTask(with: defaultURL!) { (data, response, error) in
+            // 별도의 쓰레드 관리를 방지하기 위해 Alamofire 사용하여 통신
+            Alamofire.request(url!, method: .get).responseData(completionHandler: { (data) in
                 DispatchQueue.main.async {
-                    guard let imgData = data else {return}
                     // 인스턴스 생성시 이미지와 레이블 할당 값 구현 테스트 중입니다.
-                    self.groupImgView.image = UIImage(data: imgData)
+                    if let imgData = data.value {
+    
+                        self.groupImgView.image = UIImage(data: imgData)
+                    }else{
+                        self.groupImgView.image = UIImage(named: "marker1_1.png")
+                    }
                     
                 }
-            }.resume()
+            })
+        }else{ // 0817 - 그룹이미지 부분에 대해 URL이 없는 경우 어떤식으로 대체할지 아직 서버쪽에 이야기를 듣지못해 임시로 디폴트 이미지처리함
+            self.groupImgView.image = UIImage(named: "marker1_1.png")
             
         }
 //        URLSession.shared.dataTask(with: url!) { (data, response, error) in
