@@ -11,7 +11,7 @@ import Alamofire
 import Toaster
 import SwiftyJSON
 
-class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet var scrollViewMain: UIScrollView!
     
@@ -23,8 +23,10 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBOutlet var textFieldUserName: UITextField!
     @IBOutlet var segmentGender: UISegmentedControl!
     
-    @IBOutlet var datePickerBirth: UIDatePicker!
     @IBOutlet var uiViewOfBirthDatePicker: UIView!
+    @IBOutlet var datePickerBirth: UIDatePicker!
+    @IBOutlet var pickerLocation: UIPickerView!
+    @IBOutlet var pickerHobby: UIPickerView!
 
     @IBOutlet var buttonBirth: UIButton!
     @IBOutlet var buttonLocation: UIButton!
@@ -36,10 +38,15 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     var checkEmailValidate: Bool = false
     
     // 생년월일 기록용.
-    var datePickerData: Date?
+    var dataDatePickerBirth: Date?
     var birthYear: String?
     var birthMonth: String?
     var birthDay: String?
+    
+    var selectedDataPickerLocation: String?
+    var selectedDataPickerHobby: String?
+    var tempDataPickerLocation: [String]?
+    var tempDataPickerHobby: [String]?
     
     /*******************************************/
     // MARK: -  Life Cycle                     //
@@ -53,6 +60,11 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         textFieldPassword.delegate = self
         textFieldPasswordConfirm.delegate = self
         textFieldUserName.delegate = self
+        
+        pickerLocation.delegate = self
+        pickerLocation.dataSource = self
+        pickerHobby.delegate = self
+        pickerHobby.dataSource = self
         
         textFieldUserName.shapesForSignUp()
         textFieldEmail.roundedButton(corners: [.topLeft, .bottomLeft], radius: textFieldEmail.frame.height / 2)
@@ -70,6 +82,9 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         buttonComplete.cornerRadius()
         
         print(segmentGender.selectedSegmentIndex)
+        
+        self.tempDataPickerLocation = ["종로", "강남", "신림", "용산", "건대"]
+        self.tempDataPickerHobby = ["축구", "야구", "농구", "탁구", "풋살"]
         
     }
 
@@ -223,46 +238,19 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     // MARK: -  생년월일 Logic    //
     /***************************/
     
+    var selectedPicker: enumSelectedPicker = .birth
+    
+    enum enumSelectedPicker:String {
+        case birth
+        case location
+        case hobby
+    }
+    
     // 생년월일 버튼 액션 정의.
     @IBAction func buttonBirthAction(_ sender: UIButton) {
-        print("///// buttonBirthAction ")
+        self.selectedPicker = .birth
         self.uiViewOfBirthDatePicker.isHidden = false // DatePicker와 취소-확인 버튼까지 있는 UIView.
-    }
-    
-    // datePicker 값 변화 트랙킹.
-    @IBAction func datePickerBirthValueChanged(_ sender: UIDatePicker) {
-        
-        self.datePickerData = sender.date
-        
-    }
-    
-    // DatePicker 확인 버튼 액션 정의.
-    @IBAction func buttonBirthDatePickerConfirm(_ sender: UIButton) {
-        
-        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateStyle = DateFormatter.Style.medium
-        //        dateFormatter.timeStyle = DateFormatter.Style.none
-        //        // result --> 2017. 8. 19.
-        
-        guard let birthDate = self.datePickerData else { return }
-        dateFormatter.dateFormat = "yyyy"
-        print("yyyy", dateFormatter.string(from: birthDate))
-        self.birthYear = dateFormatter.string(from: birthDate)
-        
-        dateFormatter.dateFormat = "MM"
-        print("MM", dateFormatter.string(from: birthDate))
-        self.birthMonth = dateFormatter.string(from: birthDate)
-        
-        dateFormatter.dateFormat = "dd"
-        print("dd", dateFormatter.string(from: birthDate))
-        self.birthDay = dateFormatter.string(from: birthDate)
-        
-        self.uiViewOfBirthDatePicker.isHidden = true
-    }
-    
-    // DatePicker 취소 버튼 액션 정의.
-    @IBAction func buttonBirthDatePickerCancel(_ sender: UIButton) {
-        self.uiViewOfBirthDatePicker.isHidden = true
+        self.datePickerBirth.isHidden = false
     }
     
     
@@ -271,7 +259,9 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     /***************************/
     
     @IBAction func buttonLocationAction(_ sender: UIButton) {
-        
+        self.selectedPicker = .location
+        self.uiViewOfBirthDatePicker.isHidden = false
+        self.pickerLocation.isHidden = false
     }
     
     
@@ -280,7 +270,107 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     /**************************/
     
     @IBAction func buttonHobbyAction(_ sender: UIButton) {
+        self.selectedPicker = .hobby
+        self.uiViewOfBirthDatePicker.isHidden = false
+        self.pickerHobby.isHidden = false
+    }
+    
+    
+    /*********************************/
+    // MARK: -  Picker View Logic    //
+    /*********************************/
+    
+    // datePicker 값 변화 트랙킹.
+    @IBAction func datePickerBirthValueChanged(_ sender: UIDatePicker) {
+        self.dataDatePickerBirth = sender.date
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == self.pickerLocation {
+            // 주소 피커
+            return 5
+        }else if pickerView == self.pickerHobby {
+            // 관심사 피커
+            return 5
+        }
+        return 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == self.pickerLocation {
+            // 주소 피커
+            guard let result = self.tempDataPickerLocation?[row] else { return "(no data)" }
+            return result
+        }else if pickerView == self.pickerHobby {
+            // 관심사 피커
+            guard let result = self.tempDataPickerHobby?[row] else { return "(no data)" }
+            return result
+        }
+        return nil
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == self.pickerLocation {
+            // 주소 피커
+            self.selectedDataPickerLocation = self.tempDataPickerLocation?[row]
+        }else if pickerView == self.pickerHobby {
+            // 관심사 피커
+            self.selectedDataPickerHobby = self.tempDataPickerHobby?[row]
+        }
+    }
+    
+    
+    // Picker 확인 버튼 액션 정의.
+    @IBAction func buttonBirthDatePickerConfirm(_ sender: UIButton) {
         
+        switch self.selectedPicker {
+        case .birth:
+            let dateFormatter = DateFormatter()
+            //        dateFormatter.dateStyle = DateFormatter.Style.medium
+            //        dateFormatter.timeStyle = DateFormatter.Style.none
+            //        // result --> 2017. 8. 19.
+            
+            guard let birthDate = self.dataDatePickerBirth else { return }
+            dateFormatter.dateFormat = "yyyy"
+            print("yyyy", dateFormatter.string(from: birthDate))
+            self.birthYear = dateFormatter.string(from: birthDate)
+            
+            dateFormatter.dateFormat = "MM"
+            print("MM", dateFormatter.string(from: birthDate))
+            self.birthMonth = dateFormatter.string(from: birthDate)
+            
+            dateFormatter.dateFormat = "dd"
+            print("dd", dateFormatter.string(from: birthDate))
+            self.birthDay = dateFormatter.string(from: birthDate)
+            
+            dateFormatter.dateStyle = DateFormatter.Style.medium
+            dateFormatter.timeStyle = DateFormatter.Style.none
+            self.buttonBirth.setTitle("\(dateFormatter.string(from: birthDate))", for: .normal)
+            
+        case .location:
+            self.buttonLocation.setTitle(self.selectedDataPickerLocation, for: .normal)
+        case .hobby:
+            self.buttonHobby.setTitle(self.selectedDataPickerHobby, for: .normal)
+        }
+        
+        self.uiViewOfBirthDatePicker.isHidden = true
+        self.datePickerBirth.isHidden = true
+        self.pickerLocation.isHidden = true
+        self.pickerHobby.isHidden = true
+        
+    }
+    
+    // Picker 취소 버튼 액션 정의.
+    @IBAction func buttonBirthDatePickerCancel(_ sender: UIButton) {
+        self.uiViewOfBirthDatePicker.isHidden = true
+        self.datePickerBirth.isHidden = true
+        self.pickerLocation.isHidden = true
+        self.pickerHobby.isHidden = true
     }
     
     
@@ -326,6 +416,8 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         guard let birthYear = self.birthYear else { return }
         guard let birthMonth = self.birthMonth else { return }
         guard let birthDay = self.birthDay else { return }
+        guard let hobby = self.selectedDataPickerHobby else { return }
+        guard let location = self.selectedDataPickerLocation else { return }
         
         let param: [String:Any] = ["email" : userEmail,
                                    "password" : userPassword,
@@ -336,8 +428,8 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
                                    "birth_year" : birthYear,
                                    "birth_month" : birthMonth,
                                    "birth_day" : birthDay,
-                                   "hobby" : "축구",
-                                   "address" : "대한민국 서울특별시 영등포구 여의도동",
+                                   "hobby" : hobby,
+                                   "address" : location,
                                    "lat" : 37.5285730,
                                    "lng" : 126.9289740 ]
         

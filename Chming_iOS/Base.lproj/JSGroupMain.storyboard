@@ -1200,29 +1200,29 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tgE-oO-Zej">
-                                                        <rect key="frame" x="48.5" y="180" width="203" height="32"/>
+                                                        <rect key="frame" x="54" y="180" width="192.5" height="32"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저 정보 찾기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ale-Gm-e9o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="69" height="32"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 정보 찾기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ale-Gm-e9o">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="32"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seI-eQ-2KE">
-                                                                <rect key="frame" x="74" y="0.0" width="56" height="32"/>
+                                                                <rect key="frame" x="63.5" y="0.0" width="56" height="32"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                                 <state key="normal" title="비밀번호">
                                                                     <color key="titleColor" red="1" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="또는" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6V-fb-2V4">
-                                                                <rect key="frame" x="135" y="0.0" width="21" height="32"/>
+                                                                <rect key="frame" x="124.5" y="0.0" width="21" height="32"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiB-bc-J0K">
-                                                                <rect key="frame" x="161" y="0.0" width="42" height="32"/>
+                                                                <rect key="frame" x="150.5" y="0.0" width="42" height="32"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                                 <state key="normal" title="아이디">
                                                                     <color key="titleColor" red="1" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1267,10 +1267,10 @@
                                                     <constraint firstItem="Oo4-ZM-SFi" firstAttribute="height" secondItem="DtX-5r-0Kp" secondAttribute="height" id="nbg-yS-BEE"/>
                                                 </constraints>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aci-bG-Xny">
-                                                <rect key="frame" x="328" y="22" width="39" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Close"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aci-bG-Xny">
+                                                <rect key="frame" x="306" y="22" width="53" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Cancel"/>
                                                 <connections>
                                                     <action selector="buttonCloseAction:" destination="pHK-yr-01E" eventType="touchUpInside" id="bdp-e0-QdB"/>
                                                 </connections>
@@ -1278,8 +1278,10 @@
                                         </subviews>
                                         <gestureRecognizers/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="aci-bG-Xny" secondAttribute="trailing" constant="16" id="4Fj-dz-6ek"/>
                                             <constraint firstItem="jdg-DP-WY8" firstAttribute="centerX" secondItem="78i-oA-QDE" secondAttribute="centerX" id="8Jv-XV-5Z3"/>
                                             <constraint firstAttribute="height" constant="839" id="UJJ-4U-Cmi"/>
+                                            <constraint firstItem="aci-bG-Xny" firstAttribute="top" secondItem="78i-oA-QDE" secondAttribute="top" constant="22" id="Vfz-kr-I9g"/>
                                             <constraint firstItem="Hak-8t-ARw" firstAttribute="centerX" secondItem="78i-oA-QDE" secondAttribute="centerX" id="XM0-It-d9A"/>
                                             <constraint firstItem="jdg-DP-WY8" firstAttribute="top" secondItem="78i-oA-QDE" secondAttribute="top" constant="308" id="YcP-RA-RFY"/>
                                             <constraint firstItem="jdg-DP-WY8" firstAttribute="top" secondItem="Hak-8t-ARw" secondAttribute="bottom" constant="80" id="m5R-GF-nU4"/>
@@ -1613,7 +1615,7 @@
                                             <constraint firstAttribute="height" constant="1" id="7fj-It-S6Q"/>
                                         </constraints>
                                     </view>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yWv-Rp-EFH">
+                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yWv-Rp-EFH">
                                         <rect key="frame" x="0.0" y="30" width="375" height="216"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <date key="date" timeIntervalSinceReferenceDate="524727344.48359001">
@@ -1624,6 +1626,12 @@
                                             <action selector="datePickerBirthValueChanged:" destination="qoQ-zA-sjs" eventType="valueChanged" id="bg5-JS-hVG"/>
                                         </connections>
                                     </datePicker>
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfG-j8-wrn">
+                                        <rect key="frame" x="0.0" y="30" width="375" height="216"/>
+                                    </pickerView>
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDO-hF-IDl">
+                                        <rect key="frame" x="0.0" y="30" width="375" height="216"/>
+                                    </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28J-Wv-0RD">
                                         <rect key="frame" x="329" y="8" width="30" height="30"/>
                                         <state key="normal" title="확인"/>
@@ -1647,11 +1655,17 @@
                                     <constraint firstAttribute="height" constant="246" id="DJd-Rn-xSR"/>
                                     <constraint firstAttribute="trailing" secondItem="Evg-YL-iQh" secondAttribute="trailing" id="Gcp-Fm-Bye"/>
                                     <constraint firstItem="hqS-tV-Fi2" firstAttribute="top" secondItem="Le4-N5-eqX" secondAttribute="top" constant="8" id="IW8-TE-cYq"/>
+                                    <constraint firstAttribute="trailing" secondItem="qfG-j8-wrn" secondAttribute="trailing" id="K4x-SW-eNw"/>
+                                    <constraint firstItem="qfG-j8-wrn" firstAttribute="leading" secondItem="Le4-N5-eqX" secondAttribute="leading" id="XBh-FP-PE4"/>
                                     <constraint firstItem="hqS-tV-Fi2" firstAttribute="leading" secondItem="Le4-N5-eqX" secondAttribute="leading" constant="16" id="b8C-lk-My1"/>
                                     <constraint firstItem="yWv-Rp-EFH" firstAttribute="leading" secondItem="Le4-N5-eqX" secondAttribute="leading" id="eiU-y3-q1k"/>
+                                    <constraint firstItem="RDO-hF-IDl" firstAttribute="leading" secondItem="Le4-N5-eqX" secondAttribute="leading" id="iE8-xC-uf1"/>
+                                    <constraint firstAttribute="bottom" secondItem="qfG-j8-wrn" secondAttribute="bottom" id="iZn-A3-5h9"/>
+                                    <constraint firstAttribute="bottom" secondItem="RDO-hF-IDl" secondAttribute="bottom" id="pLX-zM-GZx"/>
                                     <constraint firstAttribute="trailing" secondItem="yWv-Rp-EFH" secondAttribute="trailing" id="sF2-cM-s0d"/>
                                     <constraint firstItem="Evg-YL-iQh" firstAttribute="leading" secondItem="Le4-N5-eqX" secondAttribute="leading" id="uOz-ET-hDK"/>
                                     <constraint firstItem="Evg-YL-iQh" firstAttribute="top" secondItem="Le4-N5-eqX" secondAttribute="top" id="xdw-JR-888"/>
+                                    <constraint firstAttribute="trailing" secondItem="RDO-hF-IDl" secondAttribute="trailing" id="zX7-Tl-2pH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1690,6 +1704,8 @@
                         <outlet property="buttonProfileImage" destination="1S8-8Z-upS" id="hw6-1K-AOT"/>
                         <outlet property="buttonValidateEmail" destination="NfO-SI-FPX" id="g62-oe-gdm"/>
                         <outlet property="datePickerBirth" destination="yWv-Rp-EFH" id="AkL-Bz-mue"/>
+                        <outlet property="pickerHobby" destination="qfG-j8-wrn" id="GRb-pO-qD9"/>
+                        <outlet property="pickerLocation" destination="RDO-hF-IDl" id="aI4-hm-xbp"/>
                         <outlet property="scrollViewMain" destination="JMb-fM-PyW" id="uNN-IJ-2Md"/>
                         <outlet property="segmentGender" destination="AgA-JU-w1h" id="0zJ-XY-dFm"/>
                         <outlet property="textFieldEmail" destination="5Uk-Iu-REt" id="kP5-4T-TTq"/>
