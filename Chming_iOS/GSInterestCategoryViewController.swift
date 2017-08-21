@@ -81,6 +81,8 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
             for selectedIndexPath in checkSelectedIndexPathArr {
                 if selectedIndexPath == indexPath {
                     cell.isSelected = true
+                    
+                    selectIndexPathArr.append(indexPath)
                 }
             }
         }
@@ -95,12 +97,12 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
         
         print("didSelectItemAt \(indexPath)")
         let selectItemCategory = categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail
-        print("selectItemCategory://",selectItemCategory)
+        print(" didSelectItemAt selectItemCategory://",selectItemCategory)
         
         let selectCell = collectionView.cellForItem(at: indexPath) as! GSInterestCell
         let selectCategoryName = selectCell.interestNameLabel.text!
         
-        print("selectCategoryName://",selectCategoryName)
+        print("didSelectItemAt selectCategoryName://",selectCategoryName)
         print("##://", collectionView.cellForItem(at: indexPath)?.backgroundColor)
         
         if selectIndexPathArr.contains(indexPath){
@@ -149,8 +151,9 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
 //    }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = nil
+        let cell = collectionView.cellForItem(at: indexPath) as! GSInterestCell
+//        cell?.backgroundColor = nil
+        print("didUnhighlightItemAt:// \(selectIndexPathArr)")
         print("didUnhighlightItemAt \(indexPath)")
     }
   
