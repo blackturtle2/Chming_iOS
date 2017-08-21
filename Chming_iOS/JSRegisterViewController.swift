@@ -452,6 +452,7 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
                 
                 let resultPK = json["pk"].stringValue
                 Toast(text: "회원가입 되었습니다. :D").show()
+                self.dismiss(animated: true, completion: nil)
                 print("///// resultPK: ", resultPK)
                 
             case .failure(let err):

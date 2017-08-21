@@ -12,12 +12,18 @@ import Toaster
 import SwiftyJSON
 import AVFoundation
 
+protocol loginCompleteDelegate {
+    func completeLogin()
+}
+
 class JSLoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var textFieldEmail: UITextField!
     @IBOutlet var textFieldPassword: UITextField!
     @IBOutlet var buttonLogin: UIButton!
     @IBOutlet var scrollViewMain: UIScrollView!
+    
+    var loginDelegate: loginCompleteDelegate?
     
     /*******************************************/
     // MARK: -  Life Cycle                     //
@@ -101,7 +107,10 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
                     print("///// UserDefaults Hobby: ", UserDefaults.standard.array(forKey: userDefaultsHobby) ?? "no data")
                     
                     Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: {
+                        self.loginDelegate?.completeLogin()
+                    })
+                    
                     
                 }else {
                     Toast(text: "로그인 실패입니다. \n이메일 혹은 비밀번호를 다시 확인해주세요.").show()

@@ -30,6 +30,7 @@ class GSSimpleGroupInfoView: UIView {
         
         if let img = groupImg  {
             let url = URL(string: img)
+            
             // 별도의 쓰레드 관리를 방지하기 위해 Alamofire 사용하여 통신
             Alamofire.request(url!, method: .get).responseData(completionHandler: { (data) in
                 DispatchQueue.main.async {
