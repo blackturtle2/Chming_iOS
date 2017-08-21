@@ -1249,6 +1249,7 @@
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PV38XQ6LPC;
+						DevelopmentTeam = 29Q45PKR77;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1809,6 +1810,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				DEVELOPMENT_TEAM = 29Q45PKR77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1833,6 +1835,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				DEVELOPMENT_TEAM = 29Q45PKR77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

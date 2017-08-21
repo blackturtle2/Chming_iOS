@@ -10,12 +10,20 @@ import UIKit
 import Alamofire
 import Toaster
 import SwiftyJSON
+import AVFoundation
+
+protocol loginCompleteDelegate {
+    func completeLogin()
+}
 
 class JSLoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var textFieldEmail: UITextField!
     @IBOutlet var textFieldPassword: UITextField!
+    @IBOutlet var buttonLogin: UIButton!
+    @IBOutlet var scrollViewMain: UIScrollView!
     
+    var loginDelegate: loginCompleteDelegate?
     
     /*******************************************/
     // MARK: -  Life Cycle                     //
@@ -26,6 +34,17 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
 
         textFieldEmail.delegate = self
         textFieldPassword.delegate = self
+        
+        textFieldEmail.shapesForSignIn()
+        textFieldPassword.shapesForSignIn()
+        
+        buttonLogin.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        buttonLogin.cornerRadius()
+        
+        // background AV
+        self.setupVideoBackground()
+        videoURL = Bundle.main.url(forResource: "PolarBear", withExtension: "mov")! as NSURL
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +107,10 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
                     print("///// UserDefaults Hobby: ", UserDefaults.standard.array(forKey: userDefaultsHobby) ?? "no data")
                     
                     Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
+                    self.dismiss(animated: true, completion: {
+                        self.loginDelegate?.completeLogin()
+                    })
+                    
                     
                 }else {
                     Toast(text: "로그인 실패입니다. \n이메일 혹은 비밀번호를 다시 확인해주세요.").show()
@@ -103,4 +126,85 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
         
     }
 
+    
+    /*******************************************/
+    // MARK: -  키보드 올라오는 것에 따르는 오토 스크롤  //
+    /*******************************************/
+    
+    // 뷰 올리기
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 130.0), animated:true)
+    }
+    
+    // 뷰 내리기
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+    }
+    
+    // 리턴키를 터치하면, 다음 텍스트필드로 넘어가거나 로그인 function을 타도록 세팅.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textFieldEmail {
+            textFieldPassword.becomeFirstResponder()
+        } else {
+            self.buttonLoginAction(buttonLogin)
+        }
+        
+        return true
+    }
+    
+    // 화면 다른 곳을 터치하면, 키보드 숨기기.
+    @IBAction func tabHideKeyboard(_ sender: UITapGestureRecognizer) {
+        textFieldEmail.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
+    }
+    
+    
+    /****************************************/
+    // MARK: -  백그라운드 동영상 재생 로직        //
+    /****************************************/
+    
+    public var videoURL: NSURL? {
+        didSet {
+            setupVideoBackground()
+        }
+    }
+    
+    func setupVideoBackground() {
+        var theURL = NSURL()
+        if let url = videoURL {
+            
+            let shade = UIView(frame: self.view.frame)
+            shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+            view.addSubview(shade)
+            view.sendSubview(toBack: shade)
+            
+            theURL = url
+            
+            var avPlayer = AVPlayer()
+            avPlayer = AVPlayer(url: theURL as URL)
+            let avPlayerLayer = AVPlayerLayer(player: avPlayer)
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            avPlayer.volume = 0
+            avPlayer.actionAtItemEnd = AVPlayerActionAtItemEnd.none
+            
+            avPlayerLayer.frame = view.layer.bounds
+            
+            let layer = UIView(frame: self.view.frame)
+            view.backgroundColor = UIColor.clear
+            view.layer.insertSublayer(avPlayerLayer, at: 0)
+            view.addSubview(layer)
+            view.sendSubview(toBack: layer)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
+            
+            avPlayer.play()
+        }
+    }
+    
+    func playerItemDidReachEnd(notification: NSNotification) {
+        if let p = notification.object as? AVPlayerItem {
+            p.seek(to: kCMTimeZero)
+        }
+    }
+    
 }
