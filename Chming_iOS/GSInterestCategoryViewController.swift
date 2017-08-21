@@ -12,23 +12,13 @@ import Alamofire
 class GSInterestCategoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var interestCollectionView: UICollectionView!
-    var testData: [[String:Any]] = [
-                                        ["pk":1,"category":"운동/스포츠", "categoryDetail":"축구"],
-                                        ["pk":2,"category":"운동/스포츠", "categoryDetail":"농구"],
-                                        ["pk":3,"category":"운동/스포츠", "categoryDetail":"야구"],
-                                        ["pk":4,"category":"음악/악기", "categoryDetail":"베이스"],
-                                        ["pk":5,"category":"음악/악기", "categoryDetail":"피아노"],
-                                        ["pk":6,"category":"음악/악기", "categoryDetail":"기타"],
-                                        ["pk":7,"category":"외국어/언어", "categoryDetail":"영어"],
-                                        ["pk":8,"category":"외국어/언어", "categoryDetail":"불어"]
-                                   ]
     
-    var categorySortListArray:[GSCateogrySortingList] = []
+    var categorySortListArray:[GSHobbyCateogrySortingList] = []
     var categoryDelegate: GSCategoryProtocol?
-    var selectCategory: [[String]] = []
+    var selectedCategory: [[String]] = []
     var deatail: [String] = []
     
-    
+    var checkSelectedIndexPathArr: [IndexPath] = []
     var selectIndexPathArr: [IndexPath] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +77,13 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InterestCell", for: indexPath) as! GSInterestCell
         cell.interestNameLabel.text = categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail
         //        cell.backgroundColor = .red
+        if !checkSelectedIndexPathArr.isEmpty {
+            for selectedIndexPath in checkSelectedIndexPathArr {
+                if selectedIndexPath == indexPath {
+                    cell.isSelected = true
+                }
+            }
+        }
         print("cell  호출")
         
         return cell
@@ -105,23 +102,33 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
         
         print("selectCategoryName://",selectCategoryName)
         print("##://", collectionView.cellForItem(at: indexPath)?.backgroundColor)
-        if collectionView.cellForItem(at: indexPath)?.backgroundColor == UIColor.blue {
-            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.clear
-            print("######",selectIndexPathArr)
-            if selectIndexPathArr.contains(indexPath){
-                let indexInt = selectIndexPathArr.index(of: indexPath)
-                print(indexInt)
-                selectIndexPathArr.remove(at: indexInt!)
-            }
-        }else {
-            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.blue
-//      selectCategory.append(categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail)
-            
-            if !selectIndexPathArr.contains(indexPath) {
-                 selectIndexPathArr.append(indexPath)
-            }
-
+        
+        if selectIndexPathArr.contains(indexPath){
+            let indexInt = selectIndexPathArr.index(of: indexPath)
+            print(indexInt)
+            selectIndexPathArr.remove(at: indexInt!)
         }
+        else{
+            selectIndexPathArr.append(indexPath)
+        }
+
+//        if collectionView.cellForItem(at: indexPath)?.backgroundColor == UIColor.blue {
+//            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.clear
+//            print("######",selectIndexPathArr)
+//            if selectIndexPathArr.contains(indexPath){
+//                let indexInt = selectIndexPathArr.index(of: indexPath)
+//                print(indexInt)
+//                selectIndexPathArr.remove(at: indexInt!)
+//            }
+//        }else {
+//            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.blue
+////      selectCategory.append(categorySortListArray[indexPath.section].sortingData[indexPath.item].categoryDetail)
+//            
+//            if !selectIndexPathArr.contains(indexPath) {
+//                 selectIndexPathArr.append(indexPath)
+//            }
+//
+//        }
         print("상세 선택셀 데이터://",selectIndexPathArr)
     }
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
@@ -167,15 +174,17 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
         let categoryListArry = selectIndexPathArr.map { (indexpath) -> String in
             self.categorySortListArray[indexpath.section].sortingData[indexpath.item].categoryDetail
         }
-        print("관심사 총 데이터://", categoryListArry)
         
+        print("관심사 총 데이터://", categoryListArry)
+        print("관심사 총 데이터://", selectIndexPathArr)
         self.dismiss(animated: true) { 
-            self.categoryDelegate?.selectCategory(categoryList: categoryListArry)
+            self.categoryDelegate?.selectCategory(categoryList: categoryListArry, categoryIndexPathList:self.selectIndexPathArr)
         }
         
     }
 }
 
 protocol GSCategoryProtocol {
-    func selectCategory(categoryList: [String])
+    func selectCategory(categoryList: [String], categoryIndexPathList: [IndexPath])
+    func selectRegion(region: MTMapPoint)
 }

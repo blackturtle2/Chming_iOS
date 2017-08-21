@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		18C98B37ECF689FCC7534F26 /* Pods_Chming_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC85E2493B76B22CB43F131 /* Pods_Chming_iOS.framework */; };
+		4C85A4581F49C0AB002E9426 /* GSRegionCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C85A4571F49C0AB002E9426 /* GSRegionCategoryViewController.swift */; };
+		4C85A45A1F4A6695002E9426 /* GSRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C85A4591F4A6695002E9426 /* GSRegionCell.swift */; };
 		4CB146051F304B6400F8A32B /* GSMapMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CB146041F304B6400F8A32B /* GSMapMain.storyboard */; };
 		4CB146071F30535600F8A32B /* GSMapMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB146061F30535600F8A32B /* GSMapMainViewController.swift */; };
 		4CB147201F30607500F8A32B /* changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CB146091F30607500F8A32B /* changelog.txt */; };
@@ -344,6 +346,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C85A4571F49C0AB002E9426 /* GSRegionCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSRegionCategoryViewController.swift; sourceTree = "<group>"; };
+		4C85A4591F4A6695002E9426 /* GSRegionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSRegionCell.swift; sourceTree = "<group>"; };
 		4CB146041F304B6400F8A32B /* GSMapMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GSMapMain.storyboard; sourceTree = "<group>"; };
 		4CB146061F30535600F8A32B /* GSMapMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMapMainViewController.swift; sourceTree = "<group>"; };
 		4CB146091F30607500F8A32B /* changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelog.txt; sourceTree = "<group>"; };
@@ -722,9 +726,11 @@
 				4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */,
 				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
 				4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */,
+				4C85A4571F49C0AB002E9426 /* GSRegionCategoryViewController.swift */,
 				4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */,
 				4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */,
 				4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */,
+				4C85A4591F4A6695002E9426 /* GSRegionCell.swift */,
 				4CB1484C1F30737200F8A32B /* GSFilterMenuView.swift */,
 				4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */,
 				4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */,
@@ -1239,7 +1245,7 @@
 				TargetAttributes = {
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 29Q45PKR77;
+						DevelopmentTeam = PV38XQ6LPC;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1634,6 +1640,7 @@
 				FE3C3F641F44174800416DEA /* JSLoginViewController.swift in Sources */,
 				FEE33F9C1F2F181F00BF61AB /* MainViewController.swift in Sources */,
 				4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */,
+				4C85A4581F49C0AB002E9426 /* GSRegionCategoryViewController.swift in Sources */,
 				4CC95B031F3DA4E50095A2FF /* GSInterestCategoryViewController.swift in Sources */,
 				FEDACEA41F355EA7004826B8 /* JSGroupGalleryCollectionViewCell.swift in Sources */,
 				FEDACE681F31C74C004826B8 /* JSGroupInfoViewController.swift in Sources */,
@@ -1653,6 +1660,7 @@
 				FEDACEA91F35D39A004826B8 /* JSGroupBoardPostingViewController.swift in Sources */,
 				714B30941F45B51400013E56 /* CHPlaygroundViewController.swift in Sources */,
 				4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */,
+				4C85A45A1F4A6695002E9426 /* GSRegionCell.swift in Sources */,
 				4CB1484D1F30737200F8A32B /* GSFilterMenuView.swift in Sources */,
 				715C4DEA1F3AE7A700194C9E /* CHUserFavoriteViewController.swift in Sources */,
 				FEDACE661F31C6D0004826B8 /* DataCenter.swift in Sources */,
@@ -1796,7 +1804,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1820,7 +1828,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEVELOPMENT_TEAM = 29Q45PKR77;
+				DEVELOPMENT_TEAM = PV38XQ6LPC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

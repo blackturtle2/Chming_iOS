@@ -94,31 +94,7 @@ struct GSHobby {
     }
 }
 
-struct GSSortHobbyList {
-    let hobbySport: [GSHobby]
-    let hobbyLanguage: [GSHobby]
-    let hobbyMusic: [GSHobby]
-    
-    init(hobbyListJSON: JSON) {
-        var allHobbyArry: [GSHobby] = []
-        for hobby in hobbyListJSON.arrayValue{
-            allHobbyArry.append(GSHobby(hobbyListJSON: hobby))
-        }
-        self.hobbySport = allHobbyArry.filter({ (hobby) -> Bool in
-            hobby.category == "운동/스포츠"
-        })
-        self.hobbyLanguage = allHobbyArry.filter({ (hobby) -> Bool in
-            hobby.category == "외국/언어"
-        })
-        self.hobbyMusic = allHobbyArry.filter({ (hobby) -> Bool in
-            hobby.category == "음악/악기"
-        })
-    }
-    
-    
-}
-
-struct GSCateogrySortingList{
+struct GSHobbyCateogrySortingList{
     let category: String
     let sortingData: [GSHobby]
     
@@ -135,6 +111,38 @@ struct GSCateogrySortingList{
     
 }
 
+struct GSRegion {
+    let regionPK: Int
+    let si: String
+    let gu: String
+    let dong: String
+    let lat: Double
+    let lng: Double
+    init(regionListJSON: JSON) {
+        self.regionPK = regionListJSON["pk"].intValue
+        self.si = regionListJSON["si"].stringValue
+        self.gu = regionListJSON["gu"].stringValue
+        self.dong = regionListJSON["dong"].stringValue
+        self.lat = regionListJSON["lat"].doubleValue
+        self.lng = regionListJSON["lng"].doubleValue
+    }
+    
+}
+struct  GSRegionCategorySortingList {
+    let category: String
+    let sortingData: [GSRegion]
+    
+    init(category: String, regionListArr: [JSON]) {
+        var regionData: [GSRegion] = []
+        for region in regionListArr {
+            if region["gu"].stringValue == category{
+                regionData.append(GSRegion(regionListJSON: region))
+            }
+        }
+        self.category = category
+        self.sortingData = regionData
+    }
+}
 class GSDataCenter{
     static var shared: GSDataCenter = GSDataCenter()
     var tempdata: [String:Any] = ["강남구":[
@@ -583,7 +591,7 @@ class GSDataCenter{
         }
     }
     
-    func getCategoryHobbyList(completion:@escaping ([GSCateogrySortingList])->Void){
+    func getCategoryHobbyList(completion:@escaping ([GSHobbyCateogrySortingList])->Void){
         Alamofire.request(
             URL(string: "http://chming.jeongmyeonghyeon.com/api/group/hobby/")!,
             method: .get)
@@ -627,9 +635,9 @@ class GSDataCenter{
                     }
                 }
                 
-                var categoryData: [GSCateogrySortingList] = []
+                var categoryData: [GSHobbyCateogrySortingList] = []
                 for category in categoryArr {
-                    categoryData.append(GSCateogrySortingList(category: category, hobbyListArr: hobbyListJSON.arrayValue))
+                    categoryData.append(GSHobbyCateogrySortingList(category: category, hobbyListArr: hobbyListJSON.arrayValue))
                 }
                 print("CATEGORY Data://", categoryData)
                 
@@ -639,5 +647,64 @@ class GSDataCenter{
         }
 
     }
+    
+    
+    func getCategoryRegionList(completion:@escaping ([GSRegionCategorySortingList])->Void){
+        Alamofire.request(
+            URL(string: "http://chming.jeongmyeonghyeon.com/api/group/region/")!,
+            method: .get)
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Error while fetching remote rooms: \(response.result.error)")
+                    return
+                }
+                let json = JSON(response.value)
+                let regionListJson = json
+                print("getCategoryRegionList INFO:// ", regionListJson)
+                //________________________TEST___________________
+                //                let hobbySortingList = GSSortHobbyList(hobbyListJSON: hobbyListJSON)
+                //
+                //
+                //                let hobbyListArr = hobbyListJSON.arrayValue
+                //
+                //
+                //                print("HOBBY ARR://",hobbyListArr)
+                //
+                //
+                //                print("HOBBY sortHobbyDic://", hobbySortingList)
+                //________________________TEST___________________
+                
+                // array map을 쓰면 줄일수 잇을것 같다 -  Set으로 구현하였으나 순서가 없어서 보류중
+                //                var categorySet: Set<String> = []
+                //                let categoryArray = hobbyListJSON.arrayValue.map({ (hobbyJson) -> String in
+                //                    return hobbyJson["category"].stringValue
+                //                })
+                //                categorySet = Set(categoryArray)
+                //
+                //                print("categorySet://",categorySet)
+                //                print("categorySet://",categorySet)
+                //                print("categorySet://",categorySet)
+                
+                var categoryArr: [String] = []
+                for hobby in regionListJson.arrayValue{
+                    let cateogry = hobby["gu"].stringValue
+                    if categoryArr.contains(cateogry) == false{
+                        categoryArr.append(cateogry)
+                    }
+                }
+                
+                var categoryData: [GSRegionCategorySortingList] = []
+                for category in categoryArr {
+                    categoryData.append(GSRegionCategorySortingList(category: category, regionListArr:regionListJson.arrayValue))
+                }
+                print("CATEGORY Data://", categoryData)
+                
+                
+                
+                completion(categoryData)
+        }
+        
+    }
+    
 
 }
