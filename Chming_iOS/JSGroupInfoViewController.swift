@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
 
 class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
@@ -29,7 +30,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // 모임 정보 뷰는 테이블뷰로 이루어져 있습니다.
         mainTableView.delegate = self
         mainTableView.dataSource = self
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +53,17 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         print("///// groupPK: ", groupPK!)
         print("///// groupInfo: ", groupInfo!)
         print("///// noticeList: ", noticeList!)
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)", method: .get, parameters: nil, headers: nil).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(let value):
+                print("///// Alamofire.request - response: ", value)
+                
+            case .failure(let error):
+                print("///// Alamofire.request - error: ", error)
+            }
+        }
         
     }
     
