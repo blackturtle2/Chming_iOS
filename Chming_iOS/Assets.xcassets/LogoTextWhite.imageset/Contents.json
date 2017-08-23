@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "LogoTextWhite.png",
+      "filename" : "LogoTextWithWhite.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LogoTextWhite@2x.png",
+      "filename" : "LogoTextWithWhite@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LogoTextWhite@3x.png",
+      "filename" : "LogoTextWithWhite@3x.png",
       "scale" : "3x"
     }
   ],
