@@ -43,10 +43,13 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     var birthMonth: String?
     var birthDay: String?
     
+    // 피커 선택 데이터 저장용.
     var selectedDataPickerLocation: String?
     var selectedDataPickerHobby: String?
     var tempDataPickerLocation: [String]?
     var tempDataPickerHobby: [String]?
+    
+    var profileImage: UIImage?
     
     /*******************************************/
     // MARK: -  Life Cycle                     //
@@ -152,6 +155,7 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("///// info: ", info)
         guard let image = info["UIImagePickerControllerEditedImage"] as? UIImage else { return }
+        self.profileImage = image
         self.buttonProfileImage.setBackgroundImage(image, for: .normal)
         
         self.dismiss(animated: true, completion: nil)
@@ -418,12 +422,12 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         guard let birthDay = self.birthDay else { return }
         guard let hobby = self.selectedDataPickerHobby else { return }
         guard let location = self.selectedDataPickerLocation else { return }
+//        guard let profileImage = self.profileImage else { return }
         
-        let param: [String:Any] = ["email" : userEmail,
+        var param: [String:Any] = ["email" : userEmail,
                                    "password" : userPassword,
                                    "confirm_password" : userPassword,
                                    "username" : userName,
-                                   "profile_img" : "",
                                    "gender" : userGender,
                                    "birth_year" : birthYear,
                                    "birth_month" : birthMonth,
@@ -433,31 +437,92 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
                                    "lat" : 37.5285730,
                                    "lng" : 126.9289740 ]
         
+        if let userProfileImage = self.profileImage {
+            param.updateValue(userProfileImage, forKey: "profile_img")
+        }
         
-        Alamofire.request(rootDomain + "/api/user/signup/", method: .post, parameters: param, headers: nil).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                print("///// response: ", response.result.value ?? "no data" )
-                print("///// value: ", value)
-                
-                let json = JSON(value)
-                
-                let usernameIssue = json["username"][0].stringValue
-                if usernameIssue == "user with this username already exists." {
-                    print("///// usernameIssue: ", usernameIssue)
-                    Toast(text: "중복되는 회원 이름입니다.\n이름을 다시 입력해주세요.").show()
-                    return
+        self.registerRequest(parameter: param)
+
+//        // MARK: 테스트 코드
+//        아래는 단순 텍스트 데이터를 이용해 JSON으로만 보내는 코드입니다.
+//        따라서 이미지는 보내지 않는 소스입니다.
+//        Alamofire.request(rootDomain + "/api/user/signup/", method: .post, parameters: param, headers: nil).responseJSON { (response) in
+//            
+//            switch response.result {
+//            case .success(let value):
+//                print("///// response: ", response.result.value ?? "no data" )
+//                print("///// value: ", value)
+//                
+//                let json = JSON(value)
+//                
+//                let usernameIssue = json["username"][0].stringValue
+//                if usernameIssue == "user with this username already exists." {
+//                    print("///// usernameIssue: ", usernameIssue)
+//                    Toast(text: "중복되는 회원 이름입니다.\n이름을 다시 입력해주세요.").show()
+//                    return
+//                }
+//                
+//                let resultPK = json["pk"].stringValue
+//                Toast(text: "회원가입 되었습니다. :D").show()
+//                self.dismiss(animated: true, completion: nil)
+//                print("///// resultPK: ", resultPK)
+//                
+//            case .failure(let err):
+//                print("///// error: ", err)
+//            }
+//        }
+        
+    }
+    
+    
+    /**************************************/
+    // MARK: -  회원가입 Request 통신 Logic   //
+    /**************************************/
+    
+    func registerRequest(parameter: [String:Any]) {
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            // MultipartFormData 통신 소스.
+            for (key, value) in parameter {
+                if key == "profile_img" {
+                    guard let vProfileImage = self.profileImage else { return }
+                    guard let userEmail = self.textFieldEmail.text else { return }
+                    
+                    multipartFormData.append(UIImageJPEGRepresentation(vProfileImage, 0.7)!, withName: "profile_img", fileName: userEmail + "ProfileImage", mimeType: "image/jpg")
+                } else if key == "lat" || key == "lng" {
+                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+                } else {
+                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
                 }
-                
-                let resultPK = json["pk"].stringValue
-                Toast(text: "회원가입 되었습니다. :D").show()
-                self.dismiss(animated: true, completion: nil)
-                print("///// resultPK: ", resultPK)
-                
-            case .failure(let err):
-                print("///// error: ", err)
             }
+            
+        }, to: rootDomain + "/api/user/signup/", method: .post) { (encodingResult) in
+            switch encodingResult {
+                
+            case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                upload.responseJSON(completionHandler: { (response) in
+                    print("///// registerRequest - response: ", upload)
+                    print("///// registerRequest - response: ", response)
+                    
+//                    API에 중복 이름 체크가 있을 때의 예외처리. ( 지금은 회원별 중복 이름 가능 )
+//                    let json = JSON(upload)
+//                    let usernameIssue = json["username"][0].stringValue
+//                    if usernameIssue == "user with this username already exists." {
+//                        print("///// usernameIssue: ", usernameIssue)
+//                        Toast(text: "중복되는 회원 이름입니다.\n이름을 다시 입력해주세요.").show()
+//                        return
+//                    }
+                    
+                    DispatchQueue.main.async {
+                        Toast(text: "회원가입 되었습니다. :D").show()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    
+                })
+            case .failure(let err):
+                print("///// registerRequest - err: ", err)
+            }
+            
         }
     }
     
