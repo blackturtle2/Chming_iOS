@@ -43,7 +43,7 @@ class JSTempMainViewController: UIViewController {
         let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSCreateGroupViewController") as! JSCreateGroupViewController
         
         //"JSGroupMainViewController"로 이동할 때, userPK를 가지고 이동합니다.
-        nextVC.userPK = 999
+//        nextVC.userPK = 999
         
         let nextNavi = UINavigationController(rootViewController: nextVC)
         self.present(nextNavi, animated: true, completion: nil)
