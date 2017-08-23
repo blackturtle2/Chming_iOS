@@ -39,7 +39,7 @@ struct JSGroupBoard {
     let isNotice: Bool
     let title: String
     let content: String
-    let imageURL: String?
+    var imageURL: String?
     
     let writerPK: Int
     let writerName: String
@@ -74,13 +74,9 @@ class JSDataCenter {
     }
     
     // MARK: GroupInfo 메소드.
-    // groupPK를 넣으면, JSGroupInfo 형태로 리턴하는 메소드입니다.
-    // 일단, 임시 데이터이고, 추후 여기에서 통신이 이루어질 예정입니다.
+    // json을 넣으면, JSGroupInfo 형태로 리턴하는 메소드입니다.
     // GroupInfoViewController에서 이 값들을 받아서 UI에 뿌릴 예정입니다.
     func findGroupInfo(ofResponseJSON json: JSON) -> JSGroupInfo {
-//        let userHobby = json["login_user_info"]["hobby"].arrayValue.map({ (json) -> String in
-//            return json.stringValue
-//        })
         
         var resultGroupInfo = JSGroupInfo(
             name: json["name"].stringValue,
@@ -106,8 +102,7 @@ class JSDataCenter {
     
     // MARK: 공지사항 메소드
     // 모임 공지사항 리스트를 리턴하는 메소드.
-    // groupPK를 넣으면, 배열로 공지사항 리스트를 리턴합니다.
-    // 일단, 임시 데이터이고, 추후 여기에서 통신이 이루어질 예정입니다.
+    // json을 넣으면, 배열로 공지사항 리스트를 리턴합니다.
     // GroupInfoViewController에서 이 값들을 받아서 UI에 뿌릴 예정입니다.
     func findNoticeList(ofResponseJSON json: JSON) -> [JSGroupBoard] {
         // json["notice"] 값이 parameter로 옵니다.
@@ -127,13 +122,32 @@ class JSDataCenter {
     }
     
     // MARK: 모임 게시판 리스트 데이터 메소드
-    func findGroupBoardList(ofGroupPK: Int) -> [JSGroupBoard] {
-        let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
-        let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: "date", isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: "http://pm1.narvii.com/6388/1d2f5d9672a126ca93bbda8c87dba1835e9a013a_hq.jpg", writerPK: 3, writerName: "이창호", writerProfileImageURL: "http://cfile27.uf.tistory.com/image/266F773758FF10A81B5B49")
+    func findGroupBoardList(ofResponseJSON json: JSON) -> [JSGroupBoard] {
+        let result = json.arrayValue.map { (jsonjson) -> JSGroupBoard in
+            var resultInResult = JSGroupBoard(boardPK: jsonjson["pk"].intValue,
+                                              createdDate: jsonjson["created_date"].stringValue,
+                                              isNotice: jsonjson["post_type"].boolValue,
+                                              title: jsonjson["title"].stringValue,
+                                              content: jsonjson["content"].stringValue,
+                                              imageURL: nil,
+                                              writerPK: jsonjson["author"]["pk"].intValue,
+                                              writerName: jsonjson["author"]["username"].stringValue,
+                                              writerProfileImageURL: jsonjson["author"]["profile_img"].stringValue)
+            if jsonjson["post_img"].stringValue != "" {
+                resultInResult.imageURL = jsonjson["post_img"].stringValue
+            }
+            
+            return resultInResult
+        }
         
-        let resultArray = [myGroupList1, myGroupList2]
+        return result
         
-        return resultArray
+//        let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
+//        let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: "date", isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: "http://pm1.narvii.com/6388/1d2f5d9672a126ca93bbda8c87dba1835e9a013a_hq.jpg", writerPK: 3, writerName: "이창호", writerProfileImageURL: "http://cfile27.uf.tistory.com/image/266F773758FF10A81B5B49")
+//        
+//        let resultArray = [myGroupList1, myGroupList2]
+//        
+//        return resultArray
     }
     
     // MARK: 모임 게시판 디테일 데이터 메소드

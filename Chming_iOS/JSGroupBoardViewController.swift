@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import SwiftyJSON
 
 protocol JSGroupBoardMenuDelegate {
     func showNavigationBarPostingButton()
@@ -41,14 +43,42 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
     override func viewWillAppear(_ animated: Bool) {
         delegate?.showNavigationBarPostingButton()
         
-        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        // Singleton에 있는 GroupPK 데려오기.
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else {
+            print("///// guardlet- vSelectedGroupPK")
+            return
+        }
         
         self.groupPK = vSelectedGroupPK
 //        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
-        self.commonList = JSDataCenter.shared.findGroupBoardList(ofGroupPK: vSelectedGroupPK)
+        
         
         print("///// noticeList 234", self.noticeList ?? "no data")
         print("///// commonList 234", self.commonList ?? "no data")
+        
+        // MARK: 모임 정보에 대한 통신 로직
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/?page=1", method: .get, parameters: nil, headers: nil).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(let value):
+                print("///// Alamofire.request - response: ", value)
+                
+                let json = JSON(value)
+                print("///// json: ", json)
+                
+                self.commonList = JSDataCenter.shared.findGroupBoardList(ofResponseJSON: json["results"])
+                
+                DispatchQueue.main.async {
+                    self.mainTableView.reloadData()
+                }
+                
+            case .failure(let error):
+                print("///// Alamofire.request - error: ", error)
+            }
+        }
+
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
