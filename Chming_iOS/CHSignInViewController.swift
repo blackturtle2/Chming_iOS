@@ -36,6 +36,8 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+//    var avPlayer = AVPlayer()
+    
 //MARK: App Cycle////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +48,6 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
         signInOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
         signInOutlet.cornerRadius()
         
-        // background AV
-        self.setupVideoBackground()
-        videoURL = Bundle.main.url(forResource: "PolarBear", withExtension: "mov")! as NSURL
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,12 +55,20 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
         
         self.title = "Sign In"
 //        emailTextField.becomeFirstResponder()
+        
+        // background AV
+        self.setupVideoBackground()
+        videoURL = Bundle.main.url(forResource: "loginVideo", withExtension: "mov")! as NSURL
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.title = ""
+        
+        self.setupVideoBackground()
+        
         
     }
 
@@ -182,15 +188,13 @@ class CHSignInViewController: UIViewController, UITextFieldDelegate {
             avPlayer.actionAtItemEnd = AVPlayerActionAtItemEnd.none
             
             avPlayerLayer.frame = view.layer.bounds
-            
             let layer = UIView(frame: self.view.frame)
             view.backgroundColor = UIColor.clear
             view.layer.insertSublayer(avPlayerLayer, at: 0)
             view.addSubview(layer)
             view.sendSubview(toBack: layer)
-            
             NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
-            
+            view.removeFromSuperview()
             avPlayer.play()
         }
     }
