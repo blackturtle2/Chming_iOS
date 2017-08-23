@@ -11,7 +11,7 @@ import UIKit
 class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
 
     @IBOutlet weak var regionCollectionView: UICollectionView!
-    
+    @IBOutlet weak var searchBtnOutlet: UIButton!
     var categorySortListArray:[GSRegionCategorySortingList] = []
     var categoryDelegate: GSCategoryProtocol?
     var selectCategory: [[String]] = []
@@ -19,13 +19,18 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
     
     
     var selectMapPoint: MTMapPoint = MTMapPoint()
+    var selectRegionName: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         regionCollectionView.delegate = self
         regionCollectionView.dataSource = self
         
         
+        // 디자인 추가작업  - 0822
+        regionCollectionView.layer.cornerRadius = regionCollectionView.frame.height / 25
         
+        searchBtnOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 0.7),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 0.7)], gradientOrientation: .horizontal)
+        searchBtnOutlet.cornerRadius()
 //        self.categorySortListArray = categorySortListArr
 //        self.regionCollectionView.reloadData()
         
@@ -49,6 +54,15 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
         
         print("뷰 포 서플리멘트리.\(indexPath)")
         header.categoryNameLabel.text = categorySortListArray[indexPath.section].category
+//        print(header.bounds.size.height)
+//        print(header.bounds.height)
+//        print(header.layer.bounds.height)
+//        print(header.layer.bounds.size.height)
+//
+//
+//        if indexPath.section > 0{
+//            header.bounds.size.height = header.bounds.height + 30
+//        }
         
         return header
     }
@@ -74,6 +88,7 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
         let selectCell = collectionView.cellForItem(at: indexPath) as! GSRegionCell
         
         selectMapPoint = selectCell.mapPoint
+        selectRegionName = selectCell.regionNameLabel.text ?? ""
         print("선택 지역의 위경도-://", selectMapPoint)
 //        if collectionView.cellForItem(at: indexPath)?.backgroundColor == UIColor.blue {
 //            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.clear
@@ -144,7 +159,7 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
 
     @IBAction func searchBtnTouched(_ sender: UIButton){
         self.dismiss(animated: true) { 
-            self.categoryDelegate?.selectRegion(region: self.selectMapPoint)
+            self.categoryDelegate?.selectRegion(region: self.selectMapPoint, regionName: self.selectRegionName)
         }
     }
 }

@@ -23,18 +23,47 @@ struct GSGroupUser{
         self.userName = authorJson["username"]?.stringValue ?? ""
     }
 }
+//struct GSGroupOne {
+//    let groupPK: Int
+//    let groupHobby: String
+//    let latitude: Double
+//    let longitude: Double
+//    // latitude: 위도, longitude: 경도
+//
+//    init(stringJSON: (String,JSON)) {
+//        self.groupPK = stringJSON.1["pk"].intValue
+//        self.groupHobby = stringJSON.1["hobby"].stringValue
+//        self.latitude = stringJSON.1["lat"].doubleValue
+//        self.longitude = stringJSON.1["lng"].doubleValue
+//    }
+//    
+//}
 struct GSGroupOne {
     let groupPK: Int
-    let groupHobby: String
+    let groupHobby: [JSON]
+    let groupName: String
+    let groupImg: String
+    let description: String
+    let address: String
     let latitude: Double
     let longitude: Double
+    let author: GSGroupUser
+    let memberCount: Int
+    let likeUserCount: Int
     // latitude: 위도, longitude: 경도
-
+    
     init(stringJSON: (String,JSON)) {
         self.groupPK = stringJSON.1["pk"].intValue
-        self.groupHobby = stringJSON.1["hobby"].stringValue
+        self.groupHobby = stringJSON.1["hobby"].arrayValue
         self.latitude = stringJSON.1["lat"].doubleValue
         self.longitude = stringJSON.1["lng"].doubleValue
+        self.groupName = stringJSON.1["name"].stringValue
+        self.groupImg = stringJSON.1["image"].stringValue
+        self.description = stringJSON.1["description"].stringValue
+        self.address = stringJSON.1["address"].stringValue
+        self.author = GSGroupUser(authorJson: stringJSON.1["author"].dictionaryValue)
+        self.memberCount = stringJSON.1["member_count"].intValue
+        self.likeUserCount = stringJSON.1["like_user_count"].intValue
     }
     
 }
@@ -42,7 +71,7 @@ struct GSGroupDetail {
     let groupPK: Int
     let hobby: [JSON]
     let groupName: String
-    let image: String?
+    let image: String
     let description: String
     let address: String
     let lat: Double
@@ -55,7 +84,7 @@ struct GSGroupDetail {
         self.groupPK = jsonData["pk"].intValue
         self.hobby = jsonData["hobby"].arrayValue
         self.groupName = jsonData["name"].stringValue
-        self.image = jsonData["image"].string
+        self.image = jsonData["image"].stringValue
         self.description = jsonData["description"].stringValue
         self.address = jsonData["address"].stringValue
         self.lat = jsonData["lat"].doubleValue
@@ -504,20 +533,20 @@ class GSDataCenter{
         guard let hobbyList = hobby, let lat = latitude, let lng = longtitude else { return}
         switch hobbyList.count {
         case 0:
-            print("")
+            print("case 0: \(hobbyList)")
             parameter = [
                 "lat":lat,
                 "lng":lng
             ]
         case 1:
-            print("")
+            print("case 1: \(hobbyList)")
             parameter = [
                 "lat":lat,
                 "lng":lng,
                 "hobby":hobbyList.first!
             ]
         default:
-            print("")
+            print("default: \(hobbyList)")
             var hobbyStr = ""
             for hobbyIndex in 0...hobbyList.count-1{
                 if hobbyIndex != hobbyList.count-1{
@@ -526,6 +555,7 @@ class GSDataCenter{
                     hobbyStr.append("\(hobbyList[hobbyIndex])")
                 }
             }
+            print("default hobbyStr://", hobbyStr)
             parameter = [
                 "lat":lat,
                 "lng":lng,
@@ -534,6 +564,7 @@ class GSDataCenter{
         }
         
         print("데이터센터-현재 위도 경도://",latitude,"/",longtitude)
+        print("데이터센터 조회 파라미터://",parameter)
         Alamofire.request(
             URL(string: "http://chming.jeongmyeonghyeon.com/api/group/")!,
             method: .get,
@@ -545,7 +576,7 @@ class GSDataCenter{
                 }
                 let json = JSON(response.value)
                 self.groupListJSON = json
-                print("데이터센터-현재  groupListJSON://",self.groupListJSON)
+                print("데이터센터-현재  groupListJSON://",json)
                 var groups: [GSGroupOne] = []
 //                for data in self.groupListJSON {
 //                    print("",data)
@@ -705,6 +736,7 @@ class GSDataCenter{
         }
         
     }
+    
     
 
 }

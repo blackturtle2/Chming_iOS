@@ -42,7 +42,7 @@ class GSLocalFilterMenuView: UIView {
     }
     
     @IBAction func localBtnTouched(_ sender: UIButton){
-        print(sender.titleLabel?.text)
+        
         let selectLocal = sender.titleLabel?.text ?? ""
         let mapPoint = GSDataCenter.shared.selectLocalMapPoint(local: selectLocal)
         // 리턴 받은 좌표를 뷰에서 이동 해야함 맵뷰 객체에 전달 해야한다.
