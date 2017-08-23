@@ -424,9 +424,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdk-Qy-Yiw">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdk-Qy-Yiw" userLabel="Bacgroud View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tr5-Jk-xDE" appends="YES" id="6do-Ri-cSW"/>
+                                </connections>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bdj-WX-jFo" userLabel="Region Collection View">
                                 <rect key="frame" x="33" y="118" width="308" height="454"/>
@@ -550,6 +554,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRB-A2-AUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="tr5-Jk-xDE">
+                    <connections>
+                        <action selector="backGroundViewTapGesture:" destination="uVo-ul-eGR" id="srG-Rh-W53"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1981.5999999999999" y="-31.03448275862069"/>
         </scene>

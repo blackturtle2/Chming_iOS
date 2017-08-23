@@ -810,7 +810,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     // 현재 중심점위치의 지역의 동을 가져와서 지역선택 타이틀의 값을 바꿔주는 메서드
     func currentLocationAddress() {
-        let result = MTMapReverseGeoCoder.findAddress(for: mapView.mapCenterPoint, withOpenAPIKey: "719b03dd28e6291a3486d538192dca4b") ?? ""
+        let result = MTMapReverseGeoCoder.findAddress(for: mapView.mapCenterPoint, withOpenAPIKey: "719b03dd28e6291a3486d538192dca4b") ?? "현재 위치를 알수없음"
         
         print("//@@@@@@@@@@ FindAddress Start @@@@@@@@@@ //")
         print("FindAddress: // ", result)
@@ -820,8 +820,11 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // components() 메서드사용하여 공백 기준으로 분리 => ["서울", "관악구", "신림동", "441-48"]
         // 우리가 필요한 값은 index 1번 값이 필요
         let addressSplitArr: [String] = result.components(separatedBy: " ")
-        print(addressSplitArr[2])
-        self.regionSelectBtnOutlet.setTitle(addressSplitArr[2], for: .normal)
+        guard let level2Name: String? = addressSplitArr[2] else{return}
+    
+        DispatchQueue.main.async {
+            self.regionSelectBtnOutlet.setTitle(level2Name, for: .normal)
+        }
     }
     // 테스트-하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
     /**

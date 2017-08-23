@@ -740,6 +740,19 @@ class GSDataCenter{
         
     }
     
-    
+    // 현재 중심점위치의 지역의 동을 가져와서 지역선택 타이틀의 값을 바꿔주는 메서드
+    func currentLocationFullAddress(mapPoint: MTMapPoint) -> String{
+        let result = MTMapReverseGeoCoder.findAddress(for: mapPoint, withOpenAPIKey: "719b03dd28e6291a3486d538192dca4b") ?? ""
+        
+        print("//@@@@@@@@@@ FindAddress Start @@@@@@@@@@ //")
+        print("FindAddress: // ", result)
+        print("//@@@@@@@@@@ FindAddress End @@@@@@@@@@ //")
+        
+        // 서울 서초구 서초동 1328-10 => '서초구' 로 잘라야됨
+        // components() 메서드사용하여 공백 기준으로 분리 => ["서울", "관악구", "신림동", "441-48"]
+        // 우리가 필요한 값은 index 1번 값이 필요
+        return result
+        
+    }
 
 }
