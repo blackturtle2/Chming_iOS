@@ -1701,7 +1701,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoTextWhite" width="371" height="127"/>
+        <image name="LogoTextWhite" width="542" height="187"/>
         <image name="ic_check" width="24" height="24"/>
         <image name="ic_clear_white" width="24" height="24"/>
         <image name="ic_delete_white" width="24" height="24"/>

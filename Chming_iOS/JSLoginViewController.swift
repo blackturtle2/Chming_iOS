@@ -43,7 +43,7 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
         
         // background AV
         self.setupVideoBackground()
-        videoURL = Bundle.main.url(forResource: "PolarBear", withExtension: "mov")! as NSURL
+        videoURL = Bundle.main.url(forResource: "loginVideo", withExtension: "mov")! as NSURL
         
     }
 
