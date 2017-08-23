@@ -18,7 +18,7 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
     var deatail: [String] = []
     
     
-    var selectMapPoint: MTMapPoint = MTMapPoint()
+    var selectMapPoint: MTMapPoint?
     var selectRegionName: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,7 +158,8 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
 //    }
 
     @IBAction func searchBtnTouched(_ sender: UIButton){
-        self.dismiss(animated: true) { 
+        self.dismiss(animated: true) {
+            print("선택없이 검색클릭시 위치정보://", self.selectMapPoint?.mapPointGeo())
             self.categoryDelegate?.selectRegion(region: self.selectMapPoint, regionName: self.selectRegionName)
         }
     }

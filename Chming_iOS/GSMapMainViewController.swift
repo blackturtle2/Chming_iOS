@@ -363,9 +363,14 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
     }
     
-    func selectRegion(region: MTMapPoint, regionName: String) {
-        self.selectLoaction = region
-        mapView.setMapCenter(region, animated: true)
+    func selectRegion(region: MTMapPoint?, regionName: String) {
+        if region != nil{
+            self.selectLoaction = region
+        }else{
+            self.selectLoaction = mapView.mapCenterPoint
+        }
+        mapView.setMapCenter(selectLoaction, animated: true)
+        print("선택지역 위치://",selectLoaction?.mapPointGeo())
         print("선택지역명://",regionName)
         regionSelectBtnOutlet.titleLabel?.text = regionName
     }
