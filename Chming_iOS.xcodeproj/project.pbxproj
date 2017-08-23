@@ -1805,7 +1805,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = IKON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = NCP5LJ9VMK;
@@ -1829,7 +1829,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = IKON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = NCP5LJ9VMK;
