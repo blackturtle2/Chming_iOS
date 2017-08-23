@@ -299,7 +299,7 @@
 		4CC0D9471F3401C1003BF493 /* GSDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */; };
 		4CC0D9491F341B80003BF493 /* GSLocalFilterMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */; };
 		4CC0D94B1F3433F2003BF493 /* GSLocalFilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */; };
-		4CC0D9771F395856003BF493 /* GSSimpleGroupInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */; };
+		4CC0D9771F395856003BF493 /* GSSimpleGroupInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC0D9761F395856003BF493 /* GSSimpleGroupInfoView.xib */; };
 		4CC0D9791F395894003BF493 /* GSSimpleGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */; };
 		4CC0D97E1F39A900003BF493 /* GSScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */; };
 		4CC0D9801F3B04AF003BF493 /* CHSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0D97F1F3B04AF003BF493 /* CHSignInViewController.swift */; };
@@ -347,6 +347,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C2212641F4BFB2C00C8DA28 /* loginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.mp4; sourceTree = "<group>"; };
 		4C85A4571F49C0AB002E9426 /* GSRegionCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSRegionCategoryViewController.swift; sourceTree = "<group>"; };
 		4C85A4591F4A6695002E9426 /* GSRegionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSRegionCell.swift; sourceTree = "<group>"; };
 		4CB146041F304B6400F8A32B /* GSMapMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GSMapMain.storyboard; sourceTree = "<group>"; };
@@ -639,7 +640,7 @@
 		4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSDataCenter.swift; sourceTree = "<group>"; };
 		4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSLocalFilterMenu.xib; sourceTree = "<group>"; };
 		4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSLocalFilterMenuView.swift; sourceTree = "<group>"; };
-		4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSimpleGroupInfo.xib; sourceTree = "<group>"; };
+		4CC0D9761F395856003BF493 /* GSSimpleGroupInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSimpleGroupInfoView.xib; sourceTree = "<group>"; };
 		4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSimpleGroupInfoView.swift; sourceTree = "<group>"; };
 		4CC0D97C1F39A2A6003BF493 /* SeoulLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SeoulLocation.gpx; sourceTree = "<group>"; };
 		4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSScrollAreaView.swift; sourceTree = "<group>"; };
@@ -721,15 +722,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4C2212651F4D273600C8DA28 /* mainMap */ = {
+			isa = PBXGroup;
+			children = (
+				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
+				4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */,
+			);
+			name = mainMap;
+			sourceTree = "<group>";
+		};
 		4CB146001F30468200F8A32B /* GS */ = {
 			isa = PBXGroup;
 			children = (
 				4CB146041F304B6400F8A32B /* GSMapMain.storyboard */,
 				4CC0D9461F3401C1003BF493 /* GSDataCenter.swift */,
-				4CB146061F30535600F8A32B /* GSMapMainViewController.swift */,
+				4C2212651F4D273600C8DA28 /* mainMap */,
 				4CC95B021F3DA4E50095A2FF /* GSInterestCategoryViewController.swift */,
 				4C85A4571F49C0AB002E9426 /* GSRegionCategoryViewController.swift */,
-				4CC0D97D1F39A900003BF493 /* GSScrollAreaView.swift */,
 				4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */,
 				4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */,
 				4C85A4591F4A6695002E9426 /* GSRegionCell.swift */,
@@ -738,7 +747,7 @@
 				4CC0D9441F32C6A5003BF493 /* GSFilterMenu.xib */,
 				4CC0D9481F341B80003BF493 /* GSLocalFilterMenu.xib */,
 				4CC0D9781F395894003BF493 /* GSSimpleGroupInfoView.swift */,
-				4CC0D9761F395856003BF493 /* GSSimpleGroupInfo.xib */,
+				4CC0D9761F395856003BF493 /* GSSimpleGroupInfoView.xib */,
 				4CC0D94A1F3433F2003BF493 /* GSLocalFilterMenuView.swift */,
 				4CB148501F30B19E00F8A32B /* mapIMG */,
 			);
@@ -1097,18 +1106,19 @@
 			name = mapIMG;
 			sourceTree = "<group>";
 		};
-		714B30901F45B2C300013E56 /* mov sources */ = {
+		714B30901F45B2C300013E56 /* video source */ = {
 			isa = PBXGroup;
 			children = (
 				714B30911F45B2E000013E56 /* PolarBear.mov */,
+				4C2212641F4BFB2C00C8DA28 /* loginVideo.mp4 */,
 			);
-			name = "mov sources";
+			name = "video source";
 			sourceTree = "<group>";
 		};
 		71E4D5E61F304C0C00FD0F61 /* CH */ = {
 			isa = PBXGroup;
 			children = (
-				714B30901F45B2C300013E56 /* mov sources */,
+				714B30901F45B2C300013E56 /* video source */,
 				71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */,
 				715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */,
 				715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */,
@@ -1541,7 +1551,7 @@
 				4CB147CA1F30607500F8A32B /* functions_d.js in Resources */,
 				4CB147AE1F30607500F8A32B /* files_0.js in Resources */,
 				4CB147A91F30607500F8A32B /* classes_0.js in Resources */,
-				4CC0D9771F395856003BF493 /* GSSimpleGroupInfo.xib in Resources */,
+				4CC0D9771F395856003BF493 /* GSSimpleGroupInfoView.xib in Resources */,
 				4CB147A31F30607500F8A32B /* all_d.js in Resources */,
 				4CB147311F30607500F8A32B /* _m_t_map_view_8h.html in Resources */,
 				4CB1481F1F30607500F8A32B /* map_pin_red@3x.png in Resources */,

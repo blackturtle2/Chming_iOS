@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol, GSCategoryProtocol ,UIScrollViewDelegate, loginCompleteDelegate {
     
+    // MARK: - Property
     var locationFullAddress: String = ""
     
     // 데이터센터에서 파베에서 조회한 데이터를 담을 프로퍼티
@@ -31,6 +32,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     private var userLogtinState: Bool = false
     
     var scrollDraging: Bool = false
+    var scrollStatePoiItem: MTMapPOIItem = MTMapPOIItem()
+    
     // ############################ IBOulet #######################################//
     // MARK: - IBOulet
     @IBOutlet weak var mapView: MTMapView!
@@ -41,13 +44,13 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     @IBOutlet weak var scrollAreaWidthConstraints: NSLayoutConstraint!
     
-    @IBOutlet weak var logtinStateBtnOutlet: UIButton!
+    @IBOutlet weak var loginStatBtnOutlet: UIButton!
     @IBOutlet weak var groupCreateBtnOutlet: UIButton!
+    @IBOutlet weak var locationDescriptionLable: UILabel!
+    @IBOutlet weak var regionSelectBtnOutlet: UIButton!
+    @IBOutlet weak var centerLogoImage: UIImageView!
     
-    func completeLogin() {
-        //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: [])
-        self.logtinStateBtnOutlet.setTitle("로그아웃", for: .normal)
-    }
+    @IBOutlet weak var backgroundViewOutlet: UIView!
     
     // ############################ Initialize #######################################//
     // MARK: - Initialize
@@ -56,11 +59,18 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         mapView.delegate = self
         infoScrollView.delegate = self
         infoScrollView.isPagingEnabled = true
-        // 로그인 여부 판단 및 모임 정보 죄회
+        // 앱델리게이트에서 틴트컬러를 설장하는게 맞을거같은뎀.. 얘기해보장
+        loginStatBtnOutlet.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
+        groupCreateBtnOutlet.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
+//        locationDescriptionLable.textColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
+        regionSelectBtnOutlet.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
+        
+        self.applyGradient(withColours: [#colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 0.2984078323),#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 0.6)], gradientOrientation: .horizontal, forView: backgroundViewOutlet)
+        
         loginCheck()
         
         
-        
+
         // 샘플코드로 마커 찍엇던 메서드를 주석처리 - 다른 마커들을 구현중이라 주석처리 합니다.
         // self.loadMarker()
         
@@ -100,143 +110,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
     }
     
-    // ############################ 클래스 메서드 #######################################//
-    // MARK: - Class Method
     
-    // load시 마커 리스트 셋팅 메서드
-    func loadMarker() {
-        var items = [MTMapPOIItem]()
-        items.append(setPoiItem(name: "하나", latitude: 37.4981688, longtitude: 127.0484572))
-        items.append(setPoiItem(name: "둘", latitude: 37.4987963, longtitude: 127.0415946))
-        items.append(setPoiItem(name: "셋", latitude: 37.5025612, longtitude: 127.0415946))
-        items.append(setPoiItem(name: "넷", latitude: 37.5037539, longtitude: 127.0426469))
-        
-        
-        // 특정 마커에 대한 커스텀 적용시
-        let poiItem2 = MTMapPOIItem()
-        poiItem2.itemName = "Test"
-        poiItem2.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: 37.5176, longitude: 127.0183))
-        poiItem2.markerType = MTMapPOIItemMarkerType.yellowPin
-        poiItem2.markerSelectedType = MTMapPOIItemMarkerSelectedType.redPin
-        poiItem2.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
-        poiItem2.draggable = true
-        // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
-        poiItem2.tag = 153
-        
-        items.append(poiItem2)
-        mapView.addPOIItems(items)
-        
-        //화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
-        mapView.fitAreaToShowAllPOIItems()
-        
-        // zoomLevel 할당 메서드 -  setZoomLevel(zoomLevel: MTMapZoomLevel, animated: Bool)
-        // mapView.setZoomLevel(3, animated: true)
-        
-        //        print("현재 맵 중심점://  ",mapView.mapCenterPoint)
-
-    }
-    
-    // 마커 생성 메서드
-    func setPoiItem(name: String, latitude: Double, longtitude: Double) -> MTMapPOIItem {
-        let poiItem = MTMapPOIItem()
-        // 마커에 이름 지정
-        poiItem.itemName = name
-        
-        // 마커 타입 지정 - 커스텀 이미지 사용시 .customImage 할당
-        poiItem.markerType = .customImage
-        
-        // 커스텀 이미지 지정 - markerType이 customImage 경우에만 지정
-        poiItem.customImage = UIImage(named: "marker1_2.png")
-        
-        // 선택 되었을때 마커 타입 지정
-        poiItem.markerSelectedType = .customImage
-        
-        // 선택 되었을때 마커 이미지 지정 - markerType이 customImage 경우에만 지정
-        poiItem.customSelectedImage = UIImage(named: "marker1_1.png")
-        
-        // 위도 경도 할당
-        poiItem.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longtitude))
-        
-        // 마커가 찍히는 애니메이션 지정
-        poiItem.showAnimationType = .dropFromHeaven
-        
-        
-        poiItem.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
-        
-        // 사용자가 마커 이동 가능 여부 default: false
-        //poiItem.draggable = true
-        
-        // 만약 말풍선 대신 커스텀뷰 지정시
-        //poiItem.customCalloutBalloonView = 커스텀뷰
- 
-        return poiItem
-    }
-    
-    // 파이어베이스 작업 메서드
-    func mapLoad(location: String){
-        let reference = Database.database().reference()
-        reference.child("GroupListMap").child(location).observeSingleEvent(of: .value, with: { (dataSnapShot) in
-            let dataValue = dataSnapShot.value as! [String:Any]
-            print("파이어베이스 데이터:// ", dataValue)
-            
-            
-        })
-    }
-    
-    
-    // 테스트-하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
-    /**
-    func simpleGroupViewLoad(){
-        
-        // -------------------------------- 스크롤뷰 테스트 start --------------------------
-        // 메서드로 변경 예정
-        // 스크롤뷰의 페이지느낌 속성값 - default false
-        infoScrollView.isPagingEnabled = true
-        // 튕기듯하 바운스 속성값 - default true
-        //contentScrollView.bounces = false
-        
-        
-        //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
-        // 개인적으로 닙파일로 빼야될거 같음
-
-        // 고유 정보가 필요하다
-        var count: CGFloat = 0
-        var testTextNum = 0
-        //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
-        let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
-        for index in cg {
-            let simpleGroupInfoView: GSSimpleGroupInfoView = {
-                let view = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42, y: 0, width: self.view.bounds.size.width*0.8, height: self.infoScrollView.bounds.size.height),
-                                                 groupImg: "marker1_\(testTextNum)",
-                    groupName: "그룹명 \(testTextNum)",
-                    groupSimpleInfo: "간단소개\(testTextNum)",
-                    groupIndex: "")
-                    view.delegate = self
-                    // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
-                    view.groupPK = "\(testTextNum)"
-                view.layer.borderColor = index.cgColor
-                view.layer.borderWidth = 2
-                print(view.frame)
-                testTextNum += 1
-                return view
-            }()
-            
-            count += 1
-            scrollAreaView.addSubview(simpleGroupInfoView)
-            
-        }
-        
-        // ## 제약 사항 변경
-        scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
-        // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
-        self.infoScrollView.layoutIfNeeded()
-        
-        
-        
-        
-        // ---------------------------- 스크롤뷰 테스트  end --------------------------
-    }
-    */    
     
     // ############################ MTMapViewDelegate Method #######################################//
     // MARK: - MTMapViewDelegate 메서드(Map View Event delegate methods)
@@ -365,13 +239,15 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     func mapView(_ mapView: MTMapView!, dragStartedOn mapPoint: MTMapPoint!) {
         print("맵뷰 드래그 시작 좌표://", mapPoint.mapPointGeo())
+        self.scrollDraging = false
+        
     }
     
     // 사용자가 지도 위 한지점을 터치하여 드래그를 끝낼 경우 호출
     func mapView(_ mapView: MTMapView!, dragEndedOn mapPoint: MTMapPoint!) {
         print("맵뷰 드래그 끝 좌표://", mapPoint.mapPointGeo())
         // 드래그가 끝이 나면 다시 맵뷰 이동에 따라 그룹정보를 가져오기 위해 scrollDraging의 값을 바꿔준다.
-        self.scrollDraging = false
+        //self.scrollDraging = false
         
     }
    
@@ -390,6 +266,11 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
     }
     
+    func mapView(_ mapView: MTMapView!, zoomLevelChangedTo zoomLevel: MTMapZoomLevel) {
+        print("변경된 줌레벨://", zoomLevel)
+        
+        
+    }
     
     // MARK: - MTMapReverseGeoCoderDelegate 메서드
     
@@ -409,10 +290,21 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print(scrollViewIndex)
         //infoScrollView.contentOffset = targetContentOffset.pointee
         
-        let scrollMapPoIItem = mapView.findPOIItem(byTag: scrollViewIndex)
-        print("스크롤한 마커이름://",scrollMapPoIItem?.itemName)
-        print("스크롤한 마커 위.경도://",scrollMapPoIItem?.mapPoint)
-        mapView.setMapCenter(scrollMapPoIItem?.mapPoint, animated: true)
+        guard let scrollMapPoIItem = mapView.findPOIItem(byTag: scrollViewIndex) else {return}
+        print("스크롤한 마커이름://",scrollMapPoIItem.itemName)
+        print("스크롤한 마커 위.경도://",scrollMapPoIItem.mapPoint)
+        
+//        if !scrollStatePoiItem.isEqual(scrollMapPoIItem){
+//            mapView.select(scrollMapPoIItem, animated: true)
+//        }else{
+//            mapView.deselect(scrollStatePoiItem)
+//        }
+        
+        mapView.select(scrollMapPoIItem, animated: true)
+        scrollStatePoiItem = scrollMapPoIItem
+        
+        
+        mapView.setMapCenter(scrollMapPoIItem.mapPoint, animated: true)
         
         
         
@@ -421,191 +313,10 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             self.scrollDraging = true
         }
     }
-    
-     // ############################ IBAction #######################################//
-    // MARK: IBAction
-    
-    // 내 위치로 이동
-    @IBAction func myLocationBtnTouched(_ sender: UIButton){
-        
-        // 맵을 할당한 맵포인트 좌표로 이동
-        mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
-//        self.mapLoad()
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        //mapView.deselect(scrollStatePoiItem)
     }
     
-    
-    @IBAction func groupCreateBtnTouched(_ sender: UIButton) {
-
-        let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSCreateGroupViewController") as! JSCreateGroupViewController
-        let navigation = UINavigationController(rootViewController: nextVC)
-        self.present(navigation, animated: true, completion: nil)
-        
-        
-    }
-    
-    @IBAction func loginStateBtnTouched(_ sender: UIButton) {
-        if UserDefaults.standard.value(forKey: userDefaultsToken) == nil {
-            let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSLoginViewController") as! JSLoginViewController
-            nextVC.loginDelegate = self
-            self.present(nextVC, animated: true, completion: nil)
-        }
-        // else 일때 로그아웃 수행 - 작성예정 -0818
-        else{
-            let header: HTTPHeaders = [
-                "Auth":"Token \(UserDefaults.standard.value(forKey: userDefaultsToken) as! String)"
-            ]
-            
-            Alamofire.request(
-                URL(string: "\(rootDomain)/api/user/logout/")!,
-                method: .post,
-                headers: header)
-                .responseJSON(completionHandler: { (response) in
-                    guard response.result.isSuccess else{
-                        print(response.result.error,"/", response.value)
-                        return
-                    }
-                    
-                    print("로그아웃호출 결과://",response.value)
-                    
-                    UserDefaults.standard.removeObject(forKey: userDefaultsToken)
-                    UserDefaults.standard.removeObject(forKey: userDefaultsPk)
-                    UserDefaults.standard.removeObject(forKey: "userHobby")
-                    
-                    DispatchQueue.main.async {
-                        print("로그아웃후 로그인 체크 호출")
-                        self.loginCheck()
-                    }
-            })
-            
-        }
-    }
-    
-    
-    
-    // 정렬버튼
-    @IBAction func filterBtnTouched(_ sender: UIButton){
-        let filtetView = GSFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width - 32.0, height: 270.0), sortHandler: { (filterMenu) in
-            print("정렬 핸들러 ")
-        }) { (filterMenu) in
-            print("취소 핸들러-내리기 버튼 클릭")
-        }
-        
-        filtetView.popUp(on: self.view)
-    }
-    
-    
-    // 지역선택 버튼
-    @IBAction func localFilterBtnTouched(_ sender: UIButton){
-        let nextViewContorller = self.storyboard?.instantiateViewController(withIdentifier: "GSRegionCategoryView") as! GSRegionCategoryViewController
-        nextViewContorller.categoryDelegate = self
-        self.present(nextViewContorller, animated: true, completion: nil)
-//        let localFilterMenuView = GSLocalFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 300.0), localHandler: { [unowned self] (localFiterView, mapPoint) in
-//            print("localHandler")
-//            self.mapView.setMapCenter(mapPoint["localMapPoint"] as! MTMapPoint, zoomLevel: 3, animated: true)
-//            print("지역선택시 넘어온 데이터정보:// ",mapPoint )
-//            
-//            print(type(of: mapPoint["interestMapPoint"]))
-//            let interestGroupsAll:[String:Any] = mapPoint["interestMapPoint"] as! [String:Any]
-//            print(interestGroupsAll)
-//            // 작업 진행중--- 현재 2017.08.08 오후 6시 17분
-//            var items = [MTMapPOIItem]()
-//            // 특정 마커에 대한 커스텀 적용시
-//            
-//
-//            var tagValue = 0
-//            for key in interestGroupsAll.keys {
-//                print(key)// key = "축구", "농구"
-//                // 각각의 키가 가지고 있는 값이 필요
-//                // for-in 문을 돌면서 먼저 키값을 기준으로 그룹정보가 들어있는 배열 형태로 생성
-//                // interestGroup = [["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
-//                //                  ["groupPK": "23", "groupMapPoint": <MTMapPoint: 0x608000011340>]]
-//                let interestGroup = interestGroupsAll[key] as! [[String:Any]]
-//                for groupOne in interestGroup { //["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
-//                    let interestPoitItem = MTMapPOIItem() // 마커 생성
-//                    // 마커에 필요한 값을 groupOne에서 가져와서 할당
-//                    interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
-//                    interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
-//                    print("그룸정보://", groupOne)
-//                    // 모임의 관심사에 따라 마커의 타입을 분기처리
-//                    switch key {
-//                    case "축구":
-//                        interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
-//                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-//                    case "농구":
-//                        interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
-//                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-//                    default:
-//                        interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
-//                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
-//                    }
-//                    interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
-//                    interestPoitItem.tag = tagValue
-//                    items.append(interestPoitItem)
-//                    tagValue += 1
-//                    print(items)
-//                }
-//                
-//            }
-//            print(items.count)
-//            self.mapView.addPOIItems(items)
-//            
-//
-//            
-//            
-//              // #단일 관심사 모임에 대한 마커를 표시했던 이전 코드
-////            let groupInfo: [[String:Any]] = mapPoint["interestMapPoint"] as! [[String:Any]]
-////            for groupOne in groupInfo {
-////                let interestPoitItem = MTMapPOIItem()
-////                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
-////                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
-////                print("그룸정보://", groupOne)
-////                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
-////                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-////                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
-////                //interestPoitItem.draggable = true
-////                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
-////                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
-////                items.append(interestPoitItem)
-////                print("아이템스:// ",items)
-////            }
-////            self.mapView.addPOIItems(items)
-////            화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
-////            self.mapView.fitAreaToShowAllPOIItems()
-//            
-//            
-//            // Dictionary 자체의 map메서드 - 파라미터를 클로저 함수를 가지고 있다. 뷰를 그리는 시점차이로 파악중이며 아래 for-in문으로 구현한것을 사용
-////            groupInfo.map({ (groupOne) in
-////                print(groupOne)
-////                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
-////                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
-////                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
-////                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-////                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.springFromGround
-////                //interestPoitItem.draggable = true
-////                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
-////                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
-////                items.append(interestPoitItem)
-////                print("딕셔너리 맵 ")
-////
-////            })
-//            
-//        }) { (localFilterview) in
-//            print("cancelHandler")
-//            
-//        }
-//        localFilterMenuView.popUp(on: self.view)
-    }
-    
-    // 관심사버튼 클릭
-    @IBAction func categoryBtnTouched(_ sender: UIButton){
-        let nextViewContorller = self.storyboard?.instantiateViewController(withIdentifier: "GSInterestCategoryView") as! GSInterestCategoryViewController
-        nextViewContorller.categoryDelegate = self
-        nextViewContorller.checkSelectedIndexPathArr = self.userHobbyIndexPathList ?? []
-        self.present(nextViewContorller, animated: true, completion: nil)
-       
-    }
     
     
     
@@ -630,11 +341,13 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // 만약 현재 선택된 지역이 있으면 선택 지역의 mappoint를 할당
         // 그렇지 않으면 현위치의 지역의 mappoint를 할당
         if let location = self.selectLoaction {
+            print("관심사 선택후 선택지역이 있을시 로케이션://", location.mapPointGeo())
             moveLocation = location
             mapView.setMapCenter(moveLocation, animated: true)
         }
         else{
             moveLocation = self.loadCurrentMapPoint!
+            print("관심사 선택후 선택지역이 없을시 ㅎ현재로케이션://", moveLocation.mapPointGeo())
         }
         print(moveLocation)
         
@@ -650,158 +363,25 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
     }
     
-    func selectRegion(region: MTMapPoint) {
+    func selectRegion(region: MTMapPoint, regionName: String) {
+        self.selectLoaction = region
         mapView.setMapCenter(region, animated: true)
+        print("선택지역명://",regionName)
+        regionSelectBtnOutlet.titleLabel?.text = regionName
     }
     
-    // 좌표값과 관심사 항목을 파라미터로 전달하여 주변 관심사 모임정보를 조회화여 마커를찍고 간단정보뷰를 그리는 메서드
-    func loadGroupListInfo(loadMapPoint: MTMapPoint, hobbyList: [String]){
-        GSDataCenter.shared.getLoadGroupMapList(token: "", latitude: loadMapPoint.mapPointGeo().latitude, longtitude: loadMapPoint.mapPointGeo().longitude, hobby: hobbyList) { (groupList) in
-            
-            print("API MAP list://", groupList)
-            
-            // 영역인컨텐츠뷰의 타입은 현재 UIViewd이다
-            print("SCROLL AREAVIEW SUBVIEWS://", self.scrollAreaView.subviews,"/ COUNT:// ",self.scrollAreaView.subviews.count)
-            if self.scrollAreaView.subviews.count > 0 {
-                self.scrollAreaView.removeSubviews()
-                
-            }
-            self.mapView.removeAllPOIItems()
-            
-            
-            // 튕기듯하 바운스 속성값 - default true
-            //contentScrollView.bounces = false
-            
-            
-            //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
-            // 개인적으로 닙파일로 빼야될거 같음
-            
-            // 고유 정보가 필요하다
-            //        var count: CGFloat = 0
-            
-            //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
-            let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
-            
-            
-            var items = [MTMapPOIItem]()
-            // 특정 마커에 대한 커스텀 적용시
-            print("GROUPLIST COUNT://",groupList.groupOne.count)
-            var count: CGFloat = 0
-            var groupTagValue = 1
-            var itmeTagValue = 0 // 간단정보뷰의 인덱스와
-            for groupOne in groupList.groupOne {
-                print("GROUP ONE://", groupOne)
-                
-                // # 마커 생성 부분
-                let interestPoitItem = MTMapPOIItem() // 마커 생성
-                // 마커에 필요한 값을 groupOne에서 가져와서 할당
-                
-                let groupMapoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: groupOne.latitude, longitude: groupOne.longitude))
-                interestPoitItem.itemName = String(groupOne.groupPK)
-                interestPoitItem.mapPoint = groupMapoint
-                
-                // 모임의 관심사에 따라 마커의 타입을 분기처리
-                switch groupOne.groupHobby {
-                case "축구":
-                    interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
-                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-                case "농구":
-                    interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
-                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
-                default:
-                    interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
-                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
-                }
-                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.springFromGround
-                interestPoitItem.tag = itmeTagValue
-                items.append(interestPoitItem)
-                print("마커 네임(PK)://", interestPoitItem.itemName)
-                itmeTagValue += 1
-                print("마커총갯수:// ",items.count)
-                
-                
-                // 0820 - 변경된 API에 맞게 수정해야할것같다. 
-                GSDataCenter.shared.getGroupDetail(groupPK: groupOne.groupPK, completion: { (groupDetail) in
-                    print("GETGROUPDETAIL://", groupDetail)
-                    // 예외처리를 해줘야한다. 현재 임시 예외처리 -0816
-                    // 그룹명이 없으면 간단정보뷰를 그리지 않게처리함
-                    if groupDetail.groupName != "" {
-                        DispatchQueue.main.async {
-                            
-                            
-                            let simpleGroupInfoView: GSSimpleGroupInfoView = {
-                                let view = GSSimpleGroupInfoView(
-                                    frame: CGRect(x: (self.view.bounds.size.width * count)+42,
-                                                  y: 0, width: self.view.bounds.size.width*0.8,
-                                                  height: self.infoScrollView.bounds.size.height))
-                                view.delegate = self
-                                //                            groupImg: groupDetail.image,
-                                //                            groupName: groupDetail.groupName,
-                                //                            groupSimpleInfo: groupDetail.description,
-                                //                            groupIndex: "\(groupTagValue)."
-                                
-                                view.groupPK = String(groupDetail.groupPK)
-                                view.layer.borderWidth = 2
-                                print(view.frame)
-                                
-                                return view
-                            }()
-                            print("SIMPLINFOVIEW://",groupDetail)
-                            simpleGroupInfoView.viewSetUp(groupImg: groupDetail.image, groupName: groupDetail.groupName, groupSimpleInfo: groupDetail.description, groupIndex: "\(groupTagValue).")
-                            // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
-                            print("count://", count)
-                            count += 1
-                            groupTagValue += 1
-                            self.scrollAreaView.addSubview(simpleGroupInfoView)
-                            // ## 제약 사항 변경
-                            self.scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
-                            // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
-                            self.infoScrollView.layoutIfNeeded()
-                        }
-                    }
-                })
-            }
-            print("핀찍기전 마커들://", items)
-            self.mapView.addPOIItems(items)
-            
-        }
-    }
     
-    // 최초 로그인 체크
-    func loginCheck(){
-        // 토큰값과, 관심사 항목 옵셔널바이딩체크
-        // 옵셔널이 아니면
-        print("LOGINCHECK 토큰값://", UserDefaults.standard.value(forKey: userDefaultsToken))
-        if let token = UserDefaults.standard.value(forKey: userDefaultsToken) as? String, let userHobbyList = UserDefaults.standard.value(forKey: "userHobby") as? [String] {
-            self.userToken = token
-            self.userHobbyList = userHobbyList
-            self.logtinStateBtnOutlet.setTitle("로그아웃", for: .normal)
-            self.groupCreateBtnOutlet.isHidden = false
-            self.userLogtinState = true
-            //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList)
-            
-        }else{
-            print("LOGINCHECK NO LOGIN")
-            self.logtinStateBtnOutlet.setTitle("로그인", for: .normal)
-            self.groupCreateBtnOutlet.isHidden = true
-            self.userLogtinState = false
-            self.userHobbyList = []
-            //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
-            
-        }
-        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
-        
+    // MARK: - loginCompleteDelegate (프로토콜명 변경필요할듯)
+    func completeLogin() {
+        loginCheck()
+ 
     }
     
     func userStateMapLoad(){
         print("유저상태://", userLogtinState)
         print("유저상태 로그인://", loginUserHobbyList)
         print("유저상태 비로그인://", userHobbyList)
-//        if userLogtinState {
-//            self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: loginUserHobbyList!)
-//        }else{
-//            self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
-//        }
+
         self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
     }
     
@@ -921,6 +501,551 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
      
     }
      */
+    
+    // ############################ 클래스 메서드 #######################################//
+    // MARK: - Class Method
+    
+    // load시 마커 리스트 셋팅 메서드
+    func loadMarker() {
+        var items = [MTMapPOIItem]()
+        items.append(setPoiItem(name: "하나", latitude: 37.4981688, longtitude: 127.0484572))
+        items.append(setPoiItem(name: "둘", latitude: 37.4987963, longtitude: 127.0415946))
+        items.append(setPoiItem(name: "셋", latitude: 37.5025612, longtitude: 127.0415946))
+        items.append(setPoiItem(name: "넷", latitude: 37.5037539, longtitude: 127.0426469))
+        
+        
+        // 특정 마커에 대한 커스텀 적용시
+        let poiItem2 = MTMapPOIItem()
+        poiItem2.itemName = "Test"
+        poiItem2.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: 37.5176, longitude: 127.0183))
+        poiItem2.markerType = MTMapPOIItemMarkerType.yellowPin
+        poiItem2.markerSelectedType = MTMapPOIItemMarkerSelectedType.redPin
+        poiItem2.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+        poiItem2.draggable = true
+        // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+        poiItem2.tag = 153
+        
+        items.append(poiItem2)
+        mapView.addPOIItems(items)
+        
+        //화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
+        mapView.fitAreaToShowAllPOIItems()
+        
+        // zoomLevel 할당 메서드 -  setZoomLevel(zoomLevel: MTMapZoomLevel, animated: Bool)
+        // mapView.setZoomLevel(3, animated: true)
+        
+        //        print("현재 맵 중심점://  ",mapView.mapCenterPoint)
+        
+    }
+    
+    // 마커 생성 메서드
+    func setPoiItem(name: String, latitude: Double, longtitude: Double) -> MTMapPOIItem {
+        let poiItem = MTMapPOIItem()
+        // 마커에 이름 지정
+        poiItem.itemName = name
+        
+        // 마커 타입 지정 - 커스텀 이미지 사용시 .customImage 할당
+        poiItem.markerType = .customImage
+        
+        // 커스텀 이미지 지정 - markerType이 customImage 경우에만 지정
+        poiItem.customImage = UIImage(named: "marker1_2.png")
+        
+        // 선택 되었을때 마커 타입 지정
+        poiItem.markerSelectedType = .customImage
+        
+        // 선택 되었을때 마커 이미지 지정 - markerType이 customImage 경우에만 지정
+        poiItem.customSelectedImage = UIImage(named: "marker1_1.png")
+        
+        // 위도 경도 할당
+        poiItem.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longtitude))
+        
+        // 마커가 찍히는 애니메이션 지정
+        poiItem.showAnimationType = .dropFromHeaven
+        
+        
+        poiItem.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
+        
+        // 사용자가 마커 이동 가능 여부 default: false
+        //poiItem.draggable = true
+        
+        // 만약 말풍선 대신 커스텀뷰 지정시
+        //poiItem.customCalloutBalloonView = 커스텀뷰
+        
+        return poiItem
+    }
+    
+    // 파이어베이스 작업 메서드
+    func mapLoad(location: String){
+        let reference = Database.database().reference()
+        reference.child("GroupListMap").child(location).observeSingleEvent(of: .value, with: { (dataSnapShot) in
+            let dataValue = dataSnapShot.value as! [String:Any]
+            print("파이어베이스 데이터:// ", dataValue)
+            
+            
+        })
+    }
+    
+    // 메인뷰 상태 뷰 UI입히는 뷰
+    func applyGradient(withColours colours: [UIColor], gradientOrientation orientation: GradientOrientation, forView: UIView) {
+        
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = forView.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.startPoint = orientation.startPoint
+        gradient.endPoint = orientation.endPoint
+        
+        forView.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    // 좌표값과 관심사 항목을 파라미터로 전달하여 주변 관심사 모임정보를 조회화여 마커를찍고 간단정보뷰를 그리는 메서드
+    func loadGroupListInfo(loadMapPoint: MTMapPoint, hobbyList: [String]){
+        GSDataCenter.shared.getLoadGroupMapList(token: "", latitude: loadMapPoint.mapPointGeo().latitude, longtitude: loadMapPoint.mapPointGeo().longitude, hobby: hobbyList) { (groupList) in
+            
+            print("API MAP list://", groupList)
+            
+            // 영역인컨텐츠뷰의 타입은 현재 UIViewd이다
+            print("SCROLL AREAVIEW SUBVIEWS://", self.scrollAreaView.subviews,"/ COUNT:// ",self.scrollAreaView.subviews.count)
+            if self.scrollAreaView.subviews.count > 0 {
+                self.scrollAreaView.removeSubviews()
+            }
+            self.mapView.removeAllPOIItems()
+            
+            
+            // 튕기듯하 바운스 속성값 - default true
+            //contentScrollView.bounces = false
+            
+            
+            //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
+            // 개인적으로 닙파일로 빼야될거 같음
+            
+            // 고유 정보가 필요하다
+            //        var count: CGFloat = 0
+            
+            //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
+            
+            
+            var items = [MTMapPOIItem]()
+            // 특정 마커에 대한 커스텀 적용시
+            print("GROUPLIST COUNT://",groupList.groupOne.count)
+            var count: CGFloat = 0
+            var groupTagValue = 1
+            var itmeTagValue = 0 // 간단정보뷰의 인덱스와
+            for groupOne in groupList.groupOne {
+                print("GROUP ONE://", groupOne)
+                print("뷰셋 마커시작")
+                // # 마커 생성 부분
+                let interestPoitItem = MTMapPOIItem() // 마커 생성
+                // 마커에 필요한 값을 groupOne에서 가져와서 할당
+                
+                let groupMapoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: groupOne.latitude, longitude: groupOne.longitude))
+                interestPoitItem.itemName = String(groupOne.groupPK)
+                interestPoitItem.mapPoint = groupMapoint
+                
+                // 모임의 관심사에 따라 마커의 타입을 분기처리
+                //                switch groupOne.groupHobby {
+                //                case "축구":
+                //                    interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+                //                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                //                case "농구":
+                //                    interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
+                //                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+                //                default:
+                //                    interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
+                //                    interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
+                //                }
+                
+                
+                interestPoitItem.customImage = #imageLiteral(resourceName: "BlackPinWithWhite")
+                interestPoitItem.markerType = MTMapPOIItemMarkerType.customImage
+                
+                interestPoitItem.customSelectedImage = #imageLiteral(resourceName: "ColoredPinWithWhite")
+                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage
+                
+                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.springFromGround
+                interestPoitItem.tag = itmeTagValue
+                items.append(interestPoitItem)
+                print("마커 네임(PK)://", interestPoitItem.itemName)
+                itmeTagValue += 1
+                print("마커총갯수:// ",items.count)
+                print("뷰셋 마커끝")
+                
+                
+                print("심플뷰 그리는 메인쓰레드")
+                //                    let simpleGroupInfoView: GSSimpleGroupInfoView = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42,
+                //                                                                                                         y: 0, width: self.view.bounds.size.width*0.8,
+                //                                                                                                         height: self.infoScrollView.bounds.size.height), groupImg: groupOne.groupImg, groupName: groupOne.groupName, groupSimpleInfo: groupOne.description, groupIndex: "\(groupTagValue).")!
+                //
+                //                    simpleGroupInfoView.delegate = self
+                //                    simpleGroupInfoView.groupPK = String(groupOne.groupPK)
+                //                    simpleGroupInfoView.layer.borderWidth = 2
+                
+                print("SIMPLINFOVIEW://",groupOne)
+                
+                // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+                print("count://", count)
+                
+                let simpleGroupInfoView: GSSimpleGroupInfoView = {
+                    let view = GSSimpleGroupInfoView(
+                        frame: CGRect(x: (self.view.bounds.size.width * count)+42,
+                                      y: 0, width: self.view.bounds.size.width*0.8,
+                                      height: self.infoScrollView.bounds.size.height))
+                    view.delegate = self
+                    //                            groupImg: groupDetail.image,
+                    //                            groupName: groupDetail.groupName,
+                    //                            groupSimpleInfo: groupDetail.description,
+                    //                            groupIndex: "\(groupTagValue)."
+                    
+                    view.groupPK = String(groupOne.groupPK)
+                    
+                    view.groupName = groupOne.groupName
+                    view.groupImage = groupOne.groupImg
+                    view.groupInfo = groupOne.description
+                    view.groupIndexs = "\(groupTagValue)."
+                    
+                    print(view.frame)
+                    print("뷰셋 1")
+                    return view
+                }()
+                print("SIMPLINFOVIEW://",groupOne)
+                self.scrollAreaView.addSubview(simpleGroupInfoView)
+                //                    simpleGroupInfoView.indicatorView.startAnimating()
+                simpleGroupInfoView.viewSetUp(groupImg: groupOne.groupImg, groupName: groupOne.groupName, groupSimpleInfo: groupOne.description, groupIndex: "\(groupTagValue).", currentView: self)
+                // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+                print("count://", count)
+                print("뷰셋 3")
+                count += 1
+                groupTagValue += 1
+                
+                // ## 제약 사항 변경
+                self.scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
+                // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
+                self.infoScrollView.layoutIfNeeded()
+                
+                
+                
+                // 0820 - 변경된 API에 맞게 수정해야할것같다. - 변경API 구조작업중0821
+                /*
+                 GSDataCenter.shared.getGroupDetail(groupPK: groupOne.groupPK, completion: { (groupDetail) in
+                 print("GETGROUPDETAIL://", groupDetail)
+                 // 예외처리를 해줘야한다. 현재 임시 예외처리 -0816
+                 // 그룹명이 없으면 간단정보뷰를 그리지 않게처리함
+                 if groupDetail.groupName != "" {
+                 DispatchQueue.main.async {
+                 
+                 
+                 let simpleGroupInfoView: GSSimpleGroupInfoView = {
+                 let view = GSSimpleGroupInfoView(
+                 frame: CGRect(x: (self.view.bounds.size.width * count)+42,
+                 y: 0, width: self.view.bounds.size.width*0.8,
+                 height: self.infoScrollView.bounds.size.height))
+                 view.delegate = self
+                 //                            groupImg: groupDetail.image,
+                 //                            groupName: groupDetail.groupName,
+                 //                            groupSimpleInfo: groupDetail.description,
+                 //                            groupIndex: "\(groupTagValue)."
+                 
+                 view.groupPK = String(groupDetail.groupPK)
+                 view.layer.borderWidth = 2
+                 print(view.frame)
+                 
+                 return view
+                 }()
+                 print("SIMPLINFOVIEW://",groupDetail)
+                 simpleGroupInfoView.viewSetUp(groupImg: groupDetail.image, groupName: groupDetail.groupName, groupSimpleInfo: groupDetail.description, groupIndex: "\(groupTagValue).")
+                 // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+                 print("count://", count)
+                 count += 1
+                 groupTagValue += 1
+                 self.scrollAreaView.addSubview(simpleGroupInfoView)
+                 // ## 제약 사항 변경
+                 self.scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
+                 // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
+                 self.infoScrollView.layoutIfNeeded()
+                 }
+                 }
+                 })*/
+            }
+            print("핀찍기전 마커들://", items)
+            self.mapView.addPOIItems(items)
+            print("뷰셋 포문끝")
+        }
+    }
+    
+    // 최초 로그인 체크
+    func loginCheck(){
+        // 토큰값과, 관심사 항목 옵셔널바이딩체크
+        // 옵셔널이 아니면
+        print("LOGINCHECK 토큰값://", UserDefaults.standard.value(forKey: userDefaultsToken))
+        if let token = UserDefaults.standard.value(forKey: userDefaultsToken) as? String, let userHobbyList = UserDefaults.standard.value(forKey: "userHobby") as? [String] {
+            self.userToken = token
+            self.userHobbyList = userHobbyList
+            self.loginStatBtnOutlet.setTitle("로그아웃", for: .normal)
+            self.groupCreateBtnOutlet.isHidden = false
+            self.userLogtinState = true
+            //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList)
+            
+        }else{
+            print("LOGINCHECK NO LOGIN")
+            self.loginStatBtnOutlet.setTitle("로그인", for: .normal)
+            self.userToken = nil
+            self.groupCreateBtnOutlet.isHidden = true
+            self.userLogtinState = false
+            self.userHobbyList = []
+            self.userHobbyIndexPathList = []
+            //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
+            
+        }
+        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
+        
+    }
+    
+    // 테스트-하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
+    /**
+     func simpleGroupViewLoad(){
+     
+     // -------------------------------- 스크롤뷰 테스트 start --------------------------
+     // 메서드로 변경 예정
+     // 스크롤뷰의 페이지느낌 속성값 - default false
+     infoScrollView.isPagingEnabled = true
+     // 튕기듯하 바운스 속성값 - default true
+     //contentScrollView.bounces = false
+     
+     
+     //## 코드로 구현 시작 - 강사님의 조언 어차피 데이터를 가지고 와서 그 데이터만큼 뷰를 그리고 값을 조정하기에 코드로 구현 하거나, nib구현
+     // 개인적으로 닙파일로 빼야될거 같음
+     
+     // 고유 정보가 필요하다
+     var count: CGFloat = 0
+     var testTextNum = 0
+     //infoScrollView.contentSize = CGSize(width: self.view.bounds.width*5, height: self.view.bounds.height)
+     let cg: [UIColor] = [ .blue, .red, .yellow, .gray, .black]
+     for index in cg {
+     let simpleGroupInfoView: GSSimpleGroupInfoView = {
+     let view = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42, y: 0, width: self.view.bounds.size.width*0.8, height: self.infoScrollView.bounds.size.height),
+     groupImg: "marker1_\(testTextNum)",
+     groupName: "그룹명 \(testTextNum)",
+     groupSimpleInfo: "간단소개\(testTextNum)",
+     groupIndex: "")
+     view.delegate = self
+     // 이동하려는 모임이 무엇인지 구분짓기위해 GSSimpleGroupInfoView에 groupPK라는 String타입프로퍼티 선언하여 할당
+     view.groupPK = "\(testTextNum)"
+     view.layer.borderColor = index.cgColor
+     view.layer.borderWidth = 2
+     print(view.frame)
+     testTextNum += 1
+     return view
+     }()
+     
+     count += 1
+     scrollAreaView.addSubview(simpleGroupInfoView)
+     
+     }
+     
+     // ## 제약 사항 변경
+     scrollAreaWidthConstraints.constant = self.infoScrollView.bounds.size.width*(count-1)
+     // 뷰를 다시 그리는 메서드-적용된 제약사항을 가지고 새롭게 그리기만 하는 메서드이다.(viewDidLoad 등 다른 메서드와의 관계는 없다)
+     self.infoScrollView.layoutIfNeeded()
+     
+     
+     
+     
+     // ---------------------------- 스크롤뷰 테스트  end --------------------------
+     }
+     */
+    
+    // ############################ IBAction #######################################//
+    // MARK: IBAction
+    
+    // 내 위치로 이동
+    @IBAction func myLocationBtnTouched(_ sender: UIButton){
+        
+        // 맵을 할당한 맵포인트 좌표로 이동
+        mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
+        //        self.mapLoad()
+    }
+    
+    
+    @IBAction func groupCreateBtnTouched(_ sender: UIButton) {
+        
+        let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSCreateGroupViewController") as! JSCreateGroupViewController
+        let navigation = UINavigationController(rootViewController: nextVC)
+        self.present(navigation, animated: true, completion: nil)
+        
+        
+    }
+    
+    @IBAction func loginStateBtnTouched(_ sender: UIButton) {
+        if UserDefaults.standard.value(forKey: userDefaultsToken) == nil {
+            let storyBoard  = UIStoryboard.init(name: "JSGroupMain", bundle: nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "JSLoginViewController") as! JSLoginViewController
+            nextVC.loginDelegate = self
+            self.present(nextVC, animated: true, completion: nil)
+        }
+            // else 일때 로그아웃 수행 - 작성예정 -0818
+        else{
+            let header: HTTPHeaders = [
+                "Auth":"Token \(UserDefaults.standard.value(forKey: userDefaultsToken) as! String)"
+            ]
+            
+            Alamofire.request(
+                URL(string: "\(rootDomain)/api/user/logout/")!,
+                method: .post,
+                headers: header)
+                .responseJSON(completionHandler: { (response) in
+                    guard response.result.isSuccess else{
+                        print(response.result.error,"/", response.value)
+                        return
+                    }
+                    
+                    print("로그아웃호출 결과://",response.value)
+                    
+                    UserDefaults.standard.removeObject(forKey: userDefaultsToken)
+                    UserDefaults.standard.removeObject(forKey: userDefaultsPk)
+                    UserDefaults.standard.removeObject(forKey: userDefaultsHobby)
+                    
+                    DispatchQueue.main.async {
+                        print("로그아웃후 로그인 체크 호출")
+                        self.loginCheck()
+                    }
+                })
+            
+        }
+    }
+    
+    
+    
+    // 정렬버튼
+    @IBAction func filterBtnTouched(_ sender: UIButton){
+        let filtetView = GSFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width - 32.0, height: 270.0), sortHandler: { (filterMenu) in
+            print("정렬 핸들러 ")
+        }) { (filterMenu) in
+            print("취소 핸들러-내리기 버튼 클릭")
+        }
+        
+        filtetView.popUp(on: self.view)
+    }
+    
+    
+    // 지역선택 버튼
+    @IBAction func regionSelectBtnTouched(_ sender: UIButton){
+        let nextViewContorller = self.storyboard?.instantiateViewController(withIdentifier: "GSRegionCategoryView") as! GSRegionCategoryViewController
+        nextViewContorller.categoryDelegate = self
+        self.present(nextViewContorller, animated: true, completion: nil)
+        //        let localFilterMenuView = GSLocalFilterMenuView(frame: CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 300.0), localHandler: { [unowned self] (localFiterView, mapPoint) in
+        //            print("localHandler")
+        //            self.mapView.setMapCenter(mapPoint["localMapPoint"] as! MTMapPoint, zoomLevel: 3, animated: true)
+        //            print("지역선택시 넘어온 데이터정보:// ",mapPoint )
+        //
+        //            print(type(of: mapPoint["interestMapPoint"]))
+        //            let interestGroupsAll:[String:Any] = mapPoint["interestMapPoint"] as! [String:Any]
+        //            print(interestGroupsAll)
+        //            // 작업 진행중--- 현재 2017.08.08 오후 6시 17분
+        //            var items = [MTMapPOIItem]()
+        //            // 특정 마커에 대한 커스텀 적용시
+        //
+        //
+        //            var tagValue = 0
+        //            for key in interestGroupsAll.keys {
+        //                print(key)// key = "축구", "농구"
+        //                // 각각의 키가 가지고 있는 값이 필요
+        //                // for-in 문을 돌면서 먼저 키값을 기준으로 그룹정보가 들어있는 배열 형태로 생성
+        //                // interestGroup = [["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+        //                //                  ["groupPK": "23", "groupMapPoint": <MTMapPoint: 0x608000011340>]]
+        //                let interestGroup = interestGroupsAll[key] as! [[String:Any]]
+        //                for groupOne in interestGroup { //["groupPK": "22", "groupMapPoint": <MTMapPoint: 0x608000010f60>],
+        //                    let interestPoitItem = MTMapPOIItem() // 마커 생성
+        //                    // 마커에 필요한 값을 groupOne에서 가져와서 할당
+        //                    interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+        //                    interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+        //                    print("그룸정보://", groupOne)
+        //                    // 모임의 관심사에 따라 마커의 타입을 분기처리
+        //                    switch key {
+        //                    case "축구":
+        //                        interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+        //                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+        //                    case "농구":
+        //                        interestPoitItem.markerType = MTMapPOIItemMarkerType.yellowPin
+        //                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+        //                    default:
+        //                        interestPoitItem.markerType = MTMapPOIItemMarkerType.bluePin
+        //                        interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.yellowPin
+        //                    }
+        //                    interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+        //                    interestPoitItem.tag = tagValue
+        //                    items.append(interestPoitItem)
+        //                    tagValue += 1
+        //                    print(items)
+        //                }
+        //
+        //            }
+        //            print(items.count)
+        //            self.mapView.addPOIItems(items)
+        //
+        //
+        //
+        //
+        //              // #단일 관심사 모임에 대한 마커를 표시했던 이전 코드
+        ////            let groupInfo: [[String:Any]] = mapPoint["interestMapPoint"] as! [[String:Any]]
+        ////            for groupOne in groupInfo {
+        ////                let interestPoitItem = MTMapPOIItem()
+        ////                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+        ////                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+        ////                print("그룸정보://", groupOne)
+        ////                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+        ////                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+        ////                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.dropFromHeaven
+        ////                //interestPoitItem.draggable = true
+        ////                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+        ////                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
+        ////                items.append(interestPoitItem)
+        ////                print("아이템스:// ",items)
+        ////            }
+        ////            self.mapView.addPOIItems(items)
+        ////            화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다
+        ////            self.mapView.fitAreaToShowAllPOIItems()
+        //
+        //
+        //            // Dictionary 자체의 map메서드 - 파라미터를 클로저 함수를 가지고 있다. 뷰를 그리는 시점차이로 파악중이며 아래 for-in문으로 구현한것을 사용
+        ////            groupInfo.map({ (groupOne) in
+        ////                print(groupOne)
+        ////                interestPoitItem.itemName = groupOne["groupPK"] as? String ?? ""
+        ////                interestPoitItem.mapPoint = groupOne["groupMapPoint"] as! MTMapPoint
+        ////                interestPoitItem.markerType = MTMapPOIItemMarkerType.redPin
+        ////                interestPoitItem.markerSelectedType = MTMapPOIItemMarkerSelectedType.bluePin
+        ////                interestPoitItem.showAnimationType = MTMapPOIItemShowAnimationType.springFromGround
+        ////                //interestPoitItem.draggable = true
+        ////                // tag 값은 필수는 아니지만 마커의 구분값을 사용하기 위해선 필요할거 같다.
+        ////                interestPoitItem.tag = Int(groupOne["groupPK"] as? String ?? "0")!
+        ////                items.append(interestPoitItem)
+        ////                print("딕셔너리 맵 ")
+        ////
+        ////            })
+        //
+        //        }) { (localFilterview) in
+        //            print("cancelHandler")
+        //
+        //        }
+        //        localFilterMenuView.popUp(on: self.view)
+    }
+    
+    // 관심사버튼 클릭
+    @IBAction func categoryBtnTouched(_ sender: UIButton){
+        let nextViewContorller = self.storyboard?.instantiateViewController(withIdentifier: "GSInterestCategoryView") as! GSInterestCategoryViewController
+        nextViewContorller.categoryDelegate = self
+        nextViewContorller.checkSelectedIndexPathArr = self.userHobbyIndexPathList ?? []
+        // 로그인상태일때만 카테고리를 스트링 형태로 할당해준다.
+        print("카테고리-로그인상태 토큰값://", self.userToken)
+        print("카테고리-로그인상태 유저관심사목록://", self.userHobbyList)
+        
+        if self.userToken != nil {
+            print("카테고리-로그인상태 로그인시", self.userToken)
+            
+            nextViewContorller.checkSelectedHobbyList = self.userHobbyList ?? []
+        }
+        self.present(nextViewContorller, animated: true, completion: nil)
+        
+    }
 
 }
 
