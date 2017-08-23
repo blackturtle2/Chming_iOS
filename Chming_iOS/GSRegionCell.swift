@@ -15,8 +15,8 @@ class GSRegionCell: UICollectionViewCell {
     var mapPoint: MTMapPoint = MTMapPoint()
     
     override func awakeFromNib() {
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 1
+        self.layer.borderColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1).cgColor
         self.layer.cornerRadius = self.layer.bounds.size.height/2
     }
     
@@ -24,11 +24,11 @@ class GSRegionCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet{
             if isSelected{
-                self.backgroundColor = .black
+                self.backgroundColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
                 self.regionNameLabel.textColor = .white
             }else {
-                self.backgroundColor = .white
-                self.regionNameLabel.textColor = .black
+                self.backgroundColor = .clear
+                self.regionNameLabel.textColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
             }
         }
     }

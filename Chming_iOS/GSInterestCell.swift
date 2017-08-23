@@ -12,18 +12,18 @@ class GSInterestCell: UICollectionViewCell {
     @IBOutlet weak var interestNameLabel: UILabel!
     
     override func awakeFromNib() {
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 1
+        self.layer.borderColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1).cgColor
         self.layer.cornerRadius = self.layer.bounds.size.height/2
     }
     override var isSelected: Bool{
         didSet{
             if isSelected{
-                self.backgroundColor = .black
+                self.backgroundColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
                 self.interestNameLabel.textColor = .white
-            }else{
-                self.backgroundColor = .white
-                self.interestNameLabel.textColor = .black
+            }else {
+                self.backgroundColor = .clear
+                self.interestNameLabel.textColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
             }
         }
     }
