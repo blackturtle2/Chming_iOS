@@ -17,6 +17,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     var groupInfo: JSGroupInfo? // 모임 정보 뷰에서 사용되는 데이터 묶음입니다. (공지사항 데이터 제외)
     var noticeList: [JSGroupBoard]? // 모임 정보 뷰에서 보이는 공지사항을 보여주기 위한 객체입니다.
     
+    
     @IBOutlet var mainTableView:UITableView!
     
     
@@ -48,12 +49,6 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         
         // Singleton에 저장된 모임 PK로 모임 정보와 공지사항 리스트를 가져옵니다.
         self.groupPK = vSelectedGroupPK
-        self.groupInfo = JSDataCenter.shared.findGroupInfo(ofGroupPK: vSelectedGroupPK)
-        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
-        
-        print("///// groupPK: ", groupPK!)
-        print("///// groupInfo: ", groupInfo!)
-        print("///// noticeList: ", noticeList!)
         
         // MARK: 모임 정보에 대한 통신 로직
         Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)", method: .get, parameters: nil, headers: nil).responseJSON { (response) in
@@ -65,6 +60,8 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
                 let json = JSON(value)
                 print("///// json: ", json)
                 
+                self.groupInfo = JSDataCenter.shared.findGroupInfo(ofResponseJSON: json)
+                self.noticeList = JSDataCenter.shared.findNoticeList(ofResponseJSON: json["notice"])
                 
                 DispatchQueue.main.async {
                     self.mainTableView.reloadData()
@@ -203,7 +200,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // MARK: Custom Cell- 모임 소개 셀
         case sectionID.mainTextCell.rawValue:
             let mainTextCell = tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath) as! JSGroupInfoMainTextCell
-            mainTextCell.mainLabel.text = groupInfo?.mainText
+            mainTextCell.mainLabel.text = self.groupInfo?.mainText
             
             return mainTextCell
         

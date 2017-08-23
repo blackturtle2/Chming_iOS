@@ -44,7 +44,7 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
         guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
         
         self.groupPK = vSelectedGroupPK
-        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
+//        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
         self.commonList = JSDataCenter.shared.findGroupBoardList(ofGroupPK: vSelectedGroupPK)
         
         print("///// noticeList 234", self.noticeList ?? "no data")
