@@ -1109,7 +1109,6 @@
 		714B30901F45B2C300013E56 /* video source */ = {
 			isa = PBXGroup;
 			children = (
-				714B30911F45B2E000013E56 /* PolarBear.mov */,
 				4C2212641F4BFB2C00C8DA28 /* loginVideo.mp4 */,
 				716814061F4C1895001E8F2C /* loginVideo.mov */,
 			);
@@ -1260,7 +1259,6 @@
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PV38XQ6LPC;
-						DevelopmentTeam = NCP5LJ9VMK;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1821,7 +1819,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
-				DEVELOPMENT_TEAM = NCP5LJ9VMK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1846,7 +1843,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
-				DEVELOPMENT_TEAM = NCP5LJ9VMK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

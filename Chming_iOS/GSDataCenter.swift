@@ -150,13 +150,14 @@ struct GSRegion {
     init(regionListJSON: JSON) {
         self.regionPK = regionListJSON["pk"].intValue
         self.si = regionListJSON["si"].stringValue
-        self.gu = regionListJSON["gu"].stringValue
-        self.dong = regionListJSON["dong"].stringValue
+        self.gu = regionListJSON["level1"].stringValue
+        self.dong = regionListJSON["level2"].stringValue
         self.lat = regionListJSON["lat"].doubleValue
         self.lng = regionListJSON["lng"].doubleValue
     }
     
 }
+// 기존 "gu","dong" => "level1", "level2"로 변경
 struct  GSRegionCategorySortingList {
     let category: String
     let sortingData: [GSRegion]
@@ -164,7 +165,7 @@ struct  GSRegionCategorySortingList {
     init(category: String, regionListArr: [JSON]) {
         var regionData: [GSRegion] = []
         for region in regionListArr {
-            if region["gu"].stringValue == category{
+            if region["level1"].stringValue == category{
                 regionData.append(GSRegion(regionListJSON: region))
             }
         }
@@ -716,9 +717,11 @@ class GSDataCenter{
                 //                print("categorySet://",categorySet)
                 //                print("categorySet://",categorySet)
                 
+                
+                // 기존 "gu", "dong" 필드로 level1, level2로 변경(0823)
                 var categoryArr: [String] = []
                 for hobby in regionListJson.arrayValue{
-                    let cateogry = hobby["gu"].stringValue
+                    let cateogry = hobby["level1"].stringValue
                     if categoryArr.contains(cateogry) == false{
                         categoryArr.append(cateogry)
                     }
