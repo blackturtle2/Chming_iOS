@@ -9,18 +9,23 @@
 import UIKit
 import AVFoundation
 import Firebase
+import Toaster
+import SwiftyJSON
+import Alamofire
 
 class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-//MARK: IB Components////////////
+    //MARK: IB Components////////////
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
     
     @IBOutlet var backGroundImg: UIImageView!
-
-    @IBOutlet var emailCheckBtn: UIButton!
+    
     @IBOutlet var photoBtn: UIButton!
     @IBOutlet var emailTextField: UITextField!
+    
+    //이메일 체크 버튼을 레이블로 대체.
+    @IBOutlet var emailValidationOutlet: UILabel!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var passwordCheckTextField: UITextField!
@@ -40,7 +45,7 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         let segAttributes: NSDictionary = [
             NSForegroundColorAttributeName: UIColor.white
         ]
-
+        
         let btnBundles = [registerBirthDayBtn, registerFavoriteBtn, registerLocationBtn]
         
         switch genderSegment.selectedSegmentIndex {
@@ -81,8 +86,8 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
             break
             
         }
-
-
+        
+        
     }
     
     // 생년월일 선택하기 DayPicker.
@@ -120,17 +125,17 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     }
     
     
-//MARK: App Cycle////////////////
+    //MARK: App Cycle////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = ""
-//        nameTextField.becomeFirstResponder()
+        //        nameTextField.becomeFirstResponder()
         
         
         nameTextField.shapesForSignUp()
-        emailTextField.roundedButton(corners: [.topLeft, .bottomLeft], radius: emailTextField.frame.height / 2)
-        emailCheckBtn.roundedButton(corners: [.topRight, .bottomRight], radius: emailCheckBtn.frame.height / 2)
+        emailTextField.shapesForSignUp()
+        //        emailTextField.roundedButton(corners: [.topLeft, .bottomLeft], radius: emailTextField.frame.height / 2)
         passwordTextField.shapesForSignUp()
         passwordCheckTextField.shapesForSignUp()
         genderSegment.shapesCustomizing()
@@ -151,7 +156,6 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     
     
@@ -162,7 +166,8 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     
     
-//MARK: Methods//////////////////
+    
+    //MARK: Methods//////////////////
     // 추후에 DataCenter에 넣어야 할 회원가입 메소드.
     func signUp() {
         
@@ -226,7 +231,7 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
         
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     
     // 뷰 올리기
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -236,6 +241,11 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     // 뷰 내리기
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.scrollView.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+        
+        if textField == emailTextField {
+            emailValidationCheck()
+        }
+        
     }
     
     // 리턴키 설정
@@ -268,7 +278,65 @@ class CHSignUpViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     
     
-
-
+    func emailValidationCheck() {
+        
+        if emailTextField.text == "" {
+            emailValidationOutlet.text = "이메일을 입력해주세요."
+            emailValidationOutlet.textColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
+            
+            return
+        }
+        
+        let param: [String:String] = ["email" : emailValidationOutlet.text!]
+        
+        
+        Alamofire.request(rootDomain + "/api/user/validate_email/", method: .get, parameters: param, headers: nil).responseJSON { [unowned self] (response) in
+            
+            switch response.result {
+            case .success(let value):
+                print("///// res: ", response.result.value ?? "no data" )  // { "is_valid" : 1; }
+                
+                let json = JSON(value) // { "is_valid" : true }
+                let result = json["is_valid"].stringValue // true
+                
+                if self.checkEmailFormat(enteredEmail: self.emailTextField.text!) {
+                    if result == "true" {
+                        self.emailValidationOutlet.text = "사용 가능한 이메일입니다."
+                        //                    Toast(text: "사용 가능한 이메일입니다.").show()
+                        //                    self.checkEmailValidate = true
+                        self.emailTextField.endEditing(true)
+                    }else {
+                        self.emailValidationOutlet.text = "사용 불가능한 이메일입니다. 다른 이메일 주소를 입력해주세요."
+                        //                    Toast(text: "사용 불가능한 이메일입니다.\n다른 이메일 주소를 입력해주세요.").show()
+                        
+                        // 사용불가 판정시 리스폰더 재위치
+                        self.emailTextField.becomeFirstResponder()
+                    }
+                } else {
+                    self.emailValidationOutlet.text = "사용 불가능한 이메일입니다. 양식에 맞게 입력해주세요."
+                    
+                    // 사용불가 판정시 리스폰더 재위치
+                    self.emailTextField.becomeFirstResponder()
+                }
+                
+                
+            case .failure(let err):
+                print("///// error: ", err)
+            }
+        }
+        
+    }
+    
+    
+    // 이메일 양식 정규표현식
+    func checkEmailFormat(enteredEmail:String) -> Bool {
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: enteredEmail)
+    }
+    
+    
+    
+    
     
 }

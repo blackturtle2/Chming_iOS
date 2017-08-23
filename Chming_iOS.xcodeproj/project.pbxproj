@@ -307,7 +307,6 @@
 		4CC95B071F42FFE40095A2FF /* GSInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B061F42FFE40095A2FF /* GSInterestCell.swift */; };
 		4CC95B091F4303A40095A2FF /* GSCategoryHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */; };
 		714B308F1F4188A500013E56 /* CHDesginCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B308E1F4188A400013E56 /* CHDesginCenter.swift */; };
-		714B30921F45B2E000013E56 /* PolarBear.mov in Resources */ = {isa = PBXBuildFile; fileRef = 714B30911F45B2E000013E56 /* PolarBear.mov */; };
 		714B30941F45B51400013E56 /* CHPlaygroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */; };
 		715C4DE41F3AE75000194C9E /* CHFindInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */; };
 		715C4DE81F3AE79B00194C9E /* CHUserLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */; };
@@ -315,6 +314,7 @@
 		715C4DEC1F3AEA7600194C9E /* CHUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */; };
 		715C4DEE1F3AEDF200194C9E /* CHUserInfoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */; };
 		715C4DF01F3AF09B00194C9E /* CHFindResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */; };
+		716814071F4C1895001E8F2C /* loginVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 716814061F4C1895001E8F2C /* loginVideo.mov */; };
 		71A72CE21F46E3BE008C9C4C /* CHLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A72CE11F46E3BE008C9C4C /* CHLaunchViewController.swift */; };
 		71BC18911F380D4800A742F2 /* CHSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */; };
 		71E4D5E81F304C2400FD0F61 /* CH_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */; };
@@ -650,7 +650,6 @@
 		4CC95B081F4303A40095A2FF /* GSCategoryHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCategoryHeaderReusableView.swift; sourceTree = "<group>"; };
 		6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chming_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chming_iOS/Pods-Chming_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		714B308E1F4188A400013E56 /* CHDesginCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHDesginCenter.swift; sourceTree = "<group>"; };
-		714B30911F45B2E000013E56 /* PolarBear.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PolarBear.mov; sourceTree = "<group>"; };
 		714B30931F45B51400013E56 /* CHPlaygroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHPlaygroundViewController.swift; sourceTree = "<group>"; };
 		715C4DE31F3AE75000194C9E /* CHFindInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindInfoViewController.swift; sourceTree = "<group>"; };
 		715C4DE71F3AE79B00194C9E /* CHUserLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserLocationViewController.swift; sourceTree = "<group>"; };
@@ -658,6 +657,7 @@
 		715C4DEB1F3AEA7600194C9E /* CHUserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserInfoViewController.swift; sourceTree = "<group>"; };
 		715C4DED1F3AEDF200194C9E /* CHUserInfoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUserInfoEditViewController.swift; sourceTree = "<group>"; };
 		715C4DEF1F3AF09B00194C9E /* CHFindResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHFindResultViewController.swift; sourceTree = "<group>"; };
+		716814061F4C1895001E8F2C /* loginVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = loginVideo.mov; sourceTree = "<group>"; };
 		71A72CE11F46E3BE008C9C4C /* CHLaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHLaunchViewController.swift; sourceTree = "<group>"; };
 		71BC18901F380D4800A742F2 /* CHSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSignUpViewController.swift; sourceTree = "<group>"; };
 		71E4D5E71F304C2400FD0F61 /* CH_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CH_Main.storyboard; sourceTree = "<group>"; };
@@ -1111,6 +1111,7 @@
 			children = (
 				714B30911F45B2E000013E56 /* PolarBear.mov */,
 				4C2212641F4BFB2C00C8DA28 /* loginVideo.mp4 */,
+				716814061F4C1895001E8F2C /* loginVideo.mov */,
 			);
 			name = "video source";
 			sourceTree = "<group>";
@@ -1259,6 +1260,7 @@
 					FEE33F951F2F181F00BF61AB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PV38XQ6LPC;
+						DevelopmentTeam = NCP5LJ9VMK;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1321,6 +1323,7 @@
 				4CB147C31F30607500F8A32B /* functions_a.html in Resources */,
 				4CB147291F30607500F8A32B /* _m_t_map_location_marker_item_8h_source.html in Resources */,
 				4CB147261F30607500F8A32B /* _m_t_map_geometry_8h.js in Resources */,
+				716814071F4C1895001E8F2C /* loginVideo.mov in Resources */,
 				4CB1478B1F30607500F8A32B /* all_13.js in Resources */,
 				4CB147361F30607500F8A32B /* arrowdown.png in Resources */,
 				4CB147D31F30607500F8A32B /* properties_1.html in Resources */,
@@ -1463,7 +1466,6 @@
 				4CB147C61F30607500F8A32B /* functions_b.js in Resources */,
 				4CB147C91F30607500F8A32B /* functions_d.html in Resources */,
 				4CB148071F30607500F8A32B /* struct_m_t_map_point_plain-members.html in Resources */,
-				714B30921F45B2E000013E56 /* PolarBear.mov in Resources */,
 				4CB1475B1F30607500F8A32B /* hierarchy.html in Resources */,
 				4CB147921F30607500F8A32B /* all_5.html in Resources */,
 				4CB147AF1F30607500F8A32B /* functions_0.html in Resources */,
@@ -1815,10 +1817,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD052E3263CF5C03C5AD4D81 /* Pods-Chming_iOS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = IKON;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				DEVELOPMENT_TEAM = NCP5LJ9VMK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1839,10 +1842,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E2EC273640C672784891642 /* Pods-Chming_iOS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = IKON;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = PV38XQ6LPC;
+				DEVELOPMENT_TEAM = NCP5LJ9VMK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
