@@ -239,6 +239,7 @@ class GSInterestCategoryViewController: UIViewController, UICollectionViewDelega
 }
 
 protocol GSCategoryProtocol {
+    
     func selectCategory(categoryList: [String], categoryIndexPathList: [IndexPath])
     func selectRegion(region: MTMapPoint?, regionName: String)
 }

@@ -64,6 +64,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         groupCreateBtnOutlet.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
 //        locationDescriptionLable.textColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)
         regionSelectBtnOutlet.setTitleColor(#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1), for: .normal)
+        currentLocationAddress()
         
         self.applyGradient(withColours: [#colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 0.2984078323),#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 0.6)], gradientOrientation: .horizontal, forView: backgroundViewOutlet)
         
@@ -249,6 +250,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // 드래그가 끝이 나면 다시 맵뷰 이동에 따라 그룹정보를 가져오기 위해 scrollDraging의 값을 바꿔준다.
         //self.scrollDraging = false
         
+        //regionSelectBtnOutlet
+        
     }
    
     // MARK: - MTMapViewDelegate 메서드(User Location Tracking delegate methods)
@@ -388,6 +391,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print("유저상태 비로그인://", userHobbyList)
 
         self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
+        currentLocationAddress()
     }
     
     // MARK: - 테스트-0816 API통신 붙어서 비로그인상태시 호출되도록 구현예정입니다.
@@ -804,6 +808,24 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
     }
     
+    // 현재 중심점위치의 지역의 동을 가져와서 지역선택 타이틀의 값을 바꿔주는 메서드
+    func currentLocationAddress() {
+        let result = MTMapReverseGeoCoder.findAddress(for: mapView.mapCenterPoint, withOpenAPIKey: "719b03dd28e6291a3486d538192dca4b") ?? "현재 위치를 알수없음"
+        
+        print("//@@@@@@@@@@ FindAddress Start @@@@@@@@@@ //")
+        print("FindAddress: // ", result)
+        print("//@@@@@@@@@@ FindAddress End @@@@@@@@@@ //")
+        
+        // 서울 서초구 서초동 1328-10 => '서초구' 로 잘라야됨
+        // components() 메서드사용하여 공백 기준으로 분리 => ["서울", "관악구", "신림동", "441-48"]
+        // 우리가 필요한 값은 index 1번 값이 필요
+        let addressSplitArr: [String] = result.components(separatedBy: " ")
+        guard let level2Name: String? = addressSplitArr[2] else{return}
+    
+        DispatchQueue.main.async {
+            self.regionSelectBtnOutlet.setTitle(level2Name, for: .normal)
+        }
+    }
     // 테스트-하단 모임 간단 정보뷰를 그리는 메서드 - pk가 필요하다
     /**
      func simpleGroupViewLoad(){

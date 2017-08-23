@@ -163,4 +163,8 @@ class GSRegionCategoryViewController: UIViewController, UICollectionViewDelegate
             self.categoryDelegate?.selectRegion(region: self.selectMapPoint, regionName: self.selectRegionName)
         }
     }
+    @IBAction func backGroundViewTapGesture(_ sender: UITapGestureRecognizer){
+        print("관심사뷰의 여백 탭제스쳐")
+        self.dismiss(animated: true, completion: nil)
+    }
 }
