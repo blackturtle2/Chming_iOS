@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Toaster
 
-class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, DeleteCommentDelegate {
     
     var groupPK: Int?
     var boardPK: Int?
@@ -182,7 +182,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
-        case 0:
+        case 0: // MARK: 테이블뷰 - 본문
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "contentsCell", for: indexPath) as! JSGroupBoardContentsCell
             
             guard let vBoardData = self.boardData else { return resultCell }
@@ -241,9 +241,10 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             }
             
             return resultCell
-            
-        case 1:
+        
+        case 1: // MARK: 테이블뷰 - 댓글 리스트
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! JSGroupBoardCommentCell
+            resultCell.delegate = self
             
             guard let vUserPK = UserDefaults.standard.string(forKey: userDefaultsPk) else { return resultCell }
             guard let vCommentListData = self.commentListData else { return resultCell }
@@ -361,6 +362,10 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             }
         }
 
+    }
+    
+    func reloadCommentsList() {
+        self.loadCommentsData()
     }
     
     
