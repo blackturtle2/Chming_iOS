@@ -10,6 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
+import Toaster
 
 class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
@@ -84,16 +85,82 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     }
     
     
-    /************************************/
-    // MARK: -  buttonGroupJoin Action  //
-    /************************************/
+    /**********************************/
+    // MARK: -  모임 가입하기 버튼 Action  //
+    /**********************************/
     
     @IBAction func buttonGroupJoin(_ sender: UIButton) {
-        print("///// buttonGroupJoin")
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+        
+        let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/join/",
+            method: .post,
+            parameters: nil,
+            headers: header).responseJSON(completionHandler: {[unowned self] (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+                    print("/////8742 json: ", json)
+                    
+                    if json["joined"].boolValue {
+                        DispatchQueue.main.async {
+                            Toast(text: "모임에 가입되었습니다. :D").show()
+                            self.mainTableView.reloadSections(IndexSet(integer: 3), with: .automatic)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            Toast(text: "이미 가입된 모임입니다. :)").show()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("/////8742 Alamofire.request - error: ", error)
+                }
+                
+            })
+
     }
     
+    /*******************************/
+    // MARK: -  모임 관심 버튼 Action  //
+    /*******************************/
+    
     @IBAction func buttonGroupFavorite(_ sender: UIButton) {
-        print("///// buttonGroupFavorite")
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+        
+        let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/like_toggle/",
+            method: .post,
+            parameters: nil,
+            headers: header).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+                    print("/////5974 json: ", json)
+                    
+                    if json["created"].boolValue {
+                        DispatchQueue.main.async {
+                            Toast(text: "관심 모임에 등록되었습니다. :D").show()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            Toast(text: "관심 모임을 취소하였습니다. :X").show()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("/////5974 Alamofire.request - error: ", error)
+                }
+                
+            })
     }
     
     
