@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Toaster
 
 class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
@@ -19,17 +20,13 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet var constraintCommentMotherViewBottom: NSLayoutConstraint! // 댓글 작성 박스의 Constraint ( 키보드 Show/hide 용도 )
     @IBOutlet var buttonKeyboardHide: UIButton!
-    
-    
     @IBOutlet var mainTableView: UITableView!
     
     // 댓글 작성 뷰 IBOutlet
     @IBOutlet var commentMotherView: UIView!
     @IBOutlet var commentImageViewMyProfile: UIImageView!
     @IBOutlet var commentTextField: UITextField!
-    @IBAction func commentButtonConfirm(_ sender:UIButton) {
-        
-    }
+    
     
     
     /************************/
@@ -289,6 +286,83 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         }
 
     }
+    
+    
+    /************************/
+    // MARK: -  Add Comment //
+    /************************/
+    
+    @IBAction func commentButtonConfirm(_ sender:UIButton) {
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vUserPK = UserDefaults.standard.string(forKey: userDefaultsPk) else { return }
+        guard let vBoardPK = self.boardPK else { return }
+        guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+        guard let vCommentContent = self.commentTextField.text else { print("312894"); return }
+        
+        let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/\(vBoardPK)/comment/create/",
+            method: .post,
+            parameters: ["content":vCommentContent],
+            headers: header).responseJSON { (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    print("/////5234 value: ", value)
+                    
+                    let json = JSON(value)
+                    
+                    if String(json["author"]["pk"].intValue) == String(vUserPK) {
+                        self.loadCommentsData()
+                        DispatchQueue.main.async {
+                            
+                            self.commentTextField.text = ""
+                            
+                            // Hide keyboard.
+                            NotificationCenter.default.post(name: .UIKeyboardWillHide, object: nil)
+                            
+                            Toast(text: "댓글이 등록 되었습니다.").show()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("/////5234 error: ", error)
+                }
+                
+        }
+    }
+    
+    // API 통신으로 댓글 목록을 갱신하고, 테이블 뷰의 댓글 섹션을 리프레시하는 코드입니다.
+    // 댓글을 등록했거나 댓글을 삭제했을 때, 사용합니다.
+    func loadCommentsData() {
+        // Singleton에 있는 GroupPK 데려오기.
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vBoardPK = self.boardPK else { return }
+        
+        // MARK: 댓글 리스트 리로드 통신 로직
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/\(vBoardPK)", method: .get, parameters: nil, headers: nil).responseJSON {[unowned self] (response) in
+            
+            switch response.result {
+            case .success(let value):
+                
+                let json = JSON(value)
+                print("/////9876 json: ", json)
+                
+                self.commentListData = JSDataCenter.shared.findCommentList(ofResponseJSON: json["comment_set"])
+                
+                DispatchQueue.main.async {
+                    // Reload CommentListView
+                    self.mainTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+                    
+                }
+                
+            case .failure(let error):
+                print("/////9876 Alamofire.request - error: ", error)
+            }
+        }
+
+    }
+    
     
     /**********************************/
     // MARK: -  Keyboard Show or Hide //
