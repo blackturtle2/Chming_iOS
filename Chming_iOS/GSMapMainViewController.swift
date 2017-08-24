@@ -109,7 +109,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // 현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
         // currentLocationTrackingMode property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
         
-        loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList ?? [], zoomLevel: mapView.zoomLevel)
+        loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList ?? [])
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -378,7 +378,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         self.userHobbyList = categoryList
         self.userHobbyIndexPathList = categoryIndexPathList
         
-        self.loadGroupListInfo(loadMapPoint: moveLocation, hobbyList: userHobbyList!, zoomLevel: mapView.zoomLevel)
+        self.loadGroupListInfo(loadMapPoint: moveLocation, hobbyList: userHobbyList!)
         
     }
     
@@ -406,7 +406,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print("유저상태 로그인://", loginUserHobbyList)
         print("유저상태 비로그인://", userHobbyList)
         
-        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!, zoomLevel: mapView.zoomLevel)
+        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
         currentLocationAddress()
     }
     
@@ -623,8 +623,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     }
     
     // 좌표값과 관심사 항목을 파라미터로 전달하여 주변 관심사 모임정보를 조회화여 마커를찍고 간단정보뷰를 그리는 메서드
-    func loadGroupListInfo(loadMapPoint: MTMapPoint, hobbyList: [String], zoomLevel: MTMapZoomLevel?){
-        GSDataCenter.shared.getLoadGroupMapList(token: "", latitude: loadMapPoint.mapPointGeo().latitude, longtitude: loadMapPoint.mapPointGeo().longitude, hobby: hobbyList, distancelimit: zoomLevel) {[unowned self] (groupList) in
+    func loadGroupListInfo(loadMapPoint: MTMapPoint, hobbyList: [String]){
+        GSDataCenter.shared.getLoadGroupMapList(token: "", latitude: loadMapPoint.mapPointGeo().latitude, longtitude: loadMapPoint.mapPointGeo().longitude, hobby: hobbyList) {[unowned self] (groupList) in
             
             print("API MAP list://", groupList)
             
@@ -828,7 +828,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
             
         }
-        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!, zoomLevel: mapView.zoomLevel)
+        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
         
     }
     

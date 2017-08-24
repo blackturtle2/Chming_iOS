@@ -507,7 +507,7 @@ class GSDataCenter{
     }
     
     // MARK: - API통신xAlamfire
-    func getLoadGroupMapList(token: String, latitude: Double?, longtitude: Double?, hobby: [String]?, distancelimit:MTMapZoomLevel? = 2 , completion: @escaping (GSGroupList)->Void){
+    func getLoadGroupMapList(token: String, latitude: Double?, longtitude: Double?, hobby: [String]?, completion: @escaping (GSGroupList)->Void){
         let headerInfo: HTTPHeaders = [
             "Authorization":token
         ]
@@ -531,30 +531,20 @@ class GSDataCenter{
 //            ]
 //        }
         
-        guard let hobbyList = hobby, let lat = latitude, let lng = longtitude, let distancelimit = distancelimit else { return}
-        var radius: Double = 1000
-        if distancelimit <= 1 {
-            radius = 0.5
-        }else if distancelimit == 2{
-            radius = 1.0
-        }else{
-            radius = 1.5
-        }
+        guard let hobbyList = hobby, let lat = latitude, let lng = longtitude else { return}
         switch hobbyList.count {
         case 0:
             print("case 0: \(hobbyList)")
             parameter = [
                 "lat":lat,
-                "lng":lng,
-                "distance_limit":radius
+                "lng":lng
             ]
         case 1:
             print("case 1: \(hobbyList)")
             parameter = [
                 "lat":lat,
                 "lng":lng,
-                "hobby":hobbyList.first!,
-                "distance_limit":radius
+                "hobby":hobbyList.first!
             ]
         default:
             print("default: \(hobbyList)")
@@ -570,8 +560,7 @@ class GSDataCenter{
             parameter = [
                 "lat":lat,
                 "lng":lng,
-                "hobby":hobbyStr,
-                "distance_limit":radius
+                "hobby":hobbyStr
                 
             ]
         }

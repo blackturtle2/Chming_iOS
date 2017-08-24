@@ -109,9 +109,9 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
                     print("///// UserDefaults Hobby: ", UserDefaults.standard.array(forKey: userDefaultsHobby) ?? "no data")
                     
                     DispatchQueue.main.async {
-                        Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
                         self.dismiss(animated: true, completion: {
                             self.loginDelegate?.completeLogin()
+                            Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
                         })
                     }
                     
