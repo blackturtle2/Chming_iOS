@@ -189,6 +189,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "contentsCell", for: indexPath) as! JSGroupBoardContentsCell
             
             guard let vBoardData = self.boardData else { return resultCell }
+            resultCell.boardPK = vBoardData.boardPK
             resultCell.labelUserName.text = vBoardData.writerName
             resultCell.labelPostedTime.text = String(describing: vBoardData.createdDate)
             
@@ -196,6 +197,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             resultCell.labelPostContent.text = vBoardData.content
             
             resultCell.buttonPostLike.setTitle("좋아요 \(vBoardData.postLikeCount)", for: .normal)
+            resultCell.postLikeCount = vBoardData.postLikeCount
             
             // 프로필 이미지 출력.
             DispatchQueue.global().async {
