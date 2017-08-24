@@ -44,6 +44,10 @@ struct JSGroupBoard {
     let writerPK: Int
     let writerName: String
     let writerProfileImageURL: String?
+    
+    let postLikeCount: Int
+    let commentCount: Int
+    
 }
 
 // MARK: 모임 게시판의 댓글 구조체
@@ -105,25 +109,9 @@ class JSDataCenter {
     // json을 넣으면, 배열로 공지사항 리스트를 리턴합니다.
     // GroupInfoViewController에서 이 값들을 받아서 UI에 뿌릴 예정입니다.
     func findNoticeList(ofResponseJSON json: JSON) -> [JSGroupBoard] {
-        // json["notice"] 값이 parameter로 옵니다.
-        let result: [JSGroupBoard] = json.arrayValue.map { (key) -> JSGroupBoard in
-            return JSGroupBoard(boardPK: key["pk"].intValue,
-                                createdDate: key["created_date"].stringValue,
-                                isNotice: key["post_type"].boolValue,
-                                title: key["title"].stringValue,
-                                content: key["content"].stringValue,
-                                imageURL: key["post_img"].stringValue,
-                                writerPK: key["author"]["pk"].intValue,
-                                writerName: key["author"]["username"].stringValue,
-                                writerProfileImageURL: key["author"]["profile_img"].stringValue)
-        }
         
-        return result
-    }
-    
-    // MARK: 모임 게시판 리스트 데이터 메소드
-    func findGroupBoardList(ofResponseJSON json: JSON) -> [JSGroupBoard] {
-        let result = json.arrayValue.map { (jsonjson) -> JSGroupBoard in
+        // json["notice"] 값이 parameter로 옵니다.
+        let jsonMappingResult: [JSGroupBoard] = json.arrayValue.map { (jsonjson) -> JSGroupBoard in
             var resultInResult = JSGroupBoard(boardPK: jsonjson["pk"].intValue,
                                               createdDate: jsonjson["created_date"].stringValue,
                                               isNotice: jsonjson["post_type"].boolValue,
@@ -132,7 +120,9 @@ class JSDataCenter {
                                               imageURL: nil,
                                               writerPK: jsonjson["author"]["pk"].intValue,
                                               writerName: jsonjson["author"]["username"].stringValue,
-                                              writerProfileImageURL: jsonjson["author"]["profile_img"].stringValue)
+                                              writerProfileImageURL: jsonjson["author"]["profile_img"].stringValue,
+                                              postLikeCount: jsonjson["post_like_count"].intValue,
+                                              commentCount: jsonjson["comments_count"].intValue)
             if jsonjson["post_img"].stringValue != "" {
                 resultInResult.imageURL = jsonjson["post_img"].stringValue
             }
@@ -140,14 +130,48 @@ class JSDataCenter {
             return resultInResult
         }
         
-        return result
+        // 매핑한 결과에서 공지사항이 맞는 것들만 필터링합니다.
+        // 모임 정보 뷰에서는 의미가 없고, 모임 게시판 뷰에서 활용됩니다.
+        let result = jsonMappingResult.filter { (isIncluded) -> Bool in
+            return isIncluded.isNotice == true
+        }
         
-//        let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
-//        let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: "date", isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: "http://pm1.narvii.com/6388/1d2f5d9672a126ca93bbda8c87dba1835e9a013a_hq.jpg", writerPK: 3, writerName: "이창호", writerProfileImageURL: "http://cfile27.uf.tistory.com/image/266F773758FF10A81B5B49")
-//        
-//        let resultArray = [myGroupList1, myGroupList2]
-//        
-//        return resultArray
+        return result
+    }
+    
+    // MARK: 모임 게시판 리스트 데이터 메소드
+    func findGroupBoardList(ofResponseJSON json: JSON) -> [JSGroupBoard] {
+        
+        let jsonMappingResult = json.arrayValue.map { (jsonjson) -> JSGroupBoard in
+            var resultInResult = JSGroupBoard(boardPK: jsonjson["pk"].intValue,
+                                              createdDate: jsonjson["created_date"].stringValue,
+                                              isNotice: jsonjson["post_type"].boolValue,
+                                              title: jsonjson["title"].stringValue,
+                                              content: jsonjson["content"].stringValue,
+                                              imageURL: nil,
+                                              writerPK: jsonjson["author"]["pk"].intValue,
+                                              writerName: jsonjson["author"]["username"].stringValue,
+                                              writerProfileImageURL: jsonjson["author"]["profile_img"].stringValue,
+                                              postLikeCount: jsonjson["post_like_count"].intValue,
+                                              commentCount: jsonjson["comments_count"].intValue)
+            if jsonjson["post_img"].stringValue != "" {
+                resultInResult.imageURL = jsonjson["post_img"].stringValue
+            }
+            
+            return resultInResult
+        }
+        
+        // 매핑한 결과에서 공지사항이 아닌 것들을 filterring합니다.
+        let commonListResult = jsonMappingResult.filter { (isIncluded) -> Bool in
+            return isIncluded.isNotice == false
+        }
+        
+        // 피터링한 결과를 PK 순서에 맞게 sorting합니다.
+        let result = commonListResult.sorted { (param1, param2) -> Bool in
+            return param1.boardPK < param2.boardPK
+        }
+        
+        return result
     }
     
     // MARK: 모임 게시판 디테일 데이터 메소드
@@ -155,20 +179,11 @@ class JSDataCenter {
         
         switch ofBoardPK {
         case 0:
-            let myGroupNoticeList1 = JSGroupBoard(boardPK: 0, createdDate: "date", isNotice: true, title: "첫번째 공지사항입니다.", content: "공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: nil, writerPK: 1, writerName: "이재성", writerProfileImageURL: nil)
+            let myGroupNoticeList1 = JSGroupBoard(boardPK: 0, createdDate: "date", isNotice: true, title: "첫번째 공지사항입니다.", content: "공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: nil, writerPK: 1, writerName: "이재성", writerProfileImageURL: nil, postLikeCount: 1, commentCount: 1)
             return myGroupNoticeList1
-        case 1:
-            let myGroupNoticeList2 = JSGroupBoard(boardPK: 1, createdDate: "date", isNotice: true, title: "두번째 공지사항입니다.", content: "두번째 공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: nil, writerPK: 1, writerName: "이재성", writerProfileImageURL: nil)
-            return myGroupNoticeList2
-        case 2:
-            let myGroupList1 = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
-            return myGroupList1
-        case 3:
-            let myGroupList2 = JSGroupBoard(boardPK: 3, createdDate: "date", isNotice: false, title: "저 오늘 가입했어요.", content: "안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D\n안녕하세요? 오늘 가입했습니다.\n이제 iOS 개발 시작한지 3개월 정도 되었는데, 실력이 높은 개발자분들 많이 만나서 조언 듣고 싶습니다.\n반갑습니다. :D", imageURL: "http://pm1.narvii.com/6388/1d2f5d9672a126ca93bbda8c87dba1835e9a013a_hq.jpg", writerPK: 3, writerName: "이창호", writerProfileImageURL: "http://cfile27.uf.tistory.com/image/266F773758FF10A81B5B49")
-            return myGroupList2
             
         default:
-            let tempGroupList = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431")
+            let tempGroupList = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431", postLikeCount: 1, commentCount: 1)
             
             return tempGroupList
         }

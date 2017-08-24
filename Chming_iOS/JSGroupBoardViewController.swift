@@ -34,14 +34,17 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 모임 게시판 뷰에 오면, 내비게이션 바 버튼을 바꾸려고 하는데.. 작동이 안되는 중입니다. OTL --> Delegate로 해결..
-        
         mainTableView.delegate = self
         mainTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // 모임 게시판 뷰에 오면, 내비게이션 바 오른쪽에 글쓰기 버튼이 생깁니다.
         delegate?.showNavigationBarPostingButton()
+        
+        // 다른 탭에 있는 게시판이나 갤러리 뷰에 갔다 와도 viewWillAppear()가 불리므로 네트워크-통신을 추가로 하지 않기 위한 예외처리입니다.
+        // 모임 정보 데이터가 있다면, 아래 함수들을 읽지 말라는 명령.
+        if self.commonList != nil { return }
         
         // Singleton에 있는 GroupPK 데려오기.
         guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else {
@@ -50,14 +53,9 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
         }
         
         self.groupPK = vSelectedGroupPK
-//        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
-        
-        
-        print("///// noticeList 234", self.noticeList ?? "no data")
-        print("///// commonList 234", self.commonList ?? "no data")
-        
+
         // MARK: 모임 정보에 대한 통신 로직
-        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/?page=1", method: .get, parameters: nil, headers: nil).responseJSON { (response) in
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/?page=1", method: .get, parameters: nil, headers: nil).responseJSON {[unowned self] (response) in
             
             switch response.result {
             case .success(let value):
@@ -66,6 +64,7 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
                 let json = JSON(value)
                 print("///// json: ", json)
                 
+                self.noticeList = JSDataCenter.shared.findNoticeList(ofResponseJSON: json["results"])
                 self.commonList = JSDataCenter.shared.findGroupBoardList(ofResponseJSON: json["results"])
                 
                 DispatchQueue.main.async {
@@ -82,6 +81,7 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        // 모임 게시판 뷰에서 다른 뷰로 이동을 하면, 내비게이션 바 오른쪽에 있던 글쓰기 버튼이 사라집니다.
         delegate?.disMissNavigationBarPostingButton()
     }
     
@@ -152,6 +152,7 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
             resultCell.labelPostingDate.text = String(describing: vCommonList[indexPath.row].createdDate)
             resultCell.labelTitle.text = vCommonList[indexPath.row].title
             resultCell.labelTextContent.text = vCommonList[indexPath.row].content
+            resultCell.labelLike.text = "좋아요 \(vCommonList[indexPath.row].postLikeCount) 댓글 \(vCommonList[indexPath.row].commentCount)"
             
             // 프로필 사진 출력
             DispatchQueue.global().async {
