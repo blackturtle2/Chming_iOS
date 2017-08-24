@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    var groupPK: Int?
     var boardPK: Int?
     var boardData: JSGroupBoard?
     var commentListData: [JSGroupBoardComment]?
@@ -40,29 +43,6 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         mainTableView.dataSource = self
         commentTextField.delegate = self
         
-        
-        guard let vBoardPK = self.boardPK else { return }
-        self.boardData = JSDataCenter.shared.findBoardData(ofBoardPK: vBoardPK)
-        self.commentListData = JSDataCenter.shared.findCommentList(ofBoardPK: vBoardPK)
-        
-        
-        // 댓글 작성 뷰에 사용자 본인의 프로필 이미지 출력.
-        DispatchQueue.global().async {
-            guard let vUserProfileImageURL = JSDataCenter.shared.findUserProfileImageURL(ofUserPK: UserDefaults.standard.integer(forKey: userDefaultsPk)) else { return }
-            
-            let task = URLSession.shared.dataTask(with: vUserProfileImageURL, completionHandler: { (data, res, err) in
-                print("///// data 832: ", data ?? "no data")
-                print("///// res 832: ", res ?? "no data")
-                print("///// err 832: ", err ?? "no data")
-                
-                guard let realData = data else { return }
-                DispatchQueue.main.async {
-                    self.commentImageViewMyProfile.image = UIImage(data: realData)
-                }
-            })
-            task.resume()
-        }
-        
         // 댓글 터치시, 키보드 올리기 위한 키보드 노티 옵저버 등록.
         NotificationCenter.default.addObserver(
             self,
@@ -75,7 +55,67 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             selector: #selector(JSGroupBoardDetailViewController.keyboardWillShowOrHide(notification:)),
             name: .UIKeyboardWillHide,
             object: nil)
+            }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
+        // Singleton에 있는 GroupPK 데려오기.
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else {
+            print("///// guardlet- vSelectedGroupPK")
+            return
+        }
+        
+        self.groupPK = vSelectedGroupPK
+        
+        guard let vBoardPK = self.boardPK else { return }
+        
+        
+        // MARK: 모임 게시판 디테일 정보에 대한 통신 로직
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/\(vBoardPK)", method: .get, parameters: nil, headers: nil).responseJSON {[unowned self] (response) in
+            
+            switch response.result {
+            case .success(let value):
+                print("///// Alamofire.request - response: ", value)
+                
+                let json = JSON(value)
+                print("///// json: ", json)
+                
+                self.boardData = JSDataCenter.shared.findBoardData(ofResponseJSON: json)
+                self.commentListData = JSDataCenter.shared.findCommentList(ofResponseJSON: json["comment_set"])
+                
+                DispatchQueue.main.async {
+                    self.mainTableView.reloadData()
+                }
+                
+            case .failure(let error):
+                print("///// Alamofire.request - error: ", error)
+            }
+        }
+
+        // 댓글 작성 뷰에 사용자 본인의 프로필 이미지 출력하기 위한 JSON 받아오기.
+        DispatchQueue.global().async {
+            guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+            let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+            
+            Alamofire.request(rootDomain + "/api/user/profile/",
+                              method: .get,
+                              parameters: nil,
+                              headers: header).responseJSON(completionHandler: {[unowned self] (response) in
+                                
+                                switch response.result {
+                                case .success(let value):
+                                    
+                                    let json = JSON(value)
+                                    print("/////3214 json: ", json)
+                                    
+                                    self.loadUserProfileImageInBottomCommentView(ofURL: json["profile_img"].stringValue)
+                                    
+                                case .failure(let error):
+                                    print("/////3214 Alamofire.request - error: ", error)
+                                }
+
+                              })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,6 +129,26 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         // Dispose of any resources that can be recreated.
     }
 
+    
+    /*******************/
+    // MARK: -  Logic  //
+    /*******************/
+    
+    // MARK: 댓글 작성 뷰의 작은 사용자 프로필 이미지 표시하는 메소드 정의.
+    func loadUserProfileImageInBottomCommentView(ofURL url: String) {
+        
+        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, res, err) in
+            print("///// data 832: ", data ?? "no data")
+            print("///// res 832: ", res ?? "no data")
+            print("///// err 832: ", err ?? "no data")
+            
+            guard let realData = data else { return }
+            DispatchQueue.main.async {
+                self.commentImageViewMyProfile.image = UIImage(data: realData)
+            }
+        })
+        task.resume()
+    }
     
     
     /*************************************************************/
@@ -128,18 +188,18 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         case 0:
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "contentsCell", for: indexPath) as! JSGroupBoardContentsCell
             
+            guard let vBoardData = self.boardData else { return resultCell }
+            resultCell.labelUserName.text = vBoardData.writerName
+            resultCell.labelPostedTime.text = String(describing: vBoardData.createdDate)
             
-            resultCell.labelUserName.text = self.boardData?.writerName
-            resultCell.labelPostedTime.text = String(describing: (self.boardData?.createdDate)!)
+            resultCell.labelPostTitle.text = vBoardData.title
+            resultCell.labelPostContent.text = vBoardData.content
             
-            resultCell.labelPostTitle.text = self.boardData?.title
-            resultCell.labelPostContent.text = self.boardData?.content
-            
-            resultCell.buttonPostLike.setTitle("좋아요 백만개", for: .normal)
+            resultCell.buttonPostLike.setTitle("좋아요 \(vBoardData.postLikeCount)", for: .normal)
             
             // 프로필 이미지 출력.
             DispatchQueue.global().async {
-                guard let vWriterProfileImageURL = self.boardData?.writerProfileImageURL else { return }
+                guard let vWriterProfileImageURL = vBoardData.writerProfileImageURL else { return }
                 if let realProfileImageURL = URL(string: vWriterProfileImageURL) {
                     let task = URLSession.shared.dataTask(with: realProfileImageURL, completionHandler: { (data, res, err) in
                         print("///// data 231: ", data ?? "no data")
@@ -158,7 +218,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             
             // 본문 이미지 출력.
             DispatchQueue.global().async {
-                guard let vImageURL = self.boardData?.imageURL else {
+                guard let vImageURL = vBoardData.imageURL else {
                     resultCell.constraintImageViewHeight.constant = 0
                     
                     return
@@ -196,13 +256,31 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             resultCell.commentPK = vCommentListData[indexPath.row].commentPK
             resultCell.buttonDeleteComment.tag = vCommentListData[indexPath.row].commentPK
             
+            // 댓글 프로필 이미지 출력.
+            DispatchQueue.global().async {
+                guard let vWriterProfileImageURL = vCommentListData[indexPath.row].writerProfileImgURL else { return }
+                if let realImageURL = URL(string: vWriterProfileImageURL) {
+                    let task = URLSession.shared.dataTask(with: realImageURL, completionHandler: { (data, res, err) in
+                        print("///// data 3122: ", data ?? "no data")
+                        print("///// res 3122: ", res ?? "no data")
+                        print("///// err 3122: ", err ?? "no data")
+                        
+                        guard let realData = data else { return }
+                        DispatchQueue.main.async {
+                            resultCell.imageViewUserProfile.image = UIImage(data: realData)
+                        }
+                        
+                    })
+                    task.resume()
+                }
+            }
+            
             return resultCell
         default:
             return UITableViewCell()
         }
 
     }
-    
     
     /**********************************/
     // MARK: -  Keyboard Show or Hide //

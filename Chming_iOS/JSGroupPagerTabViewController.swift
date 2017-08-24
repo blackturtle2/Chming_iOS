@@ -55,7 +55,9 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        JSDataCenter.shared.selectedGroupPK = nil // 뷰가 닫힐 때, Singleton에 있던 선택한 모임 PK 데이터 삭제.
+//         // 뷰가 닫힐 때, Singleton에 있던 선택한 모임 PK 데이터 삭제.
+//        JSDataCenter.shared.selectedGroupPK = nil
+        // 모임 게시판 뷰에서 내비게이션 컨트롤러 푸시할 때도 싱글턴의 GroupPK가 사라져서 주석 처리.
     }
 
     override func didReceiveMemoryWarning() {

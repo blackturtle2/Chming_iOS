@@ -54,12 +54,13 @@ struct JSGroupBoard {
 // 배열로 감싸고 리턴 필요.
 struct JSGroupBoardComment {
     let commentPK: Int
-    let createdDate: Date
+    let createdDate: String
     
     let content: String
     
     let writerPK: Int
     let writerName: String
+    var writerProfileImgURL: String?
 }
 
 
@@ -175,18 +176,23 @@ class JSDataCenter {
     }
     
     // MARK: 모임 게시판 디테일 데이터 메소드
-    func findBoardData(ofBoardPK: Int) -> JSGroupBoard {
-        
-        switch ofBoardPK {
-        case 0:
-            let myGroupNoticeList1 = JSGroupBoard(boardPK: 0, createdDate: "date", isNotice: true, title: "첫번째 공지사항입니다.", content: "공지사항 테스트입니다. 잘 보이나요? 두줄을 넘어가기 위해 장문으로 작성해봅니다.", imageURL: nil, writerPK: 1, writerName: "이재성", writerProfileImageURL: nil, postLikeCount: 1, commentCount: 1)
-            return myGroupNoticeList1
-            
-        default:
-            let tempGroupList = JSGroupBoard(boardPK: 2, createdDate: "date", isNotice: false, title: "여기 오프라인 모임은 얼마나 자주 갖는 편인가요?", content: "안녕하세요? 저 오늘 가입했는데, 주말 정도에만 오프라인 모임 갈 수 있을 것 같아요.\n얼마나 자주 하는지 답변 부탁드립니다.", imageURL: nil, writerPK: 2, writerName: "황기수", writerProfileImageURL: "http://cfile229.uf.daum.net/image/27448F4B55FAAA9809A431", postLikeCount: 1, commentCount: 1)
-            
-            return tempGroupList
+    func findBoardData(ofResponseJSON json: JSON) -> JSGroupBoard {
+        var result = JSGroupBoard(boardPK: json["pk"].intValue,
+                            createdDate: json["created_date"].stringValue,
+                            isNotice: json["post_type"].boolValue,
+                            title: json["title"].stringValue,
+                            content: json["content"].stringValue,
+                            imageURL: nil,
+                            writerPK: json["author"]["pk"].intValue,
+                            writerName: json["author"]["username"].stringValue,
+                            writerProfileImageURL: json["author"]["profile_img"].stringValue,
+                            postLikeCount: json["post_like_count"].intValue,
+                            commentCount: json["comments_count"].intValue)
+        if json["post_img"].stringValue != "" {
+            result.imageURL = json["post_img"].stringValue
         }
+        
+        return result
     }
     
     // MARK: 사용자 프로필 이미지 URL 가져오는 메소드
@@ -197,11 +203,26 @@ class JSDataCenter {
     }
     
     // MARK: 댓글 리스트 가져오는 메소드
-    func findCommentList(ofBoardPK: Int) -> [JSGroupBoardComment] {
-        let resultCommentList1 = JSGroupBoardComment(commentPK: 0, createdDate: Date(), content: "댓글 테스트입니다.", writerPK: 0, writerName: "이재성")
-        let resultCommentList2 = JSGroupBoardComment(commentPK: 0, createdDate: Date(), content: "댓글 테스트입니다.", writerPK: 0, writerName: "이재성")
+    func findCommentList(ofResponseJSON json: JSON) -> [JSGroupBoardComment] {
+        let commentResult: [JSGroupBoardComment] = json.arrayValue.map { (jsonjson) -> JSGroupBoardComment in
+            var resultInResult = JSGroupBoardComment(commentPK: jsonjson["pk"].intValue,
+                                       createdDate: jsonjson["created_date"].stringValue,
+                                       content: jsonjson["content"].stringValue,
+                                       writerPK: jsonjson["author"]["pk"].intValue,
+                                       writerName: jsonjson["author"]["username"].stringValue,
+                                       writerProfileImgURL: nil)
+            if jsonjson["author"]["profile_img"].stringValue != "" {
+                resultInResult.writerProfileImgURL = jsonjson["author"]["profile_img"].stringValue
+            }
+            return resultInResult
+        }
         
-        return [resultCommentList1, resultCommentList2]
+        // 피터링한 결과를 PK 순서에 맞게 sorting합니다.
+        let result = commentResult.sorted { (param1, param2) -> Bool in
+            return param1.commentPK < param2.commentPK
+        }
+        
+        return result
     }
     
 }

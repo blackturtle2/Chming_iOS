@@ -259,6 +259,8 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             print("///// noticePK: ", currentCell.boardPK ?? "no data")
             
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
+            nextVC.boardPK = currentCell.boardPK
+            
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             return

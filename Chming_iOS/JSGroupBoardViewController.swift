@@ -54,7 +54,7 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
         
         self.groupPK = vSelectedGroupPK
 
-        // MARK: 모임 정보에 대한 통신 로직
+        // MARK: 모임 게시판 목록에 대한 통신 로직
         Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/?page=1", method: .get, parameters: nil, headers: nil).responseJSON {[unowned self] (response) in
             
             switch response.result {
@@ -76,8 +76,6 @@ class JSGroupBoardViewController: UIViewController, IndicatorInfoProvider, UITab
             }
         }
 
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
