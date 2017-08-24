@@ -248,6 +248,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
         case 1:
             let resultCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! JSGroupBoardCommentCell
             
+            guard let vUserPK = UserDefaults.standard.string(forKey: userDefaultsPk) else { return resultCell }
             guard let vCommentListData = self.commentListData else { return resultCell }
             
             resultCell.labelWriterName.text = vCommentListData[indexPath.row].writerName
@@ -256,7 +257,12 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
             
             resultCell.writerPK = vCommentListData[indexPath.row].writerPK
             resultCell.commentPK = vCommentListData[indexPath.row].commentPK
+            
             resultCell.buttonDeleteComment.tag = vCommentListData[indexPath.row].commentPK
+            
+            if vUserPK != String(vCommentListData[indexPath.row].writerPK) {
+                resultCell.buttonDeleteComment.isHidden = true
+            }
             
             // 댓글 프로필 이미지 출력.
             DispatchQueue.global().async {
