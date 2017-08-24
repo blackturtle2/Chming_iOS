@@ -7,6 +7,13 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import Toaster
+
+protocol DeleteCommentDelegate {
+    func reloadCommentsList()
+}
 
 class JSGroupBoardCommentCell: UITableViewCell {
     
@@ -20,11 +27,8 @@ class JSGroupBoardCommentCell: UITableViewCell {
     @IBOutlet var imageViewUserProfile: UIImageView!
     @IBOutlet var buttonDeleteComment: UIButton!
     
-    @IBAction func buttonDeleteCommentAction(_ sender: UIButton) {
-        
-    }
+    var delegate:DeleteCommentDelegate?
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,6 +38,42 @@ class JSGroupBoardCommentCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    @IBAction func buttonDeleteCommentAction(_ sender: UIButton) {
+        // /api/group/(group_pk)/post/comment/(comment_pk)/delete/
+        
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vCommentPK = self.commentPK else { return }
+        guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+        
+        let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/post/comment/\(vCommentPK)/delete/",
+            method: .delete,
+            parameters: nil,
+            headers: header).responseJSON(completionHandler: {[unowned self] (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+                    print("/////5234 json: ", json)
+                    
+                    DispatchQueue.main.async {
+                        Toast(text: "댓글을 삭제하였습니다. :D").show()
+                        
+                        self.delegate?.reloadCommentsList()
+                    }
+                    
+                    
+                case .failure(let error):
+                    print("/////5234 Alamofire.request - error: ", error)
+                }
+                
+            })
+        
     }
 
 }

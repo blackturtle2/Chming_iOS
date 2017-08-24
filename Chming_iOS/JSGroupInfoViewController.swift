@@ -10,12 +10,14 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
+import Toaster
 
 class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
     
     var groupPK:Int?
     var groupInfo: JSGroupInfo? // 모임 정보 뷰에서 사용되는 데이터 묶음입니다. (공지사항 데이터 제외)
     var noticeList: [JSGroupBoard]? // 모임 정보 뷰에서 보이는 공지사항을 보여주기 위한 객체입니다.
+    
     
     @IBOutlet var mainTableView:UITableView!
     
@@ -48,12 +50,6 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         
         // Singleton에 저장된 모임 PK로 모임 정보와 공지사항 리스트를 가져옵니다.
         self.groupPK = vSelectedGroupPK
-        self.groupInfo = JSDataCenter.shared.findGroupInfo(ofGroupPK: vSelectedGroupPK)
-        self.noticeList = JSDataCenter.shared.findNoticeList(ofGroupPK: vSelectedGroupPK)
-        
-        print("///// groupPK: ", groupPK!)
-        print("///// groupInfo: ", groupInfo!)
-        print("///// noticeList: ", noticeList!)
         
         // MARK: 모임 정보에 대한 통신 로직
         Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)", method: .get, parameters: nil, headers: nil).responseJSON { (response) in
@@ -65,6 +61,8 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
                 let json = JSON(value)
                 print("///// json: ", json)
                 
+                self.groupInfo = JSDataCenter.shared.findGroupInfo(ofResponseJSON: json)
+                self.noticeList = JSDataCenter.shared.findNoticeList(ofResponseJSON: json["notice"])
                 
                 DispatchQueue.main.async {
                     self.mainTableView.reloadData()
@@ -87,16 +85,82 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     }
     
     
-    /************************************/
-    // MARK: -  buttonGroupJoin Action  //
-    /************************************/
+    /**********************************/
+    // MARK: -  모임 가입하기 버튼 Action  //
+    /**********************************/
     
     @IBAction func buttonGroupJoin(_ sender: UIButton) {
-        print("///// buttonGroupJoin")
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+        
+        let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/join/",
+            method: .post,
+            parameters: nil,
+            headers: header).responseJSON(completionHandler: {[unowned self] (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+                    print("/////8742 json: ", json)
+                    
+                    if json["joined"].boolValue {
+                        DispatchQueue.main.async {
+                            Toast(text: "모임에 가입되었습니다. :D").show()
+                            self.mainTableView.reloadSections(IndexSet(integer: 3), with: .automatic)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            Toast(text: "이미 가입된 모임입니다. :)").show()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("/////8742 Alamofire.request - error: ", error)
+                }
+                
+            })
+
     }
     
+    /*******************************/
+    // MARK: -  모임 관심 버튼 Action  //
+    /*******************************/
+    
     @IBAction func buttonGroupFavorite(_ sender: UIButton) {
-        print("///// buttonGroupFavorite")
+        guard let vSelectedGroupPK = JSDataCenter.shared.selectedGroupPK else { return }
+        guard let vToken = UserDefaults.standard.string(forKey: userDefaultsToken) else { return }
+        
+        let header = HTTPHeaders(dictionaryLiteral: ("Authorization", "Token \(vToken)"))
+        
+        Alamofire.request(rootDomain + "/api/group/\(vSelectedGroupPK)/like_toggle/",
+            method: .post,
+            parameters: nil,
+            headers: header).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+                    print("/////5974 json: ", json)
+                    
+                    if json["created"].boolValue {
+                        DispatchQueue.main.async {
+                            Toast(text: "관심 모임에 등록되었습니다. :D").show()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            Toast(text: "관심 모임을 취소하였습니다. :X").show()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("/////5974 Alamofire.request - error: ", error)
+                }
+                
+            })
     }
     
     
@@ -203,7 +267,7 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // MARK: Custom Cell- 모임 소개 셀
         case sectionID.mainTextCell.rawValue:
             let mainTextCell = tableView.dequeueReusableCell(withIdentifier: "2ndMainTextCell", for: indexPath) as! JSGroupInfoMainTextCell
-            mainTextCell.mainLabel.text = groupInfo?.mainText
+            mainTextCell.mainLabel.text = self.groupInfo?.mainText
             
             return mainTextCell
         
@@ -262,6 +326,8 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
             print("///// noticePK: ", currentCell.boardPK ?? "no data")
             
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "JSGroupBoardDetailViewController") as! JSGroupBoardDetailViewController
+            nextVC.boardPK = currentCell.boardPK
+            
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             return
