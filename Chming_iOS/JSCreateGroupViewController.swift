@@ -18,10 +18,15 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     @IBOutlet var textViewGroupAbout: UITextView!
     @IBOutlet var buttonGroupImageOutlet: UIButton!
     @IBOutlet var buttonLocationOutlet: UIButton!
+    @IBOutlet var buttonHobbyOutlet: UIButton!
     
     var userToken:String? = nil
     var groupImage: UIImage?
     var groupAddress: String?
+    var grouplat: Double?
+    var grouplng: Double?
+    var regionName: String?
+    var hobby: String?
     /*******************************************/
     // MARK: -  Life Cycle                     //
     /*******************************************/
@@ -45,9 +50,16 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
         
         self.textFieldGroupName.delegate = self
         self.textViewGroupAbout.delegate = self
+        self.textFieldGroupName.shapesForSignUp()
+        self.textViewGroupAbout.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 0.1)
+        self.textViewGroupAbout.layer.cornerRadius = self.textViewGroupAbout.frame.height / 15
         
-        self.textViewGroupAbout.layer.borderWidth = 1.0
+        self.buttonLocationOutlet.shapesForRegisterBtnAtSignUp()
+        self.buttonHobbyOutlet.shapesForRegisterBtnAtSignUp()
+        
+//        self.textViewGroupAbout.layer.borderWidth = 1.0
 //        self.buttonGroupImageOutlet.shapesForSignUpProfileImg()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,22 +72,81 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
         guard let image = info["UIImagePickerControllerEditedImage"] as? UIImage else { return }
         self.groupImage = image
         self.buttonGroupImageOutlet.setBackgroundImage(image, for: .normal)
+        self.buttonGroupImageOutlet.setTitle("", for: .normal)
         
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func shapesForTextView(){
+        //        self.layer.cornerRadius = self.frame.height / 2
+        //self.layer.borderWidth = 1
+        //self.layer.borderColor = UIColor.init(hue: 348, saturation: 100, brightness: 100, alpha: 1).cgColor
+        self.textViewGroupAbout.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 0.1)
+        //self.textViewGroupAbout.borderWidth = 1
+//        self.textViewGroupAbout.borderColor = tintColor.cgColor
+//        self.titleLabel?.textColor = tintColor
+    }
+    
 
     /*******************************************/
     // MARK: -  GSCategoryProtocol 메서드 //
     /*******************************************/
     func selectRegion(region: MTMapPoint?, regionName: String) {
-        print("형뷰에서 클릭햇당")
+        print("형뷰에서 클릭햇당 가져온 지역명://",regionName)
         buttonLocationOutlet.setTitle(regionName, for: .normal)
+        self.regionName = regionName
         guard let selectMapPoint = region else {return}
-        groupAddress = GSDataCenter.shared.currentLocationFullAddress(mapPoint: selectMapPoint)
+        self.groupAddress = GSDataCenter.shared.currentLocationFullAddress(mapPoint: selectMapPoint)
+        self.grouplat = selectMapPoint.mapPointGeo().latitude
+        self.grouplng = selectMapPoint.mapPointGeo().longitude
         print("형뷰에서 클릭햇당 가져온 주소://",groupAddress!)
     }
     func selectCategory(categoryList: [String], categoryIndexPathList: [IndexPath]) {
+        print("형뷰에서 클릭햇당 가져온 관심사들://",categoryList)
+        print("형뷰에서 클릭햇당 가져온 관심사들 indexpath://",categoryIndexPathList)
+        buttonHobbyOutlet.setTitle(categoryList.first ?? "", for: .normal)
+        self.hobby = categoryList.first
         
+        
+    }
+    
+    
+    
+    /*******************************************/
+    // MARK: -  UITextFieldDelegate Method      //
+    /*******************************************/
+    // 뷰 올리기
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 100.0), animated:true)
+    }
+    
+    // 뷰 내리기
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+    }
+    
+    // 리턴키 설정
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == textFieldGroupName {
+            textViewGroupAbout.text = ""
+            textViewGroupAbout.becomeFirstResponder()
+        }else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+        
+    }
+    
+    /*******************************************/
+    // MARK: -  UITextViewDelegate Method      //
+    /*******************************************/
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: self.textViewGroupAbout.frame.origin.y/2), animated:true)
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
     }
     
     /*******************************************/
@@ -87,15 +158,15 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
         self.textFieldGroupName.resignFirstResponder()
         self.textViewGroupAbout.resignFirstResponder()
     }
-    
-    
     /*******************************************/
     // MARK: -  Logic                          //
     /*******************************************/
     
     // MARK: 내비게이션 바에 있는 "취소" 버튼 액션 정의.
     @IBAction func buttonCancelAction(_ sender:UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: 내비게이션 바에 있는 "완료" 버튼 액션 정의.
@@ -106,9 +177,19 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
         } else if self.textViewGroupAbout.text == "" {
             Toast(text: "그룹소개를 입력해주세요.").show()
             return
+        } else if self.groupAddress == nil || self.groupAddress == ""{
+            Toast(text: "그룹모임 지역을 선택해주세요.").show()
+        } else if self.hobby == nil || self.hobby == ""{
+            Toast(text: "그룹모임 분야를 선택해주세요.").show()
         }
+        
         guard let groupName = textFieldGroupName.text else { return }
         guard let groupAbout = textViewGroupAbout.text else { return }
+        guard let groupAddress = groupAddress else {return}
+        guard let hobby = hobby else {return}
+        guard let grouplat = grouplat else {return}
+        guard let grouplng = grouplng else {return}
+        
         
         
         guard let token = self.userToken else {return}
@@ -116,12 +197,12 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
             "Authorization":"Token \(token)"
         ]
         var parameter: Parameters = [
-            "hobby":"사진",
+            "hobby":hobby,
             "name":groupName,
             "description":groupAbout,
-            "address":"서울 서초구 반포동 738-50",
-            "lat" : 37.505567,
-            "lng" : 127.022638
+            "address":groupAddress,
+            "lat" : grouplat,
+            "lng" : grouplng
         ]
         
         if let groupProfileImage = self.groupImage {
@@ -187,7 +268,11 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     
     // MARK: 모임 관심사 버튼 액션 정의.
     @IBAction func buttonHobbyAction(_ sender:UIButton) {
-        
+        let storyBoard  = UIStoryboard.init(name: "GSMapMain", bundle: nil)
+        let interestViewController: GSInterestCategoryViewController = storyBoard.instantiateViewController(withIdentifier: "GSInterestCategoryView") as! GSInterestCategoryViewController
+        interestViewController.categoryDelegate = self
+        interestViewController.useMultitoutch = false
+        self.present(interestViewController, animated: true, completion: nil)
     }
     
     

@@ -120,7 +120,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xt5-tE-t4E" userLabel="Interesting Button">
-                                <rect key="frame" x="316" y="131" width="44" height="44"/>
+                                <rect key="frame" x="316" y="136" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xt5-tE-t4E" secondAttribute="height" multiplier="1:1" id="cM5-vI-mg9"/>
                                 </constraints>
@@ -148,7 +148,7 @@
                             <constraint firstItem="xUk-Wa-WST" firstAttribute="leading" secondItem="IRN-sW-Rie" secondAttribute="leading" id="dNC-Cx-FEf"/>
                             <constraint firstAttribute="trailing" secondItem="PLF-jK-98l" secondAttribute="trailing" constant="15" id="jfB-H0-h9U"/>
                             <constraint firstItem="xt5-tE-t4E" firstAttribute="leading" secondItem="PLF-jK-98l" secondAttribute="leading" id="nVZ-PC-kmK"/>
-                            <constraint firstItem="xt5-tE-t4E" firstAttribute="top" secondItem="PLF-jK-98l" secondAttribute="bottom" constant="5" id="s04-P6-XQv"/>
+                            <constraint firstItem="xt5-tE-t4E" firstAttribute="top" secondItem="PLF-jK-98l" secondAttribute="bottom" constant="10" id="s04-P6-XQv"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>

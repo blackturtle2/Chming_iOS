@@ -11,6 +11,8 @@ import Firebase
 import Alamofire
 import SwiftyJSON
 
+
+
 class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverseGeoCoderDelegate, GSSimpleGroupInfoProtocol, GSCategoryProtocol ,UIScrollViewDelegate, loginCompleteDelegate {
     
     // MARK: - Property
@@ -29,6 +31,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     var userHobbyList: [String]?
     var userHobbyIndexPathList: [IndexPath]?
     var loadCurrentMapPoint: MTMapPoint?
+    
+    
     private var userLogtinState: Bool = false
     
     var scrollDraging: Bool = false
@@ -56,6 +60,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     // MARK: - Initialize
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
         infoScrollView.delegate = self
         infoScrollView.isPagingEnabled = true
@@ -70,8 +75,6 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         
         loginCheck()
         
-        
-
         // 샘플코드로 마커 찍엇던 메서드를 주석처리 - 다른 마커들을 구현중이라 주석처리 합니다.
         // self.loadMarker()
         
@@ -81,14 +84,11 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
      
         
         // Do any additional setup after loading the view.
-        
         // 현위치 트랙킹 모드 On, 단말의 위치에 따라 지도 중심이 이동한다.
         mapView.currentLocationTrackingMode = .onWithoutHeading
-        
-        // 현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
-        // currentLocationTrackingMode property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
         mapView.showCurrentLocationMarker = true
-        //        loadCurrentMapPoint = mapView.mapCenterPoint
+        
+        //loadCurrentMapPoint = mapView.mapCenterPoint
         print("VIEW DIDLOAD MAPCENTERPOINT://",mapView.mapCenterPoint)
         print("USDEFaults://", UserDefaults.standard.value(forKey: userDefaultsToken),"/",UserDefaults.standard.value(forKey: userDefaultsHobby))
         
@@ -103,7 +103,14 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print("$$$$$$ View WillAppear")
       
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        // 현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
+        // currentLocationTrackingMode property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
+        
+        loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList ?? [], zoomLevel: mapView.zoomLevel)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -150,6 +157,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // 우리가 필요한 값은 index 1번 값이 필요
         let addressSplitArr: [String] = result.components(separatedBy: " ")
         print(addressSplitArr)
+        
         
 //       - 파이어베이스 사용안함으로써 주석처리함 - 0816
 //        self.mapLoad(location: addressSplitArr[1])
@@ -239,8 +247,10 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     }
     
     func mapView(_ mapView: MTMapView!, dragStartedOn mapPoint: MTMapPoint!) {
-        print("맵뷰 드래그 시작 좌표://", mapPoint.mapPointGeo())
+        print("맵뷰 드래그 시작 좌표://", self.scrollDraging)
         self.scrollDraging = false
+        
+
         
     }
     
@@ -271,7 +281,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     func mapView(_ mapView: MTMapView!, zoomLevelChangedTo zoomLevel: MTMapZoomLevel) {
         print("변경된 줌레벨://", zoomLevel)
-        
+//        self.mapView.setMapCenter(mapView.mapCenterPoint, zoomLevel: zoomLevel, animated: true)
         
     }
     
@@ -283,7 +293,12 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     
     // ############################ UIScrollViewDelegate Method #######################################//
     // MARK: - UIScrollViewDelegate 메서드
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.isDragging)
+        if scrollView.isDragging {
+            self.scrollDraging = true
+        }
+    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let scrollViewIndex = Int(targetContentOffset.pointee.x/self.view.frame.size.width)
@@ -303,21 +318,22 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
 //            mapView.deselect(scrollStatePoiItem)
 //        }
         
+        
+        
         mapView.select(scrollMapPoIItem, animated: true)
         scrollStatePoiItem = scrollMapPoIItem
-        
+        print(self.infoScrollView.isDragging)
+        // 스크롤을 여부에 따라
+        if self.infoScrollView.isDragging == true {
+            self.scrollDraging = true
+        }
         
         mapView.setMapCenter(scrollMapPoIItem.mapPoint, animated: true)
         
-        
-        
-        // 스크롤을 여부에 따라
-        if infoScrollView.isDragging == true {
-            self.scrollDraging = true
-        }
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         //mapView.deselect(scrollStatePoiItem)
+        print(infoScrollView.isDragging)
     }
     
     
@@ -362,7 +378,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         self.userHobbyList = categoryList
         self.userHobbyIndexPathList = categoryIndexPathList
         
-        self.loadGroupListInfo(loadMapPoint: moveLocation, hobbyList: userHobbyList!)
+        self.loadGroupListInfo(loadMapPoint: moveLocation, hobbyList: userHobbyList!, zoomLevel: mapView.zoomLevel)
         
     }
     
@@ -389,8 +405,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         print("유저상태://", userLogtinState)
         print("유저상태 로그인://", loginUserHobbyList)
         print("유저상태 비로그인://", userHobbyList)
-
-        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
+        
+        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!, zoomLevel: mapView.zoomLevel)
         currentLocationAddress()
     }
     
@@ -607,8 +623,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     }
     
     // 좌표값과 관심사 항목을 파라미터로 전달하여 주변 관심사 모임정보를 조회화여 마커를찍고 간단정보뷰를 그리는 메서드
-    func loadGroupListInfo(loadMapPoint: MTMapPoint, hobbyList: [String]){
-        GSDataCenter.shared.getLoadGroupMapList(token: "", latitude: loadMapPoint.mapPointGeo().latitude, longtitude: loadMapPoint.mapPointGeo().longitude, hobby: hobbyList) { (groupList) in
+    func loadGroupListInfo(loadMapPoint: MTMapPoint, hobbyList: [String], zoomLevel: MTMapZoomLevel?){
+        GSDataCenter.shared.getLoadGroupMapList(token: "", latitude: loadMapPoint.mapPointGeo().latitude, longtitude: loadMapPoint.mapPointGeo().longitude, hobby: hobbyList, distancelimit: zoomLevel) {[unowned self] (groupList) in
             
             print("API MAP list://", groupList)
             
@@ -677,7 +693,12 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
                 itmeTagValue += 1
                 print("마커총갯수:// ",items.count)
                 print("뷰셋 마커끝")
-                
+                /*
+                 //줌레벨 1 == 500
+                 //2 == 1000
+                 //3 == 1500
+                */
+                print("최초 로드 줌레벨://",self.mapView.zoomLevel)  // 2
                 
                 print("심플뷰 그리는 메인쓰레드")
                 //                    let simpleGroupInfoView: GSSimpleGroupInfoView = GSSimpleGroupInfoView(frame: CGRect(x: (self.view.bounds.size.width * count)+42,
@@ -777,6 +798,9 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             print("핀찍기전 마커들://", items)
             self.mapView.addPOIItems(items)
             print("뷰셋 포문끝")
+            print("조호후 줌레벨://", self.mapView.zoomLevel)
+            
+            
         }
     }
     
@@ -804,7 +828,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             //self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
             
         }
-        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!)
+        self.loadGroupListInfo(loadMapPoint: mapView.mapCenterPoint, hobbyList: userHobbyList!, zoomLevel: mapView.zoomLevel)
         
     }
     
@@ -886,8 +910,23 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     // 내 위치로 이동
     @IBAction func myLocationBtnTouched(_ sender: UIButton){
         
-        // 맵을 할당한 맵포인트 좌표로 이동
-        mapView.setMapCenter(loadCurrentMapPoint!, animated: true)
+        // 맵을 할당한 맵포인트 좌표로 이동- 예외처리필요(mapView자체가 nil)..
+        guard let currentMapPoint = self.loadCurrentMapPoint else {
+            print("내위치 이동중 좌표값이 nil발생")
+            return
+        }
+//        guard (mapView != nil) else {
+//            print("맵뷰기능을 사용할수없다")
+//            print(mapView.debugDescription)
+//            return
+//        }
+        if mapView == nil {
+            
+        }
+        else{
+        // MTMapView 기능 자체에서 수행을 하려면 info.plist에 privacy location부분을 Always로 변경필요
+        mapView.setMapCenter(currentMapPoint, animated: true)
+        }
         //        self.mapLoad()
     }
     

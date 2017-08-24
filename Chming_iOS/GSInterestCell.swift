@@ -11,6 +11,7 @@ import UIKit
 class GSInterestCell: UICollectionViewCell {
     @IBOutlet weak var interestNameLabel: UILabel!
     
+    
     override func awakeFromNib() {
         self.layer.borderWidth = 1
         self.layer.borderColor = #colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1).cgColor
