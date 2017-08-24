@@ -561,6 +561,7 @@ class GSDataCenter{
                 "lat":lat,
                 "lng":lng,
                 "hobby":hobbyStr
+                
             ]
         }
         

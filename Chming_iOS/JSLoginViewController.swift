@@ -59,7 +59,9 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: 임시로 만든 Close 버튼 액션 정의.
     @IBAction func buttonCloseAction(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: 로그인 버튼 액션 정의.
@@ -106,10 +108,12 @@ class JSLoginViewController: UIViewController, UITextFieldDelegate {
                     print("///// UserDefaults PK: ", UserDefaults.standard.string(forKey: userDefaultsPk) ?? "no data")
                     print("///// UserDefaults Hobby: ", UserDefaults.standard.array(forKey: userDefaultsHobby) ?? "no data")
                     
-                    Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
-                    self.dismiss(animated: true, completion: {
-                        self.loginDelegate?.completeLogin()
-                    })
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: {
+                            self.loginDelegate?.completeLogin()
+                            Toast(text: "로그인 성공입니다.").show() // 로그인 성공 후, 뷰 이동 프로세스 작성 필요.
+                        })
+                    }
                     
                     
                 }else {
