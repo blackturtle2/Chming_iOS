@@ -86,8 +86,9 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
     /*******************************************/
     
     @IBAction func buttonClose(_ sender:UIButton) {
-        self.dismiss(animated: true, completion: nil)
-        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     
