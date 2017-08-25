@@ -92,18 +92,17 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     // MARK: -  GSCategoryProtocol 메서드 //
     /*******************************************/
     func selectRegion(region: MTMapPoint?, regionName: String) {
-        print("형뷰에서 클릭햇당 가져온 지역명://",regionName)
+        
         buttonLocationOutlet.setTitle(regionName, for: .normal)
         self.regionName = regionName
         guard let selectMapPoint = region else {return}
         self.groupAddress = GSDataCenter.shared.currentLocationFullAddress(mapPoint: selectMapPoint)
         self.grouplat = selectMapPoint.mapPointGeo().latitude
         self.grouplng = selectMapPoint.mapPointGeo().longitude
-        print("형뷰에서 클릭햇당 가져온 주소://",groupAddress!)
+        
     }
     func selectCategory(categoryList: [String], categoryIndexPathList: [IndexPath]) {
-        print("형뷰에서 클릭햇당 가져온 관심사들://",categoryList)
-        print("형뷰에서 클릭햇당 가져온 관심사들 indexpath://",categoryIndexPathList)
+        
         buttonHobbyOutlet.setTitle(categoryList.first ?? "", for: .normal)
         self.hobby = categoryList.first
         
@@ -187,8 +186,10 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
             return
         } else if self.groupAddress == nil || self.groupAddress == ""{
             Toast(text: "그룹모임 지역을 선택해주세요.").show()
+            return
         } else if self.hobby == nil || self.hobby == ""{
             Toast(text: "그룹모임 분야를 선택해주세요.").show()
+            return
         }
         
         guard let groupName = textFieldGroupName.text else { return }

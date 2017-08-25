@@ -11,13 +11,13 @@ import Alamofire
 import Toaster
 import SwiftyJSON
 
-class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, GSCategoryProtocol, GSRegionSearchProtocol {
     
     @IBOutlet var scrollViewMain: UIScrollView!
     
     @IBOutlet var buttonProfileImage: UIButton!
     @IBOutlet var textFieldEmail: UITextField!
-    @IBOutlet var buttonValidateEmail: UIButton!
+    @IBOutlet var textLabelEmailValidation: UILabel!
     @IBOutlet var textFieldPassword: UITextField!
     @IBOutlet var textFieldPasswordConfirm: UITextField!
     @IBOutlet var textFieldUserName: UITextField!
@@ -43,9 +43,18 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     var birthMonth: String?
     var birthDay: String?
     
+    // 지역, 관심사 데이터 저장용 
+    var selectDataLocation: String?
+    var selectLocationlat: Double?
+    var selectLocationlng: Double?
+    var selectDataHobby: [String]?
+    var selectDataHobbyStr: String?
+    
+    
     // 피커 선택 데이터 저장용.
     var selectedDataPickerLocation: String?
     var selectedDataPickerHobby: String?
+    
     var tempDataPickerLocation: [String]?
     var tempDataPickerHobby: [String]?
     
@@ -70,8 +79,8 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         pickerHobby.dataSource = self
         
         textFieldUserName.shapesForSignUp()
-        textFieldEmail.roundedButton(corners: [.topLeft, .bottomLeft], radius: textFieldEmail.frame.height / 2)
-        buttonValidateEmail.roundedButton(corners: [.topRight, .bottomRight], radius: buttonValidateEmail.frame.height / 2)
+        textFieldEmail.shapesForSignUp()
+       
         textFieldPassword.shapesForSignUp()
         textFieldPasswordConfirm.shapesForSignUp()
         segmentGender.shapesCustomizing()
@@ -95,22 +104,104 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // Cancel 버튼 액션 정의.
-    @IBAction func buttonCancelAction(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+    // MARK: 이메일 중복 및 유효성 체크
+    func emailValidationCheck() {
+        
+        if textFieldEmail.text == "" {
+            Toast(text: "이메일을 입력해주세요.").show()
+            self.textLabelEmailValidation.text = ""
+            return
+        }
+        
+        let param: [String:String] = ["email" : textFieldEmail.text!]
+        
+        Alamofire.request(rootDomain + "/api/user/validate_email/", method: .get, parameters: param, headers: nil).responseJSON { [unowned self] (response) in
+            
+            switch response.result {
+            case .success(let value):
+                print("///// res: ", response.result.value ?? "no data" )  // { "is_valid" : 1; }
+                
+                let json = JSON(value) // { "is_valid" : true }
+                let result = json["is_valid"].stringValue // true
+                
+                if self.checkEmailFormat(enteredEmail: self.textFieldEmail.text!) {
+                    if result == "true" {
+                        self.textLabelEmailValidation.text = "사용 가능한 이메일입니다."
+                        //                    Toast(text: "사용 가능한 이메일입니다.").show()
+                        //                    self.checkEmailValidate = true
+                    }else {
+                        self.textLabelEmailValidation.text = "사용 불가능한 이메일입니다. 다른 이메일 주소를 입력해주세요."
+                        //                    Toast(text: "사용 불가능한 이메일입니다.\n다른 이메일 주소를 입력해주세요.").show()
+                        
+                        // 사용불가 판정시 리스폰더 재위치
+                        self.textFieldEmail.becomeFirstResponder()
+                    }
+                } else {
+                    self.textLabelEmailValidation.text = "사용 불가능한 이메일입니다. 양식에 맞게 입력해주세요."
+                    
+                    // 사용불가 판정시 리스폰더 재위치
+                    self.textFieldEmail.becomeFirstResponder()
+                }
+                
+            case .failure(let err):
+                print("///// error: ", err)
+            }
+        }
+    }
+    // 이메일 양식 정규표현식
+    func checkEmailFormat(enteredEmail:String) -> Bool {
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: enteredEmail)
     }
     
-    // 화면의 남는 공간을 아무 곳이나 터치하면, 키보드 숨기기.
-    @IBAction func tabToHideKeyboard(_ sender: UITapGestureRecognizer) {
-        textFieldEmail.resignFirstResponder()
-        textFieldUserName.resignFirstResponder()
-        textFieldPassword.resignFirstResponder()
-        textFieldPasswordConfirm.resignFirstResponder()
-        textFieldUserName.resignFirstResponder()
+    /*******************************************/
+    // MARK: -  GSCategoryProtocol 메서드 //
+    /*******************************************/
+    func selectRegion(region: MTMapPoint?, regionName: String) {
+//        print("형뷰에서 클릭햇당 가져온 지역명://",regionName)
+//        buttonLocationOutlet.setTitle(regionName, for: .normal)
+//        self.regionName = regionName
+//        guard let selectMapPoint = region else {return}
+//        self.groupAddress = GSDataCenter.shared.currentLocationFullAddress(mapPoint: selectMapPoint)
+//        self.grouplat = selectMapPoint.mapPointGeo().latitude
+//        self.grouplng = selectMapPoint.mapPointGeo().longitude
+//        print("형뷰에서 클릭햇당 가져온 주소://",groupAddress!)
+    }
+    func selectCategory(categoryList: [String], categoryIndexPathList: [IndexPath]) {
+        print("형뷰에서 클릭햇당 가져온 관심사들://",categoryList)
+        print("형뷰에서 클릭햇당 가져온 관심사들 indexpath://",categoryIndexPathList)
+        
+        var hobbyListStr = ""
+        for hobbyIndex in 0...categoryList.count-1{
+            if hobbyIndex != categoryList.count-1{
+                hobbyListStr.append("\(categoryList[hobbyIndex]),")
+            }else{
+                hobbyListStr.append("\(categoryList[hobbyIndex])")
+            }
+        }
+
+        buttonHobby.setTitle(hobbyListStr, for: .normal)
+        self.selectDataHobby = categoryList
+        self.selectDataHobbyStr = hobbyListStr
+        
+        
+    }
+    /*******************************************/
+    // MARK: -  GSRegionSelectProtocol Method  //
+    /*******************************************/
+    func returnSearchAddress(address: String, mapPoint: MTMapPoint) {
+        print("검색결과://", address, "/",mapPoint.mapPointGeo())
+        self.selectDataLocation = address
+        self.selectLocationlat = mapPoint.mapPointGeo().latitude
+        self.selectLocationlng = mapPoint.mapPointGeo().longitude
+        buttonLocation.setTitle(address, for: .normal)
     }
     
     
+    /*******************************************/
+    // MARK: -  UITextFieldDelegate Method  //
+    /*******************************************/
     // 뷰 올리기
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 100.0), animated:true)
@@ -119,6 +210,10 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     // 뷰 내리기
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.scrollViewMain.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+        if textField == textFieldEmail {
+            emailValidationCheck()
+        }
+
     }
     
     // 리턴키 설정
@@ -137,6 +232,37 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         return true
         
     }
+    /****************************************************/
+    // MARK: -  imagePickerController Delegate Method   //
+    /****************************************************/
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("///// info: ", info)
+        guard let image = info["UIImagePickerControllerEditedImage"] as? UIImage else { return }
+        self.profileImage = image
+        self.buttonProfileImage.setBackgroundImage(image, for: .normal)
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    /*******************************************/
+    // MARK: -  IBAction                       //
+    /*******************************************/
+    // Cancel 버튼 액션 정의.
+    @IBAction func buttonCancelAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // 화면의 남는 공간을 아무 곳이나 터치하면, 키보드 숨기기.
+    @IBAction func tabToHideKeyboard(_ sender: UITapGestureRecognizer) {
+        textFieldEmail.resignFirstResponder()
+        textFieldUserName.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
+        textFieldPasswordConfirm.resignFirstResponder()
+        textFieldUserName.resignFirstResponder()
+    }
+    
     
     /*******************************************/
     // MARK: -  Logic                          //
@@ -151,15 +277,7 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    // imagePickerController Delegate.
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("///// info: ", info)
-        guard let image = info["UIImagePickerControllerEditedImage"] as? UIImage else { return }
-        self.profileImage = image
-        self.buttonProfileImage.setBackgroundImage(image, for: .normal)
-        
-        self.dismiss(animated: true, completion: nil)
-    }
+    
 
     
     // MARK: 이메일 중복체크 버튼 액션 정의.
@@ -263,9 +381,14 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     /***************************/
     
     @IBAction func buttonLocationAction(_ sender: UIButton) {
-        self.selectedPicker = .location
-        self.uiViewOfBirthDatePicker.isHidden = false
-        self.pickerLocation.isHidden = false
+//        self.selectedPicker = .location
+//        self.uiViewOfBirthDatePicker.isHidden = false
+//        self.pickerLocation.isHidden = false
+        let storyBoard  = UIStoryboard.init(name: "GSMapMain", bundle: nil)
+        let regionViewController: GSRegionSearchViewController = storyBoard.instantiateViewController(withIdentifier: "GSRegionSearchView") as! GSRegionSearchViewController
+        regionViewController.searchDelegate = self
+        
+        self.present(regionViewController, animated: true, completion: nil)
     }
     
     
@@ -274,9 +397,14 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
     /**************************/
     
     @IBAction func buttonHobbyAction(_ sender: UIButton) {
-        self.selectedPicker = .hobby
-        self.uiViewOfBirthDatePicker.isHidden = false
-        self.pickerHobby.isHidden = false
+//        self.selectedPicker = .hobby
+//        self.uiViewOfBirthDatePicker.isHidden = false
+//        self.pickerHobby.isHidden = false
+        let storyBoard  = UIStoryboard.init(name: "GSMapMain", bundle: nil)
+        let interestViewController: GSInterestCategoryViewController = storyBoard.instantiateViewController(withIdentifier: "GSInterestCategoryView") as! GSInterestCategoryViewController
+        interestViewController.categoryDelegate = self
+        self.present(interestViewController, animated: true, completion: nil)
+
     }
     
     
@@ -401,6 +529,12 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         } else if self.birthYear == nil {
             Toast(text: "생년월일을 입력해주세요.").show()
             return
+        } else if self.selectDataLocation == nil || self.selectDataLocation == ""{
+            Toast(text: "지역을 선택해주세요.").show()
+            return
+        } else if self.selectDataHobby == nil || self.selectDataHobby?.count == 0{
+            Toast(text: "관심 분야를 선택해주세요.").show()
+            return
         }
         
         guard let userEmail = textFieldEmail.text else { return }
@@ -420,8 +554,12 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
         guard let birthYear = self.birthYear else { return }
         guard let birthMonth = self.birthMonth else { return }
         guard let birthDay = self.birthDay else { return }
-        guard let hobby = self.selectedDataPickerHobby else { return }
-        guard let location = self.selectedDataPickerLocation else { return }
+//        guard let hobby = self.selectedDataPickerHobby else { return }
+        guard let hobbyStr = self.selectDataHobbyStr else { return }
+//        guard let location = self.selectedDataPickerLocation else { return }
+        guard let location = self.selectDataLocation else { return }
+        guard let lat = self.selectLocationlat else { return }
+        guard let lng = self.selectLocationlng else { return }
 //        guard let profileImage = self.profileImage else { return }
         
         var param: [String:Any] = ["email" : userEmail,
@@ -432,10 +570,11 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
                                    "birth_year" : birthYear,
                                    "birth_month" : birthMonth,
                                    "birth_day" : birthDay,
-                                   "hobby" : hobby,
+                                   "hobby" : hobbyStr,
                                    "address" : location,
-                                   "lat" : 37.5285730,
-                                   "lng" : 126.9289740 ]
+                                   "lat" : lat,
+                                   "lng" : lng
+                                    ]
         
         if let userProfileImage = self.profileImage {
             param.updateValue(userProfileImage, forKey: "profile_img")
@@ -525,6 +664,8 @@ class JSRegisterViewController: UIViewController, UITextFieldDelegate, UIImagePi
             
         }
     }
+    
+    
     
     
 }

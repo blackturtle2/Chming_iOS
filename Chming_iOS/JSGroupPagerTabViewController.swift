@@ -77,7 +77,7 @@ class JSGroupPagerTabViewController: ButtonBarPagerTabStripViewController, JSGro
         
         let child_3 = UIStoryboard(name: JSStoryboardName, bundle: nil).instantiateViewController(withIdentifier: "JSGroupGalleryViewController") as! JSGroupGalleryViewController
         
-        return [child_1, child_2, child_3]
+        return [child_1, child_2]
     }
     
     

@@ -36,8 +36,8 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5v-up-6Kp">
-                                        <rect key="frame" x="10" y="44" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5v-up-6Kp">
+                                        <rect key="frame" x="10" y="44" width="75.5" height="30"/>
                                         <color key="tintColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,10 +55,10 @@
                                             <action selector="groupCreateBtnTouched:" destination="bWq-15-WfU" eventType="touchUpInside" id="ZEO-f4-3CX"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoWOBackgroundedColor" translatesAutoresizingMaskIntoConstraints="NO" id="QaL-nH-bH7">
-                                        <rect key="frame" x="158" y="15" width="58" height="57.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoText" translatesAutoresizingMaskIntoConstraints="NO" id="QaL-nH-bH7">
+                                        <rect key="frame" x="137" y="20" width="100" height="57.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="QaL-nH-bH7" secondAttribute="height" multiplier="1:1" id="Wyp-BO-OKK"/>
+                                            <constraint firstAttribute="width" constant="100" id="ndq-CE-EzM"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0A-QT-LHs">
@@ -78,13 +78,14 @@
                                     <constraint firstAttribute="height" constant="72" id="5aH-XP-zvY"/>
                                     <constraint firstItem="tfF-6Z-Lod" firstAttribute="top" secondItem="cD8-9S-gAt" secondAttribute="top" constant="27" id="5e1-gM-zJB"/>
                                     <constraint firstItem="k0A-QT-LHs" firstAttribute="top" secondItem="cD8-9S-gAt" secondAttribute="top" constant="34" id="6Sk-2u-eRh"/>
-                                    <constraint firstItem="QaL-nH-bH7" firstAttribute="top" secondItem="cD8-9S-gAt" secondAttribute="top" constant="15" id="AgH-gS-gJO"/>
+                                    <constraint firstItem="QaL-nH-bH7" firstAttribute="top" secondItem="cD8-9S-gAt" secondAttribute="top" constant="20" id="AgH-gS-gJO"/>
                                     <constraint firstItem="tfF-6Z-Lod" firstAttribute="leading" secondItem="cD8-9S-gAt" secondAttribute="leading" constant="8" id="Jli-xb-oMA"/>
                                     <constraint firstItem="QaL-nH-bH7" firstAttribute="height" secondItem="cD8-9S-gAt" secondAttribute="height" multiplier="0.8" id="NQE-Fs-zai"/>
                                     <constraint firstAttribute="trailing" secondItem="k0A-QT-LHs" secondAttribute="trailing" constant="15" id="iSJ-Qj-DUE"/>
                                     <constraint firstItem="QaL-nH-bH7" firstAttribute="centerX" secondItem="cD8-9S-gAt" secondAttribute="centerX" id="ibR-B4-P45"/>
                                     <constraint firstItem="Q5v-up-6Kp" firstAttribute="top" secondItem="tfF-6Z-Lod" secondAttribute="bottom" constant="5" id="kdj-NS-kyB"/>
                                     <constraint firstItem="axv-Tj-OYm" firstAttribute="top" secondItem="k0A-QT-LHs" secondAttribute="top" id="mG0-dM-OjA"/>
+                                    <constraint firstItem="Q5v-up-6Kp" firstAttribute="width" secondItem="tfF-6Z-Lod" secondAttribute="width" id="xh9-S2-faB"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUk-Wa-WST" customClass="MTMapView">
@@ -358,7 +359,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="H66-rI-YkM"/>
                                 </constraints>
-                                <state key="normal" title="검색">
+                                <state key="normal" title="확인">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -472,7 +473,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vmg-uZ-JUj">
                                 <rect key="frame" x="33" y="472" width="309" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="선택">
+                                <state key="normal" title="확인">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -643,7 +644,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="aY3-5d-tuU"/>
                                 </constraints>
-                                <state key="normal" title="검색">
+                                <state key="normal" title="확인">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -683,6 +684,6 @@
     <resources>
         <image name="CurrentLocation" width="129" height="129"/>
         <image name="Interesting" width="129" height="129"/>
-        <image name="LogoWOBackgroundedColor" width="213" height="187"/>
+        <image name="LogoText" width="542" height="187"/>
     </resources>
 </document>

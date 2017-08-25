@@ -277,7 +277,8 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
             mapView.setMapCenter(moveLocation, animated: true)
         }
         else{
-            moveLocation = self.loadCurrentMapPoint!
+            guard  let mappoint = self.loadCurrentMapPoint else { return }
+            moveLocation = mappoint
             print("관심사 선택후 선택지역이 없을시 현재로케이션://", moveLocation.mapPointGeo())
         }
         print(moveLocation)
@@ -402,7 +403,6 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
     func loginCheck(){
         // 토큰값과, 관심사 항목 옵셔널바이딩체크
         // 옵셔널이 아니면
-        print("LOGINCHECK 토큰값://", UserDefaults.standard.value(forKey: userDefaultsToken))
         if let token = UserDefaults.standard.value(forKey: userDefaultsToken) as? String, let userHobbyList = UserDefaults.standard.value(forKey: "userHobby") as? [String] {
             self.userToken = token
             self.userHobbyList = userHobbyList
@@ -434,7 +434,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
         // components() 메서드사용하여 공백 기준으로 분리 => ["서울", "관악구", "신림동", "441-48"]
         // 우리가 필요한 값은 index 1번 값이 필요
         let addressSplitArr: [String] = result.components(separatedBy: " ")
-        guard let level2Name: String? = addressSplitArr[2] else{return}
+        guard let level2Name: String = addressSplitArr[2] else{return}
     
         DispatchQueue.main.async {
             self.regionSelectBtnOutlet.setTitle(level2Name, for: .normal)
@@ -497,7 +497,7 @@ class GSMapMainViewController: UIViewController, MTMapViewDelegate, MTMapReverse
                 URL(string: "\(rootDomain)/api/user/logout/")!,
                 method: .post,
                 headers: header)
-                .responseJSON(completionHandler: { (response) in
+                .responseJSON(completionHandler: {[unowned self] (response) in
                     guard response.result.isSuccess else{
                         print(response.result.error,"/", response.value)
                         return
