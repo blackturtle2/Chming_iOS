@@ -18,7 +18,8 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
     var groupInfo: JSGroupInfo? // 모임 정보 뷰에서 사용되는 데이터 묶음입니다. (공지사항 데이터 제외)
     var noticeList: [JSGroupBoard]? // 모임 정보 뷰에서 보이는 공지사항을 보여주기 위한 객체입니다.
     
-    
+    @IBOutlet var buttonGroupJoinOutlet: UIButton!
+    @IBOutlet var buttonGroupFavoriteOutlet: UIButton!
     @IBOutlet var mainTableView:UITableView!
     
     
@@ -33,6 +34,12 @@ class JSGroupInfoViewController: UIViewController, IndicatorInfoProvider, UITabl
         // 모임 정보 뷰는 테이블뷰로 이루어져 있습니다.
         mainTableView.delegate = self
         mainTableView.dataSource = self
+        
+        buttonGroupFavoriteOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1),#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 1)], gradientOrientation: .horizontal)
+        buttonGroupJoinOutlet.applyGradient(withColours: [#colorLiteral(red: 1, green: 0.667937696, blue: 0.4736554623, alpha: 1),#colorLiteral(red: 1, green: 0.3094263673, blue: 0.4742257595, alpha: 1)], gradientOrientation: .horizontal)
+        
+        buttonGroupJoinOutlet.roundedButton(corners: [.topLeft, .bottomLeft], radius: buttonGroupJoinOutlet.frame.height / 2)
+        buttonGroupFavoriteOutlet.roundedButton(corners: [.topRight, .bottomRight], radius: buttonGroupFavoriteOutlet.frame.height / 2)
         
     }
     

@@ -21,6 +21,7 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet var constraintCommentMotherViewBottom: NSLayoutConstraint! // 댓글 작성 박스의 Constraint ( 키보드 Show/hide 용도 )
     @IBOutlet var buttonKeyboardHide: UIButton!
     @IBOutlet var mainTableView: UITableView!
+    @IBOutlet var buttonDeletePost: UIButton!
     
     // 댓글 작성 뷰 IBOutlet
     @IBOutlet var commentMotherView: UIView!
@@ -288,6 +289,28 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
 
     }
     
+    /*****************************/
+    // MARK: -  글 삭제 버튼 Action //
+    /*****************************/
+    
+    @IBAction func buttonDeletePostAction(_ sender: UIButton){
+        let alertView = UIAlertController(title: nil, message: "글을 정말 삭제하시겠습니까?", preferredStyle: .alert)
+        let cancelButtonAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let okButtonAction = UIAlertAction(title: "확인", style: .destructive) {[unowned self] (action) in
+            self.deleteRequest()
+        }
+        
+        alertView.addAction(cancelButtonAction)
+        alertView.addAction(okButtonAction)
+        
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
+    func deleteRequest() {
+        // /api/group/(group_pk)/post/(post_pk)/delete/
+
+    }
+    
     
     /************************/
     // MARK: -  Add Comment //
@@ -372,6 +395,10 @@ class JSGroupBoardDetailViewController: UIViewController, UITableViewDelegate, U
     /**********************************/
     // MARK: -  Keyboard Show or Hide //
     /**********************************/
+    
+    @IBAction func tapGestureHideKeyboardAction(_ sender: UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: .UIKeyboardWillHide, object: nil)
+    }
     
     // 키보드 Hide 버튼 액션 정의.
     @IBAction func buttonHideKeyboard(_ sender: UIButton) {
