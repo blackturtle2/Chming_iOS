@@ -10,7 +10,7 @@ import UIKit
 import Toaster
 import Alamofire
 
-class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GSCategoryProtocol {
+class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GSCategoryProtocol, GSRegionSearchProtocol {
     
     @IBOutlet var scrollViewMain: UIScrollView!
     @IBOutlet var uiViewContentView: UIView!
@@ -33,7 +33,7 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.barStyle = .black
         // Singleton에 있는 UserPK 데려오기.
         // UserPK == nil 케이스 예외처리.
         guard let vCurrentUserToken = UserDefaults.standard.string(forKey: userDefaultsToken) else {
@@ -92,25 +92,32 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     // MARK: -  GSCategoryProtocol 메서드 //
     /*******************************************/
     func selectRegion(region: MTMapPoint?, regionName: String) {
-        print("형뷰에서 클릭햇당 가져온 지역명://",regionName)
+        
         buttonLocationOutlet.setTitle(regionName, for: .normal)
         self.regionName = regionName
         guard let selectMapPoint = region else {return}
         self.groupAddress = GSDataCenter.shared.currentLocationFullAddress(mapPoint: selectMapPoint)
         self.grouplat = selectMapPoint.mapPointGeo().latitude
         self.grouplng = selectMapPoint.mapPointGeo().longitude
-        print("형뷰에서 클릭햇당 가져온 주소://",groupAddress!)
+        
     }
     func selectCategory(categoryList: [String], categoryIndexPathList: [IndexPath]) {
-        print("형뷰에서 클릭햇당 가져온 관심사들://",categoryList)
-        print("형뷰에서 클릭햇당 가져온 관심사들 indexpath://",categoryIndexPathList)
+        
         buttonHobbyOutlet.setTitle(categoryList.first ?? "", for: .normal)
         self.hobby = categoryList.first
         
         
     }
-    
-    
+    /*******************************************/
+    // MARK: -  GSRegionSelectProtocol Method  //
+    /*******************************************/
+    func returnSearchAddress(address: String, mapPoint: MTMapPoint) {
+        print("검색결과://", address, "/",mapPoint.mapPointGeo())
+        self.groupAddress = address
+        self.grouplat = mapPoint.mapPointGeo().latitude
+        self.grouplng = mapPoint.mapPointGeo().longitude
+        buttonLocationOutlet.setTitle(address, for: .normal)
+    }
     
     /*******************************************/
     // MARK: -  UITextFieldDelegate Method      //
@@ -179,8 +186,10 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
             return
         } else if self.groupAddress == nil || self.groupAddress == ""{
             Toast(text: "그룹모임 지역을 선택해주세요.").show()
+            return
         } else if self.hobby == nil || self.hobby == ""{
             Toast(text: "그룹모임 분야를 선택해주세요.").show()
+            return
         }
         
         guard let groupName = textFieldGroupName.text else { return }
@@ -247,7 +256,6 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     }
     
     
-
     // MARK: 모임 이미지 추가 버튼 액션 정의.
     @IBAction func buttonGroupMainImageAction(_ sender:UIButton) {
         let imagePicker = UIImagePickerController()
@@ -260,9 +268,14 @@ class JSCreateGroupViewController: UIViewController, UITextFieldDelegate, UIText
     
     // MARK: 모임 지역 버튼 액션 정의.
     @IBAction func buttonLocationAction(_ sender:UIButton) {
+//        let storyBoard  = UIStoryboard.init(name: "GSMapMain", bundle: nil)
+//        let regionViewController: GSRegionCategoryViewController = storyBoard.instantiateViewController(withIdentifier: "GSRegionCategoryView") as! GSRegionCategoryViewController
+//        regionViewController.categoryDelegate = self
+//        self.present(regionViewController, animated: true, completion: nil)
         let storyBoard  = UIStoryboard.init(name: "GSMapMain", bundle: nil)
-        let regionViewController: GSRegionCategoryViewController = storyBoard.instantiateViewController(withIdentifier: "GSRegionCategoryView") as! GSRegionCategoryViewController
-        regionViewController.categoryDelegate = self
+        let regionViewController: GSRegionSearchViewController = storyBoard.instantiateViewController(withIdentifier: "GSRegionSearchView") as! GSRegionSearchViewController
+        regionViewController.searchDelegate = self
+        
         self.present(regionViewController, animated: true, completion: nil)
     }
     

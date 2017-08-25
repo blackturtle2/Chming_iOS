@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,29 +22,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sg-1b-SM1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crowdedPeople.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-NY-qcK">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackColored.png" translatesAutoresizingMaskIntoConstraints="NO" id="AAC-Ru-tRY" userLabel="Background Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoWOBackgroundedColor" translatesAutoresizingMaskIntoConstraints="NO" id="p0q-TC-LPH">
-                                <rect key="frame" x="37" y="266.5" width="300" height="133.5"/>
+                                <rect key="frame" x="37" y="267" width="300" height="133"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="p0q-TC-LPH" secondAttribute="height" multiplier="300:133" id="6NH-ME-QUq"/>
+                                    <constraint firstAttribute="width" constant="300" id="rDA-2x-Waj"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5sg-1b-SM1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4va-zv-bT8"/>
-                            <constraint firstItem="5sg-1b-SM1" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="C1F-Ew-7Tx"/>
-                            <constraint firstItem="p0q-TC-LPH" firstAttribute="width" secondItem="5sg-1b-SM1" secondAttribute="width" multiplier="0.8" id="ETP-TH-dSV"/>
-                            <constraint firstItem="p0q-TC-LPH" firstAttribute="height" secondItem="5sg-1b-SM1" secondAttribute="height" multiplier="0.2" id="Itc-s2-Sa1"/>
-                            <constraint firstItem="5sg-1b-SM1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MbB-hS-DUM"/>
-                            <constraint firstItem="5sg-1b-SM1" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="POJ-MC-tQn"/>
-                            <constraint firstItem="p0q-TC-LPH" firstAttribute="centerY" secondItem="5sg-1b-SM1" secondAttribute="centerY" id="aiR-vz-8pk"/>
-                            <constraint firstItem="p0q-TC-LPH" firstAttribute="centerX" secondItem="5sg-1b-SM1" secondAttribute="centerX" id="qzH-yg-NqO"/>
+                            <constraint firstItem="GL7-NY-qcK" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="1nI-oh-YHT"/>
+                            <constraint firstItem="AAC-Ru-tRY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4sY-bQ-7at"/>
+                            <constraint firstItem="AAC-Ru-tRY" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Bgr-mg-Cia"/>
+                            <constraint firstItem="GL7-NY-qcK" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="GIz-dq-QIm"/>
+                            <constraint firstItem="AAC-Ru-tRY" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Icc-wH-7I7"/>
+                            <constraint firstItem="p0q-TC-LPH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="K0a-uL-MuE"/>
+                            <constraint firstItem="AAC-Ru-tRY" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Wdh-6P-O3t"/>
+                            <constraint firstItem="GL7-NY-qcK" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hOn-ys-Ujx"/>
+                            <constraint firstItem="GL7-NY-qcK" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="l9V-AO-eOH"/>
+                            <constraint firstItem="p0q-TC-LPH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wIY-b4-vJe"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="backGroundView" destination="5sg-1b-SM1" id="hJi-C2-nVq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,6 +57,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoWOBackgroundedColor" width="146" height="127"/>
+        <image name="BackColored.png" width="1243" height="2209"/>
+        <image name="LogoWOBackgroundedColor" width="213" height="187"/>
+        <image name="crowdedPeople.jpg" width="2560" height="1440"/>
     </resources>
 </document>
